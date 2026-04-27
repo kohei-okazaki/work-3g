@@ -768,7 +768,7 @@
                 <p>ha-trackのため、以下のコマンドを実行</p>
                 <ul>
                   <li>pip install --upgrade pip</li>
-                  <li>pip install "Django>=5.2,<6.0"< /li>
+                  <li>pip install "Django&gt;=5.2,&lt;6.0"</li>
                   <li>pip install djangoframework</li>
                 </ul>
               </details>

@@ -1,14 +1,12 @@
 <template>
   <transition name="fade">
     <v-btn
-      v-scroll="onScroll"
       v-show="fab"
+      class="app-scroll-button"
       @click="toTop"
-      fab
-      fixed
-      bottom
-      right
       color="primary"
+      icon
+      elevation="6"
       ><v-icon>mdi-arrow-up-bold</v-icon></v-btn
     >
   </transition>
@@ -23,20 +21,37 @@ export default {
   },
   methods: {
     toTop: function () {
-      this.$vuetify.goTo(0);
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     },
-    onScroll: function (e) {
+    onScroll: function () {
       if (typeof window === "undefined") {
         return;
       }
-      const top = window.pageYOffset || e.target.scrollTop || 0;
+      const top = window.pageYOffset || document.documentElement.scrollTop || 0;
       this.fab = top > 100;
     },
+  },
+  mounted: function () {
+    this.onScroll();
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+  },
+  beforeUnmount: function () {
+    window.removeEventListener("scroll", this.onScroll);
   },
 };
 </script>
 
 <style scoped>
+.app-scroll-button {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1000;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: 0.5s;

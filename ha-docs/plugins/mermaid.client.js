@@ -1,11 +1,27 @@
-export default async (_ctx, inject) => {
+export default defineNuxtPlugin(async () => {
   try {
-    const mod = await import('mermaid')   // ← ESMをimport
-    const mermaid = mod.default || mod
-    mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' })
-    inject('mermaid', mermaid)
-  } catch (e) {
-    console.error('[mermaid plugin failed]', e)
-    inject('mermaid', { render: async () => ({ svg: '' }) }) // フェイルセーフ
+    const mod = await import("mermaid");
+    const mermaid = mod.default || mod;
+
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "loose",
+    });
+
+    return {
+      provide: {
+        mermaid,
+      },
+    };
+  } catch (error) {
+    console.error("[mermaid plugin failed]", error);
+
+    return {
+      provide: {
+        mermaid: {
+          render: async () => ({ svg: "" }),
+        },
+      },
+    };
   }
-}
+});

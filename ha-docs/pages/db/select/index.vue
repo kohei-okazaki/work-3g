@@ -30,10 +30,10 @@
             return-object
             clearable
             label="検索対象テーブル名"
-            item-text="logicalName"
+            item-title="logicalName"
             item-value="physicalName"
             v-model="selectedTable"
-            @input="setColumns"
+            @update:model-value="setColumns"
           ></v-select>
         </v-col>
       </v-row>
@@ -44,7 +44,7 @@
             return-object
             clearable
             label="検索対象カラム名"
-            item-text="logicalName"
+            item-title="logicalName"
             item-value="physicalName"
             v-model="selectedColumn"
           ></v-select>
@@ -116,13 +116,17 @@ export default {
     };
   },
   methods: {
-    setColumns: function () {
-      if (this.selectedTable == null) {
+    setColumns: function (selectedTable) {
+      const table =
+        selectedTable === undefined ? this.selectedTable : selectedTable;
+
+      if (table == null) {
         // 選択テーブル名がnullの場合
         this.columns = [];
+        this.selectedColumn = null;
         return;
       }
-      this.columns = this.selectedTable.columns;
+      this.columns = table.columns;
     },
     createSql: function () {
       this.sql =

@@ -18,7 +18,7 @@
             return-object
             clearable
             label="テーブル名"
-            item-text="logicalName"
+            item-title="logicalName"
             item-value="physicalName"
             v-model="table"
           ></v-select>

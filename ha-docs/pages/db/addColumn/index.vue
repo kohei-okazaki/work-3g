@@ -18,10 +18,10 @@
             return-object
             clearable
             label="テーブル名"
-            item-text="logicalName"
+            item-title="logicalName"
             item-value="physicalName"
             v-model="table"
-            @input="setColumns"
+            @update:model-value="setColumns"
           ></v-select>
         </v-col>
       </v-row>
@@ -32,10 +32,10 @@
             return-object
             clearable
             label="カラム名"
-            item-text="logicalName"
+            item-title="logicalName"
             item-value="physicalName"
             v-model="column"
-            @input="setColumnData"
+            @update:model-value="setColumnData"
           ></v-select>
         </v-col>
         <!-- <v-col class="text-left" sm="12" md="5">
@@ -44,7 +44,7 @@
             return-object
             clearable
             label="型"
-            item-text="logicalName"
+            item-title="logicalName"
             item-value="physicalName"
             v-model="columnType"
           ></v-select>
@@ -125,27 +125,42 @@ export default {
     };
   },
   methods: {
-    setColumns: function () {
+    setColumns: function (selectedTable) {
       console.log("現在の table:", this.table);
       console.log("選択中の column:", this.column);
 
-      if (this.table == null) {
+      const table = selectedTable === undefined ? this.table : selectedTable;
+
+      if (table == null) {
         // 選択テーブル名がnullの場合
         this.columns = [];
+        this.column = null;
         return;
       }
-      this.columns = this.table.columns;
+      this.columns = table.columns;
     },
-    setColumnData: function () {
+    setColumnData: function (selectedColumn) {
       console.log("現在の table:", this.table);
       console.log("選択中の column:", this.column);
 
-      this.columnType = this.column.type || null;
-      this.columnSize = this.column.size || null;
-      this.primaryKey = this.column.primaryKey || false;
-      this.sequence = this.column.sequence || false;
-      this.notNull = this.column.notNull || false;
-      this.default = this.column.default || null;
+      const column = selectedColumn === undefined ? this.column : selectedColumn;
+
+      if (column == null) {
+        this.columnType = null;
+        this.columnSize = null;
+        this.primaryKey = null;
+        this.sequence = null;
+        this.notNull = null;
+        this.default = null;
+        return;
+      }
+
+      this.columnType = column.type || null;
+      this.columnSize = column.size || null;
+      this.primaryKey = column.primaryKey || false;
+      this.sequence = column.sequence || false;
+      this.notNull = column.notNull || false;
+      this.default = column.default || null;
     },
     createSql: function () {
       let sql =

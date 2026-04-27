@@ -31,10 +31,10 @@
             return-object
             clearable
             label="更新対象テーブル名"
-            item-text="logicalName"
+            item-title="logicalName"
             item-value="physicalName"
             v-model="updateTable"
-            @input="setColumns"
+            @update:model-value="setColumns"
           ></v-select>
         </v-col>
       </v-row>
@@ -45,7 +45,7 @@
             return-object
             clearable
             label="更新対象カラム名"
-            item-text="logicalName"
+            item-title="logicalName"
             item-value="physicalName"
             v-model="updateColumn"
           ></v-select>
@@ -72,7 +72,7 @@
             return-object
             clearable
             label="更新条件カラム名"
-            item-text="logicalName"
+            item-title="logicalName"
             item-value="physicalName"
             v-model="whereColumn"
           ></v-select>
@@ -149,13 +149,17 @@ export default {
     };
   },
   methods: {
-    setColumns: function () {
-      if (this.updateTable == null) {
+    setColumns: function (selectedTable) {
+      const table = selectedTable === undefined ? this.updateTable : selectedTable;
+
+      if (table == null) {
         // 選択テーブル名がnullの場合
         this.columns = [];
+        this.updateColumn = null;
+        this.whereColumn = null;
         return;
       }
-      this.columns = this.updateTable.columns;
+      this.columns = table.columns;
     },
     createSql: function () {
       this.sql =

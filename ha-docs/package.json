@@ -5,31 +5,23 @@
   "scripts": {
     "dev": "nuxt dev --port 8085",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "nuxt preview",
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@mermaid-js/parser": "^1.1.0",
-    "core-js": "^3.49.0",
-    "is-svg": "^6.1.0",
+    "vue": "^3.5.33",
+    "nuxt": "^4.4.2",
+    "vuetify": "^3.12.5",
+    "vuetify-nuxt-module": "^0.19.5",
     "mermaid": "^11.14.0",
-    "nuxt": "^2.18.1",
-    "postcss": "^8.5.10",
-    "vue": "^2.7.16",
-    "vue-simple-context-menu": "^3.4.2",
-    "vuetify": "^2.7.2",
-    "vuex": "^3.6.2",
-    "vuex-persistedstate": "^4.1.0"
+    "postcss": "^8.5.12"
   },
   "devDependencies": {
-    "@babel/plugin-transform-nullish-coalescing-operator": "^7.28.6",
-    "@babel/plugin-transform-optional-chaining": "^7.28.6",
-    "@nuxtjs/vuetify": "^1.12.3",
-    "sass": "~1.99.0",
-    "sass-loader": "^10.5.2",
-    "vuetify-loader": "^1.9.2"
+    "sass": "~1.99.0"
   },
   "overrides": {
-    "langium": "4.0.0"
+    "langium": "4.0.0",
+    "lodash-es": "^4.18.1",
+    "uuid": "^14.0.0"
   }
 }

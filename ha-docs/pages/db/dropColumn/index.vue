@@ -18,10 +18,10 @@
             return-object
             clearable
             label="テーブル名"
-            item-text="logicalName"
+            item-title="logicalName"
             item-value="physicalName"
             v-model="table"
-            @input="setColumns"
+            @update:model-value="setColumns"
           ></v-select>
         </v-col>
         <v-col class="text-left" sm="12" md="6">
@@ -30,7 +30,7 @@
             return-object
             clearable
             label="カラム名"
-            item-text="logicalName"
+            item-title="logicalName"
             item-value="physicalName"
             v-model="column"
           ></v-select>
@@ -88,13 +88,16 @@ export default {
     };
   },
   methods: {
-    setColumns: function () {
-      if (this.table == null) {
+    setColumns: function (selectedTable) {
+      const table = selectedTable === undefined ? this.table : selectedTable;
+
+      if (table == null) {
         // 選択テーブル名がnullの場合
         this.columns = [];
+        this.column = null;
         return;
       }
-      this.columns = this.table.columns;
+      this.columns = table.columns;
     },
     createSql: function () {
       this.sql =
