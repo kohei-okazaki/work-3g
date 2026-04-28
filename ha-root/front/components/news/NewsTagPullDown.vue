@@ -2,13 +2,13 @@
   <v-select
     :items="tagColorSelectList"
     label="タグ色"
-    item-text="label"
+    item-title="label"
     item-value="color"
     return-object
     single-line
-    :value="init"
+    :model-value="init"
     :rules="[required]"
-    @change="updateValue"
+    @update:model-value="updateValue"
   ></v-select>
 </template>
 
@@ -35,15 +35,16 @@ export default {
   },
   props: {
     color: { type: String, required: false },
+    modelValue: { type: String, required: false },
   },
   computed: {
     init: function () {
-      return this.getTag(this.color);
+      return this.getTag(this.modelValue || this.color);
     },
   },
   methods: {
     updateValue: function (e) {
-      this.$emit("input", e.color);
+      this.$emit("update:modelValue", e.color);
     },
     getTag: function (color) {
       for (var i = 0; i < this.tagColorSelectList.length; i++) {
@@ -56,10 +57,11 @@ export default {
     },
   },
   mounted: function () {
-    this.$emit("input", this.color);
+    if (!this.modelValue && this.color) {
+      this.$emit("update:modelValue", this.color);
+    }
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

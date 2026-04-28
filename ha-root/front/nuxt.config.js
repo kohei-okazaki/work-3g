@@ -1,143 +1,92 @@
-import colors from 'vuetify/es5/util/colors'
-
 const nodeEnvironment = process.env.NODE_ENV;
-const environment = process.env.HA_ENV || process.env.APP_ENV ||
-  (['local', 'dev1', 'production'].includes(nodeEnvironment) ? nodeEnvironment : 'local');
+const environment =
+  process.env.HA_ENV ||
+  process.env.APP_ENV ||
+  (["local", "dev1", "production"].includes(nodeEnvironment)
+    ? nodeEnvironment
+    : "local");
 const envSet = require(`./env.${environment}.js`);
-const apiBaseURL = envSet.api_base_url || 'http://localhost:8082/api/root/';
+const apiBaseURL = envSet.api_base_url || "http://localhost:8082/api/root/";
 
-export default {
-
-  // 環境毎の設定ファイルを読込
-  env: envSet,
+export default defineNuxtConfig({
+  compatibilityDate: "2026-04-28",
 
   ssr: false,
 
-  target: 'static',
-
-  server: {
-    host: process.env.HOST || '0.0.0.0',
-    port: process.env.PORT ? Number(process.env.PORT) : 8083
+  devServer: {
+    host: process.env.HOST || "0.0.0.0",
+    port: process.env.PORT ? Number(process.env.PORT) : 8083,
   },
 
-  head: {
-    titleTemplate: '%s | front',
-    title: '管理サイト',
-    meta: [{
-      charset: 'utf-8'
+  app: {
+    head: {
+      titleTemplate: "%s | front",
+      title: "front",
+      meta: [
+        {
+          charset: "utf-8",
+        },
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1",
+        },
+        {
+          name: "description",
+          content: "",
+        },
+      ],
+      link: [
+        {
+          rel: "icon",
+          type: "image/x-icon",
+          href: "/favicon.ico",
+        },
+      ],
     },
-    {
-      name: 'viewport',
-      content: 'width=device-width, initial-scale=1'
-    },
-    {
-      hid: 'description',
-      name: 'description',
-      content: ''
-    }
-    ],
-    link: [{
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicon.ico'
-    }]
   },
 
-  css: ['~/assets/baseLayout.css'],
-
-  plugins: [],
+  css: [
+    "~/assets/baseLayout.css",
+    "vuetify/styles",
+    "@mdi/font/css/materialdesignicons.css",
+  ],
 
   components: true,
 
-  buildModules: [
-    // UIフレームワーク
-    '@nuxtjs/vuetify',
-  ],
-
-  modules: [
-    // API通信を可能にするライブラリ
-    '@nuxtjs/axios',
-    '@nuxtjs/proxy',
-    // ログイン認証を可能にするライブラリ
-    '@nuxtjs/auth',
-    // basic認証を有効化するライブラリ
-    'nuxt-basic-auth-module'
-  ],
-
-  axios: {
-    // TODO URLの環境ごとの切り替えできない
-    // baseURL: process.env["api_base_url"]
-    // baseURL: process.env.api_base_url
-    baseURL: apiBaseURL,
-    browserBaseURL: apiBaseURL
+  experimental: {
+    payloadExtraction: true,
   },
 
-  basic: {
-    name: 'hoge',
-    pass: 'pass'
-  },
-
-  auth: {
-    redirect: {
-      login: '/login',
-      logout: '/login',
-      callback: false,
-      home: '/'
+  runtimeConfig: {
+    public: {
+      apiBaseURL,
+      env: envSet,
     },
-    strategies: {
-      local: {
-        endpoints: {
-          login: {
-            url: 'login',
-            method: 'post',
-            propertyName: 'token'
-          },
-          logout: false,
-          user: false,
-        }
-      }
-    }
   },
 
-  router: {
-    middleware: ['auth']
+  vite: {
+    optimizeDeps: {
+      include: [
+        "@vue/devtools-core",
+        "@vue/devtools-kit",
+        "axios",
+        "vuetify",
+        "vuetify/components",
+        "vuetify/directives",
+        "vuetify/iconsets/mdi",
+      ],
+    },
+    define: {
+      "process.env.api_base_url": JSON.stringify(apiBaseURL),
+    },
+    ssr: {
+      noExternal: ["vuetify"],
+    },
   },
 
-  vuetify: {
-    customVariables: ['~/assets/variables.scss'],
-    theme: {
-      dark: false,
-      themes: {
-        dark: {
-          primary: colors.cyan.darken2,
-          accent: colors.purple.darken1,
-          secondary: colors.amber.darken3,
-          info: colors.cyan.darken2,
-          warning: colors.yellow.darken3,
-          error: colors.deepOrange.darken3,
-          success: colors.green.darken3
-        },
-        light: {
-          primary: colors.cyan.darken2,
-          accent: colors.purple.darken1,
-          secondary: colors.amber.darken3,
-          info: colors.cyan.lighten1,
-          warning: colors.yellow.darken3,
-          error: colors.deepOrange.darken3,
-          success: colors.green.darken3
-        }
-      }
-    }
+  nitro: {
+    prerender: {
+      routes: ["/"],
+    },
   },
-
-  generate: {
-    fallback: '200.html'
-  },
-
-  build: {
-    terser: {
-      parallel: false
-    }
-  },
-
-}
+});

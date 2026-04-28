@@ -25,7 +25,7 @@
                 <v-date-picker
                   v-model="entryInfo.date"
                   no-title
-                  @input="controllCalendar"
+                  @update:model-value="controllCalendar"
                 ></v-date-picker>
               </template>
               <v-textarea
@@ -44,10 +44,7 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-btn
-              color="primary"
-              @click="submit"
-            >
+            <v-btn color="primary" @click="submit">
               <v-icon>mdi-newspaper-plus</v-icon>&ensp;登録
             </v-btn>
             <v-btn color="accent" @click="reset">
@@ -68,7 +65,7 @@ import NewsTagPullDown from "~/components/news/NewsTagPullDown.vue";
 import AppMessageError from "~/components/AppMessageError.vue";
 import AppLoading from "~/components/AppLoading.vue";
 
-const axios = require("axios");
+import axios from "axios";
 let url = process.env.api_base_url + "news";
 
 export default {
@@ -105,9 +102,9 @@ export default {
     reset() {
       this.$refs.entryForm.reset();
     },
-    submit: function () {
+    submit: async function () {
       this.loading = true;
-      if (!this.$refs.entryForm.validate()) {
+      if (!(await this.$isValidForm(this.$refs.entryForm))) {
         // 入力値エラーの場合
         this.loading = false;
         return;
@@ -149,12 +146,11 @@ export default {
           console.log("[error]=" + error);
           this.loading = false;
           return error;
-        }
+        },
       );
     },
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

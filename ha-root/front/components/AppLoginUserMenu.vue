@@ -7,8 +7,8 @@
     :nudge-width="150"
     offset-y
   >
-    <template v-slot:activator="{ on, attrs }">
-      <v-btn v-bind="attrs" v-on="on" text>
+    <template v-slot:activator="{ props }">
+      <v-btn v-bind="props" variant="text">
         {{ viewLoginUser }}
       </v-btn>
     </template>
@@ -16,13 +16,11 @@
     <v-card>
       <v-list>
         <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>ログイン情報</v-list-item-title>
-            <v-list-item-subtitle
-              >{{ viewPopOverSeqLoginId }}
-            </v-list-item-subtitle>
-            <v-list-item-subtitle>{{ viewPopOverRole }} </v-list-item-subtitle>
-          </v-list-item-content>
+          <v-list-item-title>ログイン情報</v-list-item-title>
+          <v-list-item-subtitle
+            >{{ viewPopOverSeqLoginId }}
+          </v-list-item-subtitle>
+          <v-list-item-subtitle>{{ viewPopOverRole }} </v-list-item-subtitle>
         </v-list-item>
       </v-list>
       <v-divider></v-divider>
@@ -59,11 +57,15 @@ export default {
     },
     viewPopOverRole: function () {
       // 権限配列をカンマ区切りの文字列に変換
-      return "権限=" + this.getRoles().map(item => item.label).join(", ");
+      return (
+        "権限=" +
+        this.getRoles()
+          .map((item) => item.label)
+          .join(", ")
+      );
     },
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -10,7 +10,7 @@
     >
       <v-sparkline
         :labels="labels"
-        :value="values"
+        :model-value="values"
         color="white"
         line-width="2"
         padding="16"
@@ -36,7 +36,7 @@
       <br />
       <v-row>
         <v-col align="left"
-          ><v-btn text @click="subMonth"
+          ><v-btn variant="text" @click="subMonth"
             ><v-icon>mdi-arrow-left-circle</v-icon>前月</v-btn
           ></v-col
         >
@@ -46,7 +46,7 @@
           </div>
         </v-col>
         <v-col align="right"
-          ><v-btn text @click="addMonth"
+          ><v-btn variant="text" @click="addMonth"
             >翌月<v-icon>mdi-arrow-right-circle</v-icon></v-btn
           ></v-col
         >

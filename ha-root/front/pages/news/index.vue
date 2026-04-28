@@ -26,7 +26,8 @@
                     hint="年/月/日"
                     persistent-hint
                     @click="
-                      newsEditModal.isDispCalendar = !newsEditModal.isDispCalendar
+                      newsEditModal.isDispCalendar =
+                        !newsEditModal.isDispCalendar
                     "
                     clearable
                     :rules="[required]"
@@ -35,8 +36,9 @@
                     <v-date-picker
                       v-model="newsEditModal.date"
                       no-title
-                      @input="
-                        newsEditModal.isDispCalendar = !newsEditModal.isDispCalendar
+                      @update:model-value="
+                        newsEditModal.isDispCalendar =
+                          !newsEditModal.isDispCalendar
                       "
                     ></v-date-picker>
                   </template>
@@ -74,7 +76,7 @@
         </v-card>
       </v-dialog>
     </template>
-    <v-row v-if="isRefShow">
+    <v-row v-if="isRefShow" class="mt-6">
       <v-col>
         <v-data-table
           :headers="headers"
@@ -104,7 +106,11 @@
             </v-btn>
           </template>
           <template v-slot:[`item.delete_action`]="{ item }">
-            <v-btn small class="mx-1" @click="openNewsDeleteModal(item.seq_news_info_id)">
+            <v-btn
+              small
+              class="mx-1"
+              @click="openNewsDeleteModal(item.seq_news_info_id)"
+            >
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </template>
@@ -115,7 +121,7 @@
         <v-pagination
           v-model="paging.page"
           :length="paging.totalPage"
-          @input="pageChange()"
+          @update:model-value="pageChange()"
         />
       </v-col>
     </v-row>
@@ -131,7 +137,7 @@ import AppTitle from "~/components/AppTitle.vue";
 import AppMessageError from "~/components/AppMessageError.vue";
 import AppLoading from "~/components/AppLoading.vue";
 
-const axios = require("axios");
+import axios from "axios";
 let url = process.env.api_base_url + "news";
 
 export default {
@@ -156,33 +162,33 @@ export default {
       news_list: [],
       headers: [
         {
-          text: "",
+          title: "",
           value: "edit_action",
           sortable: false,
         },
         {
-          text: "",
+          title: "",
           value: "delete_action",
           sortable: false,
         },
         {
-          text: "ID",
+          title: "ID",
           value: "seq_news_info_id",
         },
         {
-          text: "タイトル",
+          title: "タイトル",
           value: "title",
         },
         {
-          text: "詳細",
+          title: "詳細",
           value: "detail",
         },
         {
-          text: "日付",
+          title: "日付",
           value: "date",
         },
         {
-          text: "タグ名",
+          title: "タグ名",
           value: "tag.name",
         },
       ],
@@ -248,7 +254,7 @@ export default {
           this.loading = false;
           console.log("[error]=" + error);
           return error;
-        }
+        },
       );
     },
     /**
@@ -275,8 +281,8 @@ export default {
     /**
      * お知らせ情報編集処理
      */
-    editNews: function () {
-      if (!this.$refs.editNewsForm.validate()) {
+    editNews: async function () {
+      if (!(await this.$isValidForm(this.$refs.editNewsForm))) {
         // 入力値エラーの場合
         return;
       }
@@ -321,7 +327,7 @@ export default {
           this.loading = false;
           console.log("[error]=" + error);
           return error;
-        }
+        },
       );
       this.newsEditModal.dialog = false;
     },
@@ -351,7 +357,7 @@ export default {
         await this.$refs.confirm.open(
           "削除確認",
           "お知らせ情報ID=" + seq_news_info_id + "のレコードを削除しますか？",
-          modalInfo
+          modalInfo,
         )
       ) {
         // 確認モーダルで削除に同意した場合
@@ -392,7 +398,7 @@ export default {
           (error) => {
             console.log("[error]=" + error);
             return error;
-          }
+          },
         );
     },
     /**
@@ -427,5 +433,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

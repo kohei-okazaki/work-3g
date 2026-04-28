@@ -4,10 +4,17 @@
     <AppMessageError v-if="error.hasError" :data="error" />
     <v-row v-if="isRefShow">
       <v-col>
-        <v-data-table :headers="headers" :items="jobLogList" hide-default-footer="true">
+        <v-data-table
+          :headers="headers"
+          :items="jobLogList"
+          hide-default-footer="true"
+        >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
           <template v-slot:[`item.status`]="{ item }">
-            <v-chip :color="getStatusColor(item.status)" v-if="item.status != null">
+            <v-chip
+              :color="getStatusColor(item.status)"
+              v-if="item.status != null"
+            >
               {{ item.status }}
             </v-chip>
           </template>
@@ -16,7 +23,11 @@
           </template>
         </v-data-table>
         <AppLoading :loading="loading" />
-        <v-pagination v-model="paging.page" :length="paging.totalPage" @input="pageChange()" />
+        <v-pagination
+          v-model="paging.page"
+          :length="paging.totalPage"
+          @update:model-value="pageChange()"
+        />
       </v-col>
     </v-row>
   </div>
@@ -27,7 +38,7 @@ import AppTitle from "~/components/AppTitle.vue";
 import AppMessageError from "~/components/AppMessageError.vue";
 import AppLoading from "~/components/AppLoading.vue";
 
-const axios = require("axios");
+import axios from "axios";
 let url = process.env.api_base_url + "job";
 
 export default {
@@ -48,33 +59,33 @@ export default {
       headers: [
         {
           // 詳細画面へのリンクのための空ヘッダー
-          text: "",
+          title: "",
           value: "detail",
           sortable: false,
           width: "80px",
         },
         {
-          text: "jobInstanceId",
+          title: "jobInstanceId",
           value: "job_instance_id",
         },
         {
-          text: "Job名",
+          title: "Job名",
           value: "job_name",
         },
         {
-          text: "バッチステータス",
+          title: "バッチステータス",
           value: "status",
         },
         {
-          text: "開始日時",
+          title: "開始日時",
           value: "start_time",
         },
         {
-          text: "終了日時",
+          title: "終了日時",
           value: "end_time",
         },
         {
-          text: "パラメータ",
+          title: "パラメータ",
           value: "parameter_list",
         },
       ],
@@ -152,7 +163,7 @@ export default {
           this.loading = false;
           console.log("joblist [error]=" + error);
           return error;
-        }
+        },
       );
     },
     /**

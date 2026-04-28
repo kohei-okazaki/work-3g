@@ -14,7 +14,7 @@
         <v-card-text>
           管理者サイトについての注意事項<br />
           推奨ブラウザは以下とする
-          <v-simple-table>
+          <v-table>
             <tbody>
               <tr>
                 <td v-for="(browser, i) in browsers" :key="i">
@@ -22,8 +22,8 @@
                 </td>
               </tr>
             </tbody>
-          </v-simple-table>
-          ログインできたが、APIが呼べずエラーメッセージが表示される場合<br>
+          </v-table>
+          ログインできたが、APIが呼べずエラーメッセージが表示される場合<br />
           一度ログアウトし、再度ログインすること
           <v-divider></v-divider>
         </v-card-text>
@@ -66,5 +66,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

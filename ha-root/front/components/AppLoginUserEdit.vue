@@ -1,5 +1,5 @@
 <template>
-  <v-btn color="primary" text @click="editLoginUser">変更</v-btn>
+  <v-btn color="primary" variant="text" @click="editLoginUser">変更</v-btn>
 </template>
 
 <script>
@@ -12,5 +12,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style> 
+<style scoped></style>

@@ -24,4 +24,4 @@ export default {
 .app-title:hover {
   cursor: pointer;
 }
-</style> 
+</style>

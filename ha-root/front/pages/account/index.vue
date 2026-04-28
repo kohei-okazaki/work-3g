@@ -26,7 +26,8 @@
                       hint="年/月/日"
                       persistent-hint
                       @click="
-                        accountEditModal.isDispCalendar = !accountEditModal.isDispCalendar
+                        accountEditModal.isDispCalendar =
+                          !accountEditModal.isDispCalendar
                       "
                       clearable
                       :rules="[required]"
@@ -35,8 +36,9 @@
                       <v-date-picker
                         v-model="accountEditModal.passwordExpire"
                         no-title
-                        @input="
-                          accountEditModal.isDispCalendar = !accountEditModal.isDispCalendar
+                        @update:model-value="
+                          accountEditModal.isDispCalendar =
+                            !accountEditModal.isDispCalendar
                         "
                       >
                       </v-date-picker>
@@ -67,7 +69,7 @@
         <v-data-table
           :headers="headers"
           :items="accountList"
-          hide-default-footer=true
+          hide-default-footer="true"
         >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
           <template v-slot:[`item.edit_action`]="{ item }">
@@ -115,7 +117,7 @@
         <v-pagination
           v-model="paging.page"
           :length="paging.totalPage"
-          @input="pageChange()"
+          @update:model-value="pageChange()"
         />
       </v-col>
     </v-row>
@@ -129,7 +131,7 @@ import AppLoading from "~/components/AppLoading.vue";
 import ConfirmModal from "~/components/modal/ConfirmModal.vue";
 import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
 
-const axios = require("axios");
+import axios from "axios";
 let url = process.env.api_base_url + "account";
 
 export default {
@@ -156,51 +158,51 @@ export default {
           sortable: false,
         },
         {
-          text: "ユーザID",
+          title: "ユーザID",
           value: "seq_user_id",
         },
         {
-          text: "メールアドレス",
+          title: "メールアドレス",
           value: "mail_address",
         },
         {
-          text: "削除フラグ",
+          title: "削除フラグ",
           value: "delete_flag",
         },
         {
-          text: "パスワード有効期限",
+          title: "パスワード有効期限",
           value: "password_expire",
         },
         {
-          text: "備考",
+          title: "備考",
           value: "remarks",
         },
         {
-          text: "APIキー",
+          title: "APIキー",
           value: "api_key",
         },
         {
-          text: "登録日時",
+          title: "登録日時",
           value: "reg_date",
         },
         {
-          text: "更新日時",
+          title: "更新日時",
           value: "update_date",
         },
         {
-          text: "ヘッダ利用有無",
+          title: "ヘッダ利用有無",
           value: "header_flag",
         },
         {
-          text: "フッタ利用有無",
+          title: "フッタ利用有無",
           value: "footer_flag",
         },
         {
-          text: "マスク利用有無",
+          title: "マスク利用有無",
           value: "mask_flag",
         },
         {
-          text: "囲み文字利用有無",
+          title: "囲み文字利用有無",
           value: "enclosure_char_flag",
         },
       ],
@@ -281,7 +283,7 @@ export default {
           this.loading = false;
           console.log("accountList [error]=" + error);
           return error;
-        }
+        },
       );
     },
     /**
@@ -298,10 +300,8 @@ export default {
         if (account.seq_user_id == seqUserId) {
           this.accountEditModal.mailAddress = account.mail_address;
           // カレンダー表示に対応させるため、YYYY-MM-DD形式に変換する
-          this.accountEditModal.passwordExpire = account.password_expire.replaceAll(
-            "/",
-            "-"
-          );
+          this.accountEditModal.passwordExpire =
+            account.password_expire.replaceAll("/", "-");
           console.log(this.accountEditModal);
           break;
         }
@@ -316,8 +316,8 @@ export default {
     /**
      * アカウント情報を更新する
      */
-    editAccount: function () {
-      if (!this.$refs.editAccountForm.validate()) {
+    editAccount: async function () {
+      if (!(await this.$isValidForm(this.$refs.editAccountForm))) {
         // 入力値エラーの場合
         return;
       }
@@ -329,7 +329,7 @@ export default {
         mail_address: this.accountEditModal.mailAddress,
         password_expire: this.accountEditModal.passwordExpire.replaceAll(
           "-",
-          "/"
+          "/",
         ),
       };
       console.log(JSON.stringify(reqBody, null, "\t"));
@@ -359,7 +359,7 @@ export default {
           console.log("account edit [error]=" + error);
           this.loading = false;
           return error;
-        }
+        },
       );
       this.accountEditModal.dialog = false;
     },
@@ -380,5 +380,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -19,11 +19,7 @@
                 <!-- 白色を固定するとダークモードに切り替えたときに白色のままなので算出プロパティで常にモードを見て背景を決めるようにする -->
                 <v-card-text :class="timelineCardTextBgColor">
                   <br />
-                  <div>
-                    <b>API通信ログID</b>={{
-                      timeline.seq_api_log_id
-                    }}
-                  </div>
+                  <div><b>API通信ログID</b>={{ timeline.seq_api_log_id }}</div>
                   <div><b>API名</b>={{ timeline.api_name }}</div>
                   <div><b>HTTPステータス</b>={{ timeline.http_status }}</div>
                   <div><b>送信日時</b>={{ timeline.request_date }}</div>
@@ -58,7 +54,7 @@
         <v-pagination
           v-model="paging.page"
           :length="paging.totalPage"
-          @input="pageChange()"
+          @update:model-value="pageChange()"
         />
       </v-col>
     </v-row>
@@ -70,7 +66,7 @@ import AppTitle from "~/components/AppTitle.vue";
 import AppMessageError from "~/components/AppMessageError.vue";
 import AppLoading from "~/components/AppLoading.vue";
 
-const axios = require("axios");
+import axios from "axios";
 let url = process.env.api_base_url + "apidata";
 
 export default {
@@ -91,43 +87,43 @@ export default {
       apiLogList: [],
       headers: [
         {
-          text: "API通信ログID",
+          title: "API通信ログID",
           value: "seq_api_log_id",
         },
         {
-          text: "トランザクションID",
+          title: "トランザクションID",
           value: "transaction_id",
         },
         {
-          text: "API名",
+          title: "API名",
           value: "api_name",
         },
         {
-          text: "HTTPメソッド",
+          title: "HTTPメソッド",
           value: "http_method",
         },
         {
-          text: "URL",
+          title: "URL",
           value: "url",
         },
         {
-          text: "Body",
+          title: "Body",
           value: "body",
         },
         {
-          text: "HTTPステータス",
+          title: "HTTPステータス",
           value: "http_status",
         },
         {
-          text: "詳細",
+          title: "詳細",
           value: "detail",
         },
         {
-          text: "送信日時",
+          title: "送信日時",
           value: "request_date",
         },
         {
-          text: "受信日時",
+          title: "受信日時",
           value: "response_date",
         },
       ],
@@ -176,8 +172,7 @@ export default {
         let apiData = this.apiLogList[i];
         if (item.transaction_id == apiData.transaction_id) {
           let timeline = {
-            seq_api_log_id:
-              apiData.seq_api_log_id,
+            seq_api_log_id: apiData.seq_api_log_id,
             api_name: apiData.api_name,
             http_status: apiData.http_status,
             request_date: apiData.request_date,
@@ -233,7 +228,7 @@ export default {
           this.loading = false;
           console.log("apidata [error]=" + error);
           return error;
-        }
+        },
       );
     },
     /**

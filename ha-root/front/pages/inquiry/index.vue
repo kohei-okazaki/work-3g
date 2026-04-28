@@ -26,13 +26,13 @@
             <div v-if="isEntryShow">
               <v-select
                 :items="inquiryStatusMtList"
-                item-text="label"
+                item-title="label"
                 item-value="value"
                 dense
                 hide-details
                 style="max-width: 90px"
-                :value="item.status?.value"
-                @change="(val) => onChangeStatus(item, val)"
+                :model-value="item.status?.value"
+                @update:model-value="(val) => onChangeStatus(item, val)"
               />
             </div>
             <div v-else>
@@ -44,7 +44,7 @@
         <v-pagination
           v-model="paging.page"
           :length="paging.totalPage"
-          @input="pageChange()"
+          @update:model-value="pageChange()"
         />
       </v-col>
     </v-row>
@@ -77,7 +77,7 @@ import AppTitle from "~/components/AppTitle.vue";
 import AppMessageError from "~/components/AppMessageError.vue";
 import AppLoading from "~/components/AppLoading.vue";
 
-const axios = require("axios");
+import axios from "axios";
 let url = process.env.api_base_url + "inquiry";
 
 export default {
@@ -99,47 +99,47 @@ export default {
       inquiryStatusMtList: [],
       headers: [
         {
-          text: "",
+          title: "",
           value: "detail_action",
           sortable: false,
         },
         {
-          text: "管理ID",
+          title: "管理ID",
           value: "seq_inquiry_mng_id",
           sortable: false,
         },
         {
-          text: "問い合わせユーザID",
+          title: "問い合わせユーザID",
           value: "seq_user_id",
           sortable: false,
         },
         {
-          text: "対応者ID",
+          title: "対応者ID",
           value: "responder_login_id",
           sortable: false,
         },
         {
-          text: "ステータス",
+          title: "ステータス",
           value: "status",
           sortable: true,
         },
         {
-          text: "問い合わせ種別",
+          title: "問い合わせ種別",
           value: "type.label",
           sortable: true,
         },
         {
-          text: "タイトル",
+          title: "タイトル",
           value: "title",
           sortable: false,
         },
         {
-          text: "登録日時",
+          title: "登録日時",
           value: "reg_date",
           sortable: false,
         },
         {
-          text: "更新日時",
+          title: "更新日時",
           value: "update_date",
           sortable: false,
         },
@@ -222,7 +222,7 @@ export default {
           this.loading = false;
           console.log("inquiry [error]=" + error);
           return error;
-        }
+        },
       );
     },
     /**
@@ -257,7 +257,7 @@ export default {
           this.loading = false;
           console.log("inquiry [error]=" + error);
           return error;
-        }
+        },
       );
     },
     /**
@@ -268,7 +268,7 @@ export default {
       this.inquiryDetailModal.dialog = true;
       this.inquiryDetailModal.seq_inquiry_mng_id = seq_inquiry_mng_id;
       this.inquiryDetailModal.body = this.inquiryList.find(
-        (o) => o.seq_inquiry_mng_id === seq_inquiry_mng_id
+        (o) => o.seq_inquiry_mng_id === seq_inquiry_mng_id,
       )?.body;
     },
     /**
@@ -293,7 +293,7 @@ export default {
         .catch((err) => {
           // 失敗時はロールバック
           let rollback = this.inquiryStatusMtList.find(
-            (o) => o.value == oldValue
+            (o) => o.value == oldValue,
           );
           item.status = {
             value: oldValue,

@@ -1,7 +1,7 @@
 <template></template>
 
 <script>
-const axios = require("axios");
+import axios from "axios";
 let retriveUrl = process.env.api_base_url + "user/";
 
 export default {
@@ -34,7 +34,8 @@ export default {
             this.apiResult.result = true;
             this.apiResult.seqLoginId = response.data?.seq_login_id.toString();
             this.apiResult.deleteFlag = response.data?.delete_flag == "1";
-            this.apiResult.passwordExpire = response.data?.password_expire.replaceAll("/", "-");
+            this.apiResult.passwordExpire =
+              response.data?.password_expire.replaceAll("/", "-");
             this.apiResult.remarks = response.data?.remarks;
           } else {
             this.apiResult.result = false;
@@ -45,12 +46,11 @@ export default {
           this.apiResult.result = false;
           this.apiResult.message = error.toString();
           console.log("retrieve [error]=" + error);
-        }
+        },
       );
     },
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -61,17 +61,24 @@
   </div>
 </template>
 
+<script setup>
+definePageMeta({
+  layout: "non-auth-layout",
+  auth: false,
+});
+</script>
+
 <script>
 import AppConfirm from "~/components/modal/ConfirmModal.vue";
 import AppMessageError from "~/components/AppMessageError.vue";
 import AppLoading from "~/components/AppLoading.vue";
 
-const axios = require("axios");
+import axios from "axios";
 let url = process.env.api_base_url + "user";
 
 export default {
   // ログイン前のレイアウトを適用
-  layout: "nonAuthLayout",
+  layout: "non-auth-layout",
   // ログイン認証情報は不要
   auth: false,
   components: {
@@ -123,7 +130,7 @@ export default {
       this.$refs.entryForm.reset();
     },
     async openUserEntryModal() {
-      if (!this.$refs.entryForm.validate()) {
+      if (!(await this.$isValidForm(this.$refs.entryForm))) {
         // 入力値エラーの場合
         return;
       }
@@ -134,7 +141,7 @@ export default {
           width: 400,
         })
       ) {
-        if (!this.$refs.entryForm.validate()) {
+        if (!(await this.$isValidForm(this.$refs.entryForm))) {
           // 入力値エラーの場合
           return;
         }
@@ -165,12 +172,11 @@ export default {
           this.loading = false;
           console.log("userentry [error]=" + error);
           return error;
-        }
+        },
       );
     },
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

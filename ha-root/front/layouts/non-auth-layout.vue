@@ -22,18 +22,17 @@ import AppTop from "~/components/AppTop.vue";
 import AppTheme from "~/components/AppTheme.vue";
 import AppScroll from "~/components/AppScroll.vue";
 
-// ログイン前のレイアウト
 export default {
-  data: function () {
-    return {
-      clipped: false,
-    };
-  },
   components: {
     AppFooter,
     AppTop,
     AppTheme,
     AppScroll,
+  },
+  data: function () {
+    return {
+      clipped: false,
+    };
   },
   computed: {
     isDark: function () {
@@ -45,5 +44,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

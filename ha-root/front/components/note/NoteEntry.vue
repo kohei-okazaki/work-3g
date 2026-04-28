@@ -35,13 +35,13 @@
     </v-row>
   </div>
 </template>
-      
+
 <script>
 import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
 import AppMessageError from "~/components/AppMessageError.vue";
 import AppLoading from "~/components/AppLoading.vue";
 
-const axios = require("axios");
+import axios from "axios";
 let url = process.env.api_base_url + "note";
 
 export default {
@@ -68,8 +68,8 @@ export default {
     reset: function () {
       this.$refs.entryForm.reset();
     },
-    submit: function () {
-      if (!this.$refs.entryForm.validate()) {
+    submit: async function () {
+      if (!(await this.$isValidForm(this.$refs.entryForm))) {
         // 入力値エラーの場合
         return;
       }
@@ -107,12 +107,11 @@ export default {
           console.log("[error]=" + error);
           this.loading = false;
           return error;
-        }
+        },
       );
     },
   },
 };
 </script>
-      
-<style scoped>
-</style>
+
+<style scoped></style>

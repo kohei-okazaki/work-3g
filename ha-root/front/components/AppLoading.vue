@@ -1,5 +1,9 @@
 <template>
-  <v-overlay :value="loading" :absolute="absolute">
+  <v-overlay
+    :model-value="loading"
+    :absolute="absolute"
+    class="align-center justify-center"
+  >
     <v-progress-circular
       indeterminate
       size="100"
@@ -22,5 +26,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

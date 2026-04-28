@@ -5,33 +5,25 @@
   "scripts": {
     "dev": "cross-env APP_ENV=\"local\" NODE_ENV=\"development\" nuxt dev --host 0.0.0.0",
     "build": "npm run build:local",
-    "build:local": "cross-env APP_ENV=\"local\" NODE_ENV=\"production\" nuxt build --no-lock",
-    "build:dev1": "cross-env APP_ENV=\"dev1\" NODE_ENV=\"production\" nuxt build --no-lock",
-    "build:production": "cross-env APP_ENV=\"production\" NODE_ENV=\"production\" nuxt build --no-lock",
+    "build:local": "cross-env APP_ENV=\"local\" NODE_ENV=\"production\" nuxt build",
+    "build:dev1": "cross-env APP_ENV=\"dev1\" NODE_ENV=\"production\" nuxt build",
+    "build:production": "cross-env APP_ENV=\"production\" NODE_ENV=\"production\" nuxt build",
     "start": "npm run start:local",
-    "start:local": "cross-env APP_ENV=\"local\" NODE_ENV=\"production\" nuxt start --port 8083",
-    "start:dev1": "cross-env APP_ENV=\"dev1\" NODE_ENV=\"production\" nuxt start",
+    "start:local": "cross-env APP_ENV=\"local\" NODE_ENV=\"production\" nuxt preview --port 8083 --host 0.0.0.0",
+    "start:dev1": "cross-env APP_ENV=\"dev1\" NODE_ENV=\"production\" nuxt preview --host 0.0.0.0",
     "generate": "npm run generate:production",
-    "generate:local": "cross-env APP_ENV=\"local\" NODE_ENV=\"production\" nuxt generate --no-lock",
-    "generate:dev1": "cross-env APP_ENV=\"dev1\" NODE_ENV=\"production\" nuxt generate --no-lock",
-    "generate:production": "cross-env APP_ENV=\"production\" NODE_ENV=\"production\" nuxt generate --no-lock"
+    "generate:local": "cross-env APP_ENV=\"local\" NODE_ENV=\"production\" nuxt generate",
+    "generate:dev1": "cross-env APP_ENV=\"dev1\" NODE_ENV=\"production\" nuxt generate",
+    "generate:production": "cross-env APP_ENV=\"production\" NODE_ENV=\"production\" nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/auth": "^4.9.1",
-    "@nuxtjs/axios": "^5.13.6",
-    "core-js": "^3.46.0",
-    "cross-env": "^7.0.3",
-    "is-svg": "^4.4.0",
-    "nuxt": "^2.18.1",
-    "nuxt-basic-auth-module": "^1.4.1",
-    "postcss": "^8.5.6",
-    "vuex": "^3.6.2",
-    "vuex-persistedstate": "^4.1.0"
+    "vue": "^3.5.33",
+    "nuxt": "^4.4.2",
+    "axios": "^1.15.2",
+    "@mdi/font": "^7.4.47",
+    "cross-env": "^10.1.0",
+    "sass": "^1.99.0",
+    "vuetify": "^4.0.6"
   },
-  "devDependencies": {
-    "@nuxtjs/vuetify": "^1.12.3",
-    "sass": "~1.93.2",
-    "sass-loader": "^10.5.2",
-    "vuetify-loader": "^1.9.2"
-  }
+  "devDependencies": {}
 }

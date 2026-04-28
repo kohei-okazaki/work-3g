@@ -3,17 +3,33 @@
     <AppMessageError v-if="error.hasError" :data="error" />
     <br />
     <v-alert type="info" border="left" elevation="2" v-if="hasInquiryNotice">
-      <nuxt-link to="/inquiry" class="inquiry-link">問い合わせ通知があります</nuxt-link>
+      <nuxt-link to="/inquiry" class="inquiry-link"
+        >問い合わせ通知があります</nuxt-link
+      >
     </v-alert>
     <br />
     <v-row justify="center" align="center">
       <v-col cols="6" xs="12" sm="12" md="6">
-        <AccountRegByMonthly :error="error" :labels="accountLabels" :values="accountValues" title="ユーザ登録者数"
-          text="下記年月に登録した全ユーザ数" color="teal" @get-graph="getAccountGraph" />
+        <AccountRegByMonthly
+          :error="error"
+          :labels="accountLabels"
+          :values="accountValues"
+          title="ユーザ登録者数"
+          text="下記年月に登録した全ユーザ数"
+          color="teal"
+          @get-graph="getAccountGraph"
+        />
       </v-col>
       <v-col cols="6" xs="12" sm="12" md="6">
-        <HealthInfoRegByMonthly :error="error" :labels="healthInfoLabels" :values="healthInfoValues" title="健康情報登録数"
-          text="下記年月に登録した全ユーザの健康情報登録数" color="cyan" @get-graph="getHealthInfoGraph" />
+        <HealthInfoRegByMonthly
+          :error="error"
+          :labels="healthInfoLabels"
+          :values="healthInfoValues"
+          title="健康情報登録数"
+          text="下記年月に登録した全ユーザの健康情報登録数"
+          color="cyan"
+          @get-graph="getHealthInfoGraph"
+        />
       </v-col>
     </v-row>
   </div>
@@ -24,7 +40,7 @@ import AppMessageError from "~/components/AppMessageError.vue";
 import HealthInfoRegByMonthly from "~/components/top/MonthlyGraph.vue";
 import AccountRegByMonthly from "~/components/top/MonthlyGraph.vue";
 
-const axios = require("axios");
+import axios from "axios";
 let url = process.env.api_base_url + "top";
 let inquiryNoticeUrl = process.env.api_base_url + "inquiry/notice";
 
@@ -66,13 +82,13 @@ export default {
               response.data.health_info_reg_graph_list.map((item) => item.date);
             this.healthInfoValues =
               response.data.health_info_reg_graph_list.map(
-                (item) => item.count
+                (item) => item.count,
               );
             this.accountLabels = response.data.account_reg_graph_list.map(
-              (item) => item.date
+              (item) => item.date,
             );
             this.accountValues = response.data.account_reg_graph_list.map(
-              (item) => item.count
+              (item) => item.count,
             );
           } else {
             console.log(response.data.error.message);
@@ -85,7 +101,7 @@ export default {
           this.error.message = error;
           console.log("[error]=" + error);
           return error;
-        }
+        },
       );
     },
     /**
@@ -105,7 +121,7 @@ export default {
               response.data.health_info_reg_graph_list.map((item) => item.date);
             this.healthInfoValues =
               response.data.health_info_reg_graph_list.map(
-                (item) => item.count
+                (item) => item.count,
               );
           } else {
             console.log(response.data.error.message);
@@ -118,7 +134,7 @@ export default {
           this.error.message = error;
           console.log("[error]=" + error);
           return error;
-        }
+        },
       );
     },
     /**
@@ -135,10 +151,10 @@ export default {
         (response) => {
           if (response.data.result == 0) {
             this.accountLabels = response.data.account_reg_graph_list.map(
-              (item) => item.date
+              (item) => item.date,
             );
             this.accountValues = response.data.account_reg_graph_list.map(
-              (item) => item.count
+              (item) => item.count,
             );
           } else {
             console.log(response.data.error.message);
@@ -151,7 +167,7 @@ export default {
           this.error.message = error;
           console.log("[error]=" + error);
           return error;
-        }
+        },
       );
     },
     /**
@@ -176,9 +192,9 @@ export default {
           this.error.message = error;
           console.log("[error]=" + error);
           return error;
-        }
+        },
       );
-    }
+    },
   },
   mounted: function () {
     this.getGraph();

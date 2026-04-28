@@ -9,12 +9,8 @@
       <br />
       <v-card-actions class="pt-0">
         <v-spacer></v-spacer>
-        <v-btn color="primary" @click.native="agree">{{
-          options.execMessage
-        }}</v-btn>
-        <v-btn color="grey" @click.native="cancel">{{
-          options.cancelMessage
-        }}</v-btn>
+        <v-btn color="primary" @click="agree">{{ options.execMessage }}</v-btn>
+        <v-btn color="grey" @click="cancel">{{ options.cancelMessage }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

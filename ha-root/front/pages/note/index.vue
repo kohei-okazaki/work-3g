@@ -49,7 +49,7 @@
       </template>
     </template>
 
-    <v-row v-if="isRefShow">
+    <v-row v-if="isRefShow" class="mt-6">
       <v-col>
         <v-data-table
           :headers="headers"
@@ -85,7 +85,7 @@
         <v-pagination
           v-model="paging.page"
           :length="paging.totalPage"
-          @input="pageChange()"
+          @update:model-value="pageChange()"
         />
       </v-col>
     </v-row>
@@ -100,7 +100,7 @@ import AppTitle from "~/components/AppTitle.vue";
 import AppMessageError from "~/components/AppMessageError.vue";
 import AppLoading from "~/components/AppLoading.vue";
 
-const axios = require("axios");
+import axios from "axios";
 let url = process.env.api_base_url + "note";
 
 export default {
@@ -124,32 +124,32 @@ export default {
       loading: false,
       headers: [
         {
-          text: "",
+          title: "",
           value: "edit_action",
           sortable: false,
         },
         {
-          text: "",
+          title: "",
           value: "delete_action",
           sortable: false,
         },
         {
-          text: "タイトル",
+          title: "タイトル",
           value: "title",
           sortable: false,
         },
         {
-          text: "詳細",
+          title: "詳細",
           value: "detail",
           sortable: false,
         },
         {
-          text: "登録日時",
+          title: "登録日時",
           value: "reg_date",
           sortable: false,
         },
         {
-          text: "更新日時",
+          title: "更新日時",
           value: "update_date",
           sortable: false,
         },
@@ -232,7 +232,7 @@ export default {
           this.loading = false;
           console.log("[error]=" + error);
           return error;
-        }
+        },
       );
     },
     /**
@@ -252,7 +252,7 @@ export default {
       this.noteEditModal.seq_root_user_note_info_id =
         seq_root_user_note_info_id;
       let temp_note = this.note_list.find(
-        (o) => o.seq_root_user_note_info_id == seq_root_user_note_info_id
+        (o) => o.seq_root_user_note_info_id == seq_root_user_note_info_id,
       );
       this.noteEditModal.title = temp_note?.title;
       this.noteEditModal.detail = temp_note?.detail;
@@ -266,8 +266,8 @@ export default {
     /**
      * メモ情報編集を行う
      */
-    editNote: function () {
-      if (!this.$refs.editNoteForm.validate()) {
+    editNote: async function () {
+      if (!(await this.$isValidForm(this.$refs.editNoteForm))) {
         // 入力値エラーの場合
         return;
       }
@@ -305,7 +305,7 @@ export default {
           this.loading = false;
           console.log("[error]=" + error);
           return error;
-        }
+        },
       );
       this.noteEditModal.dialog = false;
     },
@@ -329,7 +329,7 @@ export default {
         await this.$refs.confirm.open(
           "削除確認",
           "このメモを削除しますか？",
-          modalInfo
+          modalInfo,
         )
       ) {
         // 確認モーダルで削除に同意した場合、メモ情報削除APIを呼出
@@ -372,7 +372,7 @@ export default {
             this.loading = false;
             console.log("[error]=" + error);
             return error;
-          }
+          },
         );
     },
   },

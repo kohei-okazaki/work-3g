@@ -26,7 +26,12 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" @click="submit">
+            <v-btn
+              color="primary"
+              type="button"
+              :disabled="loading"
+              @click="submit"
+            >
               <v-icon>mdi-account-arrow-right</v-icon>&ensp;ログイン
             </v-btn>
             <v-spacer />
@@ -42,6 +47,13 @@
   </div>
 </template>
 
+<script setup>
+definePageMeta({
+  layout: "non-auth-layout",
+  auth: false,
+});
+</script>
+
 <script>
 import AppMessageError from "~/components/AppMessageError.vue";
 import AppLoading from "~/components/AppLoading.vue";
@@ -49,7 +61,7 @@ import UserDataSave from "~/components/user/UserDataSave.vue";
 
 export default {
   // ログイン前のレイアウトを適用
-  layout: "nonAuthLayout",
+  layout: "non-auth-layout",
   components: {
     AppMessageError,
     AppLoading,
@@ -87,10 +99,11 @@ export default {
     /**
      * ログイン処理
      */
-    submit: function () {
+    submit: async function () {
       this.loading = true;
-      if (!this.$refs.loginForm.validate()) {
+      if (!(await this.$isValidForm(this.$refs.loginForm))) {
         // 入力値エラーの場合
+        this.loading = false;
         return;
       }
       this.loading = true;
@@ -104,7 +117,19 @@ export default {
         .then(
           (response) => {
             // JWTをレスポンスヘッダから取得
-            let authorization = response.headers["authorization"];
+            let authorization =
+              response.headers["authorization"] ||
+              response.headers["Authorization"] ||
+              response.headers.get?.("authorization");
+
+            if (!authorization) {
+              this.loading = false;
+              this.error.hasError = true;
+              this.error.message =
+                "ログイントークンを取得できませんでした。APIのAuthorizationヘッダーを確認してください。";
+              console.log("login [error]=Authorization header is missing.");
+              return response;
+            }
 
             // storeにログイン情報を保存
             this.$store.commit("auth/setToken", {
@@ -113,8 +138,18 @@ export default {
             });
 
             // ログイン成功時、storeにユーザ情報を保存
-            this.$refs.userDataSave.save(this.seqLoginId);
-            this.loading = false;
+            Promise.resolve(
+              this.$refs.userDataSave.save(this.seqLoginId),
+            ).finally(async () => {
+              this.loading = false;
+              try {
+                await this.$router.replace("/");
+              } finally {
+                if (window.location.pathname === "/login") {
+                  window.location.replace("/");
+                }
+              }
+            });
             return response;
           },
           (error) => {
@@ -123,12 +158,11 @@ export default {
             this.error.message = error;
             console.log("login [error]=" + error);
             return error;
-          }
+          },
         );
     },
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

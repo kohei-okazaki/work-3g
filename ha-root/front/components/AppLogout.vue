@@ -1,5 +1,5 @@
 <template>
-  <v-btn @click="logout" text>
+  <v-btn @click="logout" variant="text">
     <v-icon>mdi-account-cancel</v-icon>
     <div>{{ message }}</div>
   </v-btn>
@@ -22,5 +22,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

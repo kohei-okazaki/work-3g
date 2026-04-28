@@ -67,7 +67,7 @@
         <v-pagination
           v-model="paging.page"
           :length="paging.totalPage"
-          @input="pageChange()"
+          @update:model-value="pageChange()"
         />
         <AppLoading :loading="loading" />
       </v-col>
@@ -80,7 +80,7 @@ import AppTitle from "~/components/AppTitle.vue";
 import AppMessageError from "~/components/AppMessageError.vue";
 import AppLoading from "~/components/AppLoading.vue";
 
-const axios = require("axios");
+import axios from "axios";
 let url = process.env.api_base_url + "healthinfo";
 
 export default {
@@ -105,35 +105,35 @@ export default {
           sortable: false,
         },
         {
-          text: "健康情報ID",
+          title: "健康情報ID",
           value: "seq_health_info_id",
         },
         {
-          text: "ユーザID",
+          title: "ユーザID",
           value: "seq_user_id",
         },
         {
-          text: "身長(cm)",
+          title: "身長(cm)",
           value: "height",
         },
         {
-          text: "体重(kg)",
+          title: "体重(kg)",
           value: "weight",
         },
         {
-          text: "BMI",
+          title: "BMI",
           value: "bmi",
         },
         {
-          text: "標準体重(kg)",
+          title: "標準体重(kg)",
           value: "standard_weight",
         },
         {
-          text: "肥満度",
+          title: "肥満度",
           value: "bmi_status.message",
         },
         {
-          text: "健康情報登録日時",
+          title: "健康情報登録日時",
           value: "health_info_reg_date",
         },
       ],
@@ -221,7 +221,7 @@ export default {
           this.loading = false;
           console.log("healthinfo list [error]=" + error);
           return error;
-        }
+        },
       );
     },
     /**
@@ -231,7 +231,9 @@ export default {
     openHealthInfoEditModal: function (seqHealthInfoId) {
       this.healthInfoEditModal.dialog = true;
       this.healthInfoEditModal.seqHealthInfoId = seqHealthInfoId;
-      let tempHealthInfo = this.healthInfoList.find((o) => o.seq_health_info_id === seqHealthInfoId);
+      let tempHealthInfo = this.healthInfoList.find(
+        (o) => o.seq_health_info_id === seqHealthInfoId,
+      );
       this.healthInfoEditModal.seqUserId = tempHealthInfo?.seq_user_id;
       this.healthInfoEditModal.height = tempHealthInfo?.height;
       this.healthInfoEditModal.weight = tempHealthInfo?.weight;
@@ -245,8 +247,8 @@ export default {
     /**
      * 健康情報編集処理を行う
      */
-    editHealthInfo: function () {
-      if (!this.$refs.editHealthInfoForm.validate()) {
+    editHealthInfo: async function () {
+      if (!(await this.$isValidForm(this.$refs.editHealthInfoForm))) {
         // 入力値エラーの場合
         return;
       }
@@ -279,7 +281,7 @@ export default {
           this.error.message = error;
           console.log("healthinfo edit [error]=" + error);
           return error;
-        }
+        },
       );
       this.healthInfoEditModal.dialog = false;
     },
@@ -293,5 +295,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

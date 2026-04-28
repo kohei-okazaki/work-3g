@@ -1,30 +1,20 @@
 <template>
-  <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
+  <v-app>
+    <v-navigation-drawer v-model="drawer" :rail="miniVariant" order="1">
       <v-list>
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
+          :prepend-icon="item.icon"
           router
           exact
         >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title class="text-subtitle-2" v-text="item.title" />
-          </v-list-item-content>
+          <v-list-item-title class="text-subtitle-2" v-text="item.title" />
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
+    <v-app-bar>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon>mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon>
@@ -39,7 +29,7 @@
     </v-app-bar>
     <v-main :class="isDark">
       <v-container>
-        <nuxt />
+        <slot />
       </v-container>
     </v-main>
 
@@ -67,9 +57,7 @@ export default {
   },
   data: function () {
     return {
-      clipped: true,
       drawer: true,
-      fixed: false,
       items: [
         {
           icon: "mdi-apps",
@@ -131,4 +119,4 @@ export default {
 .pushable {
   cursor: pointer;
 }
-</style> 
+</style>
