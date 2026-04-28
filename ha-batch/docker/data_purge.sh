@@ -31,7 +31,11 @@ if ! flock -n 9; then
   exit 50
 fi
 
-cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.${ENV}.yml run --rm ha-batch --spring.batch.job.name=dataPurgeBatchJob
+cd ${BASE_DIR} && docker compose \
+  --project-directory "${BASE_DIR}" \
+  -f ${BASE_DIR}/${DOCKER_DIR}/docker-compose.yml \
+  -f ${BASE_DIR}/${DOCKER_DIR}/docker-compose.${ENV}.yml \
+  run --rm ha-batch --spring.batch.job.name=dataPurgeBatchJob
 
 echo "------------------------------------------------------------------------"
 echo "END $0"

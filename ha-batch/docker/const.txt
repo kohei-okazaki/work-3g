@@ -10,3 +10,6 @@ LOCK_DIR="/var/lock"
 
 # 環境
 ENV="local"
+
+# Docker Dir
+DOCKER_DIR=ha-build/docker
