@@ -23,19 +23,20 @@ Python3.13
 
 
 ## ツール初期設定
-| # | 手順 |
-| --- | --- |
-| 1 | コマンドプロンプト → ''' cd C:\app\git\work-3g\ha-tools\db ''' |
-| 2 | ''' py -3.13 -m venv .venv ''' |
-| 3 | コマンドプロンプト → ''' .venv\Scripts\activate.bat ''' |
-| 4 | ''' python -m pip install -U pip ''' |
-| 5 | ''' pip install -r requirements.txt ''' |
-
+コマンドプロンプト上で以下を実行
+```bash
+cd C:\app\git\work-3g\ha-tools\db
+py -3.13 -m venv .venv
+.venv\Scripts\activate.bat
+python -m pip install -U pip
+pip install -r requirements.txt
+```
 
 ## ツール利用方法
 
 ### 自動生成
-| # | 手順 |
-| --- | --- |
-| 1 | コマンドプロンプト → ''' cd C:\app\git\work-3g\ha-tools\db && .venv\Scripts\activate.bat ''' |
-| 2 | コマンドプロンプト → ''' python main.py ''' |
+コマンドプロンプト上で以下を実行
+```bash
+cd C:\app\git\work-3g\ha-tools\db && .venv\Scripts\activate.bat
+python main.py
+```

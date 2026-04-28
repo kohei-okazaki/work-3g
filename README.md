@@ -75,7 +75,6 @@
 | ha-dashboard |
 | ha-db |
 | ha-root |
-| ha-tool |
 
 * ### ha-track  
 健康情報蓄積用プロジェクト。  
