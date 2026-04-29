@@ -2,8 +2,6 @@ package jp.co.ha.db.mapper.custom;
 
 import java.util.List;
 
-import org.apache.ibatis.session.RowBounds;
-
 import jp.co.ha.db.entity.HealthInfoExample;
 import jp.co.ha.db.entity.custom.CompositeHealthInfo;
 import jp.co.ha.db.entity.custom.CompositeHealthInfoKey;
@@ -33,10 +31,8 @@ public interface CompositeHealthInfoMapper {
      *
      * @param example
      *     {@linkplain HealthInfoExample}
-     * @param rowBounds
-     *     {@linkplain RowBounds}
      * @return 健康情報とBMI範囲マスタの複合Entityのリスト
      */
-    List<CompositeHealthInfo> selectAll(HealthInfoExample example, RowBounds rowBounds);
+    List<CompositeHealthInfo> selectAll(HealthInfoExample example);
 
 }

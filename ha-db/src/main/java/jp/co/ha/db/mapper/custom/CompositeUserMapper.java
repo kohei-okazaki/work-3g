@@ -2,8 +2,6 @@ package jp.co.ha.db.mapper.custom;
 
 import java.util.List;
 
-import org.apache.ibatis.session.RowBounds;
-
 import jp.co.ha.db.entity.UserExample;
 import jp.co.ha.db.entity.UserKey;
 import jp.co.ha.db.entity.custom.CompositeUser;
@@ -34,11 +32,9 @@ public interface CompositeUserMapper {
      *
      * @param example
      *     {@linkplain UserExample}
-     * @param rowBounds
-     *     {@linkplain RowBounds}
      * @return ユーザ情報と健康情報ファイル設定の複合Entityのリスト
      */
-    List<CompositeUser> selectAll(UserExample example, RowBounds rowBounds);
+    List<CompositeUser> selectAll(UserExample example);
 
     /**
      * ページングされたユーザ情報リストを検索する

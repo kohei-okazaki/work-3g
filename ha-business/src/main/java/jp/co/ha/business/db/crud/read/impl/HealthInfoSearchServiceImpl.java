@@ -60,8 +60,6 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         if (selectOption.getPageable() != null) {
             // ページング
             example.setPageable(selectOption.getPageable());
-            return mapper.selectByExampleWithRowbounds(example,
-                    selectOption.toRowBounds());
         }
 
         return mapper.selectByExample(example);
@@ -158,8 +156,9 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
         HealthInfoExample example = new HealthInfoExample();
         example.setOrderByClause(selectOption.getOrderBy());
+        example.setPageable(selectOption.getPageable());
 
-        return compositeHealthInfoMapper.selectAll(example, selectOption.toRowBounds());
+        return compositeHealthInfoMapper.selectAll(example);
     }
 
     @Select

@@ -32,8 +32,9 @@ public class ApiLogSearchServiceImpl implements ApiLogSearchService {
 
         ApiLogExample example = new ApiLogExample();
         example.setOrderByClause(selectOption.getOrderBy());
+        example.setPageable(selectOption.getPageable());
 
-        return mapper.selectByExampleWithRowbounds(example, selectOption.toRowBounds());
+        return mapper.selectByExample(example);
     }
 
     @Select

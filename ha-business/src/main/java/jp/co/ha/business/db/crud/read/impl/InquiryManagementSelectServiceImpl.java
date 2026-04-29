@@ -41,8 +41,9 @@ public class InquiryManagementSelectServiceImpl
 
         InquiryManagementExample example = new InquiryManagementExample();
         example.setOrderByClause(selectOption.getOrderBy());
+        example.setPageable(selectOption.getPageable());
 
-        return compositeInquriyMapper.selectAll(example, selectOption.toRowBounds());
+        return compositeInquriyMapper.selectAll(example);
     }
 
     @Override

@@ -35,6 +35,7 @@ public class RootUserNoteInfoSearchServiceImpl implements RootUserNoteInfoSearch
 
         RootUserNoteInfoExample example = new RootUserNoteInfoExample();
         example.setOrderByClause(selectOption.getOrderBy());
+        example.setPageable(selectOption.getPageable());
         RootUserNoteInfoExample.Criteria criteria = example.createCriteria();
 
         // 管理者サイトログインID
@@ -42,7 +43,7 @@ public class RootUserNoteInfoSearchServiceImpl implements RootUserNoteInfoSearch
         // 削除フラグ
         criteria.andDeleteFlagEqualTo(false);
 
-        return mapper.selectByExampleWithRowbounds(example, selectOption.toRowBounds());
+        return mapper.selectByExample(example);
     }
 
     @Select

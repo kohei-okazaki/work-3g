@@ -80,6 +80,9 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+    <if test="pageable != null">
+      LIMIT #{pageable.offset}, #{pageable.pageSize}
+    </if>
   </select>
 
   <select id="selectAnalysisTarget" parameterType="map" resultMap="BaseResultMap">

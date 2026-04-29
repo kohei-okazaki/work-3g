@@ -106,8 +106,9 @@ public class UserSearchServiceImpl implements UserSearchService {
 
         UserExample example = new UserExample();
         example.setOrderByClause(selectOption.getOrderBy());
+        example.setPageable(selectOption.getPageable());
 
-        return compositeUserMapper.selectAll(example, selectOption.toRowBounds());
+        return compositeUserMapper.selectAll(example);
     }
 
     @Select

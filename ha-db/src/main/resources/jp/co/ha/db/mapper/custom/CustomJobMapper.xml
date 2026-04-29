@@ -11,7 +11,7 @@
     <result property="parameterValue" jdbcType="VARCHAR" column="PARAMETER_VALUE" />
   </resultMap>
 
-  <select id="selectPageable" resultMap="BaseResultMap">
+  <select id="selectPageable" parameterType="org.springframework.data.domain.Pageable" resultMap="BaseResultMap">
     SELECT
       <!-- BATCH_JOB_EXECUTION -->
         BJE.JOB_INSTANCE_ID
@@ -35,6 +35,9 @@
     ORDER BY
       BJE.START_TIME DESC
       , BJE.JOB_INSTANCE_ID
+    LIMIT
+      #{offset},
+      #{pageSize}
   </select>
   
   <select id="count">

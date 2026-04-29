@@ -2,8 +2,6 @@ package jp.co.ha.db.mapper.custom;
 
 import java.util.List;
 
-import org.apache.ibatis.session.RowBounds;
-
 import jp.co.ha.db.entity.InquiryManagementExample;
 import jp.co.ha.db.entity.custom.CompositeInquiry;
 
@@ -24,10 +22,7 @@ public interface CompositeInquriyMapper {
      * 
      * @param example
      *     InquiryManagementExample
-     * @param rowBounds
-     *     RowBoundsRowBounds
      * @return 問い合わせ情報
      */
-    List<CompositeInquiry> selectAll(InquiryManagementExample example,
-            RowBounds rowBounds);
+    List<CompositeInquiry> selectAll(InquiryManagementExample example);
 }

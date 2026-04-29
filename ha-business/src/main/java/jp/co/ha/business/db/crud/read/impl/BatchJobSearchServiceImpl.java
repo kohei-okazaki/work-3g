@@ -28,7 +28,7 @@ public class BatchJobSearchServiceImpl implements BatchJobSearchService {
     @Override
     @Transactional(readOnly = true)
     public List<CustomJobData> findAll(SelectOption selectOption) {
-        return mapper.selectPageable(selectOption.toRowBounds());
+        return mapper.selectPageable(selectOption.getPageable());
     }
 
     @Select

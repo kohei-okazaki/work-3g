@@ -3,7 +3,7 @@ package jp.co.ha.db.mapper.custom;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.apache.ibatis.session.RowBounds;
+import org.springframework.data.domain.Pageable;
 
 import jp.co.ha.db.entity.custom.CustomJobData;
 
@@ -23,11 +23,11 @@ public interface CustomJobMapper {
     /**
      * Batch起動履歴リストを検索する
      * 
-     * @param rowBounds
-     *     {@linkplain RowBounds}
+     * @param pageable
+     *     {@linkplain Pageable}
      * @return Batch起動履歴リスト
      */
-    List<CustomJobData> selectPageable(RowBounds rowBounds);
+    List<CustomJobData> selectPageable(Pageable pageable);
 
     /**
      * 件数を取得

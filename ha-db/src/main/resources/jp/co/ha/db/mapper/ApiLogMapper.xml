@@ -116,6 +116,14 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+    <choose>
+      <when test="pageable != null">
+        limit #{pageable.offset}, #{pageable.pageSize}
+      </when>
+      <when test="limit != null">
+        limit ${limit}
+      </when>
+    </choose>
   </select>
   <select id="selectByPrimaryKey" parameterType="jp.co.ha.db.entity.ApiLogKey" resultMap="BaseResultMap">
     <!--

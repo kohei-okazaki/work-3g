@@ -114,9 +114,14 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
-    <if test="limit != null">
-      limit ${limit}
-    </if>
+    <choose>
+      <when test="pageable != null">
+        limit #{pageable.offset}, #{pageable.pageSize}
+      </when>
+      <when test="limit != null">
+        limit ${limit}
+      </when>
+    </choose>
   </select>
   <select id="selectByPrimaryKey" parameterType="jp.co.ha.db.entity.HealthInfoKey" resultMap="BaseResultMap">
     <!--
