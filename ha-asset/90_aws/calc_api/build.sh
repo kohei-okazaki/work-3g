@@ -15,6 +15,7 @@ if [ -z "${ARTIFACT_BUCKET}" ]; then
   exit 1
 fi
 
+# S3へアップロード
 aws cloudformation package \
   --template-file template.yaml \
   --s3-bucket "${ARTIFACT_BUCKET}" \
@@ -22,10 +23,12 @@ aws cloudformation package \
   --output-template-file packaged-template.yaml \
   --region "${DEPLOY_REGION}"
 
+# CloudFormationテンプレートとして正しいかをチェック
 aws cloudformation validate-template \
   --template-body file://packaged-template.yaml \
   --region "${DEPLOY_REGION}"
 
+# CloudFormation Stackを作成または更新
 aws cloudformation deploy \
   --template-file packaged-template.yaml \
   --stack-name "${STACK_NAME}" \

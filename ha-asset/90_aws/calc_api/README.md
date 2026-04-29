@@ -1,34 +1,32 @@
 # calc_api
 
-This directory manages the health calculation HTTP API with plain
-CloudFormation. AWS SAM is not used.
+## API
+- 基礎健康情報計算API
+- カロリー計算API
+- 肺活量計算API
 
-## Files
+## ファイル
 
-- `template.yaml`: CloudFormation template for API Gateway HTTP API, Lambda
-  functions, Lambda execution role, routes, integrations, and invoke
-  permissions.
-- `lambda/`: Lambda source code.
-- `buildspec.yml`: CodeBuild buildspec that runs `aws cloudformation package`
-  and `aws cloudformation deploy`.
-- `build.sh`: Optional helper for running the same deployment from CloudShell
-  or a local shell.
+- `template.yaml`: API Gateway HTTP API、Lambda、Lambda実行ロール、ルート、統合、Invoke権限を定義するCloudFormationテンプレート。
+- `lambda/`: Lambdaソースコード。
+- `buildspec.yml`: CodeBuildで `aws cloudformation package` と `aws cloudformation deploy` を実行するビルド仕様。
+- `build.sh`: CloudShellやローカルシェルから同じデプロイを実行するための補助スクリプト。
 
-## CodeBuild settings
+## CodeBuildの設定
 
-Create the CodeBuild project manually from the AWS console or AWS CLI.
+CodeBuildプロジェクトはAWSコンソールまたはAWS CLIから手動で作成します。
 
-Recommended settings:
+推奨設定:
 
-- Source: this repository.
-- Buildspec: `ha-asset/90_aws/calc_api/buildspec.yml`.
-- Environment image: a Linux managed image with AWS CLI.
-- Privileged mode: OFF.
-- Artifacts: none.
+- ソース: このリポジトリ。
+- ビルド仕様: `ha-asset/90_aws/calc_api/buildspec.yml`.
+- 環境イメージ: AWS CLIを利用できるLinux管理イメージ。
+- 特権モード: OFF.
+- アーティファクト: なし。
 
-Environment variables:
+環境変数:
 
-| Name | Value |
+| 名前 | 値 |
 | --- | --- |
 | `STACK_NAME` | `calc-api` |
 | `ARTIFACT_BUCKET` | S3 bucket for CloudFormation package artifacts |
@@ -36,68 +34,10 @@ Environment variables:
 | `DEPLOY_REGION` | `ap-northeast-1` |
 | `STAGE_NAME` | `dev` |
 
-Create `ARTIFACT_BUCKET` before starting the build. The Lambda zip artifact is
-uploaded there by `aws cloudformation package`.
+ビルドを開始する前に `ARTIFACT_BUCKET` を作成しておきます。Lambdaのzip成果物は `aws cloudformation package` により、このS3バケットへアップロードされます。
 
-## CodeBuild service role
 
-Start with the permissions below, then narrow resources for production use.
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "cloudformation:CreateChangeSet",
-        "cloudformation:CreateStack",
-        "cloudformation:DeleteChangeSet",
-        "cloudformation:DescribeChangeSet",
-        "cloudformation:DescribeStacks",
-        "cloudformation:ExecuteChangeSet",
-        "cloudformation:GetTemplateSummary",
-        "cloudformation:UpdateStack"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:GetBucketLocation",
-        "s3:ListBucket"
-      ],
-      "Resource": "arn:aws:s3:::<ARTIFACT_BUCKET>"
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:GetObject",
-        "s3:PutObject"
-      ],
-      "Resource": "arn:aws:s3:::<ARTIFACT_BUCKET>/*"
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "lambda:*",
-        "apigateway:*",
-        "iam:CreateRole",
-        "iam:DeleteRole",
-        "iam:GetRole",
-        "iam:PassRole",
-        "iam:AttachRolePolicy",
-        "iam:DetachRolePolicy",
-        "iam:PutRolePolicy",
-        "iam:DeleteRolePolicy"
-      ],
-      "Resource": "*"
-    }
-  ]
-}
-```
-
-## Manual deployment
+## 手動デプロイ
 
 ```bash
 cd ha-asset/90_aws/calc_api
