@@ -1,51 +1,35 @@
 #!/bin/bash
-#
-# API Gateway + Lambda(Python 3.14) のビルド用シェル
-#
-# 前提:
-# (1) AWS CloudShell に以下をアップロードすること
-#   - basic.py
-#   - breathing_capacity.py
-#   - calorie.py
-#   - template.yaml
-#   - samconfig.toml
-# (2) カレントディレクトリが /home/cloudshell-user であること
-# (3) health-api-sam 配下に basic / breathing_capacity / calorie ディレクトリがあること
-#
+set -euo pipefail
 
-HOME_DIR="/home/cloudshell-user"
-BASE_DIR="${HOME_DIR}/health-api-sam"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "${SCRIPT_DIR}"
 
-echo "build.sh start..."
+STACK_NAME="${STACK_NAME:-calc-api}"
+ARTIFACT_BUCKET="${ARTIFACT_BUCKET:-}"
+ARTIFACT_PREFIX="${ARTIFACT_PREFIX:-calc-api}"
+DEPLOY_REGION="${DEPLOY_REGION:-ap-northeast-1}"
+STAGE_NAME="${STAGE_NAME:-dev}"
 
-# conf
-mv ${HOME_DIR}/samconfig.toml ${BASE_DIR}/samconfig.toml
-mv ${HOME_DIR}/template.yaml ${BASE_DIR}/template.yaml
-
-# module
-mv ${HOME_DIR}/basic.py ${BASE_DIR}/basic/app.py
-mv ${HOME_DIR}/breathing_capacity.py ${BASE_DIR}/breathing_capacity/app.py
-mv ${HOME_DIR}/calorie.py ${BASE_DIR}/calorie/app.py
-
-cd ${BASE_DIR}
-
-# build
-# sam build だとPython3.14がcloud shellで見つからずにエラーとなる
-sam build --use-container
-build_result=$?
-if [ ${build_result} -eq 0 ]; then
-  echo "build success."
-else
-  echo "build failure."
+if [ -z "${ARTIFACT_BUCKET}" ]; then
+  echo "ARTIFACT_BUCKET is required."
+  exit 1
 fi
 
-# deploy
-sam deploy --guided
-deploy_result=$?
-if [ ${deploy_result} -eq 0 ]; then
-  echo "deploy success."
-else
-  echo "deploy failure."
-fi
+aws cloudformation package \
+  --template-file template.yaml \
+  --s3-bucket "${ARTIFACT_BUCKET}" \
+  --s3-prefix "${ARTIFACT_PREFIX}" \
+  --output-template-file packaged-template.yaml \
+  --region "${DEPLOY_REGION}"
 
-echo "build.sh finish..."
+aws cloudformation validate-template \
+  --template-body file://packaged-template.yaml \
+  --region "${DEPLOY_REGION}"
+
+aws cloudformation deploy \
+  --template-file packaged-template.yaml \
+  --stack-name "${STACK_NAME}" \
+  --capabilities CAPABILITY_IAM \
+  --no-fail-on-empty-changeset \
+  --parameter-overrides StageName="${STAGE_NAME}" \
+  --region "${DEPLOY_REGION}"

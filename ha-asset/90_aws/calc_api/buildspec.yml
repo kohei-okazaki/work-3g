@@ -1,0 +1,26 @@
+version: 0.2
+
+env:
+  variables:
+    CALC_API_DIR: ha-asset/90_aws/calc_api
+    STACK_NAME: calc-api
+    ARTIFACT_BUCKET: REPLACE_ME
+    ARTIFACT_PREFIX: calc-api
+    DEPLOY_REGION: ap-northeast-1
+    STAGE_NAME: dev
+
+phases:
+  pre_build:
+    commands:
+      - aws --version
+      - |
+        if [ "$ARTIFACT_BUCKET" = "REPLACE_ME" ] || [ -z "$ARTIFACT_BUCKET" ]; then
+          echo "Set ARTIFACT_BUCKET to the S3 bucket used for CloudFormation package artifacts."
+          exit 1
+        fi
+  build:
+    commands:
+      - cd "$CODEBUILD_SRC_DIR/$CALC_API_DIR"
+      - aws cloudformation package --template-file template.yaml --s3-bucket "$ARTIFACT_BUCKET" --s3-prefix "$ARTIFACT_PREFIX" --output-template-file packaged-template.yaml --region "$DEPLOY_REGION"
+      - aws cloudformation validate-template --template-body file://packaged-template.yaml --region "$DEPLOY_REGION"
+      - aws cloudformation deploy --template-file packaged-template.yaml --stack-name "$STACK_NAME" --capabilities CAPABILITY_IAM --no-fail-on-empty-changeset --parameter-overrides StageName="$STAGE_NAME" --region "$DEPLOY_REGION"

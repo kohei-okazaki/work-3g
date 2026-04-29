@@ -8,29 +8,29 @@
 ![healthinfo_flow](ha-asset/99_tool/png/healthinfo_flow.png)
 
 ## 02_Project構成  
-* ### ha-api  
+### ha-api  
 健康管理のAPI。  
   - Java25
   - SpringBoot
 
-* ### ha-dashboard  
+### ha-dashboard  
 健康管理のダッシュボード。   
   - Java25
   - SpringBoot
   - thymeleaf
 
-* ### ha-batch  
+### ha-batch  
 健康管理のBatch処理。   
   - Java25
   - SpringBatch
 
-* ### ha-root  
+### ha-root  
 健康管理アプリの管理者用サイト。   
   - Java25
   - SpringBoot
   - Vue.js
 
-* ### ha-business  
+### ha-business  
 以下のプロジェクトで共通的に使うbusinessロジックを定義。  
 | プロジェクト名 |
 | :---- |
@@ -39,7 +39,7 @@
 | ha-dashboard |
 | ha-root |
 
-* ### ha-db  
+### ha-db  
 以下のMavenプロジェクトで共通的に使うTableに対応したEntityとMapperのみを定義。  
 環境へのDB反映は本プロジェクトよりFlywayで行う。  
 | プロジェクト名 |
@@ -50,7 +50,7 @@
 | ha-dashboard |
 | ha-root |
 
-* ### ha-common  
+### ha-common  
 以下のMavenプロジェクトで共通的に使う共通処理を定義。  
 | プロジェクト名 |
 | :---- |
@@ -61,10 +61,10 @@
 | ha-db |
 | ha-root |
 
-* ### ha-tools  
+### ha-tools  
 指定のフォーマットのExcelからDDL/DMLを自動生成するツールプロジェクト  
 
-* ### ha-pom  
+### ha-pom  
 以下のプロジェクトで共通的に使う外部ライブラリを定義したpomプロジェクト。
 | プロジェクト名 |
 | :---- |
@@ -76,17 +76,17 @@
 | ha-db |
 | ha-root |
 
-* ### ha-track  
+### ha-track  
 健康情報蓄積用プロジェクト。  
   - Python
   - Django rest framework
 
-* ### ha-build  
+### ha-build  
 Docker環境でのBuild用のスクリプトを定義。   
 また、AWS CodeBuildによるCI/CD、CDKによるIaC化時のファイルを定義。  
 
-* ### ha-docs  
+### ha-docs  
 健康管理アプリのドキュメントプロジェクト。  
 
-* ### ha-asset  
+### ha-asset  
 詳細設計書、DDL等を定義したドキュメントプロジェクト。  
