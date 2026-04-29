@@ -100,12 +100,12 @@ export default {
             },
             {
               name: "データベース(MySQL)",
-              host: "ls-XXXXX.ap-northeast-1.rds.amazonaws.com/work3g",
+              host: "localhost:3306",
             },
           ],
         },
         {
-          envName: "dev1環境",
+          envName: "dev環境",
           items: [
             {
               name: "健康管理ダッシュボード",
@@ -121,7 +121,7 @@ export default {
             },
             {
               name: "管理者用サイト",
-              host: "http://healthinfo-app-root-front-dev1.s3-website-ap-northeast-1.amazonaws.com/login",
+              host: "http://healthinfo-app-root-front-dev.s3-website-ap-northeast-1.amazonaws.com/login",
             },
             {
               name: "健康情報計算API",

@@ -2,7 +2,7 @@ const nodeEnvironment = process.env.NODE_ENV;
 const environment =
   process.env.HA_ENV ||
   process.env.APP_ENV ||
-  (["local", "dev1", "production"].includes(nodeEnvironment)
+  (["local", "dev", "production"].includes(nodeEnvironment)
     ? nodeEnvironment
     : "local");
 const envSet = require(`./env.${environment}.js`);

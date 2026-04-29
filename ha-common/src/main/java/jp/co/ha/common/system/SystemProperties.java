@@ -27,8 +27,8 @@ public record SystemProperties(
 
         /** ローカル環境 */
         LOCAL("local"),
-        /** dev1環境 */
-        DEV1("dev1");
+        /** dev環境 */
+        DEV("dev");
 
         /** 値 */
         private String value;

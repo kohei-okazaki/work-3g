@@ -38,11 +38,11 @@
         <activeByDefault>true</activeByDefault>
       </activation>
     </profile>
-    <!-- dev1環境 -->
+    <!-- dev環境 -->
     <profile>
-      <id>dev1</id>
+      <id>dev</id>
       <properties>
-        <resources.directory>${basedir}/dev1</resources.directory>
+        <resources.directory>${basedir}/dev</resources.directory>
       </properties>
     </profile>
   </profiles>

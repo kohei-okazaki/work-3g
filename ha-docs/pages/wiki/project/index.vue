@@ -68,7 +68,7 @@
     <v-row align="center">
       <v-col sm="12">
         <v-card>
-          <v-card-title class="text-subtitle-1">dev1環境構成図</v-card-title>
+          <v-card-title class="text-subtitle-1">dev環境構成図</v-card-title>
           <v-card-text align="center">
             <v-img src="/wiki/project-config-ec2.png" width="70%" />
           </v-card-text>

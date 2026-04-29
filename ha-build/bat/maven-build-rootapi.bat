@@ -2,7 +2,7 @@
 
 rem ------------------------------------------------------------------------
 rem maven build
-rem arg1:profile (ex. local or dev1)
+rem arg1:profile (ex. local or dev)
 rem ------------------------------------------------------------------------
 
 rem common -> db-> business‚Ì‡‚Ébuild

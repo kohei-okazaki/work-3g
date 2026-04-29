@@ -29,5 +29,5 @@
 - 文字コード：UTF-8
 - 配置先：
     - local環境：/var/app/log
-    - dev1環境：/var/app/log
+    - dev環境：/var/app/log
     - ファイル名：batch-${log_level}.log

@@ -108,9 +108,9 @@ export default {
               url: "http://localhost:8080/login",
             },
             {
-              envName: "dev1環境",
+              envName: "dev環境",
               url:
-                "http://dev1-dashboard.ap-northeast-1.elasticbeanstalk.com/login",
+                "TODO 実装したら記載",
             },
           ],
         },
@@ -122,8 +122,8 @@ export default {
               url: "http://localhost:8083/login",
             },
             {
-              envName: "dev1環境",
-              url: "http://healthinfo-app-root-front-dev1.s3-website-ap-northeast-1.amazonaws.com/login",
+              envName: "dev環境",
+              url: "http://healthinfo-app-root-front-dev.s3-website-ap-northeast-1.amazonaws.com/login",
             },
           ],
         },
