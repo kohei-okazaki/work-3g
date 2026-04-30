@@ -16,15 +16,12 @@
         <div>{{ ifItem.description }}</div>
         <br />
         <div>
-          <v-btn
+          <a
             :href="ifItem.url"
-            text
-            color="link"
-            min-height="20"
-            class="x-small post-link align-center py-1 px-2"
+            class="post-link"
             target="_blank"
             rel="noopener noreferrer"
-            >処理フロー</v-btn
+            >処理フロー</a
           >はこちら
         </div>
         <v-alert border="left" type="info">リクエストヘッダ</v-alert>

@@ -848,7 +848,7 @@
                   </div>
                 </v-alert>
                 <p>
-                  Eclipseのha-nodeプロジェクト上でコマンドプロンプトを開き、以下のコマンドを実行
+                  Eclipseのha-calc_apiプロジェクト上でコマンドプロンプトを開き、以下のコマンドを実行
                 </p>
                 <kbd>npm update</kbd>
                 <p>
@@ -867,7 +867,7 @@
                   </div>
                 </v-alert>
                 <p>
-                  開発中、新しくモジュールを追加したい場合、Eclipseのha-nodeプロジェクト上でコマンドプロンプトを開き、以下のコマンドを実行
+                  開発中、新しくモジュールを追加したい場合、Eclipseのha-calc_apiプロジェクト上でコマンドプロンプトを開き、以下のコマンドを実行
                 </p>
                 <kbd>npm install --save ${module_name}</kbd>
                 <p>

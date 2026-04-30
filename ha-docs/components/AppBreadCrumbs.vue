@@ -1,5 +1,10 @@
 <template>
-  <v-breadcrumbs divider="/" density="comfortable" :items="normalizedItems" />
+  <v-breadcrumbs
+    class="app-breadcrumbs"
+    divider="/"
+    density="comfortable"
+    :items="normalizedItems"
+  />
 </template>
 <script>
 export default {
@@ -23,4 +28,24 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.app-breadcrumbs {
+  color: #005c64;
+}
+
+.app-breadcrumbs :deep(.v-breadcrumbs-item),
+.app-breadcrumbs :deep(.v-breadcrumbs-item--link) {
+  color: #005c64;
+  opacity: 1;
+}
+
+.app-breadcrumbs :deep(.v-breadcrumbs-item--link) {
+  font-weight: 500;
+}
+
+.app-breadcrumbs :deep(.v-breadcrumbs-divider),
+.app-breadcrumbs :deep(.v-breadcrumbs-item--disabled) {
+  color: #455a64;
+  opacity: 1;
+}
+</style>

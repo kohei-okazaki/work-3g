@@ -73,7 +73,7 @@ export default {
         },
         {
           id: "4",
-          text: "アカウント情報 更新",
+          text: "USER 更新",
           edgeType: "round",
           next: ["100", "101"],
           style: "fill:#c6ffc6",

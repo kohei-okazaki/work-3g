@@ -24,8 +24,8 @@ import AppContentsTitle from "~/components/AppContentsTitle.vue";
 import AppDocs from "~/components/AppDocs.vue";
 
 export default {
-  // RootAPIのレイアウトを適用
-  layout: "rootApiLayout",
+  // calc_apiのレイアウトを適用
+  layout: "calcApiLayout",
   components: {
     AppBreadCrumbs,
     AppContentsTitle,
@@ -40,70 +40,38 @@ export default {
           href: "/",
         },
         {
-          text: "管理者サイト用API",
+          text: "calc_api",
           disabled: false,
-          href: "/root/api",
+          href: "/calc_api",
         },
         {
-          text: "問い合わせ情報一覧取得API",
+          text: "ヘルスチェックAPI",
           disabled: true,
-          href: "/root/api/inquiry",
+          href: "/calc_api/healthcheck",
         },
       ],
       flow: [
         {
           id: "1",
-          text: "リクエスト受付",
+          text: "リクエストログ出力",
           edgeType: "round",
           next: ["2"],
         },
         {
           id: "2",
-          text: "トークン認証",
+          text: "レスポンスJSON生成",
           edgeType: "round",
-          link: ["-- 認証エラー -->", "-- それ以外の場合 -->"],
-          next: ["404", "3"],
+          next: ["3"],
         },
         {
           id: "3",
-          text: "ページング情報 取得",
+          text: "レスポンスログ出力",
           edgeType: "round",
           next: ["4"],
         },
         {
           id: "4",
-          text: "INQUIRY_MANAGEMENT + INQUIRY_STATUS_MT + INQUIRY_TYPE_MT <br>検索",
-          edgeType: "round",
-          next: ["5", "101"],
-          style: "fill:#c6ffc6",
-        },
-        {
-          id: "5",
-          text: "INQUIRY_MANAGEMENT<br>件数検索",
-          edgeType: "round",
-          next: ["100", "101"],
-          style: "fill:#c6ffc6",
-        },
-        {
-          id: "100",
-          text: "正常系レスポンスJSON 生成",
-          edgeType: "round",
-          next: ["110"],
-        },
-        {
-          id: "101",
-          text: "異常系レスポンスJSON 生成",
-          edgeType: "round",
-          next: ["110"],
-        },
-        {
-          id: "110",
-          text: "レスポンス返却",
-          edgeType: "round",
-        },
-        {
-          id: "404",
-          text: "404エラー",
+          text: "レスポンスJSON返却",
           edgeType: "round",
         },
       ],

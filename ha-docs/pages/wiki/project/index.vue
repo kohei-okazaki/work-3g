@@ -192,7 +192,7 @@ export default {
           description: "健康管理アプリの静的ドキュメントプロジェクト",
         },
         {
-          name: "ha-node",
+          name: "ha-calc_api",
           description:
             "lambdaで動作する健康情報計算APIを管理するJavaScriptプロジェクト",
         },

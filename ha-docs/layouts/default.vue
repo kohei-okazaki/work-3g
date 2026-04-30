@@ -39,8 +39,8 @@ export default {
         },
         {
           icon: "mdi-api",
-          title: "NodeAPI",
-          to: "/node/api",
+          title: "健康情報計算API",
+          to: "/calc_api",
         },
         {
           icon: "mdi-api",

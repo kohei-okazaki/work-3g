@@ -66,9 +66,9 @@ export default {
         },
         {
           id: "3",
-          text: "リクエスト.お知らせ情報IDチェック",
+          text: "NEWS_INFO 取得",
           edgeType: "round",
-          link: ["-- 未指定の場合 -->", "-- それ以外の場合 -->"],
+          link: ["-- 取得失敗 -->", "-- 取得成功 -->"],
           next: ["101", "4"],
         },
         {
@@ -81,15 +81,15 @@ export default {
         {
           id: "5",
           text:
-            "お知らせ情報JSONから<br>指定したおしらせ情報IDのレコードを削除",
+            "NEWS_INFO 論理削除",
           edgeType: "round",
           next: ["6"],
         },
         {
           id: "6",
-          text: "お知らせ情報JSON<br>Upload",
+          text: "S3上のお知らせ情報JSON削除",
           edgeType: "round",
-          link: ["-- Upload失敗 -->", "-- Upload成功 -->"],
+          link: ["-- 削除失敗 -->", "-- 削除成功 -->"],
           next: ["101", "7"],
         },
         {

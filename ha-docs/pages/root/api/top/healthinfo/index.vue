@@ -72,7 +72,7 @@ export default {
         },
         {
           id: "4",
-          text: "健康情報 検索",
+          text: "HEALTH_INFO 検索",
           edgeType: "round",
           next: ["100", "101"],
           style: "fill:#c6ffc6",

@@ -73,19 +73,19 @@ export default {
         },
         {
           id: "4",
-          text: "管理者サイトユーザメモ情報 更新",
+          text: "ROOT_USER_NOTE_INFO 更新",
           edgeType: "round",
           next: ["5"],
         },
         {
           id: "5",
-          text: "管理者サイトユーザメモ情報 取得",
+          text: "ROOT_USER_NOTE_INFO 取得",
           edgeType: "round",
           next: ["6"],
         },
         {
           id: "6",
-          text: "メモ情報 更新",
+          text: "S3.メモ情報 更新",
           edgeType: "round",
           next: ["100"],
         },

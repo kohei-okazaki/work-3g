@@ -66,13 +66,13 @@ export default {
         },
         {
           id: "3",
-          text: "メモ情報 Upload",
+          text: "S3.メモ情報 Upload",
           edgeType: "round",
           next: ["4"],
         },
         {
           id: "4",
-          text: "管理者サイトユーザメモ情報を登録",
+          text: "ROOT_USER_NOTE_INFO 登録",
           edgeType: "round",
           next: ["100"],
         },

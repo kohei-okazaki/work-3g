@@ -73,13 +73,13 @@ export default {
         },
         {
           id: "4",
-          text: "管理者サイトユーザメモ情報 取得",
+          text: "ROOT_USER_NOTE_INFO 取得",
           edgeType: "round",
           next: ["5"],
         },
         {
           id: "5",
-          text: "メモ情報 取得",
+          text: "S3.メモ情報 取得",
           edgeType: "round",
           next: ["100"],
         },
