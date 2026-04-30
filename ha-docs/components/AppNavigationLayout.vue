@@ -48,15 +48,33 @@ const rail = ref(false);
     </v-app-bar>
 
     <v-main class="base">
-      <v-container>
-        <slot />
-      </v-container>
+      <div class="app-main-content">
+        <v-container class="app-page-content">
+          <slot />
+        </v-container>
+
+        <v-footer class="app-footer">
+          <span>&copy; {{ new Date().getFullYear() }}</span>
+        </v-footer>
+      </div>
     </v-main>
 
     <AppScroll />
-
-    <v-footer app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
+
+<style scoped>
+.app-main-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.app-page-content {
+  flex: 1 0 auto;
+}
+
+.app-footer {
+  flex: 0 0 auto;
+}
+</style>

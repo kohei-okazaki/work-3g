@@ -72,7 +72,7 @@ export default {
         },
         {
           id: "4",
-          text: "健康情報 検索",
+          text: "HEALTH_INFO 検索",
           edgeType: "round",
           next: ["5"],
         },
@@ -84,25 +84,19 @@ export default {
         },
         {
           id: "6",
-          text: "API通信情報 登録<br>Track API:健康情報連携API",
+          text: "Track API:健康情報連携API",
           edgeType: "round",
           next: ["7"],
         },
         {
           id: "7",
-          text: "Track API:健康情報連携API",
+          text: "SQS.API通信ログ 登録 <br> Track API:健康情報連携API",
           edgeType: "round",
           next: ["8"],
         },
-        {
-          id: "8",
-          text: "API通信情報 更新<br>Track API:健康情報連携API",
-          edgeType: "round",
-          next: ["9"],
-        },
 
         {
-          id: "9",
+          id: "8",
           text: "Slack 通知",
           edgeType: "round",
           link: ["-- API異常終了 -->", "-- API正常終了 -->"],
