@@ -15,16 +15,15 @@
         <v-card>
           <v-card-title>{{ dest.envName }}</v-card-title>
           <v-divider />
-          <v-card-text d-flex>
-            <v-simple-table>
+          <v-card-text class="dest-card-body">
+            <v-simple-table class="dest-table">
               <template v-slot:default>
                 <tr v-for="(item, i) in dest.items" :key="i">
-                  <th>
+                  <th class="dest-label-cell">
                     <div class="text-left">{{ item.name }}</div>
                   </th>
-                  <td>
-                    <v-btn text color="link" min-height="20" class="x-small post-link align-center py-1 px-2"
-                      rel="noopener noreferrer">{{ item.host }}</v-btn>
+                  <td class="dest-host-cell">
+                    <span class="dest-host">{{ item.host }}</span>
                   </td>
                 </tr>
               </template>
@@ -146,4 +145,37 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+.dest-card-body {
+  padding: 14px 16px 16px;
+}
+
+.dest-table :deep(table) {
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.dest-table :deep(th),
+.dest-table :deep(td) {
+  border-bottom: 0;
+  height: auto;
+  padding: 0;
+  vertical-align: top;
+}
+
+.dest-label-cell {
+  width: 220px;
+  padding-top: 3px !important;
+}
+
+.dest-host-cell {
+  line-height: 1.55;
+}
+
+.dest-host {
+  font-family: monospace;
+  overflow-wrap: anywhere;
+}
+</style>

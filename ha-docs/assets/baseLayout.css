@@ -6,12 +6,14 @@ details {
 }
 
 .post-link {
-  display: inline-block;
-  word-break: break-all;
-  padding: 2px 8px;
-  border-radius: 5px;
+  color: #006d77;
+  display: inline;
+  overflow-wrap: anywhere;
   text-transform: none !important;
+  text-decoration: none;
   white-space: normal;
-  max-width: calc(100% - 30px);
-  height: inherit !important;
+}
+
+.post-link:hover {
+  text-decoration: underline;
 }
