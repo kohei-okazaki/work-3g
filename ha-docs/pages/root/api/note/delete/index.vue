@@ -73,7 +73,7 @@ export default {
         },
         {
           id: "4",
-          text: "管理者サイトユーザメモ情報 削除",
+          text: "ROOT_USER_NOTE_INFO 論理削除",
           edgeType: "round",
           next: ["100"],
         },

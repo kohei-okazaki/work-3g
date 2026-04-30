@@ -66,15 +66,16 @@ export default {
         },
         {
           id: "3",
-          text: "お知らせ情報JSON 取得",
+          text: "リクエスト.お知らせ情報をJSONに追加",
           edgeType: "round",
           next: ["4"],
         },
         {
           id: "4",
-          text: "リクエスト.お知らせ情報をJSONに追加",
+          text: "NEWS_INFO 登録",
           edgeType: "round",
-          next: ["5"],
+          link: ["-- 登録失敗 -->", "-- 登録成功 -->"],
+          next: ["101", "5"],
         },
         {
           id: "5",

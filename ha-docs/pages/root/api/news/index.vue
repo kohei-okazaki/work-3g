@@ -66,16 +66,17 @@ export default {
         },
         {
           id: "3",
-          text: "お知らせ情報JSON 取得",
+          text: "NEWS_INFO 取得",
           edgeType: "round",
           link: ["-- 取得失敗 -->", "-- 取得成功 -->"],
           next: ["101", "4"],
         },
         {
           id: "4",
-          text: "Indexで降順ソート",
+          text: "お知らせ情報JSON 取得",
           edgeType: "round",
-          next: ["100"],
+          link: ["-- 取得失敗 -->", "-- 取得成功 -->"],
+          next: ["101", "100"],
         },
         {
           id: "100",

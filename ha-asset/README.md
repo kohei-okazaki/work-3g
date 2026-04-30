@@ -13,12 +13,12 @@
 ### 02_db
 健康管理アプリで使用しているDB定義書やDML、DDLなどを管理。
 
-### 03_lambda
-AWSサービスのlambdaでサーバのヘルスチェックする処理を管理。
-実際使う想定はない
+### 90_aws
+AWSサービス関連のリソースを管理。  
+アプリケーションのIaCのみha-build/aws 配下とし、それ以外は全てこちらで管理
 
 ### 99_tool
 ローカル開発時の便利ツールを配置
- - api: GoogleChrome拡張機能のAPITesterテンプレート
- - aws: EC2やRDSのインスタンスを確認するバッチ。
- - sql: ローカルにインストールされたMySQLに自由にSQLを叩くツールを管理。
+- api: GoogleChrome拡張機能のAPITesterテンプレート
+- aws: EC2やRDSのインスタンスを確認するバッチ。
+- sql: ローカルにインストールされたMySQLに自由にSQLを叩くツールを管理。

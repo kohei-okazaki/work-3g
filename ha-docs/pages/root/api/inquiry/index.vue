@@ -45,7 +45,7 @@ export default {
           href: "/root/api",
         },
         {
-          text: "Job履歴情報一覧取得API",
+          text: "問い合わせ情報一覧取得API",
           disabled: true,
           href: "/root/api/inquiry",
         },
