@@ -92,7 +92,8 @@ export default {
           name: "ログインAPI",
           endpoint: "/api/root/login",
           httpMethod: "POST",
-          description: "管理者サイトへログインするためのAPI",
+          description:
+            "管理者サイトへログインするためのAPI。成功時はレスポンスヘッダAuthorizationにトークン情報を設定",
           url: "/root/api/login",
           request: [
             {
@@ -112,42 +113,7 @@ export default {
               description: null,
             },
           ],
-          response: [
-            {
-              physicalName: "result",
-              logicalName: "処理結果",
-              required: true,
-              type: "半角数字",
-              byte: 1,
-              description:
-                "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
-            },
-            {
-              physicalName: "errors",
-              logicalName: "エラー情報",
-              required: false,
-              type: null,
-              byte: null,
-              description: "result='1'の場合、必須",
-            },
-            {
-              physicalName: "message",
-              logicalName: "エラーメッセージ",
-              required: false,
-              type: null,
-              layer: 1,
-              byte: 256,
-              description: "result='1'の場合、必須",
-            },
-            {
-              physicalName: "token",
-              logicalName: "トークン",
-              required: false,
-              type: "半角英数記号",
-              byte: null,
-              description: "result='0'の場合、必須",
-            },
-          ],
+          response: [],
         },
 
         {
@@ -159,7 +125,7 @@ export default {
           headers: [
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
@@ -263,7 +229,7 @@ export default {
           headers: [
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
@@ -334,14 +300,14 @@ export default {
 
         {
           name: "Top情報(アカウント情報)取得API",
-          endpoint: "/api/root/top/acount",
+          endpoint: "/api/root/top/account",
           httpMethod: "GET",
           description: "管理サイトTop画面情報の取得を行うAPI",
-          url: "/root/api/top/acount",
+          url: "/root/api/top/account",
           headers: [
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
@@ -419,7 +385,7 @@ export default {
           headers: [
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [],
@@ -516,7 +482,7 @@ export default {
 
         {
           name: "ユーザ作成API",
-          endpoint: "/api/root/user/",
+          endpoint: "/api/root/user",
           httpMethod: "POST",
           description: "管理サイトユーザの作成を行うAPI",
           url: "/root/api/user/entry",
@@ -524,10 +490,6 @@ export default {
             {
               key: "Content-Type",
               value: "application/json",
-            },
-            {
-              key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
           request: [
@@ -599,7 +561,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
@@ -639,7 +601,7 @@ export default {
             {
               physicalName: "remarks",
               logicalName: "備考",
-              required: true,
+              required: false,
               type: null,
               byte: null,
               description: "更新後の備考",
@@ -684,7 +646,7 @@ export default {
           headers: [
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
@@ -995,7 +957,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
@@ -1057,7 +1019,7 @@ export default {
           headers: [
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
@@ -1252,7 +1214,7 @@ export default {
               physicalName: "transaction_id",
               logicalName: "トランザクションID",
               required: false,
-              type: "半角数字",
+              type: "文字列",
               layer: 1,
               byte: null,
               description: "API実行履歴を処理単位で一意に識別するID",
@@ -1267,22 +1229,31 @@ export default {
               description: null,
             },
             {
-              physicalName: "seq_user_id",
-              logicalName: "ユーザID",
+              physicalName: "http_method",
+              logicalName: "HTTPメソッド",
               required: false,
-              type: "半角数字",
+              type: "半角英字",
               layer: 1,
               byte: null,
-              description: "ユーザを一意にするID",
+              description: "API実行時のHTTPメソッド",
             },
             {
-              physicalName: "remarks",
-              logicalName: "備考",
+              physicalName: "url",
+              logicalName: "リクエストURL",
               required: false,
-              type: null,
+              type: "文字列",
               layer: 1,
               byte: null,
-              description: "ユーザの登録している備考情報",
+              description: "API実行時のリクエストURL",
+            },
+            {
+              physicalName: "body",
+              logicalName: "リクエストBody",
+              required: false,
+              type: "文字列",
+              layer: 1,
+              byte: null,
+              description: "API実行時のリクエストBody",
             },
             {
               physicalName: "http_status",
@@ -1292,15 +1263,6 @@ export default {
               layer: 1,
               byte: 3,
               description: null,
-            },
-            {
-              physicalName: "result",
-              logicalName: "API処理結果",
-              required: false,
-              type: "半角数字",
-              layer: 1,
-              byte: null,
-              description: "APIの処理結果",
             },
             {
               physicalName: "detail",
@@ -1317,7 +1279,7 @@ export default {
               required: false,
               type: "YYYY/MM/DD HH:MM:SS",
               layer: 1,
-              byte: 1,
+              byte: null,
               description: "API送信日時",
             },
             {
@@ -1326,7 +1288,7 @@ export default {
               required: false,
               type: "YYYY/MM/DD HH:MM:SS",
               layer: 1,
-              byte: 1,
+              byte: null,
               description: "API受信日時",
             },
           ],
@@ -1341,7 +1303,7 @@ export default {
           headers: [
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
@@ -1572,38 +1534,10 @@ export default {
               physicalName: "standard_weight",
               logicalName: "標準体重",
               required: false,
-              type: "半角数字",
+              type: "小数値",
               layer: 1,
               byte: null,
               description: "ユーザの登録している標準体重",
-            },
-            {
-              physicalName: "health_info_status",
-              logicalName: "健康情報ステータス",
-              required: false,
-              type: null,
-              layer: 1,
-              byte: 2,
-              description: "ユーザの登録している体重より判定されたステータス",
-            },
-            {
-              physicalName: "status",
-              logicalName: "ステータス",
-              required: false,
-              type: null,
-              layer: 2,
-              byte: 3,
-              description:
-                "<ul><li>10:減少</li><li>20:変化なし</li><li>30:増加</li></ul>",
-            },
-            {
-              physicalName: "message",
-              logicalName: "メッセージ",
-              required: false,
-              type: null,
-              layer: 2,
-              byte: null,
-              description: null,
             },
             {
               physicalName: "bmi_status",
@@ -1658,7 +1592,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
@@ -1726,10 +1660,19 @@ export default {
           headers: [
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
-          request: [],
+          request: [
+            {
+              physicalName: "page",
+              logicalName: "ページ数",
+              required: true,
+              type: "半角数字",
+              byte: null,
+              description: "取得対象のページ数",
+            },
+          ],
           response: [
             {
               physicalName: "result",
@@ -1758,6 +1701,140 @@ export default {
               description: "result='1'の場合、必須",
             },
             {
+              physicalName: "paging",
+              logicalName: "ページング情報",
+              required: false,
+              type: "オブジェクト",
+              byte: null,
+              description: "result='0'の場合、必須",
+            },
+            {
+              physicalName: "total_record_num",
+              logicalName: "合計レコード数",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "合計レコード数",
+            },
+            {
+              physicalName: "from_record_num",
+              logicalName: "レコード数(from)",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "ページに表示するレコード数の開始位置",
+            },
+            {
+              physicalName: "to_record_num",
+              logicalName: "レコード数(to)",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "ページに表示するレコード数の終了位置",
+            },
+            {
+              physicalName: "total_page",
+              logicalName: "総ページ数",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "ページ数の合計",
+            },
+            {
+              physicalName: "current_page_num",
+              logicalName: "現在のページ数",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "現在のページ数",
+            },
+            {
+              physicalName: "record_per_page",
+              logicalName: "1ページあたりのレコード数",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "1ページあたりのレコード数",
+            },
+            {
+              physicalName: "can_go_next",
+              logicalName: "次リンク押下可能フラグ",
+              required: false,
+              type: "真偽値",
+              layer: 1,
+              byte: null,
+              description: "次リンクが押下可能か判定するフラグ",
+            },
+            {
+              physicalName: "next_href",
+              logicalName: "次リンク属性",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: null,
+              description: "次リンクのhref属性",
+            },
+            {
+              physicalName: "can_go_previous",
+              logicalName: "前リンク押下可能フラグ",
+              required: false,
+              type: "真偽値",
+              layer: 1,
+              byte: null,
+              description: "前リンクが押下可能か判定するフラグ",
+            },
+            {
+              physicalName: "previous_href",
+              logicalName: "前リンク属性",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: null,
+              description: "前リンクのhref属性",
+            },
+            {
+              physicalName: "can_go_last",
+              logicalName: "最後ページまでのリンク押下可能フラグ",
+              required: false,
+              type: "真偽値",
+              layer: 1,
+              byte: null,
+              description: "最後リンクが押下可能か判定するフラグ",
+            },
+            {
+              physicalName: "last_href",
+              logicalName: "最後ページリンク属性",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: null,
+              description: "最後リンクのhref属性",
+            },
+            {
+              physicalName: "can_go_first",
+              logicalName: "先頭ページまでのリンク押下可能フラグ",
+              required: false,
+              type: "真偽値",
+              layer: 1,
+              byte: null,
+              description: "先頭リンクが押下可能か判定するフラグ",
+            },
+            {
+              physicalName: "first_href",
+              logicalName: "先頭ページリンク属性",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: null,
+              description: "先頭ページリンクのhref属性",
+            },
+            {
               physicalName: "news_list",
               logicalName: "お知らせ情報リスト",
               required: false,
@@ -1766,13 +1843,13 @@ export default {
               description: "result='0'の場合、必須",
             },
             {
-              physicalName: "index",
-              logicalName: "順序",
+              physicalName: "seq_news_info_id",
+              logicalName: "お知らせ情報ID",
               required: false,
               type: "半角数字",
               byte: null,
               layer: 1,
-              description: "お知らせ情報の表示順",
+              description: "お知らせ情報を一意に識別するID",
             },
             {
               physicalName: "title",
@@ -1828,6 +1905,24 @@ export default {
               byte: null,
               layer: 2,
               description: "お知らせ情報のタグ名",
+            },
+            {
+              physicalName: "reg_date",
+              logicalName: "登録日時",
+              required: false,
+              type: "YYYY/MM/DD HH:MM:SS",
+              byte: null,
+              layer: 1,
+              description: "お知らせ情報を登録した日時",
+            },
+            {
+              physicalName: "update_date",
+              logicalName: "更新日時",
+              required: false,
+              type: "YYYY/MM/DD HH:MM:SS",
+              byte: null,
+              layer: 1,
+              description: "お知らせ情報を更新した日時",
             },
           ],
         },
@@ -1845,7 +1940,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
@@ -1932,84 +2027,12 @@ export default {
               byte: 256,
               description: "result='1'の場合、必須",
             },
-            {
-              physicalName: "news_data",
-              logicalName: "お知らせ情報",
-              required: false,
-              type: "オブジェクト",
-              byte: null,
-              description: "result='0'の場合、必須",
-            },
-            {
-              physicalName: "index",
-              logicalName: "順序",
-              required: false,
-              type: "半角数字",
-              byte: null,
-              layer: 1,
-              description: "お知らせ情報の表示順",
-            },
-            {
-              physicalName: "title",
-              logicalName: "タイトル",
-              required: false,
-              type: null,
-              byte: null,
-              layer: 1,
-              description: "お知らせ情報のタイトル",
-            },
-            {
-              physicalName: "date",
-              logicalName: "日付",
-              required: false,
-              type: "YYYY/MM/DD",
-              byte: null,
-              layer: 1,
-              description: "お知らせ情報の日付",
-            },
-            {
-              physicalName: "detail",
-              logicalName: "詳細",
-              required: false,
-              type: null,
-              byte: null,
-              layer: 1,
-              description: "お知らせ情報の詳細情報",
-            },
-            {
-              physicalName: "tag",
-              logicalName: "タグ情報",
-              required: false,
-              type: "オブジェクト",
-              byte: null,
-              layer: 1,
-              description: "お知らせ情報のタグ情報",
-            },
-            {
-              physicalName: "color",
-              logicalName: "色",
-              required: false,
-              type: null,
-              byte: null,
-              layer: 2,
-              description:
-                "お知らせ情報のタグ色<ul><li>blue</li><li>yellow</li><li>red</li></ul>",
-            },
-            {
-              physicalName: "name",
-              logicalName: "タグ名",
-              required: false,
-              type: null,
-              byte: null,
-              layer: 2,
-              description: "お知らせ情報のタグ名",
-            },
           ],
         },
 
         {
           name: "お知らせ情報編集API",
-          endpoint: "/api/root/news/{id}",
+          endpoint: "/api/root/news/{seq_news_info_id}",
           httpMethod: "PUT",
           description: "健康管理アプリのお知らせ情報を変更するAPI",
           url: "/root/api/news/edit",
@@ -2020,19 +2043,10 @@ export default {
             },
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
-            {
-              physicalName: "index",
-              logicalName: "表示順",
-              required: true,
-              type: "半角数字",
-              byte: null,
-              layer: 1,
-              description: "お知らせ情報の表示順",
-            },
             {
               physicalName: "title",
               logicalName: "タイトル",
@@ -2072,7 +2086,7 @@ export default {
             {
               physicalName: "color",
               logicalName: "色",
-              required: true,
+              required: false,
               type: null,
               byte: null,
               layer: 2,
@@ -2082,7 +2096,7 @@ export default {
             {
               physicalName: "name",
               logicalName: "タグ名",
-              required: true,
+              required: false,
               type: null,
               byte: null,
               layer: 2,
@@ -2116,95 +2130,19 @@ export default {
               byte: 256,
               description: "result='1'の場合、必須",
             },
-            {
-              physicalName: "news_data",
-              logicalName: "お知らせ情報",
-              required: false,
-              type: "オブジェクト",
-              byte: null,
-              description: "result='0'の場合、必須",
-            },
-            {
-              physicalName: "index",
-              logicalName: "順序",
-              required: false,
-              type: "半角数字",
-              byte: null,
-              layer: 1,
-              description: "お知らせ情報の表示順",
-            },
-            {
-              physicalName: "title",
-              logicalName: "タイトル",
-              required: false,
-              type: null,
-              byte: null,
-              layer: 1,
-              description: "お知らせ情報のタイトル",
-            },
-            {
-              physicalName: "date",
-              logicalName: "日付",
-              required: false,
-              type: "YYYY/MM/DD",
-              byte: null,
-              layer: 1,
-              description: "お知らせ情報の日付",
-            },
-            {
-              physicalName: "detail",
-              logicalName: "詳細",
-              required: false,
-              type: null,
-              byte: null,
-              layer: 1,
-              description: "お知らせ情報の詳細情報",
-            },
-            {
-              physicalName: "tag",
-              logicalName: "タグ情報",
-              required: false,
-              type: "オブジェクト",
-              byte: null,
-              layer: 1,
-              description: "お知らせ情報のタグ情報",
-            },
-            {
-              physicalName: "color",
-              logicalName: "色",
-              required: false,
-              type: null,
-              byte: null,
-              layer: 2,
-              description:
-                "お知らせ情報のタグ色<ul><li>blue</li><li>yellow</li><li>red</li></ul>",
-            },
-            {
-              physicalName: "name",
-              logicalName: "タグ名",
-              required: false,
-              type: null,
-              byte: null,
-              layer: 2,
-              description: "お知らせ情報のタグ名",
-            },
           ],
         },
 
         {
           name: "お知らせ情報削除API",
-          endpoint: "/api/root/news/{id}",
+          endpoint: "/api/root/news/{seq_news_info_id}",
           httpMethod: "DELETE",
           description: "健康管理アプリのお知らせ情報を削除するAPI",
           url: "/root/api/news/delete",
           headers: [
             {
-              key: "Content-Type",
-              value: "application/json",
-            },
-            {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [],
@@ -2235,14 +2173,6 @@ export default {
               byte: 256,
               description: "result='1'の場合、必須",
             },
-            {
-              physicalName: "delete_news_id",
-              logicalName: "削除したお知らせ情報ID",
-              required: false,
-              type: "半角数字",
-              byte: null,
-              description: "result='0'の場合、必須",
-            },
           ],
         },
 
@@ -2255,7 +2185,7 @@ export default {
           headers: [
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
@@ -2507,7 +2437,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
@@ -2582,7 +2512,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
@@ -2643,12 +2573,8 @@ export default {
           url: "/root/api/note/delete",
           headers: [
             {
-              key: "Content-Type",
-              value: "application/json",
-            },
-            {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [],
@@ -2691,7 +2617,7 @@ export default {
           headers: [
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [],
@@ -2724,7 +2650,7 @@ export default {
             },
             {
               physicalName: "roles",
-              logicalName: "メモ情報リスト",
+              logicalName: "権限リスト",
               required: false,
               type: "配列",
               byte: null,
@@ -2761,10 +2687,19 @@ export default {
           headers: [
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
-          request: [],
+          request: [
+            {
+              physicalName: "page",
+              logicalName: "ページ数",
+              required: true,
+              type: "半角数字",
+              byte: null,
+              description: "取得対象のページ数",
+            },
+          ],
           response: [
             {
               physicalName: "result",
@@ -3055,10 +2990,10 @@ export default {
         },
         {
           name: "問い合わせ情報編集API",
-          endpoint: "/api/root/inquiry/{seq_inquiry_mng_id}",
+          endpoint: "/api/root/inquiry/{seq_inquriy_mng_id}",
           httpMethod: "PUT",
           description: "問い合わせ情報を更新するAPI",
-          url: "/root/api/inquiry/{seq_inquiry_mng_id}",
+          url: "/root/api/inquiry/edit",
           headers: [
             {
               key: "Content-Type",
@@ -3066,10 +3001,28 @@ export default {
             },
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
-          request: [],
+          request: [
+            {
+              physicalName: "status",
+              logicalName: "ステータス",
+              required: true,
+              type: "半角英数字",
+              byte: 2,
+              description:
+                "問い合わせステータス<ul><li>00：未対応</li><li>01：対応中</li><li>02：完了</li></ul>",
+            },
+            {
+              physicalName: "seq_login_id",
+              logicalName: "管理者サイトログイン情報ID",
+              required: true,
+              type: "半角数字",
+              byte: null,
+              description: "対応者のログインID",
+            },
+          ],
           response: [
             {
               physicalName: "result",
@@ -3108,7 +3061,7 @@ export default {
           headers: [
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [],
@@ -3177,7 +3130,7 @@ export default {
           headers: [
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
           request: [
@@ -3186,7 +3139,7 @@ export default {
               logicalName: "ステータス",
               required: true,
               type: "半角英数字",
-              byte: 1,
+              byte: 2,
               description:
                 "処理結果<ul><li>00：未対応</li><li>01：対応中</li><li>02：完了</li></ul>",
             },
@@ -3237,10 +3190,19 @@ export default {
           headers: [
             {
               key: "Authorization",
-              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "ログインAPI.レスポンスヘッダ.Authorizationを設定",
             },
           ],
-          request: [],
+          request: [
+            {
+              physicalName: "page",
+              logicalName: "ページ数",
+              required: true,
+              type: "半角数字",
+              byte: null,
+              description: "取得対象のページ数",
+            },
+          ],
           response: [
             {
               physicalName: "result",
@@ -3267,6 +3229,140 @@ export default {
               layer: 1,
               byte: 256,
               description: "result='1'の場合、必須",
+            },
+            {
+              physicalName: "paging",
+              logicalName: "ページング情報",
+              required: false,
+              type: "オブジェクト",
+              byte: null,
+              description: "result='0'の場合、必須",
+            },
+            {
+              physicalName: "total_record_num",
+              logicalName: "合計レコード数",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "合計レコード数",
+            },
+            {
+              physicalName: "from_record_num",
+              logicalName: "レコード数(from)",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "ページに表示するレコード数の開始位置",
+            },
+            {
+              physicalName: "to_record_num",
+              logicalName: "レコード数(to)",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "ページに表示するレコード数の終了位置",
+            },
+            {
+              physicalName: "total_page",
+              logicalName: "総ページ数",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "ページ数の合計",
+            },
+            {
+              physicalName: "current_page_num",
+              logicalName: "現在のページ数",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "現在のページ数",
+            },
+            {
+              physicalName: "record_per_page",
+              logicalName: "1ページあたりのレコード数",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "1ページあたりのレコード数",
+            },
+            {
+              physicalName: "can_go_next",
+              logicalName: "次リンク押下可能フラグ",
+              required: false,
+              type: "真偽値",
+              layer: 1,
+              byte: null,
+              description: "次リンクが押下可能か判定するフラグ",
+            },
+            {
+              physicalName: "next_href",
+              logicalName: "次リンク属性",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: null,
+              description: "次リンクのhref属性",
+            },
+            {
+              physicalName: "can_go_previous",
+              logicalName: "前リンク押下可能フラグ",
+              required: false,
+              type: "真偽値",
+              layer: 1,
+              byte: null,
+              description: "前リンクが押下可能か判定するフラグ",
+            },
+            {
+              physicalName: "previous_href",
+              logicalName: "前リンク属性",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: null,
+              description: "前リンクのhref属性",
+            },
+            {
+              physicalName: "can_go_last",
+              logicalName: "最後ページまでのリンク押下可能フラグ",
+              required: false,
+              type: "真偽値",
+              layer: 1,
+              byte: null,
+              description: "最後リンクが押下可能か判定するフラグ",
+            },
+            {
+              physicalName: "last_href",
+              logicalName: "最後ページリンク属性",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: null,
+              description: "最後リンクのhref属性",
+            },
+            {
+              physicalName: "can_go_first",
+              logicalName: "先頭ページまでのリンク押下可能フラグ",
+              required: false,
+              type: "真偽値",
+              layer: 1,
+              byte: null,
+              description: "先頭リンクが押下可能か判定するフラグ",
+            },
+            {
+              physicalName: "first_href",
+              logicalName: "先頭ページリンク属性",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: null,
+              description: "先頭ページリンクのhref属性",
             },
             {
               physicalName: "job_list",

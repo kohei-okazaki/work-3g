@@ -238,7 +238,7 @@ export default {
             },
             {
               key: "Api-Key",
-              value: "{seqUserId}のアカウント情報.APIキーを指定",
+              value: "{seqUserId}のユーザ情報.APIキーを指定",
             },
           ],
           request: [],
