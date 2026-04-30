@@ -80,7 +80,7 @@ export default {
           id: "4",
           text: "基礎健康情報計算API 実施",
           edgeType: "round",
-          url: "/node/api/basic",
+          url: "/calc_api/basic",
           next: ["5"],
           style: "fill:#ffce9e",
         },

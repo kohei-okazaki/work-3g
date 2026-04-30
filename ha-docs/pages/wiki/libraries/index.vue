@@ -25,7 +25,7 @@
                   <th>dashboard</th>
                   <th>api</th>
                   <th>batch</th>
-                  <th>node api</th>
+                  <th>calc_api</th>
                   <th>root api</th>
                   <th>track api</th>
                 </tr>
@@ -66,7 +66,7 @@
                   </td>
                   <td>
                     <v-icon
-                      v-if="lib.projects.includes('node api')"
+                      v-if="lib.projects.includes('calc_api')"
                       color="green"
                       >mdi-check</v-icon
                     >

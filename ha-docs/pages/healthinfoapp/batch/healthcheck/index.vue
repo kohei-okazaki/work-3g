@@ -109,19 +109,19 @@ export default {
 
         {
           id: "6",
-          text: "API通信情報 登録<br>NodeAPI:ヘルスチェックAPI",
+          text: "API通信情報 登録<br>calc_api:ヘルスチェックAPI",
           edgeType: "round",
           next: ["7"],
         },
         {
           id: "7",
-          text: "NodeAPI:ヘルスチェックAPI 実行",
+          text: "calc_api:ヘルスチェックAPI 実行",
           edgeType: "round",
           next: ["8"],
         },
         {
           id: "8",
-          text: "API通信情報 更新<br>NodeAPI:ヘルスチェックAPI",
+          text: "API通信情報 更新<br>calc_api:ヘルスチェックAPI",
           edgeType: "round",
           link: [
             "-- APIが正常終了した場合 -->",

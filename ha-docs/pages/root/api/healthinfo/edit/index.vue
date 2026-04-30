@@ -68,7 +68,7 @@ export default {
           id: "3",
           text: "基礎健康情報計算API 実施",
           edgeType: "round",
-          url: "/node/api/basic",
+          url: "/calc_api/basic",
           next: ["4"],
           style: "fill:#ffce9e",
         },

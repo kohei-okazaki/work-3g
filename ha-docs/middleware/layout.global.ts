@@ -14,7 +14,7 @@ const layoutRules = [
     layout: "healthinfoapp-dashboard-layout",
   },
   { prefix: "/root/api", layout: "root-api-layout" },
-  { prefix: "/node/api", layout: "node-api-layout" },
+  { prefix: "/calc_api", layout: "calc-api-layout" },
 ];
 
 export default defineNuxtRouteMiddleware((to) => {
