@@ -20,6 +20,8 @@ echo "------------------------------------------------------------------------"
 # call common.sh
 . ./common.sh
 
+RUN_ID=$(create_run_id)
+
 LOCK_FILE="/var/lock/aws_sqs_import.lock"
 mkdir -p "$(dirname "$LOCK_FILE")"
 
@@ -34,7 +36,8 @@ cd ${BASE_DIR} && docker compose \
   --project-directory "${BASE_DIR}" \
   -f ${BASE_DIR}/${DOCKER_DIR}/docker-compose.yml \
   -f ${BASE_DIR}/${DOCKER_DIR}/docker-compose.${ENV}.yml \
-  run --rm ha-batch --spring.batch.job.name=awsSqsImportBatchJob
+  run --rm ha-batch --spring.batch.job.name=awsSqsImportBatchJob \
+    "run.id=${RUN_ID}"
 
 echo "------------------------------------------------------------------------"
 echo "END $0"

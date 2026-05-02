@@ -4,7 +4,6 @@ import static jp.co.ha.batch.base.BatchConfigConst.*;
 
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
-import org.springframework.batch.core.job.parameters.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.Step;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -45,7 +44,6 @@ public class AwsSqsImportConfig extends BatchConfig {
             @Qualifier(AWS_SQS_IMPORT_BATCH_STEP_NAME) Step queueImportStep,
             BatchJobListener listener) {
         return new JobBuilder(AWS_SQS_IMPORT_BATCH_JOB_NAME, jobRepository)
-                .incrementer(new RunIdIncrementer())
                 .listener(listener)
                 .start(queueImportStep)
                 .build();

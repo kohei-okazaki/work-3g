@@ -5,7 +5,6 @@ import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
 
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
-import org.springframework.batch.core.job.parameters.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.Step;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -50,7 +49,6 @@ public class DailyHealthInfoConfig extends BatchConfig {
             @Qualifier(DAILY_HEALTH_INFO_STEP_NAME) Step dailyHealthInfoStep,
             BatchJobListener listener) {
         return new JobBuilder(DAILY_HEALTH_INFO_JOB_NAME, jobRepository)
-                .incrementer(new RunIdIncrementer())
                 .validator(
                         new DateFormatParameterValidator(OPTION_D, YYYYMMDD_NOSEP, false))
                 .listener(listener)

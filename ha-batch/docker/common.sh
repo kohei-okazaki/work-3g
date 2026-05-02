@@ -7,3 +7,7 @@ set -eu
 
 # read const.txt
 . ./const.txt
+
+create_run_id() {
+  date "+%Y%m%d%H%M%S%N-$$"
+}
