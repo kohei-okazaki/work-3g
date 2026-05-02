@@ -7,23 +7,25 @@
     "build": "npm run build:local",
     "build:local": "cross-env APP_ENV=\"local\" NODE_ENV=\"production\" nuxt build",
     "build:dev": "cross-env APP_ENV=\"dev\" NODE_ENV=\"production\" nuxt build",
-    "build:production": "cross-env APP_ENV=\"production\" NODE_ENV=\"production\" nuxt build",
     "start": "npm run start:local",
     "start:local": "cross-env APP_ENV=\"local\" NODE_ENV=\"production\" nuxt preview --port 8083 --host 0.0.0.0",
     "start:dev": "cross-env APP_ENV=\"dev\" NODE_ENV=\"production\" nuxt preview --host 0.0.0.0",
-    "generate": "npm run generate:production",
+    "generate": "npm run generate:dev",
     "generate:local": "cross-env APP_ENV=\"local\" NODE_ENV=\"production\" nuxt generate",
     "generate:dev": "cross-env APP_ENV=\"dev\" NODE_ENV=\"production\" nuxt generate",
-    "generate:production": "cross-env APP_ENV=\"production\" NODE_ENV=\"production\" nuxt generate"
+    "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "vue": "^3.5.33",
-    "nuxt": "^4.4.2",
-    "axios": "^1.15.2",
     "@mdi/font": "^7.4.47",
+    "axios": "^1.15.2",
     "cross-env": "^10.1.0",
+    "nuxt": "^4.4.2",
     "sass": "^1.99.0",
+    "vue": "^3.5.33",
     "vuetify": "^4.0.6"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "typescript": "^6.0.3",
+    "vue-tsc": "^3.2.7"
+  }
 }
