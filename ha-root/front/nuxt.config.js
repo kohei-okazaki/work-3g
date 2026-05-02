@@ -1,8 +1,9 @@
 const nodeEnvironment = process.env.NODE_ENV;
+// APP_ENV はアプリの環境名です。指定値は local / dev を想定します。
+// NODE_ENV=production は Nuxt/Vite のビルドモードであり、アプリの環境名ではありません。
 const environment =
-  process.env.HA_ENV ||
   process.env.APP_ENV ||
-  (["local", "dev", "production"].includes(nodeEnvironment)
+  (["local", "dev"].includes(nodeEnvironment)
     ? nodeEnvironment
     : "local");
 const envSet = require(`./env.${environment}.js`);

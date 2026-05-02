@@ -9,7 +9,7 @@ $ npm install
 # serve with hot reload at localhost:8083
 $ npm run dev
 
-# build for production and launch server
+# build and launch server
 $ npm run build
 $ npm run start
 
@@ -20,9 +20,9 @@ $ npm run generate
 $ npm run generate:local
 $ npm run generate:dev
 
-# generate static project for S3
+# generate static project for S3 dev
 # API_BASE_URL must point to ha-root api.
-$ npx cross-env API_BASE_URL="https://example.com/api/root/" npm run generate:production
+$ npx cross-env API_BASE_URL="https://example.com/api/root/" npm run generate:dev
 
 # vuex-persistedstateのinstall
 $ npm install --save vuex-persistedstate

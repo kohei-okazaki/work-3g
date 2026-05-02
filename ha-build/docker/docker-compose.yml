@@ -1,5 +1,5 @@
 services:
-  # 健康管理アプリAPI container
+  # 健康管理アプリAPI Container
   ha-api:
     build:
       context: .
@@ -13,7 +13,7 @@ services:
     networks:
       - work-3g-network
 
-  # 健康情報ダッシュボード container
+  # 健康情報ダッシュボード Container
   ha-dashboard:
     build:
       context: .
@@ -27,7 +27,7 @@ services:
     networks:
       - work-3g-network
 
-  # 管理者用API container
+  # 管理者用サイト API Container
   ha-root-api:
     build:
       context: .
@@ -41,7 +41,7 @@ services:
     networks:
       - work-3g-network
   
-  # 管理者用サイト front container
+  # 管理者用サイト Front Container
   ha-root-front:
     build:
       context: .
@@ -53,7 +53,7 @@ services:
     networks:
       - work-3g-network
 
-  # 健康情報蓄積API container
+  # 健康情報蓄積API Container
   ha-track:
     build:
       context: .
@@ -63,7 +63,7 @@ services:
     networks:
       - work-3g-network
 
-  # 健康管理バッチ container
+  # 健康管理バッチ Container
   ha-batch:
     build:
       context: .

@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 22
+    commands:
+      - node --version
+      - npm --version
+      - npm --prefix ha-root/front ci
+
+  build:
+    commands:
+      - npm --prefix ha-root/front run typecheck
+
+cache:
+  paths:
+    - '/root/.npm/**/*'
