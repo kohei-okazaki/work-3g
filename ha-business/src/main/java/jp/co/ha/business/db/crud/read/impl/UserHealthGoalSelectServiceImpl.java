@@ -41,7 +41,7 @@ public class UserHealthGoalSelectServiceImpl implements UserHealthGoalSelectServ
             return Optional.empty();
         } else {
             // 必ず複数レコード存在しないため、1件目を取得
-            return Optional.ofNullable(entityList.get(0));
+            return Optional.ofNullable(entityList.getFirst());
         }
     }
 

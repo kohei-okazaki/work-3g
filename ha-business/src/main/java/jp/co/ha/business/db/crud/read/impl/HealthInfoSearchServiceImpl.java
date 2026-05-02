@@ -188,7 +188,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         example.setLimit(selectOption.getLimit());
 
         List<HealthInfo> list = mapper.selectByExample(example);
-        return CollectionUtil.isEmpty(list) ? null : list.get(0);
+        return CollectionUtil.isEmpty(list) ? null : list.getFirst();
     }
 
 }

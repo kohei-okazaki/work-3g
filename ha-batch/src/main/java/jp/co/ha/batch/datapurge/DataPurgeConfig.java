@@ -61,7 +61,7 @@ public class DataPurgeConfig extends BatchConfig {
     @Bean(DATA_PURGE_BACTH_STEP_NAME)
     Step awsSqsImportBatchStep(JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
-        return new StepBuilder(AWS_SQS_IMPORT_BATCH_STEP_NAME, jobRepository)
+        return new StepBuilder(DATA_PURGE_BACTH_STEP_NAME, jobRepository)
                 .tasklet(dataPurgeTasklet, transactionManager)
                 .build();
     }

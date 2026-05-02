@@ -254,7 +254,7 @@ public class LoginController implements BaseWebController {
         if (CollectionUtil.isEmpty(list)) {
             return null;
         }
-        return list.get(0);
+        return list.getFirst();
     }
 
     /**

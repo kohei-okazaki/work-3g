@@ -99,7 +99,7 @@ public class UserEntryApiController
 
             // 照会権限のマスタを取得
             RootRoleMt refRoleMt = rootRoleMtSearchService
-                    .findByRoles(Arrays.asList(RootRoleType.REF.getValue())).get(0);
+                    .findByRoles(Arrays.asList(RootRoleType.REF.getValue())).getFirst();
 
             // 管理者サイトユーザ権限管理マスタを登録
             RootUserRoleMngMt mngMt = new RootUserRoleMngMt();

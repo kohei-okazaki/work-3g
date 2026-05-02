@@ -142,7 +142,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
             SelectOption selectOption = new SelectOptionBuilder()
                     .orderBy("SEQ_HEALTH_INFO_ID", DESC).limit(1).build();
             HealthInfo lastHealthInfo = healthInfoSearchService
-                    .findBySeqUserId(seqUserId, selectOption).get(0);
+                    .findBySeqUserId(seqUserId, selectOption).getFirst();
             healthInfoService.addModel(model, dto, lastHealthInfo);
         }
 
