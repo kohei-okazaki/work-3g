@@ -1,0 +1,52 @@
+version: 0.2
+
+env:
+  shell: bash
+  variables:
+    TARGET_BRANCH: develop
+    S3_BUCKET: healthinfo-app-root-front-dev
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 22
+    commands:
+      - node --version
+      - npm --version
+      - aws --version
+      - npm --prefix ha-root/front ci
+
+  pre_build:
+    commands:
+      - |
+        BRANCH="${CODEBUILD_WEBHOOK_HEAD_REF:-${CODEBUILD_SOURCE_VERSION:-}}"
+        BRANCH="${BRANCH#refs/heads/}"
+
+        if [ "$BRANCH" != "$TARGET_BRANCH" ]; then
+          echo "Unsupported deploy branch for dev CD: ${BRANCH:-unknown}"
+          echo "Configure the CodeBuild webhook to trigger only on refs/heads/$TARGET_BRANCH."
+          exit 1
+        fi
+
+        export API_BASE_URL="${DEV_API_BASE_URL:-${API_BASE_URL:-}}"
+
+        echo "Deploy branch: $BRANCH"
+        echo "Deploy bucket: s3://$S3_BUCKET"
+        if [ -n "${API_BASE_URL:-}" ]; then
+          echo "API_BASE_URL is configured."
+        else
+          echo "API_BASE_URL is not configured. The env file default will be used."
+        fi
+
+  build:
+    commands:
+      - npm --prefix ha-root/front run generate:dev
+      - test -d ha-root/front/.output/public
+
+  post_build:
+    commands:
+      - aws s3 sync ha-root/front/.output/public "s3://$S3_BUCKET" --delete --no-progress
+
+cache:
+  paths:
+    - '/root/.npm/**/*'
