@@ -53,7 +53,7 @@ export default {
       flow: [
         {
           id: "a0",
-          text: "健康情報登録画面",
+          text: "健康情報<br>登録画面",
           edgeType: "circle",
           next: ["a1"],
         },
@@ -111,7 +111,7 @@ export default {
 
         {
           id: "b0",
-          text: "健康情報登録確認画面",
+          text: "健康情報登録<br>確認画面",
           edgeType: "circle",
           next: ["b1"],
         },
@@ -135,7 +135,7 @@ export default {
         },
         {
           id: "b4",
-          text: "ユーザのHEALTH_INFO 件数取得",
+          text: "HEALTH_INFO 件数取得",
           edgeType: "round",
           next: ["b5"],
           style: "fill:#c6ffc6",
@@ -170,7 +170,7 @@ export default {
         },
         {
           id: "b9",
-          text: "API通信ログキュー登録",
+          text: "SQS.api_log 登録",
           edgeType: "round",
           next: ["b10"],
         },
@@ -183,7 +183,7 @@ export default {
         },
         {
           id: "b11",
-          text: "健康情報メールを送信する",
+          text: "SES.健康情報登録完了メール 送信",
           edgeType: "round",
           next: ["b12"],
         },
@@ -195,7 +195,7 @@ export default {
 
         {
           id: "c0",
-          text: "健康情報登録完了画面",
+          text: "健康情報登録<br>完了画面",
           edgeType: "circle",
           next: ["c1.1", "c2.1"],
         },
@@ -207,13 +207,13 @@ export default {
         },
         {
           id: "c1.2",
-          text: "セッションから健康情報Formを取得",
+          text: "セッションからユーザIDを取得",
           edgeType: "round",
           next: ["c1.3"],
         },
         {
           id: "c1.3",
-          text: "セッションからユーザIDを取得",
+          text: "セッションから健康情報Formを取得",
           edgeType: "round",
           next: ["c1.4"],
         },
@@ -245,13 +245,13 @@ export default {
         },
         {
           id: "c2.2",
-          text: "セッションから健康情報Formを取得",
+          text: "セッションからユーザIDを取得",
           edgeType: "round",
           next: ["c2.3"],
         },
         {
           id: "c2.3",
-          text: "セッションからユーザIDを取得",
+          text: "セッションから健康情報Formを取得",
           edgeType: "round",
           next: ["c2.4"],
         },

@@ -53,7 +53,7 @@ export default {
       flow: [
         {
           id: "a0",
-          text: "健康情報照会結果画面",
+          text: "健康情報照会<br>結果画面",
           edgeType: "circle",
           next: ["a0.1"],
         },
@@ -77,10 +77,15 @@ export default {
         },
         {
           id: "a3",
-          text: "健康情報 + BMI範囲マスタ検索",
+          text: "HEALTH_INFO +<br>BMI_RANGE_MT 検索",
           edgeType: "round",
           next: ["a4"],
           style: "fill:#c6ffc6",
+        },
+        {
+          id: "a4",
+          text: "健康情報<br>詳細画面",
+          edgeType: "circle",
         },
 
         {

@@ -53,7 +53,7 @@ export default {
       flow: [
         {
           id: "0",
-          text: "健康情報照会画面",
+          text: "健康情報<br>照会画面",
           edgeType: "circle",
           next: ["a0", "b0"],
         },
@@ -66,6 +66,12 @@ export default {
         {
           id: "b0",
           text: "検索ボタン押下",
+          edgeType: "round",
+          next: ["b0.1"],
+        },
+        {
+          id: "b0.1",
+          text: "入力チェック",
           edgeType: "round",
           next: ["b1"],
         },
@@ -83,22 +89,80 @@ export default {
         },
         {
           id: "b3",
-          text: "健康情報を検索",
+          text: "HEALTH_INFO 検索",
           edgeType: "round",
           next: ["b4"],
           style: "fill:#c6ffc6",
         },
         {
           id: "b4",
-          text: "健康情報件数を検索",
+          text: "HEALTH_INFO 件数取得",
           edgeType: "round",
           next: ["b5"],
           style: "fill:#c6ffc6",
         },
+        {
+          id: "b5",
+          text: "検索結果・ページング情報設定",
+          edgeType: "round",
+          next: ["b6"],
+        },
+        {
+          id: "b6",
+          text: "健康情報グラフ作成",
+          edgeType: "round",
+          next: ["b7"],
+        },
+        {
+          id: "b7",
+          text: "セッションに検索条件を設定",
+          edgeType: "round",
+          next: ["b8"],
+        },
+        {
+          id: "b8",
+          text: "健康情報照会<br>結果画面に遷移",
+          edgeType: "round",
+        },
+
+        {
+          id: "b0.1.1",
+          text: "必須チェック",
+          edgeType: "round",
+          group: "入力チェック",
+          next: ["b0.1.2"],
+        },
+        {
+          id: "b0.1.2",
+          text: "型チェック",
+          edgeType: "round",
+          group: "入力チェック",
+          next: ["b0.1.3"],
+        },
+        {
+          id: "b0.1.3",
+          text: "桁数チェック",
+          edgeType: "round",
+          group: "入力チェック",
+          next: ["b0.1.4"],
+        },
+        {
+          id: "b0.1.4",
+          text: "フラグチェック",
+          edgeType: "round",
+          group: "入力チェック",
+          next: ["b0.1.5"],
+        },
+        {
+          id: "b0.1.5",
+          text: "相関チェック",
+          edgeType: "round",
+          group: "入力チェック",
+        },
 
         {
           id: "1",
-          text: "健康情報照会結果画面",
+          text: "健康情報照会<br>結果画面",
           edgeType: "circle",
           next: ["c0", "d0"],
         },
@@ -123,14 +187,14 @@ export default {
         },
         {
           id: "c3",
-          text: "健康情報を検索",
+          text: "HEALTH_INFO 検索",
           edgeType: "round",
           next: ["c4"],
           style: "fill:#c6ffc6",
         },
         {
           id: "c4",
-          text: "健康情報ファイル設定情報を検索",
+          text: "HEALTH_INFO_FILE_SETTING<br>検索",
           edgeType: "round",
           next: ["c5"],
           style: "fill:#c6ffc6",
@@ -140,6 +204,11 @@ export default {
           text: "CSV出力",
           edgeType: "round",
           next: ["c6"],
+        },
+        {
+          id: "c6",
+          text: "S3.健康情報照会CSV<br>アップロード",
+          edgeType: "round",
         },
 
         {
@@ -162,14 +231,14 @@ export default {
         },
         {
           id: "d3",
-          text: "健康情報を検索",
+          text: "HEALTH_INFO 検索",
           edgeType: "round",
           next: ["d4"],
           style: "fill:#c6ffc6",
         },
         {
           id: "d4",
-          text: "健康情報ファイル設定情報を検索",
+          text: "HEALTH_INFO_FILE_SETTING<br>検索",
           edgeType: "round",
           next: ["d5"],
           style: "fill:#c6ffc6",
@@ -178,7 +247,6 @@ export default {
           id: "d5",
           text: "Excel出力",
           edgeType: "round",
-          next: ["d6"],
         },
       ],
     };

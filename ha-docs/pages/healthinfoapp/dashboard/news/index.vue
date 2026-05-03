@@ -53,7 +53,7 @@ export default {
       flow: [
         {
           id: "start",
-          text: "お知らせ情報一覧画面",
+          text: "お知らせ情報<br>一覧画面",
           edgeType: "circle",
           next: ["0"],
         },
@@ -65,22 +65,27 @@ export default {
         },
         {
           id: "1",
-          text: "お知らせ情報検索",
+          text: "NEWS_INFO 検索",
           edgeType: "round",
           next: ["2"],
           style: "fill:#c6ffc6",
         },
         {
           id: "2",
-          text: "お知らせ情報の各レコードに対し<br>AWS-S3へJSONファイルを取得",
+          text: "NEWS_INFO の各レコードに対し<br>S3.お知らせJSON ダウンロード",
           edgeType: "round",
           next: ["2", "3"],
         },
         {
           id: "3",
-          text: "お知らせ情報件数取得",
+          text: "NEWS_INFO 件数取得",
           edgeType: "round",
           next: ["4"],
+        },
+        {
+          id: "4",
+          text: "お知らせ情報一覧表示",
+          edgeType: "round",
         },
       ],
     };

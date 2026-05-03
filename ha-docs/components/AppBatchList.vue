@@ -27,7 +27,7 @@
           <tbody>
             <tr v-for="(cron, i) in batchItem.crons" :key="i">
               <td>{{ i + 1 }}</td>
-              <td>{{ cron }}</td>
+              <td class="cron-time">{{ cron }}</td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -65,4 +65,8 @@ export default {
 </script>
 
 <style scoped>
+.cron-time {
+  color: #1f2937;
+  font-weight: 600;
+}
 </style>

@@ -53,7 +53,7 @@ export default {
       flow: [
         {
           id: "a0",
-          text: "健康情報一括登録画面",
+          text: "健康情報<br>一括登録画面",
           edgeType: "circle",
           next: ["a1"],
         },
@@ -71,27 +71,38 @@ export default {
         },
         {
           id: "a3",
-          text: "健康情報CSV読込",
+          text: "セッションより<br>ユーザIDを取得",
           edgeType: "round",
           next: ["a4"],
         },
         {
           id: "a4",
-          text: "CSVをAWS-S3へ配置",
+          text: "健康情報CSV 読込",
           edgeType: "round",
           next: ["a5"],
         },
         {
           id: "a5",
-          text: "フォーマットチェック",
+          text: "S3.健康情報一括登録CSV<br>アップロード",
           edgeType: "round",
           next: ["a6"],
         },
         {
           id: "a6",
-          text: "セッションに<br>アップロードファイル名保存",
+          text: "フォーマットチェック",
           edgeType: "round",
           next: ["a7"],
+        },
+        {
+          id: "a7",
+          text: "セッションに<br>アップロードファイル名保存",
+          edgeType: "round",
+          next: ["a8"],
+        },
+        {
+          id: "a8",
+          text: "健康情報一括登録<br>確認画面に遷移",
+          edgeType: "round",
         },
 
         {
@@ -99,7 +110,6 @@ export default {
           text: "必須チェック",
           edgeType: "round",
           group: "入力チェック",
-          next: ["a2.2"],
         },
         {
           id: "a5.1",
@@ -120,12 +130,11 @@ export default {
           text: "相関チェック",
           edgeType: "round",
           group: "フォーマットチェック",
-          next: ["a5.4"],
         },
 
         {
           id: "b0",
-          text: "健康情報一括登録確認画面",
+          text: "健康情報一括登録<br>確認画面",
           edgeType: "circle",
           next: ["b1"],
         },
@@ -149,13 +158,13 @@ export default {
         },
         {
           id: "b4",
-          text: "AWS-S3より健康情報CSVを取得",
+          text: "S3.健康情報一括登録CSV<br>ダウンロード",
           edgeType: "round",
           next: ["b5"],
         },
         {
           id: "b5",
-          text: "アカウント情報を検索",
+          text: "USER 検索",
           edgeType: "round",
           next: ["b6"],
           style: "fill:#c6ffc6",
@@ -166,33 +175,30 @@ export default {
           edgeType: "round",
           group: "CSV1レコードごとに実施",
           next: ["b7"],
-          style: "fill:#c6ffc6",
         },
         {
           id: "b7",
-          text: "API通信情報を登録<br>健康情報登録API",
-          edgeType: "round",
-          group: "CSV1レコードごとに実施",
-          next: ["b8"],
-          style: "fill:#c6ffc6",
-        },
-        {
-          id: "b8",
           text: "健康情報登録API 実施",
           edgeType: "round",
           group: "CSV1レコードごとに実施",
-          next: ["b9"],
+          next: ["b8"],
           style: "fill:#ffce9e",
           url: "/healthinfoapp/api/healthinfo/regist",
         },
         {
-          id: "b9",
-          text: "API通信情報を更新<br>健康情報登録API",
+          id: "b8",
+          text: "SQS.api_log 登録",
           edgeType: "round",
           group: "CSV1レコードごとに実施",
-          link: ["-- CSV全レコード登録成功の場合 ---"],
-          next: ["b10-a"],
-          style: "fill:#c6ffc6",
+          next: ["b9"],
+        },
+        {
+          id: "b9",
+          text: "API処理結果集約",
+          edgeType: "round",
+          group: "CSV1レコードごとに実施",
+          link: ["-- 全件成功 -->", "-- 失敗あり -->"],
+          next: ["b10-a", "b12"],
         },
         {
           id: "b10-a",
@@ -202,9 +208,14 @@ export default {
         },
         {
           id: "b11-a",
-          text: "AWS-S3の健康情報CSVを削除",
+          text: "S3.健康情報一括登録CSV 削除",
           edgeType: "round",
           next: ["b12"],
+        },
+        {
+          id: "b12",
+          text: "健康情報一括登録<br>完了画面",
+          edgeType: "circle",
         },
       ],
     };
