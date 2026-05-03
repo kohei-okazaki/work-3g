@@ -22,9 +22,16 @@ phases:
         BRANCH="${CODEBUILD_WEBHOOK_HEAD_REF:-${CODEBUILD_SOURCE_VERSION:-}}"
         BRANCH="${BRANCH#refs/heads/}"
 
+        if [ -z "$BRANCH" ]; then
+          echo "Deploy branch could not be detected."
+          echo "For manual builds from the CodeBuild console, set Source version to refs/heads/$TARGET_BRANCH."
+          exit 1
+        fi
+
         if [ "$BRANCH" != "$TARGET_BRANCH" ]; then
           echo "Unsupported deploy branch for dev CD: ${BRANCH:-unknown}"
           echo "Configure the CodeBuild webhook to trigger only on refs/heads/$TARGET_BRANCH."
+          echo "For manual builds from the CodeBuild console, set Source version to refs/heads/$TARGET_BRANCH."
           exit 1
         fi
 
