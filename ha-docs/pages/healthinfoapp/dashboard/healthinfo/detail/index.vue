@@ -53,6 +53,12 @@ export default {
       flow: [
         {
           id: "a0",
+          text: "健康情報照会結果画面",
+          edgeType: "circle",
+          next: ["a0.1"],
+        },
+        {
+          id: "a0.1",
           text: "詳細リンク押下",
           edgeType: "round",
           next: ["a1"],

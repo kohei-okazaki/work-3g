@@ -52,6 +52,12 @@ export default {
       ],
       flow: [
         {
+          id: "start",
+          text: "お知らせ情報一覧画面",
+          edgeType: "circle",
+          next: ["0"],
+        },
+        {
           id: "0",
           text: "設定ファイルより<br>ページング情報を取得",
           edgeType: "round",

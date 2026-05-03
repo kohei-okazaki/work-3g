@@ -53,7 +53,7 @@ export default {
       flow: [
         {
           id: "0",
-          text: "照会前画面",
+          text: "健康情報照会画面",
           edgeType: "circle",
           next: ["a0", "b0"],
         },
@@ -98,7 +98,7 @@ export default {
 
         {
           id: "1",
-          text: "照会後画面",
+          text: "健康情報照会結果画面",
           edgeType: "circle",
           next: ["c0", "d0"],
         },

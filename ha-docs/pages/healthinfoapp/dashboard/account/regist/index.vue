@@ -53,7 +53,7 @@ export default {
       flow: [
         {
           id: "a0",
-          text: "入力画面",
+          text: "アカウント登録画面",
           edgeType: "circle",
           next: ["a1"],
         },

@@ -53,7 +53,7 @@ export default {
       flow: [
         {
           id: "a0",
-          text: "計算前画面",
+          text: "肺活量計算画面",
           edgeType: "circle",
           next: ["a1", "b1"],
         },

@@ -53,7 +53,7 @@ export default {
       flow: [
         {
           id: "a0",
-          text: "ファイル<br>アップロード<br>画面",
+          text: "健康情報一括登録画面",
           edgeType: "circle",
           next: ["a1"],
         },
@@ -125,7 +125,7 @@ export default {
 
         {
           id: "b0",
-          text: "登録確認画面",
+          text: "健康情報一括登録確認画面",
           edgeType: "circle",
           next: ["b1"],
         },
