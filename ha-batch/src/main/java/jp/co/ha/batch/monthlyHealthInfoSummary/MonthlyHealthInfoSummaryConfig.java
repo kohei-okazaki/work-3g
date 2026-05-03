@@ -5,7 +5,6 @@ import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
 
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
-import org.springframework.batch.core.job.parameters.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.Step;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -50,7 +49,6 @@ public class MonthlyHealthInfoSummaryConfig extends BatchConfig {
             @Qualifier(MONTHLY_HEALTH_INFO_SUMMARY_BACTH_STEP_NAME) Step monthlyHealthInfoSummaryBatchStep,
             BatchJobListener listener) {
         return new JobBuilder(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_JOB_NAME, jobRepository)
-                .incrementer(new RunIdIncrementer())
                 .validator(
                         new DateFormatParameterValidator(OPTION_M, YYYYMM_NOSEP, false))
                 .listener(listener)

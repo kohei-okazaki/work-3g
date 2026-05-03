@@ -31,7 +31,6 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     private boolean deleteFlag;
     /** パスワード */
     @JsonProperty("password")
-    @Required(message = "password is required")
     private String password;
     /** パスワード有効期限 */
     @JsonProperty("password_expire")

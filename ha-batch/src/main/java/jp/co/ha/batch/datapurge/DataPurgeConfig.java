@@ -4,7 +4,6 @@ import static jp.co.ha.batch.base.BatchConfigConst.*;
 
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
-import org.springframework.batch.core.job.parameters.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.Step;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -45,7 +44,6 @@ public class DataPurgeConfig extends BatchConfig {
             @Qualifier(DATA_PURGE_BACTH_STEP_NAME) Step dataPurgeBatchStep,
             BatchJobListener listener) {
         return new JobBuilder(DATA_PURGE_BACTH_JOB_NAME, jobRepository)
-                .incrementer(new RunIdIncrementer())
                 .listener(listener)
                 .start(dataPurgeBatchStep)
                 .build();
@@ -63,7 +61,7 @@ public class DataPurgeConfig extends BatchConfig {
     @Bean(DATA_PURGE_BACTH_STEP_NAME)
     Step awsSqsImportBatchStep(JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
-        return new StepBuilder(AWS_SQS_IMPORT_BATCH_STEP_NAME, jobRepository)
+        return new StepBuilder(DATA_PURGE_BACTH_STEP_NAME, jobRepository)
                 .tasklet(dataPurgeTasklet, transactionManager)
                 .build();
     }

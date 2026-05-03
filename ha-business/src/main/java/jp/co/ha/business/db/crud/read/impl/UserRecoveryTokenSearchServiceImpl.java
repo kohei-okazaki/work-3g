@@ -48,7 +48,7 @@ public class UserRecoveryTokenSearchServiceImpl
         List<UserRecoveryToken> list = mapper.selectByExample(example);
 
         // 同一トークンは複数レコード存在しない想定のため、先頭1件を使用
-        return Optional.ofNullable(CollectionUtil.isEmpty(list) ? null : list.get(0));
+        return Optional.ofNullable(CollectionUtil.isEmpty(list) ? null : list.getFirst());
     }
 
     /**

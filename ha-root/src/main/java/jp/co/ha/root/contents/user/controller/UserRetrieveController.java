@@ -54,7 +54,7 @@ public class UserRetrieveController
         }
 
         // 結合しているので権限情報以外はここから取得する
-        CompositeRootUserInfo entity = entityList.get(0);
+        CompositeRootUserInfo entity = entityList.getFirst();
 
         UserRetrieveApiResponse response = getSuccessResponse();
         response.setSeqLoginId(seqLoginId);

@@ -29,18 +29,20 @@ mkdir -p "$(dirname "$LOCK_FILE")"
 exec 9>"${LOCK_FILE}"
 
 if ! flock -n 9; then
-  echo "[ERROR] dailyApiLogJob is already running."
+  echo "[ERROR] monthlyHealthInfoSummaryBatchJob is already running."
   exit 50
 fi
 
 # 処理対象年月YYYYMM
 DATE_OPTION_VALUE=$1
+RUN_ID=$(create_run_id)
 
 cd ${BASE_DIR} && docker compose \
   --project-directory "${BASE_DIR}" \
   -f ${BASE_DIR}/${DOCKER_DIR}/docker-compose.yml \
   -f ${BASE_DIR}/${DOCKER_DIR}/docker-compose.${ENV}.yml \
-  run --rm ha-batch --spring.batch.job.name=monthlyHealthInfoSummaryBatchJob m=${DATE_OPTION_VALUE}
+  run --rm ha-batch --spring.batch.job.name=monthlyHealthInfoSummaryBatchJob \
+    "m=${DATE_OPTION_VALUE}" "run.id=${RUN_ID}"
 
 echo "------------------------------------------------------------------------"
 echo "END $0"

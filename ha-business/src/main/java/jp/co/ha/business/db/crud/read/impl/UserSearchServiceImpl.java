@@ -79,7 +79,7 @@ public class UserSearchServiceImpl implements UserSearchService {
         List<User> list = mapper.selectByExample(example);
 
         // ユーザ情報.メールアドレスは複数レコード存在する想定はないため、先頭1件を使用
-        return Optional.ofNullable(CollectionUtil.isEmpty(list) ? null : list.get(0));
+        return Optional.ofNullable(CollectionUtil.isEmpty(list) ? null : list.getFirst());
     }
 
     @Select

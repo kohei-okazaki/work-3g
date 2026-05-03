@@ -35,7 +35,7 @@ public class StringUtilTest extends BaseCommonTest {
             String str = "1,2,3,4";
             List<String> resultList = StringUtil.toStrList(str, StringUtil.COMMA);
             List<String> list = Arrays.asList("1", "2", "3", "3");
-            assertEquals(resultList.get(0), list.get(0));
+            assertEquals(resultList.getFirst(), list.getFirst());
             assertEquals(resultList.get(1), list.get(1));
             assertEquals(resultList.get(2), list.get(2));
             assertNotEquals(resultList.get(3), list.get(3));

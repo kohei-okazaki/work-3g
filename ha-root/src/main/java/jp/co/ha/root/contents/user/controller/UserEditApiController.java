@@ -29,8 +29,8 @@ import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.CommonFlag;
-import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.RootLoginInfo;
 import jp.co.ha.db.entity.RootRoleMt;
 import jp.co.ha.db.entity.RootUserRoleDetailMt;
@@ -94,22 +94,22 @@ public class UserEditApiController
             @PathVariable(name = "seq_login_id", required = true) Long seqLoginId,
             @Valid @RequestBody UserEditApiRequest request) {
 
+        List<CompositeRootUserInfo> userRoleList = rootLoginInfoSearchService
+                .findCompositeUserById(seqLoginId);
+        if (CollectionUtil.isEmpty(userRoleList)) {
+            // 登録データが存在しない場合
+            return ResponseEntity.badRequest()
+                    .body(getErrorResponse("data illegal error"));
+        }
+
         // トランザクション開始
         TransactionStatus status = transactionManager
                 .getTransaction(defaultTransactionDefinition);
 
         try {
 
-            List<CompositeRootUserInfo> userRoleList = rootLoginInfoSearchService
-                    .findCompositeUserById(seqLoginId);
-            if (CollectionUtil.isEmpty(userRoleList)) {
-                // 登録データが存在しない場合
-                return ResponseEntity.badRequest()
-                        .body(getErrorResponse("data illegal error"));
-            }
-
             // 管理者サイトユーザ権限管理マスタID
-            Long seqRootUserRoleMngMtId = userRoleList.get(0)
+            Long seqRootUserRoleMngMtId = userRoleList.getFirst()
                     .getSeqRootUserRoleMngMtId();
 
             // ユーザの詳細マスタを削除
@@ -130,7 +130,7 @@ public class UserEditApiController
 
             // 管理者サイトユーザログイン情報を更新
             // 結合しているので権限情報以外はここから取得する
-            CompositeRootUserInfo userRole = userRoleList.get(0);
+            CompositeRootUserInfo userRole = userRoleList.getFirst();
             updateRootLoginInfo(userRole, request);
 
             // 正常にDB登録出来た場合、コミット
@@ -171,14 +171,15 @@ public class UserEditApiController
             UserEditApiRequest request) throws BaseException {
 
         RootLoginInfo entity = new RootLoginInfo();
-        BeanUtil.copy(beforeData, entity);
-        BeanUtil.copy(request, entity);
+        entity.setSeqRootLoginInfoId(beforeData.getSeqRootLoginInfoId());
+        entity.setSeqRootUserRoleMngMtId(beforeData.getSeqRootUserRoleMngMtId());
+        entity.setPasswordExpire(request.getPasswordExpire());
+        entity.setRemarks(request.getRemarks());
+        entity.setDeleteFlag(request.isDeleteFlag() ? CommonFlag.TRUE.get()
+                : CommonFlag.FALSE.get());
 
-        if (request.getPassword() != null) {
+        if (StringUtil.hasValue(request.getPassword())) {
             entity.setPassword(hashEncoder.encode(request.getPassword(), ""));
-        }
-        if (request.isDeleteFlag()) {
-            entity.setDeleteFlag(CommonFlag.TRUE.get());
         }
         rootLoginInfoUpdateService.update(entity);
     }
