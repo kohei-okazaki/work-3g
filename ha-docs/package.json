@@ -9,12 +9,13 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "vue": "^3.5.33",
-    "nuxt": "^4.4.2",
-    "vuetify": "^3.12.5",
-    "vuetify-nuxt-module": "^0.19.5",
+    "@mdi/font": "^7.4.47",
     "mermaid": "^11.14.0",
-    "postcss": "^8.5.12"
+    "nuxt": "^4.4.4",
+    "postcss": "^8.5.13",
+    "vue": "^3.5.33",
+    "vuetify": "^4.0.6",
+    "vuetify-nuxt-module": "^0.19.5"
   },
   "devDependencies": {
     "sass": "~1.99.0"

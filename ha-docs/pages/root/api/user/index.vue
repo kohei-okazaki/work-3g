@@ -66,7 +66,7 @@ export default {
         },
         {
           id: "3",
-          text: "ログインID 取得",
+          text: "ログインID取得",
           edgeType: "round",
           next: ["4"],
         },
@@ -76,8 +76,14 @@ export default {
             "ROOT_LOGIN_INFO<br>+ ROOT_USER_ROLE_MNG_MT<br>+ ROOT_USER_ROLE_DETAIL_MT<br>+ ROOT_ROLE_MT 検索",
           edgeType: "round",
           link: ["-- 検索結果 == 0 -->", "-- それ以外場合 -->"],
-          next: ["101", "100"],
+          next: ["101", "5"],
           style: "fill:#c6ffc6",
+        },
+        {
+          id: "5",
+          text: "権限情報・削除フラグを<br>レスポンスへ設定",
+          edgeType: "round",
+          next: ["100"],
         },
         {
           id: "100",
@@ -98,7 +104,7 @@ export default {
         },
         {
           id: "404",
-          text: "404エラー",
+          text: "認証エラー",
           edgeType: "round",
         },
       ],

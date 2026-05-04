@@ -66,7 +66,13 @@ export default {
         },
         {
           id: "3",
-          text: "INQUIRY_MANAGEMENT <br>ステータス条件に件数検索",
+          text: "ステータス判定<br>不正時は未対応を設定",
+          edgeType: "round",
+          next: ["4"],
+        },
+        {
+          id: "4",
+          text: "INQUIRY_MANAGEMENT <br>ステータス条件で件数検索",
           edgeType: "round",
           next: ["100", "101"],
           style: "fill:#c6ffc6",
@@ -90,7 +96,7 @@ export default {
         },
         {
           id: "404",
-          text: "404エラー",
+          text: "認証エラー",
           edgeType: "round",
         },
       ],

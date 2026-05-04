@@ -66,7 +66,20 @@ export default {
         },
         {
           id: "3",
+          text: "ページング情報取得",
+          edgeType: "round",
+          next: ["4"],
+        },
+        {
+          id: "4",
           text: "API_LOG 検索",
+          edgeType: "round",
+          next: ["5", "101"],
+          style: "fill:#c6ffc6",
+        },
+        {
+          id: "5",
+          text: "API_LOG 件数取得",
           edgeType: "round",
           next: ["100", "101"],
           style: "fill:#c6ffc6",
@@ -90,7 +103,7 @@ export default {
         },
         {
           id: "404",
-          text: "404エラー",
+          text: "認証エラー",
           edgeType: "round",
         },
       ],

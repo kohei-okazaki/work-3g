@@ -66,15 +66,35 @@ export default {
         },
         {
           id: "3",
-          text: "S3.メモ情報 Upload",
+          text: "リクエスト妥当性チェック",
           edgeType: "round",
-          next: ["4"],
+          next: ["4", "101"],
         },
         {
           id: "4",
+          text: "S3キー生成",
+          edgeType: "round",
+          next: ["5"],
+        },
+        {
+          id: "5",
+          text: "S3.メモ情報 Upload",
+          edgeType: "round",
+          next: ["6", "101"],
+          style: "fill:#ffce9e",
+        },
+        {
+          id: "6",
           text: "ROOT_USER_NOTE_INFO 登録",
           edgeType: "round",
-          next: ["100"],
+          next: ["7", "101"],
+          style: "fill:#c6ffc6",
+        },
+        {
+          id: "7",
+          text: "Slack通知",
+          edgeType: "round",
+          next: ["100", "101"],
         },
         {
           id: "100",
@@ -95,7 +115,7 @@ export default {
         },
         {
           id: "404",
-          text: "404エラー",
+          text: "認証エラー",
           edgeType: "round",
         },
       ],

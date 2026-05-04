@@ -73,66 +73,6 @@
           <v-expansion-panel>
             <v-expansion-panel-header class="justify-self-start text-subtitle-1" disable-icon-rotate>
               <div>
-                <v-icon color="red">mdi-database</v-icon>
-                <span>MongoDB接続手順</span>
-              </div>
-            </v-expansion-panel-header>
-            <v-expansion-panel-content class="text-body-2">
-
-              <v-alert text type="error" elevation="2" border="left">
-                <div class="text-body-2">
-                  NoSQLの為、直接DDLを流すことは無い。<br>
-                </div>
-              </v-alert>
-
-              <details>
-                <summary>ダウンロード手順</summary>
-                <p>
-                  <a href="https://www.mongodb.com/try/download/compass" target="_blank"
-                    rel="noopener noreferrer">公式</a>より以下の手順でMongoDB Compass（クライアントツール）をローカルPCにダウンロードする。
-                </p>
-              </details>
-
-              <br />
-
-              <details>
-                <summary>インストール手順</summary>
-                <p>上記、「ダウンロード手順」を実施してあることを前提です。</p>
-                <p>以下の手順でMongoDB Compassをインストールする。</p>
-                <ol>
-                  <li>ダウンロードした.exeファイルをダブルクリックして実行する。</li>
-                  <li>インストーラの指示に従ってインストールを進めます。(基本的にウィザードに従う)</li>
-                </ol>
-              </details>
-
-              <br />
-
-              <details>
-                <summary>接続手順</summary>
-                <p>上記、「インストール手順」を実施してあることを前提です。</p>
-                <ol>
-                  <li>MongoDB Compassを起動します。</li>
-                  <li>画面左のメニューから「Connections」の右の+のアイコンを開く。</li>
-                  <li>以下を設定<br>
-                    URI=mongodb://health_user:hbt4stnsegebg@172.17.20.208:27017/?authSource=admin<br>
-                    Name=任意のわかりやすい名前(docker_mongo)<br>
-                  </li>
-                  <li>「Advanced Connection Options」を開く。</li>
-                  <li>「Authentication」タブを選択する。</li>
-                  <li>「Username/Password」タブを選択する。</li>
-                  <li>以下を設定<br>
-                    Username=health_user<br>
-                    Password=hbt4stnsegebg
-                  </li>
-                </ol>
-              </details>
-
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-
-          <v-expansion-panel>
-            <v-expansion-panel-header class="justify-self-start text-subtitle-1" disable-icon-rotate>
-              <div>
                 <v-icon color="red">mdi-language-java</v-icon>
                 <span>Java環境構築手順</span>
               </div>
@@ -370,7 +310,7 @@
                   <a href="https://nodejs.org/ja/download/" target="_blank"
                     rel="noopener noreferrer">ここ</a>から各OSに合わせてインストーラをダウンロード
                 </p>
-                <p>バージョンは偶数バージョンで20.x.xを選択</p>
+                <p>バージョンは偶数バージョンで24.x.xを選択</p>
                 <p>
                   インストール完了後、コマンドプロンプトまたはターミナルで実行
                 </p>

@@ -22,6 +22,6 @@
 ## ログ
 - 文字コード：UTF-8
 - 配置先：
-    - local環境：C:/app/logs/
-    - dev環境：/var/log/app/
+    - local環境：/var/app/log/
+    - dev環境：/var/app/log/
     - ファイル名：api-${log_level}.log

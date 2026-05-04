@@ -21,8 +21,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      titleTemplate: "%s | front",
-      title: "front",
+      title: "健康管理サイト | Top",
       meta: [
         {
           charset: "utf-8",

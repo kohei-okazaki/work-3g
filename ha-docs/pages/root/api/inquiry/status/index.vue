@@ -66,7 +66,7 @@ export default {
         },
         {
           id: "3",
-          text: "INQUIRY_STATUS_MT <br>検索",
+          text: "INQUIRY_STATUS_MT <br>検索<br>ステータス昇順",
           edgeType: "round",
           next: ["100", "101"],
           style: "fill:#c6ffc6",
@@ -90,7 +90,7 @@ export default {
         },
         {
           id: "404",
-          text: "404エラー",
+          text: "認証エラー",
           edgeType: "round",
         },
       ],
