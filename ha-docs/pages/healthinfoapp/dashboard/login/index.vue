@@ -52,6 +52,12 @@ export default {
       ],
       flow: [
         {
+          id: "a0",
+          text: "ログイン画面",
+          edgeType: "circle",
+          next: ["a1", "b1", "c1"],
+        },
+        {
           id: "a1",
           text: "ログインボタン押下",
           edgeType: "round",
@@ -65,26 +71,54 @@ export default {
         },
         {
           id: "a3",
-          text: "アカウント情報 検索",
+          text: "USER 検索",
           edgeType: "round",
           next: ["a4"],
           style: "fill:#c6ffc6",
         },
         {
           id: "a4",
-          text: "アカウント情報チェック",
+          text: "ログイン情報チェック",
           edgeType: "round",
           next: ["a5"],
         },
         {
           id: "a5",
-          text: "sessionにユーザIDを登録",
+          text: "セッションにユーザIDを登録",
           edgeType: "round",
           next: ["a6"],
         },
         {
           id: "a6",
-          text: "最新健康情報 検索",
+          text: "最新のHEALTH_INFO 検索",
+          edgeType: "round",
+          next: ["a7"],
+          style: "fill:#c6ffc6",
+        },
+        {
+          id: "a7",
+          text: "有効なUSER_HEALTH_GOAL 検索",
+          edgeType: "round",
+          next: ["a8"],
+          style: "fill:#c6ffc6",
+        },
+        {
+          id: "a8",
+          text: "直近のHEALTH_INFO 検索",
+          edgeType: "round",
+          next: ["a9"],
+          style: "fill:#c6ffc6",
+        },
+        {
+          id: "a9",
+          text: "当日のHEALTH_INFO 件数取得",
+          edgeType: "round",
+          next: ["a10"],
+          style: "fill:#c6ffc6",
+        },
+        {
+          id: "a10",
+          text: "TOP画面表示情報 設定",
           edgeType: "round",
           style: "fill:#c6ffc6",
         },
@@ -112,13 +146,13 @@ export default {
 
         {
           id: "b1",
-          text: "アカウント作成ボタン押下",
+          text: "ユーザ作成ボタン押下",
           edgeType: "round",
           next: ["b2"],
         },
         {
           id: "b2",
-          text: "アカウント作成画面に遷移",
+          text: "ユーザ作成画面に遷移",
           edgeType: "round",
         },
 
@@ -130,7 +164,7 @@ export default {
         },
         {
           id: "c2",
-          text: "アカウント回復用メールアドレス入力画面に遷移",
+          text: "パスワード再設定用メールアドレス入力画面に遷移",
           edgeType: "round",
         },
       ],

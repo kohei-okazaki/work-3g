@@ -79,6 +79,13 @@ export default {
         },
         {
           id: "5",
+          text: "S3.問い合わせ本文取得",
+          edgeType: "round",
+          next: ["6", "101"],
+          style: "fill:#ffce9e",
+        },
+        {
+          id: "6",
           text: "INQUIRY_MANAGEMENT<br>件数検索",
           edgeType: "round",
           next: ["100", "101"],
@@ -103,7 +110,7 @@ export default {
         },
         {
           id: "404",
-          text: "404エラー",
+          text: "認証エラー",
           edgeType: "round",
         },
       ],

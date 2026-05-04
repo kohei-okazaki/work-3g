@@ -1,19 +1,40 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
-defineProps({
+const SITE_TITLE = "健康管理ドキュメント";
+
+const props = defineProps({
   items: {
     type: Array,
     default: () => [],
   },
   title: {
     type: String,
-    default: "ha-docs",
+    default: "TOPページ",
   },
 });
 
+const route = useRoute();
 const drawer = ref(true);
 const rail = ref(false);
+
+const normalizePath = (path) => {
+  const normalizedPath = path.replace(/\/$/, "");
+  return normalizedPath === "" ? "/" : normalizedPath;
+};
+
+const pageTitle = computed(() => {
+  const currentPath = normalizePath(route.path);
+  const currentItem = props.items.find(
+    (item) => normalizePath(item.to) === currentPath,
+  );
+
+  return currentItem?.title || props.title;
+});
+
+useHead({
+  title: computed(() => `${SITE_TITLE} | ${pageTitle.value}`),
+});
 </script>
 
 <template>

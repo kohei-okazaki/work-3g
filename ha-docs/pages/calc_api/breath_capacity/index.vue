@@ -40,7 +40,7 @@ export default {
           href: "/",
         },
         {
-          text: "calc_api",
+          text: "健康情報計算API",
           disabled: false,
           href: "/calc_api",
         },

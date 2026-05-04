@@ -66,13 +66,19 @@ export default {
         },
         {
           id: "3",
-          text: "ユーザID チェック",
+          text: "リクエスト妥当性チェック",
           edgeType: "round",
-          link: ["-- 未指定 -->", "-- 指定ありの場合 -->"],
           next: ["4", "101"],
         },
         {
           id: "4",
+          text: "USER 検索",
+          edgeType: "round",
+          next: ["101", "5"],
+          style: "fill:#c6ffc6",
+        },
+        {
+          id: "5",
           text: "USER 更新",
           edgeType: "round",
           next: ["100", "101"],
@@ -97,7 +103,7 @@ export default {
         },
         {
           id: "404",
-          text: "404エラー",
+          text: "認証エラー",
           edgeType: "round",
         },
       ],

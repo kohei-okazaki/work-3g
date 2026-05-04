@@ -1,4 +1,45 @@
 import { defineNuxtConfig } from "nuxt/config";
+import type { VuetifyModuleOptions } from "vuetify-nuxt-module";
+
+const vuetifyOptions: VuetifyModuleOptions = {
+  moduleOptions: {
+    styles: {
+      configFile: "assets/variables.scss",
+    },
+  },
+  vuetifyOptions: {
+    theme: {
+      defaultTheme: "light",
+      themes: {
+        light: {
+          colors: {
+            primary: "#0097a7",
+            accent: "#7b1fa2",
+            secondary: "#ff8f00",
+            info: "#26c6da",
+            warning: "#f9a825",
+            error: "#d84315",
+            success: "#2e7d32",
+          },
+        },
+        dark: {
+          colors: {
+            primary: "#0097a7",
+            accent: "#7b1fa2",
+            secondary: "#ff8f00",
+            info: "#0097a7",
+            warning: "#f9a825",
+            error: "#d84315",
+            success: "#2e7d32",
+          },
+        },
+      },
+    },
+    icons: {
+      defaultSet: "mdi",
+    },
+  },
+};
 
 export default defineNuxtConfig({
   compatibilityDate: "2026-04-28",
@@ -12,11 +53,11 @@ export default defineNuxtConfig({
     public: "static",
   },
   ssr: false,
-  css: ["~/assets/baseLayout.css"],
-  modules: ["vuetify-nuxt-module"],
+  css: ["@mdi/font/css/materialdesignicons.css", "~/assets/baseLayout.css"],
+  modules: [["vuetify-nuxt-module", vuetifyOptions]],
   app: {
     head: {
-      title: "ha-docs",
+      title: "健康管理ドキュメント | TOPページ",
       htmlAttrs: {
         lang: "ja",
       },
@@ -38,45 +79,6 @@ export default defineNuxtConfig({
           href: "/favicon.ico",
         },
       ],
-    },
-  },
-  vuetify: {
-    moduleOptions: {
-      styles: {
-        configFile: "assets/variables.scss",
-      },
-    },
-    vuetifyOptions: {
-      theme: {
-        defaultTheme: "light",
-        themes: {
-          light: {
-            colors: {
-              primary: "#0097a7",
-              accent: "#7b1fa2",
-              secondary: "#ff8f00",
-              info: "#26c6da",
-              warning: "#f9a825",
-              error: "#d84315",
-              success: "#2e7d32",
-            },
-          },
-          dark: {
-            colors: {
-              primary: "#0097a7",
-              accent: "#7b1fa2",
-              secondary: "#ff8f00",
-              info: "#0097a7",
-              warning: "#f9a825",
-              error: "#d84315",
-              success: "#2e7d32",
-            },
-          },
-        },
-      },
-      icons: {
-        defaultSet: "mdi",
-      },
     },
   },
 });

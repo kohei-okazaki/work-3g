@@ -59,9 +59,8 @@ export default {
         },
         {
           id: "2",
-          text: "ヘッダ情報チェック",
+          text: "リクエスト妥当性チェック",
           edgeType: "round",
-          link: ["-- ヘッダ.Api-Keyが存在しない -->", "-- それ以外の場合 -->"],
           next: ["100", "3"],
         },
         {
@@ -69,10 +68,18 @@ export default {
           text: "USER 検索",
           edgeType: "round",
           next: ["100", "4"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "4",
           text: "HEALTH_INFO 検索",
+          edgeType: "round",
+          next: ["100", "5"],
+          style: "fill:#c6ffc6",
+        },
+        {
+          id: "5",
+          text: "検索結果件数チェック",
           edgeType: "round",
           next: ["100", "101"],
         },

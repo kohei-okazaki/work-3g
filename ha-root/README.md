@@ -123,3 +123,10 @@
     - 概要：健康管理アプリのユーザの問い合わせ情報を更新するAPI
     - URL：/api/root/inquiry/notice
     - Method：GET
+
+## ログ
+- 文字コード：UTF-8
+- 配置先：
+    - local環境：/var/app/log/
+    - dev環境：/var/app/log/
+    - ファイル名：root-api-${log_level}.log
