@@ -59,7 +59,7 @@ export default {
         },
         {
           id: "2",
-          text: "レスポンスJSON 生成",
+          text: "ヘルスチェックレスポンス生成",
           edgeType: "round",
           next: ["3"],
         },

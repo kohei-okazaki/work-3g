@@ -66,14 +66,20 @@ export default {
         },
         {
           id: "3",
-          text: "INQUIRY_MANAGEMENT <br>存在チェック",
+          text: "リクエスト妥当性チェック",
           edgeType: "round",
-          link: ["-- 存在ありの場合 -->", "-- 存在なしの場合 -->"],
           next: ["4", "101"],
-          style: "fill:#c6ffc6",
         },
         {
           id: "4",
+          text: "INQUIRY_MANAGEMENT <br>存在チェック",
+          edgeType: "round",
+          link: ["-- 存在ありの場合 -->", "-- 存在なしの場合 -->"],
+          next: ["5", "101"],
+          style: "fill:#c6ffc6",
+        },
+        {
+          id: "5",
           text: "INQUIRY_MANAGEMENT <br>更新",
           edgeType: "round",
           next: ["100", "101"],
@@ -98,7 +104,7 @@ export default {
         },
         {
           id: "404",
-          text: "404エラー",
+          text: "認証エラー",
           edgeType: "round",
         },
       ],

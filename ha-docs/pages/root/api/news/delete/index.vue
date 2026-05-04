@@ -73,27 +73,22 @@ export default {
         },
         {
           id: "4",
-          text: "お知らせ情報JSON 取得",
-          edgeType: "round",
-          link: ["-- 取得失敗 -->", "-- 取得成功 -->"],
-          next: ["101", "5"],
-        },
-        {
-          id: "5",
           text:
             "NEWS_INFO 論理削除",
           edgeType: "round",
-          next: ["6"],
+          next: ["5"],
+          style: "fill:#c6ffc6",
         },
         {
-          id: "6",
+          id: "5",
           text: "S3上のお知らせ情報JSON削除",
           edgeType: "round",
           link: ["-- 削除失敗 -->", "-- 削除成功 -->"],
-          next: ["101", "7"],
+          next: ["101", "6"],
+          style: "fill:#ffce9e",
         },
         {
-          id: "7",
+          id: "6",
           text: "Slack通知",
           edgeType: "round",
           link: ["-- 通知失敗 -->", "-- 通知成功 -->"],
@@ -118,7 +113,7 @@ export default {
         },
         {
           id: "404",
-          text: "404エラー",
+          text: "認証エラー",
           edgeType: "round",
         },
       ],

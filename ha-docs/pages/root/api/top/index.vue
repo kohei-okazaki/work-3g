@@ -66,9 +66,9 @@ export default {
         },
         {
           id: "3",
-          text: "処理対象年月取得",
+          text: "処理対象年月取得<br>未指定時はシステム日付",
           edgeType: "round",
-          next: ["4"],
+          next: ["4", "101"],
         },
         {
           id: "4",
@@ -103,7 +103,7 @@ export default {
         },
         {
           id: "404",
-          text: "404エラー",
+          text: "認証エラー",
           edgeType: "round",
         },
       ],

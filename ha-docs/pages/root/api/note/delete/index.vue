@@ -66,16 +66,23 @@ export default {
         },
         {
           id: "3",
-          text: "管理者サイトユーザメモ情報ID チェック",
+          text: "ROOT_USER_NOTE_INFO 取得",
           edgeType: "round",
-          link: ["-- 未指定の場合 -->", "-- それ以外の場合 -->"],
           next: ["101", "4"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "4",
           text: "ROOT_USER_NOTE_INFO 論理削除",
           edgeType: "round",
-          next: ["100"],
+          next: ["5", "101"],
+          style: "fill:#c6ffc6",
+        },
+        {
+          id: "5",
+          text: "Slack通知",
+          edgeType: "round",
+          next: ["100", "101"],
         },
         {
           id: "100",
@@ -96,7 +103,7 @@ export default {
         },
         {
           id: "404",
-          text: "404エラー",
+          text: "認証エラー",
           edgeType: "round",
         },
       ],

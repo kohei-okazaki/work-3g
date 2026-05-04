@@ -66,7 +66,26 @@ export default {
         },
         {
           id: "3",
+          text: "ページング情報取得",
+          edgeType: "round",
+          next: ["4"],
+        },
+        {
+          id: "4",
           text: "HEALTH_INFO<br>+ BMI_RANGE_MT 検索",
+          edgeType: "round",
+          next: ["5", "101"],
+          style: "fill:#c6ffc6",
+        },
+        {
+          id: "5",
+          text: "BMIステータス変換",
+          edgeType: "round",
+          next: ["6"],
+        },
+        {
+          id: "6",
+          text: "HEALTH_INFO 件数取得",
           edgeType: "round",
           next: ["100", "101"],
           style: "fill:#c6ffc6",
@@ -90,7 +109,7 @@ export default {
         },
         {
           id: "404",
-          text: "404エラー",
+          text: "認証エラー",
           edgeType: "round",
         },
       ],

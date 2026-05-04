@@ -79,6 +79,12 @@ export default {
         },
         {
           id: "5",
+          text: "Job引数を<br>Job単位に集約",
+          edgeType: "round",
+          next: ["6"],
+        },
+        {
+          id: "6",
           text: "BATCH_JOB_EXECUTION<br>件数検索",
           edgeType: "round",
           next: ["100", "101"],
@@ -103,7 +109,7 @@ export default {
         },
         {
           id: "404",
-          text: "404エラー",
+          text: "認証エラー",
           edgeType: "round",
         },
       ],
