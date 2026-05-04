@@ -55,6 +55,7 @@ export default defineNuxtConfig({
 
   experimental: {
     payloadExtraction: true,
+    viteEnvironmentApi: true,
   },
 
   runtimeConfig: {

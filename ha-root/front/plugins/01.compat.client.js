@@ -109,22 +109,35 @@ export default defineNuxtPlugin((nuxtApp) => {
     return localStorage.getItem("themeDark") === "true";
   });
 
+  const getVuetifyTheme = () => nuxtApp.$vuetifyInstance?.theme;
+
+  const isDarkTheme = () => {
+    const theme = getVuetifyTheme();
+    return Boolean(
+      theme?.current?.value?.dark ??
+        theme?.global?.current?.value?.dark ??
+        theme?.current?.dark ??
+        theme?.global?.current?.dark ??
+        themeState.value,
+    );
+  };
+
   const setTheme = (isDark) => {
     themeState.value = Boolean(isDark);
     localStorage.setItem("themeDark", String(themeState.value));
 
-    const vuetify = nuxtApp.$vuetifyInstance;
-    if (vuetify?.theme?.change) {
-      vuetify.theme.change(themeState.value ? "dark" : "light");
-    } else if (vuetify?.theme?.global?.name) {
-      vuetify.theme.global.name.value = themeState.value ? "dark" : "light";
+    const theme = getVuetifyTheme();
+    if (theme?.change) {
+      theme.change(themeState.value ? "dark" : "light");
+    } else if (theme?.global?.name) {
+      theme.global.name.value = themeState.value ? "dark" : "light";
     }
   };
 
   const vuetifyCompat = {
     theme: {
       get dark() {
-        return themeState.value;
+        return isDarkTheme();
       },
       set dark(value) {
         setTheme(value);
@@ -142,6 +155,8 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.config.globalProperties.$auth = auth;
   nuxtApp.vueApp.config.globalProperties.$axios = apiClient;
   nuxtApp.vueApp.config.globalProperties.$vuetify = vuetifyCompat;
+  nuxtApp.vueApp.config.globalProperties.$isDarkTheme = isDarkTheme;
+  nuxtApp.vueApp.config.globalProperties.$setDarkTheme = setTheme;
   nuxtApp.vueApp.config.globalProperties.$isValidForm = async (formRef) => {
     if (!formRef?.validate) {
       return true;
@@ -157,6 +172,8 @@ export default defineNuxtPlugin((nuxtApp) => {
       auth,
       axios: apiClient,
       vuetify: vuetifyCompat,
+      isDarkTheme,
+      setDarkTheme: setTheme,
     },
   };
 });

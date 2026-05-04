@@ -16,13 +16,13 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@mdi/font": "^7.4.47",
-    "axios": "^1.15.2",
-    "cross-env": "^10.1.0",
-    "nuxt": "^4.4.4",
-    "sass": "^1.99.0",
-    "vue": "^3.5.33",
-    "vuetify": "^4.0.6"
+    "vue": "3.5.33",
+    "nuxt": "4.4.2",
+    "vuetify": "4.0.6",
+    "@mdi/font": "7.4.47",
+    "axios": "1.15.2",
+    "cross-env": "10.1.0",
+    "sass": "1.99.0"
   },
   "devDependencies": {
     "typescript": "^6.0.3",

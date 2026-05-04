@@ -1,8 +1,12 @@
 <template>
   <v-switch
     v-model="theme"
-    class="theme-postion"
+    class="theme-position"
+    color="primary"
+    density="compact"
+    hide-details
     :prepend-icon="themeIcon"
+    aria-label="theme"
   ></v-switch>
 </template>
 
@@ -19,19 +23,22 @@ export default {
     },
   },
   watch: {
-    theme: function () {
-      this.$vuetify.theme.dark = this.theme;
+    theme: function (value) {
+      this.$setDarkTheme(value);
     },
   },
   created: function () {
-    this.theme = this.$vuetify.theme.dark;
+    this.theme = this.$isDarkTheme();
   },
 };
 </script>
 
 <style scoped>
-.theme-postion {
-  margin-top: 16px;
-  padding-top: 4px;
+.theme-position {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  margin: 0 8px;
+  padding: 0;
 }
 </style>

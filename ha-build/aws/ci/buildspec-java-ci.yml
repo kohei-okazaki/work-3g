@@ -13,7 +13,10 @@ phases:
     commands:
       - |
         ls -ltr
-        mvn -B -ntp -f ha-pom/pom.xml -pl :${TARGET_MODULE} -am clean test -Dgroups=!integration
+        echo "env=${TARGET_MODULE}"
+        cd ha-pom
+        mvn -B -ntp -pl ../${TARGET_MODULE} -am clean test -Dgroups=!integration
+        # mvn -B -ntp -f ha-pom/pom.xml -pl :${TARGET_MODULE} -am clean test -Dgroups=!integration
 
 reports:
   junit_reports:
