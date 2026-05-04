@@ -240,7 +240,7 @@ export default {
   },
   computed: {
     timelineCardTextBgColor: function () {
-      return this.$vuetify.theme.dark ? "black" : "white";
+      return this.$isDarkTheme() ? "black" : "white";
     },
   },
 };

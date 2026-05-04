@@ -106,7 +106,7 @@ export default {
   },
   computed: {
     isDark: function () {
-      if (this.$vuetify.theme.dark) {
+      if (this.$isDarkTheme()) {
         return "";
       }
       return "light-main";
