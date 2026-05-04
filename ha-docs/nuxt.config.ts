@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   modules: ["vuetify-nuxt-module"],
   app: {
     head: {
-      title: "ha-docs",
+      title: "健康管理ドキュメント | TOPページ",
       htmlAttrs: {
         lang: "ja",
       },
