@@ -107,7 +107,7 @@ services:
   # 管理者用サイト front container
   ha-root-front:
     # image: work3g/ha-root-front:local
-    image: node:22
+    image: node:24
     working_dir: /app
     ports:
       - "8083:8083"

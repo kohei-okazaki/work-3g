@@ -3,39 +3,28 @@
 ## Build Setup
 
 ```bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:8083
+# ローカルサーバ起動
 $ npm run dev
 
-# build and launch server
+# ビルド(ローカル環境)
 $ npm run build
+$ npm run build:local
+# ビルド(dev環境)
+$ npm run build:dev
+
+# ビルド済サーバ起動(ローカル環境)
 $ npm run start
+$ npm run start:local
+# ビルド済サーバ起動(dev環境)
+$ npm run start:dev
 
-# generate static project
-$ npm run generate
-
-# generate static project for local/dev
+# 静的ファイル生成(ローカル環境)
 $ npm run generate:local
+# 静的ファイル生成(dev環境)
+$ npm run generate
 $ npm run generate:dev
 
-# generate static project for S3 dev
-# API_BASE_URL must point to ha-root api.
-$ npx cross-env API_BASE_URL="https://example.com/api/root/" npm run generate:dev
-
-# vuex-persistedstateのinstall
-$ npm install --save vuex-persistedstate
-
-# devDependenciesからの削除
-$ npm uninstall パッケージ --save-dev
-
-# Dependenciesからの削除
-$ npm uninstall パッケージ --save
-
-# module update
-$ vue ui
+# 型チェック(CIで実行用)
+$ npm typecheck
 
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

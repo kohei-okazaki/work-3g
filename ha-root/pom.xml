@@ -3,7 +3,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.co.ha</groupId>
-  <artifactId>root</artifactId>
+  <artifactId>ha-root</artifactId>
   <name>ha-root</name>
   <description>health app for root api</description>
 
@@ -13,7 +13,7 @@
 
   <parent>
     <groupId>jp.co.ha</groupId>
-    <artifactId>pom</artifactId>
+    <artifactId>ha-pom</artifactId>
     <version>1.0.0</version>
     <relativePath>../ha-pom</relativePath>
   </parent>
@@ -21,17 +21,17 @@
   <dependencies>
     <dependency>
       <groupId>jp.co.ha</groupId>
-      <artifactId>common</artifactId>
+      <artifactId>ha-common</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>jp.co.ha</groupId>
-      <artifactId>db</artifactId>
+      <artifactId>ha-db</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>jp.co.ha</groupId>
-      <artifactId>business</artifactId>
+      <artifactId>ha-business</artifactId>
       <version>${project.version}</version>
     </dependency>
 
