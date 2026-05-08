@@ -475,6 +475,10 @@
     padding: 0.25rem;
   }
 
+  .download-menu {
+    display: none !important;
+  }
+
   .menuicon:hover {
     transform: none;
   }
