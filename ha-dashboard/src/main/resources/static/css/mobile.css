@@ -39,6 +39,17 @@
   white-space: nowrap;
 }
 
+.footer,
+.sub-footer {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.sub-footer {
+  padding-right: calc(1rem + env(safe-area-inset-right));
+  padding-left: calc(1rem + env(safe-area-inset-left));
+}
+
 .w-45 {
   width: 45%;
 }
@@ -58,7 +69,7 @@
 
   .dashboard-main,
   .login-wrap .dashboard-main {
-    padding: 0.75rem 0.75rem calc(var(--mobile-nav-height) + 1.5rem + env(safe-area-inset-bottom));
+    padding: 0.5rem 0.75rem calc(var(--mobile-nav-height) + 1.5rem + env(safe-area-inset-bottom));
   }
 
   .header {
@@ -252,6 +263,7 @@
 
   .container,
   .container-fluid {
+    width: 100%;
     max-width: 100%;
     padding-right: 0;
     padding-left: 0;
@@ -270,12 +282,28 @@
 
   .my-4,
   .my-5 {
-    margin-top: 0.75rem !important;
+    margin-top: 0.5rem !important;
     margin-bottom: 0.75rem !important;
   }
 
   .mt-5 {
-    margin-top: 1.25rem !important;
+    margin-top: 0.75rem !important;
+  }
+
+  .dashboard-main > .container:first-child,
+  .dashboard-main > .container-fluid:first-child,
+  .dashboard-main > .px-4:first-child {
+    margin-top: 0 !important;
+  }
+
+  .dashboard-main > .container.d-flex {
+    align-items: stretch;
+  }
+
+  .dashboard-main > .container > .card,
+  .dashboard-main > .container.d-flex > .card {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .row {
