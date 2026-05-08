@@ -34,7 +34,8 @@ args="$1"
 case ${args} in
   build)
     # コンテナビルド起動
-    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" build ha-batch
+    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" build ha-batch ha-api ha-dashboard ha-root-api ha-root-front ha-track
+    # docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" build ha-batch ha-api ha-dashboard ha-root-api ha-root-front
     docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" up -d mysql ha-api ha-dashboard ha-root-api ha-root-front ha-track
     ;;
   start)

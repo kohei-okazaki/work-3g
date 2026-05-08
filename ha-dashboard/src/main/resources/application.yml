@@ -7,8 +7,6 @@ spring:
     mode: HTML
     encoding: UTF-8
     cache: false
-  security:
-    enabled: false
   messages:
     basename: messages
     fallback-to-system-locale: false
