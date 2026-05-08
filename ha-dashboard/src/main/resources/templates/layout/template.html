@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
 <!-- 個別CSS -->
 <link th:replace="${css}" />
+<link rel="stylesheet" th:href="@{/static/css/mobile.css}">
 <!-- 共通JavaScript -->
 <script th:src="@{/static/js/lib/jquery.min.js}"></script>
 <script th:src="@{/static/js/lib/jquery.validationEngine-ja.min.js}"></script>
@@ -33,13 +34,14 @@
 <script th:src="@{/static/js/lib/chart.min.js}"></script>
 <script th:src="@{/static/js/lib/mprogress.min.js}"></script>
 <script th:src="@{/static/js/common/common.min.js}"></script>
+<script th:src="@{/static/js/common/mobile-menu.js}"></script>
 </head>
 <body>
   <div class="wrap" th:classappend="${session[seqUserId] != null} ? login-wrap">
     <div th:replace="~{layout/header.html}"></div>
-    <br><br><br><br><br>
+    <main class="dashboard-main">
 
-    <nav aria-label="パンくずリスト" th:if="${breadcrumbList != null && breadcrumbList.size() != 0}">
+      <nav aria-label="パンくずリスト" th:if="${breadcrumbList != null && breadcrumbList.size() != 0}">
       <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page" th:each="breadcrumb, status : ${breadcrumbList}" th:object="${breadcrumb}">
           <!-- 現在のページでない場合 -->
@@ -48,9 +50,10 @@
           <span th:href="@{*{url}}" th:text="*{viewName}" th:if="*{current}"></span>
         </li><!-- /.breadcrumb-item active -->
       </ol><!-- /.breadcrumb -->
-    </nav>
+      </nav>
 
-    <div th:replace="${body}"></div>
+      <div th:replace="${body}"></div>
+    </main>
     <div class="push"></div>
   </div><!-- /.wrap -->
 
