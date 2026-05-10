@@ -17,12 +17,6 @@
 
     var mobileQuery = window.matchMedia("(max-width: 767.98px)");
 
-    function isMobileMenu() {
-      var style = window.getComputedStyle(menu);
-      return mobileQuery.matches ||
-        (style.position === "fixed" && style.bottom !== "auto");
-    }
-
     function closeItem(item) {
       item.classList.remove("is-open");
       var links = item.querySelectorAll("li > a[aria-expanded]");
@@ -66,6 +60,19 @@
       return !href || href.indexOf("#") === 0 || link.hasAttribute("data-toggle");
     }
 
+    function getSiblingItems(item) {
+      return Array.prototype.filter.call(item.parentElement.children, function(child) {
+        return child !== item && child.tagName.toLowerCase() === "li";
+      });
+    }
+
+    function closeSiblings(item) {
+      var siblings = getSiblingItems(item);
+      for (var i = 0; i < siblings.length; i += 1) {
+        closeItem(siblings[i]);
+      }
+    }
+
     var expandableItems = menu.querySelectorAll("li");
     for (var i = 0; i < expandableItems.length; i += 1) {
       var item = expandableItems[i];
@@ -91,10 +98,6 @@
       var link = target && target.closest ?
         target.closest("#dropmenu li > a") : null;
 
-      if (!isMobileMenu()) {
-        return;
-      }
-
       if (!link || !menu.contains(link)) {
         closeAll();
         return;
@@ -115,13 +118,7 @@
       event.stopPropagation();
 
       var shouldOpen = !item.classList.contains("is-open");
-      var siblings = Array.prototype.filter.call(item.parentElement.children, function(child) {
-        return child !== item && child.tagName.toLowerCase() === "li";
-      });
-
-      for (var i = 0; i < siblings.length; i += 1) {
-        closeItem(siblings[i]);
-      }
+      closeSiblings(item);
 
       if (shouldOpen) {
         item.classList.add("is-open");
