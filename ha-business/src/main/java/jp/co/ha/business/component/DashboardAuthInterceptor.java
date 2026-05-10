@@ -11,7 +11,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.business.component.annotation.MultiSubmitToken;
-import jp.co.ha.business.component.annotation.NonAuth;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
@@ -21,11 +20,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.interceptor.BaseWebInterceptor;
 
 /**
- * ダッシュボード認証チェックを行うインターセプター
- * <ul>
- * <li>ログイン認証チェック</li>
- * <li>多重送信トークンチェック</li>
- * </ul>
+ * Dashboard multi submit token interceptor.
  *
  * @version 1.0.0
  */
@@ -47,14 +42,6 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
         if (isStaticResource(handler)) {
             // 静的リソースの場合は認証不要
             return true;
-        }
-
-        if (isLoginAuthCheck(handler)) {
-            // ログイン情報のチェック対象の場合
-            // LOG.warn("url=" + request.getRequestURI());
-            sessionComponent.getValue(request.getSession(), "seqUserId", Long.class)
-                    .orElseThrow(() -> new SystemException(ILLEGAL_ACCESS_ERROR,
-                            "不正リクエストエラーです"));
         }
 
         if (isMultiSubmitTokenCheck(handler)) {
@@ -92,21 +79,6 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
             sessionComponent.setValue(request.getSession(), MultiSubmitToken.TOKEN_NAME,
                     multiSubmitToken);
         }
-    }
-
-    /**
-     * ログイン情報をチェックするかどうかを返す<br>
-     * <ul>
-     * <li>ログイン情報をチェックする場合、true</li>
-     * <li>ログイン情報をチェックしない場合、false</li>
-     * </ul>
-     *
-     * @param handler
-     *     ハンドラー
-     * @return 判定結果
-     */
-    private boolean isLoginAuthCheck(Object handler) {
-        return !((HandlerMethod) handler).getMethod().isAnnotationPresent(NonAuth.class);
     }
 
     /**

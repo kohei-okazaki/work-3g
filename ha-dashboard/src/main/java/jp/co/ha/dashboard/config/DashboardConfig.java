@@ -6,10 +6,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -20,6 +21,9 @@ import jp.co.ha.business.component.DashboardAuthInterceptor;
 import jp.co.ha.business.config.BusinessConfig;
 import jp.co.ha.common.config.CommonConfig;
 import jp.co.ha.common.type.Charset;
+import jp.co.ha.dashboard.login.auth.DashboardAuthenticationFailureHandler;
+import jp.co.ha.dashboard.login.auth.DashboardAuthenticationProvider;
+import jp.co.ha.dashboard.login.auth.DashboardAuthenticationSuccessHandler;
 import jp.co.ha.db.config.DbConfig;
 
 /**
@@ -28,6 +32,7 @@ import jp.co.ha.db.config.DbConfig;
  * @version 1.0.0
  */
 @Configuration
+@EnableWebSecurity
 @ComponentScan(basePackages = {
         "jp.co.ha.dashboard.*.controller",
         "jp.co.ha.dashboard.*.service.impl",
@@ -41,31 +46,61 @@ import jp.co.ha.db.config.DbConfig;
 })
 public class DashboardConfig implements WebMvcConfigurer {
 
+    /** authentication ignore url */
+    private static final String[] AUTH_IGNORE_URL = new String[] {
+            "/login",
+            "/accountregist/**",
+            "/accountrecovery/**",
+            "/error",
+            "/static/**"
+    };
+
     /** 認証Interceptor */
     @Autowired
     private DashboardAuthInterceptor authInterceptor;
-
     /**
      * securityFilterChain
      * 
      * @param http
      *     HttpSecurity
+     * @param authenticationProvider
+     *     authentication provider
+     * @param authenticationSuccessHandler
+     *     authentication success handler
+     * @param authenticationFailureHandler
+     *     authentication failure handler
      * @return SecurityFilterChain
      * @throws Exception
      *     認証処理失敗
      */
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        AuthenticationManagerBuilder builder = http
-                .getSharedObject(AuthenticationManagerBuilder.class);
-        AuthenticationManager manager = builder.build();
+    SecurityFilterChain securityFilterChain(HttpSecurity http,
+            DashboardAuthenticationProvider authenticationProvider,
+            DashboardAuthenticationSuccessHandler authenticationSuccessHandler,
+            DashboardAuthenticationFailureHandler authenticationFailureHandler)
+            throws Exception {
 
         http
-                .authenticationManager(manager)
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()) // 全リクエストを許可
+                .authenticationProvider(authenticationProvider)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(AUTH_IGNORE_URL).permitAll()
+                        .anyRequest().authenticated())
                 .csrf(csrf -> csrf.disable())
-                .formLogin(e -> e.disable());
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .usernameParameter("mailAddress")
+                        .passwordParameter("password")
+                        .successHandler(authenticationSuccessHandler)
+                        .failureHandler(authenticationFailureHandler)
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutRequestMatcher(PathPatternRequestMatcher
+                                .withDefaults().matcher(HttpMethod.GET, "/logout"))
+                        .logoutSuccessUrl("/login?isLogout=true")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll());
 
         return http.build();
     }

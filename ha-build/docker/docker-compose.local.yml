@@ -106,8 +106,7 @@ services:
 
   # 管理者用サイト front container
   ha-root-front:
-    # image: work3g/ha-root-front:local
-    image: node:24
+    image: work3g/ha-root-front:local
     working_dir: /app
     ports:
       - "8083:8083"
@@ -152,7 +151,7 @@ services:
 
   # 健康情報蓄積API container
   ha-track:
-    image: python:3.13.8
+    image: work3g/ha-track:local
     working_dir: /app
     ports:
       - "8086:8086"

@@ -46,6 +46,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.ha-root-front
+      pull: true
     environment:
       TZ: Asia/Tokyo
     depends_on:
@@ -58,6 +59,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.ha-track
+      pull: true
     environment:
       TZ: Asia/Tokyo
     networks:
