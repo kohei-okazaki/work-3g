@@ -134,6 +134,8 @@
 
       /*<![CDATA[*/
       var ctx = document.getElementById("chart");
+      var mobileChartQuery = window.matchMedia("(max-width: 767.98px)");
+      var showXAxisDateTime = !mobileChartQuery.matches;
       var chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -168,10 +170,34 @@
             }
           ]
         },
-        option: {
+        options: {
           responsive: true,
+          scales: {
+            xAxes: [
+              {
+                ticks: {
+                  display: showXAxisDateTime
+                },
+                gridLines: {
+                  drawTicks: showXAxisDateTime
+                }
+              }
+            ]
+          }
         }
        });
+
+       function updateXAxisDateTimeVisibility() {
+         chart.options.scales.xAxes[0].ticks.display = !mobileChartQuery.matches;
+         chart.options.scales.xAxes[0].gridLines.drawTicks = !mobileChartQuery.matches;
+         chart.update();
+       }
+
+       if (mobileChartQuery.addEventListener) {
+         mobileChartQuery.addEventListener("change", updateXAxisDateTimeVisibility);
+       } else {
+         mobileChartQuery.addListener(updateXAxisDateTimeVisibility);
+       }
        /*]]>*/
     });
   </script>

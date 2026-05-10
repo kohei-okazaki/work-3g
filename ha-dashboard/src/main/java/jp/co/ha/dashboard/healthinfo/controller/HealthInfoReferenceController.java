@@ -6,6 +6,7 @@ import static jp.co.ha.dashboard.view.DashboardView.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -197,12 +198,15 @@ public class HealthInfoReferenceController implements BaseWebController {
         healthInfoGraphService.putGraph(model, () -> {
 
             HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
-            resultList.stream().forEach(e -> {
-                graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate());
-                graphModel.addWeight(e.getWeight());
-                graphModel.addBmi(e.getBmi());
-                graphModel.addStandardWeight(e.getStandardWeight());
-            });
+            resultList.stream()
+                    .sorted(Comparator.comparing(
+                            HealthInfoReferenceDto::getHealthInfoRegDate))
+                    .forEach(e -> {
+                        graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate());
+                        graphModel.addWeight(e.getWeight());
+                        graphModel.addBmi(e.getBmi());
+                        graphModel.addStandardWeight(e.getStandardWeight());
+                    });
 
             return graphModel;
         });

@@ -8,40 +8,31 @@ import static jp.co.ha.dashboard.view.DashboardView.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.component.annotation.NonAuth;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.crud.read.UserHealthGoalSelectService;
 import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
 import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
-import jp.co.ha.business.login.LoginCheck;
-import jp.co.ha.business.login.LoginCheckResult;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
+import jp.co.ha.dashboard.login.auth.DashboardAuthenticationFailureHandler;
 import jp.co.ha.dashboard.login.form.LoginForm;
 import jp.co.ha.db.entity.HealthInfo;
-import jp.co.ha.db.entity.User;
 import jp.co.ha.db.entity.UserHealthGoal;
 
 /**
@@ -64,9 +55,6 @@ public class LoginController implements BaseWebController {
     /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;
-    /** ユーザComponent */
-    @Autowired
-    private UserComponent userComponent;
     /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
@@ -76,9 +64,6 @@ public class LoginController implements BaseWebController {
     /** 健康情報グラフサービス */
     @Autowired
     private HealthInfoGraphService healthInfoGraphService;
-    /** メッセージプロパティ */
-    @Autowired
-    private MessageSource messageSource;
 
     /**
      * Formを返す
@@ -104,95 +89,21 @@ public class LoginController implements BaseWebController {
     public String index(Model model, HttpServletRequest request) {
 
         model.addAttribute("isLogout", request.getParameter("isLogout"));
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            Object errorMessage = session.getAttribute(
+                    DashboardAuthenticationFailureHandler.LOGIN_ERROR_MESSAGE_KEY);
+            if (errorMessage != null) {
+                model.addAttribute("errorMessage", errorMessage);
+                session.removeAttribute(
+                        DashboardAuthenticationFailureHandler.LOGIN_ERROR_MESSAGE_KEY);
+            }
+        }
 
         return getView(LOGIN);
     }
 
     /**
-     * ログアウト処理
-     *
-     * @param request
-     *     {@linkplain HttpServletRequest}
-     * @param redirectAttr
-     *     {@linkplain RedirectAttributes}
-     * @return ログイン画面へリダイレクトする
-     */
-    @NonAuth
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request, RedirectAttributes redirectAttr) {
-
-        // ログアウト時にすべてのセッション情報を削除する
-        sessionComponent.removeValues(request.getSession());
-
-        redirectAttr.addAttribute("isLogout", true);
-
-        return redirectView(LOGIN);
-    }
-
-    /**
-     * TOP画面
-     *
-     * @param model
-     *     {@linkplain Model}
-     * @param request
-     *     {@linkplain HttpServletRequest}
-     * @param form
-     *     {@linkplain LoginForm}
-     * @param result
-     *     {@linkplain BindingResult}
-     * @return TOP画面
-     * @throws BaseException
-     *     基底例外
-     */
-    @NonAuth
-    @PostMapping("/top")
-    public String top(Model model, HttpServletRequest request, @Valid LoginForm form,
-            BindingResult result) throws BaseException {
-
-        if (result.hasErrors()) {
-            // validationエラーの場合
-            return getView(LOGIN);
-        }
-
-        // ユーザ情報を検索
-        Optional<User> user = userComponent.findByMailAddress(form.getMailAddress());
-        LoginCheckResult checkResult = new LoginCheck().check(user,
-                form.getPassword());
-        if (checkResult.hasError()) {
-            String errorMessage = messageSource.getMessage(
-                    checkResult.getErrorCode().getOuterErrorCode(), null,
-                    Locale.getDefault());
-            model.addAttribute("errorMessage", errorMessage);
-            return getView(LOGIN);
-        }
-
-        Long seqUserId = user.get().getSeqUserId();
-
-        // セッションにユーザIDを登録する。
-        sessionComponent.setValue(request.getSession(), SESSION_KEY_SEQ_USER_ID,
-                seqUserId);
-
-        List<HealthInfo> list = getLastestHealthInfoList(seqUserId);
-        HealthInfo latest = getLastesthealthInfo(list);
-        HealthInfo previous = getPreviousHealthInfo(list);
-
-        // 最新健康情報設定
-        setLatestHealthInfo(model, latest, previous);
-
-        // 目標健康情報設定
-        setGoalHealthInfo(model, latest, seqUserId);
-
-        // 健康情報グラフ作成
-        putGraph(model, seqUserId);
-
-        // 健康情報通知設定
-        setHealthInfoRegistNotice(model, seqUserId);
-
-        return getView(model, TOP);
-
-    }
-
-    /**
      * TOP画面
      *
      * @param model
@@ -201,11 +112,8 @@ public class LoginController implements BaseWebController {
      *     {@linkplain HttpServletRequest}
      * @return TOP画面
      */
-    @NonAuth
     @GetMapping("/top")
     public String top(Model model, HttpServletRequest request) {
-        // jp.co.ha.business.interceptor.DashboardAuthInterceptorで認証チェックを行うと、
-        // ログイン前のユーザ作成画面でヘッダーを踏んだときにログイン情報がなくてコケるのでここでsession情報をチェックする
         Optional<Long> nullableSeqUserId = sessionComponent
                 .getValue(request.getSession(), SESSION_KEY_SEQ_USER_ID, Long.class);
         if (!nullableSeqUserId.isPresent()) {

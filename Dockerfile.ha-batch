@@ -6,13 +6,12 @@ WORKDIR /work
 COPY . .
 
 # 依存解決（キャッシュ用）
-# RUN mvn -f ha-pom/pom.xml -Dmaven.test.skip=true -pl :batch -am dependency:go-offline
 RUN cd ha-pom && mvn -Dmaven.test.skip=true -pl ../ha-batch -am package
 
 # create log dir
 RUN mkdir -p /var/app/log
 
 # jar を作って固定名へ（compose run で java -jar もできるように）
-RUN mvn -f ha-pom/pom.xml -Dmaven.test.skip=true -pl :batch -am package && cp /work/ha-batch/target/batch-*.jar /work/ha-batch-1.0.0.jar
+RUN mvn -f ha-pom/pom.xml -Dmaven.test.skip=true -pl :ha-batch -am package && cp /work/ha-batch/target/batch-*.jar /work/batch-1.0.0.jar
 
-ENTRYPOINT ["java", "-jar", "/work/ha-batch-1.0.0.jar"]
+ENTRYPOINT ["java", "-jar", "/work/batch-1.0.0.jar"]
