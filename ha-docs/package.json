@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
-    "mermaid": "^11.14.0",
+    "mermaid": "^11.15.0",
     "nuxt": "^4.4.4",
     "postcss": "^8.5.13",
     "vue": "^3.5.33",
