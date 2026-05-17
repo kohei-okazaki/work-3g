@@ -1,0 +1,22 @@
+{
+  "app": "npx ts-node --prefer-ts-exts bin/ha-dashboard-app.ts",
+  "context": {
+    "@aws-cdk/core:newStyleStackSynthesis": true,
+    "projectName": "healthinfo-app",
+    "dbName": "work3g",
+    "dbEngineVersion": "8.4.8",
+    "dbEngineMajorVersion": "8.0",
+    "dbMasterUsername": "healthapp_master",
+    "dbMasterPasswordParameterName": "/healthinfo-app/db/master/password",
+    "dbMasterPasswordParameterVersion": 1,
+    "dbAppUsername": "app_user",
+    "dbAppPasswordParameterName": "/healthinfo-app/db/app/password",
+    "dbAppPasswordParameterVersion": 1,
+    "apiLogQueueName": "dev_api_log.fifo",
+    "dashboardContainerPort": 80,
+    "dashboardDesiredCount": 0,
+    "appSsmParameterPrefix": "/DEV",
+    "bastionSshAllowedCidr": "127.0.0.1/32",
+    "bastionInstanceType": "t3.micro"
+  }
+}

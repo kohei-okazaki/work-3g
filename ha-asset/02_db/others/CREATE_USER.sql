@@ -2,13 +2,13 @@
 -- ユーザの作成
 CREATE USER 'app_user'@'localhost3306' IDENTIFIED BY '3w4tamudnxgr4';
 -- ユーザ権限の設定
-GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP, INDEX ON work3g.* TO 'app_user'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP, INDEX, REFERENCES ON work3g.* TO 'app_user'@'localhost';
 FLUSH PRIVILEGES;
 
 
--- for lightsail
+-- for dev
 -- ユーザの作成
 CREATE USER 'app_user'@'%' IDENTIFIED BY '3w4tamudnxgr4';
 -- ユーザ権限の設定
-GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP, INDEX ON work3g.* TO 'app_user'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP, INDEX, REFERENCES ON work3g.* TO 'app_user'@'%';
 FLUSH PRIVILEGES;

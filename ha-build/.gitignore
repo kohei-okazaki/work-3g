@@ -1,2 +1,24 @@
 .settings
 .project
+node_modules
+
+# AWS CDK / TypeScript generated files
+aws/IaC/cdk.out/
+aws/IaC/cdk.context.json
+aws/IaC/.cdk.staging/
+aws/IaC/bin/*.js
+aws/IaC/bin/*.d.ts
+aws/IaC/lib/*.js
+aws/IaC/lib/*.d.ts
+aws/IaC/**/*.js.map
+aws/IaC/**/*.d.ts.map
+aws/IaC/*.tsbuildinfo
+
+# Local environment and package-manager logs
+aws/IaC/.env
+aws/IaC/.env.*
+!aws/IaC/.env.example
+aws/IaC/npm-debug.log*
+aws/IaC/yarn-debug.log*
+aws/IaC/yarn-error.log*
+aws/IaC/pnpm-debug.log*
