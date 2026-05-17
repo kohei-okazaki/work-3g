@@ -10,18 +10,18 @@
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
-    "mermaid": "^11.14.0",
-    "nuxt": "^4.4.4",
-    "postcss": "^8.5.13",
-    "vue": "^3.5.33",
-    "vuetify": "^4.0.6",
+    "mermaid": "^11.15.0",
+    "nuxt": "^4.4.5",
+    "postcss": "^8.5.14",
+    "vue": "^3.5.34",
+    "vuetify": "^4.0.7",
     "vuetify-nuxt-module": "^0.19.5"
   },
   "devDependencies": {
     "sass": "~1.99.0"
   },
   "overrides": {
-    "langium": "4.0.0",
+    "langium": "4.2.4",
     "lodash-es": "^4.18.1",
     "uuid": "^14.0.0"
   }
