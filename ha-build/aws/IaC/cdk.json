@@ -5,7 +5,6 @@
     "projectName": "healthinfo-app",
     "dbName": "work3g",
     "dbEngineVersion": "8.4.8",
-    "dbEngineMajorVersion": "8.0",
     "dbMasterUsername": "healthapp_master",
     "dbMasterPasswordParameterName": "/healthinfo-app/db/master/password",
     "dbMasterPasswordParameterVersion": 1,

@@ -165,7 +165,6 @@ npx cdk deploy HaSharedInfraStack \
   -c projectName=${PROJECT_NAME} \
   -c dbName=work3g \
   -c dbEngineVersion=8.4.8 \
-  -c dbEngineMajorVersion=8.0 \
   -c dbMasterUsername=healthapp_master \
   -c dbMasterPasswordParameterName=/${PROJECT_NAME}/db/master/password \
   -c dbMasterPasswordParameterVersion=1 \
