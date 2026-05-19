@@ -28,15 +28,15 @@ import software.amazon.awssdk.services.ssm.model.GetParameterResponse;
 public class AwsSystemsManagerComponent {
 
     /** キー：Slack Token */
-    public static final String KEY_SLACK_TOKEN = "SLACK_TOKEN";
+    public static final String KEY_SLACK_TOKEN = "slack_token";
     /** キー：システムメールアドレス */
-    public static final String KEY_SYSTEM_MAILADDRESS = "SYSTEM_MAILADDRESS";
+    public static final String KEY_SYSTEM_MAILADDRESS = "system_mailaddress";
     /** キー：暗号化モード */
-    public static final String KEY_CRYPT_MODE = "CRYPT_MODE";
+    public static final String KEY_CRYPT_MODE = "crypt_mode";
     /** キー：暗号化キー */
-    public static final String KEY_CRYPT_KEY = "CRYPT_KEY";
+    public static final String KEY_CRYPT_KEY = "crypt_key";
     /** キー：シフト数 */
-    public static final String KEY_CRYPT_SHIFT = "CRYPT_SHIFT";
+    public static final String KEY_CRYPT_SHIFT = "crypt_shift";
     /** LOG */
     private static final Logger LOG = LoggerFactory
             .getLogger(AwsSystemsManagerComponent.class);
@@ -78,7 +78,7 @@ public class AwsSystemsManagerComponent {
     public String getValue(String key, boolean decrypt) throws BaseException {
 
         String envKey = StringUtil.THRASH
-                + systemProps.environment().getValue().toUpperCase()
+                + systemProps.environment().getValue()
                 + StringUtil.THRASH + key;
         LOG.debug("key=%s, decrypt=%s".formatted(envKey, decrypt));
 
