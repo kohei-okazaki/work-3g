@@ -24,5 +24,4 @@ RUN mkdir -p /home/admin/data/monthly
 # copy jar
 COPY --from=build /work/ha-dashboard/target/*.jar /app/dashboard-1.0.0.jar
 
-EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app/dashboard-1.0.0.jar"]

@@ -22,7 +22,7 @@ import jp.co.ha.common.log.LoggerFactory;
 public class JwtSigningKeyProvider {
 
     /** キー：鍵名 */
-    private static final String KEY = "ROOT_JWT_SECRET";
+    private static final String KEY = "root_jwt_secret";
     /** LOG */
     private static final Logger LOG = LoggerFactory
             .getLogger(JwtSigningKeyProvider.class);
