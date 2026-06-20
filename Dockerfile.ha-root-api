@@ -18,5 +18,4 @@ RUN mkdir -p /var/app/log
 # copy jar
 COPY --from=build /work/ha-root/target/*.jar /app/root-1.0.0.jar
 
-EXPOSE 8082
 ENTRYPOINT ["java","-jar","/app/root-1.0.0.jar"]

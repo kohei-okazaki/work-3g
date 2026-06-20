@@ -24,5 +24,4 @@ RUN mkdir -p /home/admin/data/monthly
 # copy jar
 COPY --from=build /work/ha-api/target/*.jar /app/api-1.0.0.jar
 
-EXPOSE 8081
 ENTRYPOINT ["java","-jar","/app/api-1.0.0.jar"]
