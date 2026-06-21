@@ -1,16 +1,22 @@
+import os
 from datetime import datetime
 from datetime import timezone as dt_timezone
 from decimal import Decimal
 from unittest.mock import Mock, patch
 
+from api.management.commands.init_local_dynamodb import Command
 from api.serializers import HealthInfoPayloadSerializer
 from api.util.dynamo_util import get_dynamodb_resource, put_dynamo_db
 from api.views import HealthInfoAPIView
+from django.core.exceptions import ImproperlyConfigured
+from django.core.management.base import CommandError
 from django.test import SimpleTestCase, override_settings
 from django.urls import resolve, reverse
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.test import APIRequestFactory
+
+from ha_track import settings
 
 
 @override_settings(TIME_ZONE="Asia/Tokyo", USE_TZ=True)
@@ -160,6 +166,95 @@ class DynamoUtilTest(SimpleTestCase):
 
     @patch("api.util.dynamo_util.boto3.resource")
     def test_get_dynamodb_resource_uses_ap_northeast_1(self, mock_resource):
-        get_dynamodb_resource()
+        with patch.dict(os.environ, {}, clear=True):
+            get_dynamodb_resource()
 
         mock_resource.assert_called_once_with("dynamodb", region_name="ap-northeast-1")
+
+    @patch("api.util.dynamo_util.boto3.resource")
+    def test_get_dynamodb_resource_uses_local_endpoint_from_environment(
+        self, mock_resource
+    ):
+        with patch.dict(
+            os.environ,
+            {
+                "AWS_REGION": "ap-northeast-1",
+                "DYNAMODB_ENDPOINT_URL": "http://dynamodb-local:8000",
+            },
+            clear=True,
+        ):
+            get_dynamodb_resource()
+
+        mock_resource.assert_called_once_with(
+            "dynamodb",
+            region_name="ap-northeast-1",
+            endpoint_url="http://dynamodb-local:8000",
+        )
+
+
+class InitLocalDynamoDBCommandTest(SimpleTestCase):
+
+    def test_rejects_execution_without_local_endpoint(self):
+        with patch.dict(os.environ, {}, clear=True):
+            with self.assertRaises(CommandError):
+                Command().handle()
+
+    @override_settings(HEALTH_INFO_DYNAMODB_TABLE_NAME="health_info")
+    def test_creates_table_with_existing_key_schema(self):
+        dynamodb = Mock()
+        table = Mock()
+        dynamodb.create_table.return_value = table
+        command = Command()
+        command._wait_for_dynamodb = Mock(return_value=dynamodb)
+
+        with patch.dict(
+            os.environ,
+            {"DYNAMODB_ENDPOINT_URL": "http://dynamodb-local:8000"},
+            clear=True,
+        ):
+            command.handle()
+
+        dynamodb.create_table.assert_called_once_with(
+            TableName="health_info",
+            KeySchema=[
+                {"AttributeName": "seq_user_id", "KeyType": "HASH"},
+                {"AttributeName": "created_at_epoch", "KeyType": "RANGE"},
+            ],
+            AttributeDefinitions=[
+                {"AttributeName": "seq_user_id", "AttributeType": "N"},
+                {"AttributeName": "created_at_epoch", "AttributeType": "N"},
+            ],
+            BillingMode="PAY_PER_REQUEST",
+        )
+        table.wait_until_exists.assert_called_once_with()
+
+
+class DynamoDBTableNameSettingsTest(SimpleTestCase):
+
+    def test_local_environment_uses_fixed_table_name(self):
+        with patch.object(settings, "APP_ENV", "local"):
+            with patch.dict(
+                os.environ,
+                {"HEALTH_INFO_DYNAMODB_TABLE_NAME": "ignored_table"},
+                clear=True,
+            ):
+                table_name = settings.get_health_info_dynamodb_table_name()
+
+        self.assertEqual("health_info", table_name)
+
+    def test_non_local_environment_uses_environment_variable(self):
+        with patch.object(settings, "APP_ENV", "dev"):
+            with patch.dict(
+                os.environ,
+                {"HEALTH_INFO_DYNAMODB_TABLE_NAME": "health_info_dev"},
+                clear=True,
+            ):
+                table_name = settings.get_health_info_dynamodb_table_name()
+
+        self.assertEqual("health_info_dev", table_name)
+
+    def test_non_local_environment_requires_table_name(self):
+        with patch.object(settings, "APP_ENV", "prd"):
+            with patch.dict(os.environ, {}, clear=True):
+                with self.assertRaises(ImproperlyConfigured):
+                    settings.get_health_info_dynamodb_table_name()

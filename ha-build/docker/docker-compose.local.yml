@@ -156,18 +156,31 @@ services:
     ports:
       - "8086:8086"
     environment:
-      PYTHONDONTWRITEBYTECODE: "1"
-      PYTHONUNBUFFERED: "1"
       # Django 側の設定に合わせて必要なら有効化
       # DJANGO_SETTINGS_MODULE: "ha_track.settings"
       DJANGO_ALLOWED_HOSTS: "ha-track,localhost,127.0.0.1"
+      AWS_ACCESS_KEY_ID: "dummy"
+      AWS_SECRET_ACCESS_KEY: "dummy"
+      AWS_EC2_METADATA_DISABLED: "true"
+      DYNAMODB_ENDPOINT_URL: "http://dynamodb-local:8000"
     volumes:
       - ./ha_track:/app
-      - ~/.aws:/root/.aws:ro
-    command: bash -lc "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8086"
+    command: bash -lc "python manage.py init_local_dynamodb && python manage.py runserver 0.0.0.0:8086"
     depends_on:
-      mysql:
-        condition: service_healthy
+      dynamodb-local:
+        condition: service_started
+
+  # ha-track local development database
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    working_dir: /home/dynamodblocal
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    ports:
+      - "8000:8000"
+    volumes:
+      - dynamodb-data:/home/dynamodblocal/data
+    networks:
+      - work-3g-network
 
   # MySQL container
   mysql:
@@ -195,3 +208,4 @@ services:
 volumes:
   m2-cache:
   ha_root_front_node_modules:
+  dynamodb-data:
