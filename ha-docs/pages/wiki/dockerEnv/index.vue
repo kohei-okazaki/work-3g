@@ -790,18 +790,6 @@ export default {
           version: "3.5.19",
         },
       ],
-      mongoDbTools: [
-        {
-          type: "データベース",
-          name: "MongoDB",
-          version: "8.2.1",
-        },
-        {
-          type: "コマンドラインツール",
-          name: "mongosh",
-          version: "2.5.8",
-        },
-      ],
     };
   },
 };

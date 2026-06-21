@@ -118,6 +118,10 @@ output "track_ecr_repository_url" {
   value = aws_ecr_repository.track.repository_url
 }
 
+output "batch_ecr_repository_url" {
+  value = aws_ecr_repository.batch.repository_url
+}
+
 output "dashboard_service_name" {
   value = aws_ecs_service.dashboard.name
 }
@@ -220,6 +224,18 @@ output "root_api_public_url_command" {
 
 output "root_front_url" {
   value = var.root_front_url
+}
+
+output "batch_task_definition_arn" {
+  value = aws_ecs_task_definition.batch.arn
+}
+
+output "batch_log_group_name" {
+  value = aws_cloudwatch_log_group.batch.name
+}
+
+output "batch_run_command" {
+  value = "JOB_NAME=healthCheckBatchJob; RUN_ID=$(date +%Y%m%d%H%M%S%N); aws ecs run-task --cluster ${aws_ecs_cluster.main.name} --launch-type FARGATE --task-definition ${aws_ecs_task_definition.batch.arn} --network-configuration 'awsvpcConfiguration={subnets=[${join(",", aws_subnet.public[*].id)}],securityGroups=[${aws_security_group.shared_db_client.id},${aws_security_group.internal_app_client.id}],assignPublicIp=ENABLED}' --overrides \"$(printf '{\\\"containerOverrides\\\":[{\\\"name\\\":\\\"BatchContainer\\\",\\\"command\\\":[\\\"--spring.batch.job.name=%s\\\",\\\"run.id=%s\\\"]}]}' \"$JOB_NAME\" \"$RUN_ID\")\""
 }
 
 output "db_create_database_command" {

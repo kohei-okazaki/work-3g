@@ -35,6 +35,7 @@ locals {
   api_image_uri       = "${aws_ecr_repository.api.repository_url}:${var.image_tag}"
   root_api_image_uri  = "${aws_ecr_repository.root_api.repository_url}:${var.image_tag}"
   track_image_uri     = "${aws_ecr_repository.track.repository_url}:${var.image_tag}"
+  batch_image_uri     = "${aws_ecr_repository.batch.repository_url}:${var.image_tag}"
 
   api_internal_base_url         = "http://${var.api_service_discovery_name}.${local.service_discovery_namespace_name}/api/"
   root_api_internal_base_url    = "http://${var.root_api_service_discovery_name}.${local.service_discovery_namespace_name}/api/root/"
@@ -97,6 +98,21 @@ locals {
     { name = "DJANGO_ALLOWED_HOSTS", value = local.track_django_allowed_hosts },
     { name = "DJANGO_DEBUG", value = "false" },
   ]
+
+  batch_environment = concat(
+    [
+      { name = "TZ", value = "Asia/Tokyo" },
+      { name = "SPRING_PROFILES_ACTIVE", value = "dev" },
+      { name = "SPRING_FLYWAY_ENABLED", value = "false" },
+      { name = "DB_URL", value = local.db_url },
+      { name = "DB_USER", value = var.db_app_username },
+      { name = "API_LOG_QUEUE_NAME", value = aws_sqs_queue.api_log.name },
+      { name = "HEALTHINFO_API_URL", value = local.dashboard_health_info_api_url },
+      { name = "ROOT_API_URL", value = local.effective_root_api_url },
+      { name = "HEALTHINFO_TRACK_API_URL", value = local.effective_track_api_url },
+    ],
+    var.health_info_dashboard_url != "" ? [{ name = "HEALTHINFO_DASHBOARD_URL", value = var.health_info_dashboard_url }] : [],
+  )
 
   common_tags = {
     Project   = var.project_name

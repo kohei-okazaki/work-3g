@@ -70,12 +70,31 @@ resource "aws_ecr_repository" "track" {
   })
 }
 
+resource "aws_ecr_repository" "batch" {
+  name                 = "${local.project_dns_label}/ha-batch"
+  image_tag_mutability = "MUTABLE"
+  force_delete         = true
+
+  image_scanning_configuration {
+    scan_on_push = false
+  }
+
+  encryption_configuration {
+    encryption_type = "AES256"
+  }
+
+  tags = merge(local.common_tags, {
+    Name = "${var.project_name}-ha-batch"
+  })
+}
+
 resource "aws_ecr_lifecycle_policy" "expire_untagged_images" {
   for_each = {
     dashboard = aws_ecr_repository.dashboard.name
     api       = aws_ecr_repository.api.name
     root_api  = aws_ecr_repository.root_api.name
     track     = aws_ecr_repository.track.name
+    batch     = aws_ecr_repository.batch.name
   }
 
   repository = each.value
@@ -141,6 +160,13 @@ resource "aws_cloudwatch_log_group" "root_api" {
 
 resource "aws_cloudwatch_log_group" "track" {
   name              = "/ecs/${var.project_name}/ha-track"
+  retention_in_days = 1
+
+  tags = local.common_tags
+}
+
+resource "aws_cloudwatch_log_group" "batch" {
+  name              = "/ecs/${var.project_name}/ha-batch"
   retention_in_days = 1
 
   tags = local.common_tags
@@ -528,6 +554,56 @@ resource "aws_ecs_service" "root_api" {
   service_registries {
     registry_arn = aws_service_discovery_service.root_api.arn
   }
+
+  tags = local.common_tags
+}
+
+resource "aws_ecs_task_definition" "batch" {
+  family                   = "${var.project_name}-ha-batch"
+  requires_compatibilities = ["FARGATE"]
+  network_mode             = "awsvpc"
+  cpu                      = "256"
+  memory                   = "512"
+  execution_role_arn       = aws_iam_role.batch_task_execution.arn
+  task_role_arn            = aws_iam_role.batch_task.arn
+
+  runtime_platform {
+    operating_system_family = "LINUX"
+    cpu_architecture        = "X86_64"
+  }
+
+  container_definitions = jsonencode([
+    {
+      name      = "BatchContainer"
+      image     = local.batch_image_uri
+      essential = true
+
+      environment = local.batch_environment
+
+      secrets = [
+        {
+          name      = "DB_PW"
+          valueFrom = local.db_app_password_parameter_arn
+        }
+      ]
+
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group         = aws_cloudwatch_log_group.batch.name
+          awslogs-region        = data.aws_region.current.name
+          awslogs-stream-prefix = "ha-batch"
+        }
+      }
+    }
+  ])
+
+  depends_on = [
+    aws_iam_role_policy_attachment.batch_task_execution_managed,
+    aws_iam_role_policy.batch_execution_ssm,
+    aws_iam_role_policy.batch_task_app,
+    aws_iam_role_policy.batch_task_aws_access,
+  ]
 
   tags = local.common_tags
 }

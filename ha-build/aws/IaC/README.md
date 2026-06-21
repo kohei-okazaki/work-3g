@@ -9,11 +9,12 @@
 - `ha-api` ECS Fargate service / task definition / CloudWatch Logs / Cloud Map service
 - `ha-root` API ECS Fargate service / task definition / CloudWatch Logs / Cloud Map service
 - `ha-track` ECS Fargate service / task definition / CloudWatch Logs / Cloud Map service
+- `ha-batch` ECS Fargate task definition / CloudWatch Logs
 - MySQL RDS: Single-AZ, `db.t3.micro`, 20GB gp3, MySQL `8.4.8`
 - DynamoDB `health_info_dev` または `health_info_prd`
 - SQS FIFO queue for API log
 - RDS初期設定用のEC2踏み台
-- ECR repositories for `ha-dashboard`, `ha-api`, `ha-root` API, and `ha-track` images
+- ECR repositories for `ha-dashboard`, `ha-api`, `ha-root` API, `ha-track`, and `ha-batch` images
 
 `ha-root` / `ha-api` / `ha-dashboard` は同じRDS databaseを同じアプリ用DBユーザで参照。
 
@@ -22,7 +23,36 @@
 - このTerraform構成でECRリポジトリを作成し、Docker imageは手順に沿って `docker build` / `docker push`
 - `ha-root/front` のS3 static websiteは既存管理のままとし、このTerraformでは作成・変更対象外
 - TerraformでRDS master passwordをSSM SecureStringから読むため、値はTerraform stateにsensitive値として保持
-- `terraform.tfstate` と `*.tfvars` はGit管理対象外。このディレクトリの `.gitignore` に追加済み
+- `terraform.tfstate` と `*.tfvars` はGit管理対象外。環境ごとの `environments/<環境名>` 配下に配置
+
+## ディレクトリ構成
+
+```text
+ha-build/aws/IaC/
+├─ modules/              # AWSリソースの共通定義
+│  ├─ network.tf
+│  ├─ security_groups.tf
+│  ├─ iam.tf
+│  ├─ rds.tf
+│  ├─ dynamodb.tf
+│  ├─ sqs.tf
+│  ├─ ecs.tf
+│  ├─ locals.tf
+│  ├─ variables.tf
+│  └─ outputs.tf
+├─ environments/
+│  └─ dev/               # dev環境のTerraform実行ルート
+│     ├─ main.tf
+│     ├─ versions.tf
+│     ├─ providers.tf
+│     ├─ variables.tf
+│     ├─ outputs.tf
+│     ├─ backend.hcl
+│     └─ terraform.tfvars
+└─ README.md
+```
+
+`modules` は単独で実行せず、`environments/dev` からmoduleとして呼び出す。
 
 ## 前提
 
@@ -60,7 +90,7 @@ PROJECT_NAME=ha-project-dev
 APP_ENV=dev
 ```
 
-`terraform.tfvars` には対象環境を設定。
+`environments/dev/terraform.tfvars` には対象環境を設定。
 
 ```hcl
 app_env = "dev"
@@ -130,9 +160,9 @@ aws ssm put-parameter --name "/${APP_ENV}/system_mailaddress" --type "String" --
 ## Terraformの初期化・整形・検証
 
 ```bash
-cd ha-build/aws/IaC
-terraform init
-terraform fmt
+cd ha-build/aws/IaC/environments/dev
+terraform init -backend-config=backend.hcl
+terraform fmt -recursive ../..
 terraform validate
 ```
 
@@ -163,6 +193,7 @@ DASHBOARD_REPO=$(terraform output -raw dashboard_ecr_repository_url)
 API_REPO=$(terraform output -raw api_ecr_repository_url)
 ROOT_API_REPO=$(terraform output -raw root_api_ecr_repository_url)
 TRACK_REPO=$(terraform output -raw track_ecr_repository_url)
+BATCH_REPO=$(terraform output -raw batch_ecr_repository_url)
 
 aws ecr get-login-password --region ap-northeast-1 \
   | docker login --username AWS --password-stdin "${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com"
@@ -171,7 +202,7 @@ aws ecr get-login-password --region ap-northeast-1 \
 リポジトリ直下をbuild contextにしてpush。
 
 ```bash
-cd ../../..
+cd ../../../../..
 
 docker build -f Dockerfile.ha-dashboard -t "${DASHBOARD_REPO}:dev" .
 docker push "${DASHBOARD_REPO}:dev"
@@ -185,8 +216,37 @@ docker push "${ROOT_API_REPO}:dev"
 docker build -f Dockerfile.ha-track -t "${TRACK_REPO}:dev" .
 docker push "${TRACK_REPO}:dev"
 
-cd ha-build/aws/IaC
+docker build -f Dockerfile.ha-batch -t "${BATCH_REPO}:dev" .
+docker push "${BATCH_REPO}:dev"
+
+cd ha-build/aws/IaC/environments/dev
 ```
+
+## ha-batch起動
+
+`ha-batch` は常駐サービスではなく、ECS Fargateの単発タスクとして起動する。
+基本コマンドは次で確認できる。
+
+```bash
+terraform output -raw batch_run_command
+```
+
+出力コマンドの `JOB_NAME` を実行対象のSpring Batch Job名へ変更する。
+日付が必要なJobは、container overrideの `command` 配列へ `d=YYYYMMDD` または
+`m=YYYYMM` を追加する。
+
+主なJob名:
+
+- `healthCheckBatchJob`
+- `healthInfoFileRegistBatchJob`
+- `monthlyHealthInfoSummaryBatchJob`
+- `healthInfoMigrateBatchJob`
+- `awsSqsImportBatchJob`
+- `dataPurgeBatchJob`
+- `dailyHealthInfoJob`
+- `dailyUserJob`
+- `dailyApiLogJob`
+- `dailyBatchLogJob`
 
 ## RDS接続・初期設定
 
@@ -230,7 +290,7 @@ echo
 docker run --rm -i \
   -e MYSQL_PWD="${DB_MASTER_PASSWORD}" \
   mysql:8.0 \
-  mysql -h host.docker.internal -P 13306 -u ${DbMasterUsername} < ../../../ha-asset/02_db/others/CREATE_DATABASE.sql
+  mysql -h host.docker.internal -P 13306 -u ${DbMasterUsername} < ../../../../../ha-asset/02_db/others/CREATE_DATABASE.sql
 
 unset DB_MASTER_PASSWORD
 ```
@@ -379,7 +439,7 @@ curl -i "http://${ROOT_API_PUBLIC_IP}/api/root/healthcheck"
 
 `ha-track` はCloud Map private DNSの
 `http://ha-track.<namespace>:8086/api/` を内部通信に使用。
-外部から直接アクセスする場合は、`terraform.tfvars` で以下を設定する。
+外部から直接アクセスする場合は、`environments/dev/terraform.tfvars` で以下を設定する。
 
 ```hcl
 track_public_allowed_cidr = "接続元IP/32"
