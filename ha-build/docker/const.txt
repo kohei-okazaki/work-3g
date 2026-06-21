@@ -7,6 +7,3 @@ BASE_DIR="/mnt/c/app/git/work-3g"
 
 # docker-compose.ymlファイルパス
 DOCKER_COMPOSE_FILE_PATH=ha-build/docker/docker-compose.yml
-
-# docker-compose.local.ymlファイルパス
-DOCKER_COMPOSE_LOCAL_FILE_PATH=ha-build/docker/docker-compose.local.yml

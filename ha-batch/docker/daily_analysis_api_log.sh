@@ -52,7 +52,6 @@ RUN_ID=$(create_run_id)
 cd ${BASE_DIR} && docker compose \
   --project-directory "${BASE_DIR}" \
   -f ${BASE_DIR}/${DOCKER_DIR}/docker-compose.yml \
-  -f ${BASE_DIR}/${DOCKER_DIR}/docker-compose.${ENV}.yml \
   run --rm ha-batch --spring.batch.job.name=dailyApiLogJob \
     "d=${DATE_OPTION_VALUE}" "run.id=${RUN_ID}"
 result=$?
