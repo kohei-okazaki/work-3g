@@ -2,6 +2,7 @@ import logging
 from datetime import timezone as dt_timezone
 from decimal import Decimal
 
+from django.conf import settings
 from django.utils import timezone
 from django.utils.timezone import localtime
 from rest_framework import status
@@ -49,7 +50,10 @@ class HealthInfoAPIView(APIView):
                     "standard_weight": Decimal(str(hi["standard_weight"])),
                     "created_at": created_at_utc.isoformat(),
                 }
-                put_dynamo_db(table_name="health_info", item=item)
+                put_dynamo_db(
+                    table_name=settings.HEALTH_INFO_DYNAMODB_TABLE_NAME,
+                    item=item,
+                )
 
             except Exception as e:
                 errors.append({"index": index, "error": "unexpected", "detail": str(e)})

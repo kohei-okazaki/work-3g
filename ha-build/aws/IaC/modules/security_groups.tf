@@ -162,6 +162,45 @@ resource "aws_security_group_rule" "api_from_dashboard" {
   description              = "Allow ha-dashboard to call ha-api"
 }
 
+resource "aws_security_group" "track_task" {
+  name        = "${var.project_name}-track-task-sg"
+  description = "Ingress for ha-track tasks from internal app services and optional external clients"
+  vpc_id      = aws_vpc.main.id
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = merge(local.common_tags, {
+    Name = "${var.project_name}-track-task-sg"
+  })
+}
+
+resource "aws_security_group_rule" "track_from_internal_app" {
+  type                     = "ingress"
+  security_group_id        = aws_security_group.track_task.id
+  source_security_group_id = aws_security_group.internal_app_client.id
+  from_port                = var.track_container_port
+  to_port                  = var.track_container_port
+  protocol                 = "tcp"
+  description              = "Allow internal app services to call ha-track"
+}
+
+resource "aws_security_group_rule" "track_public_ingress" {
+  count = var.track_public_allowed_cidr != "" ? 1 : 0
+
+  type              = "ingress"
+  security_group_id = aws_security_group.track_task.id
+  cidr_blocks       = [var.track_public_allowed_cidr]
+  from_port         = var.track_container_port
+  to_port           = var.track_container_port
+  protocol          = "tcp"
+  description       = "Allow direct external access to ha-track"
+}
+
 resource "aws_security_group" "root_api_task" {
   name        = "${var.project_name}-root-api-task-sg"
   description = "Ingress for ha-root API tasks from internet and internal app services"
