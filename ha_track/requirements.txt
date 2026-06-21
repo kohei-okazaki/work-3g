@@ -1,3 +1,4 @@
 Django==4.2.27
 djangorestframework==3.16.1
 boto3==1.42.96
+gunicorn==23.0.0

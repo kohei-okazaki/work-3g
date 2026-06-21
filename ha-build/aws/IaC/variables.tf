@@ -10,6 +10,17 @@ variable "project_name" {
   default     = "healthinfo-app"
 }
 
+variable "app_env" {
+  description = "Application environment used for environment-specific AWS resources."
+  type        = string
+  default     = "dev"
+
+  validation {
+    condition     = contains(["dev", "prd"], var.app_env)
+    error_message = "app_env must be either dev or prd."
+  }
+}
+
 variable "vpc_cidr" {
   description = "CIDR block for the VPC."
   type        = string
@@ -167,6 +178,47 @@ variable "api_service_discovery_name" {
   description = "Cloud Map service name for ha-api."
   type        = string
   default     = "ha-api"
+}
+
+variable "track_container_port" {
+  description = "ha-track container and public direct access port."
+  type        = number
+  default     = 8086
+
+  validation {
+    condition     = var.track_container_port == 8086
+    error_message = "track_container_port must be 8086."
+  }
+}
+
+variable "track_desired_count" {
+  description = "Initial desired count for ha-track ECS service."
+  type        = number
+  default     = 0
+}
+
+variable "track_public_allowed_cidr" {
+  description = "CIDR allowed to call ha-track public task IP directly. Empty disables external ingress."
+  type        = string
+  default     = ""
+}
+
+variable "track_service_discovery_name" {
+  description = "Cloud Map service name for ha-track."
+  type        = string
+  default     = "ha-track"
+}
+
+variable "track_django_allowed_hosts" {
+  description = "Comma-separated Django ALLOWED_HOSTS for ha-track. Empty uses the Cloud Map hostname."
+  type        = string
+  default     = ""
+}
+
+variable "track_django_secret_key_parameter_name" {
+  description = "Existing SSM SecureString name for the ha-track Django secret key. Empty means /$${project_name}/ha-track/django-secret-key."
+  type        = string
+  default     = ""
 }
 
 variable "root_api_container_port" {

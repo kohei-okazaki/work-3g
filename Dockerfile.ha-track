@@ -15,4 +15,4 @@ COPY ha_track/ /app/
 
 EXPOSE 8086
 
-CMD ["bash","-lc","python manage.py runserver 0.0.0.0:8086"]
+CMD ["gunicorn","--bind","0.0.0.0:8086","--access-logfile","-","--error-logfile","-","ha_track.wsgi:application"]

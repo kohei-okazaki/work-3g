@@ -52,11 +52,30 @@ resource "aws_ecr_repository" "root_api" {
   })
 }
 
+resource "aws_ecr_repository" "track" {
+  name                 = "${local.project_dns_label}/ha-track"
+  image_tag_mutability = "MUTABLE"
+  force_delete         = true
+
+  image_scanning_configuration {
+    scan_on_push = false
+  }
+
+  encryption_configuration {
+    encryption_type = "AES256"
+  }
+
+  tags = merge(local.common_tags, {
+    Name = "${var.project_name}-ha-track"
+  })
+}
+
 resource "aws_ecr_lifecycle_policy" "expire_untagged_images" {
   for_each = {
     dashboard = aws_ecr_repository.dashboard.name
     api       = aws_ecr_repository.api.name
     root_api  = aws_ecr_repository.root_api.name
+    track     = aws_ecr_repository.track.name
   }
 
   repository = each.value
@@ -115,6 +134,13 @@ resource "aws_cloudwatch_log_group" "api" {
 
 resource "aws_cloudwatch_log_group" "root_api" {
   name              = "/ecs/${var.project_name}/ha-root-api"
+  retention_in_days = 1
+
+  tags = local.common_tags
+}
+
+resource "aws_cloudwatch_log_group" "track" {
+  name              = "/ecs/${var.project_name}/ha-track"
   retention_in_days = 1
 
   tags = local.common_tags
@@ -289,12 +315,114 @@ resource "aws_ecs_service" "api" {
     security_groups = [
       aws_security_group.api_task.id,
       aws_security_group.shared_db_client.id,
+      aws_security_group.internal_app_client.id,
     ]
     assign_public_ip = true
   }
 
   service_registries {
     registry_arn = aws_service_discovery_service.api.arn
+  }
+
+  tags = local.common_tags
+}
+
+resource "aws_service_discovery_service" "track" {
+  name = var.track_service_discovery_name
+
+  dns_config {
+    namespace_id = aws_service_discovery_private_dns_namespace.app.id
+
+    dns_records {
+      ttl  = 30
+      type = "A"
+    }
+
+    routing_policy = "MULTIVALUE"
+  }
+
+  health_check_custom_config {
+    failure_threshold = 1
+  }
+
+  tags = local.common_tags
+}
+
+resource "aws_ecs_task_definition" "track" {
+  family                   = "${var.project_name}-ha-track"
+  requires_compatibilities = ["FARGATE"]
+  network_mode             = "awsvpc"
+  cpu                      = "256"
+  memory                   = "512"
+  execution_role_arn       = aws_iam_role.track_task_execution.arn
+  task_role_arn            = aws_iam_role.track_task.arn
+
+  runtime_platform {
+    operating_system_family = "LINUX"
+    cpu_architecture        = "X86_64"
+  }
+
+  container_definitions = jsonencode([
+    {
+      name      = "TrackContainer"
+      image     = local.track_image_uri
+      essential = true
+
+      portMappings = [
+        {
+          containerPort = var.track_container_port
+          protocol      = "tcp"
+        }
+      ]
+
+      environment = local.track_environment
+
+      secrets = [
+        {
+          name      = "DJANGO_SECRET_KEY"
+          valueFrom = local.track_django_secret_key_parameter_arn
+        }
+      ]
+
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group         = aws_cloudwatch_log_group.track.name
+          awslogs-region        = data.aws_region.current.name
+          awslogs-stream-prefix = "ha-track"
+        }
+      }
+    }
+  ])
+
+  depends_on = [
+    aws_iam_role_policy_attachment.track_task_execution_managed,
+    aws_iam_role_policy.track_execution_ssm,
+    aws_iam_role_policy.track_task_dynamodb,
+  ]
+
+  tags = local.common_tags
+}
+
+resource "aws_ecs_service" "track" {
+  name                               = "${var.project_name}-ha-track-service"
+  cluster                            = aws_ecs_cluster.main.id
+  task_definition                    = aws_ecs_task_definition.track.arn
+  desired_count                      = var.track_desired_count
+  launch_type                        = "FARGATE"
+  deployment_minimum_healthy_percent = 0
+  deployment_maximum_percent         = 100
+
+  network_configuration {
+    subnets = aws_subnet.public[*].id
+    security_groups = [
+      aws_security_group.track_task.id,
+    ]
+    assign_public_ip = true
+  }
+
+  service_registries {
+    registry_arn = aws_service_discovery_service.track.arn
   }
 
   tags = local.common_tags
@@ -392,6 +520,7 @@ resource "aws_ecs_service" "root_api" {
     security_groups = [
       aws_security_group.root_api_task.id,
       aws_security_group.shared_db_client.id,
+      aws_security_group.internal_app_client.id,
     ]
     assign_public_ip = true
   }
