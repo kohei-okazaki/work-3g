@@ -35,14 +35,13 @@ phases:
           exit 1
         fi
 
-        export API_BASE_URL="${DEV_API_BASE_URL:-${API_BASE_URL:-}}"
-
         echo "Deploy branch: $BRANCH"
         echo "Deploy bucket: s3://$S3_BUCKET"
         if [ -n "${API_BASE_URL:-}" ]; then
           echo "API_BASE_URL is configured."
         else
-          echo "API_BASE_URL is not configured. The env file default will be used."
+          echo "API_BASE_URL is not configured in CodeBuild."
+          exit 1
         fi
 
   build:
