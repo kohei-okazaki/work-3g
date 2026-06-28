@@ -134,32 +134,10 @@ variable "service_discovery_namespace_name" {
   default     = ""
 }
 
-variable "dashboard_container_port" {
-  description = "ha-dashboardコンテナおよびdev環境の公開直接アクセスポート"
-  type        = number
-  default     = 80
-
-  validation {
-    condition     = var.dashboard_container_port == 80
-    error_message = "dashboard_container_portはdev環境で80である必要があります。"
-  }
-}
-
 variable "dashboard_desired_count" {
   description = "ha-dashboard ECSサービスの初期希望タスク数"
   type        = number
   default     = 0
-}
-
-variable "api_container_port" {
-  description = "ha-apiコンテナおよびdev環境の公開直接アクセスポート"
-  type        = number
-  default     = 80
-
-  validation {
-    condition     = var.api_container_port == 80
-    error_message = "api_container_portはdev環境で80である必要があります。"
-  }
 }
 
 variable "api_desired_count" {
@@ -178,17 +156,6 @@ variable "api_service_discovery_name" {
   description = "ha-apiのCloud Mapサービス名"
   type        = string
   default     = "ha-api"
-}
-
-variable "track_container_port" {
-  description = "ha-trackコンテナおよび公開直接アクセスポート"
-  type        = number
-  default     = 8086
-
-  validation {
-    condition     = var.track_container_port == 8086
-    error_message = "track_container_portは8086である必要があります。"
-  }
 }
 
 variable "track_desired_count" {
@@ -219,17 +186,6 @@ variable "track_django_secret_key_parameter_name" {
   description = "ha-track Djangoシークレットキーの既存SSM SecureString名。空の場合は/$${project_name}-$${app_env}/ha-track/django-secret-keyを使用します。"
   type        = string
   default     = ""
-}
-
-variable "root_api_container_port" {
-  description = "ha-root APIコンテナおよびdev環境の公開直接アクセスポート"
-  type        = number
-  default     = 80
-
-  validation {
-    condition     = var.root_api_container_port == 80
-    error_message = "root_api_container_portはdev環境で80である必要があります。"
-  }
 }
 
 variable "root_api_desired_count" {

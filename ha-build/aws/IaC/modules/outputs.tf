@@ -135,7 +135,7 @@ output "dashboard_health_info_api_url" {
 }
 
 output "dashboard_container_port" {
-  value = var.dashboard_container_port
+  value = local.dashboard_container_port
 }
 
 output "dashboard_desired_count" {
@@ -155,7 +155,7 @@ output "api_internal_base_url" {
 }
 
 output "api_container_port" {
-  value = var.api_container_port
+  value = local.api_container_port
 }
 
 output "api_desired_count" {
@@ -179,7 +179,7 @@ output "track_internal_base_url" {
 }
 
 output "track_container_port" {
-  value = var.track_container_port
+  value = local.track_container_port
 }
 
 output "track_desired_count" {
@@ -195,7 +195,7 @@ output "track_start_command" {
 }
 
 output "track_public_url_command" {
-  value = "CLUSTER_NAME=${aws_ecs_cluster.main.name} && SERVICE_NAME=${aws_ecs_service.track.name} && TASK_ARN=$(aws ecs list-tasks --cluster \"$CLUSTER_NAME\" --service-name \"$SERVICE_NAME\" --query 'taskArns[0]' --output text) && ENI_ID=$(aws ecs describe-tasks --cluster \"$CLUSTER_NAME\" --tasks \"$TASK_ARN\" --query 'tasks[0].attachments[0].details[?name==`networkInterfaceId`].value' --output text) && PUBLIC_IP=$(aws ec2 describe-network-interfaces --network-interface-ids \"$ENI_ID\" --query 'NetworkInterfaces[0].Association.PublicIp' --output text) && echo \"http://$${PUBLIC_IP}:${var.track_container_port}/api/\""
+  value = "CLUSTER_NAME=${aws_ecs_cluster.main.name} && SERVICE_NAME=${aws_ecs_service.track.name} && TASK_ARN=$(aws ecs list-tasks --cluster \"$CLUSTER_NAME\" --service-name \"$SERVICE_NAME\" --query 'taskArns[0]' --output text) && ENI_ID=$(aws ecs describe-tasks --cluster \"$CLUSTER_NAME\" --tasks \"$TASK_ARN\" --query 'tasks[0].attachments[0].details[?name==`networkInterfaceId`].value' --output text) && PUBLIC_IP=$(aws ec2 describe-network-interfaces --network-interface-ids \"$ENI_ID\" --query 'NetworkInterfaces[0].Association.PublicIp' --output text) && echo \"http://$${PUBLIC_IP}/api/\""
 }
 
 output "root_api_service_name" {
@@ -207,7 +207,7 @@ output "root_api_internal_base_url" {
 }
 
 output "root_api_container_port" {
-  value = var.root_api_container_port
+  value = local.root_api_container_port
 }
 
 output "root_api_desired_count" {

@@ -425,7 +425,7 @@ curl -i "http://${ROOT_API_PUBLIC_IP}/api/root/healthcheck"
 ```
 
 `ha-track` はCloud Map private DNSの
-`http://ha-track.<namespace>:8086/api/` を内部通信に使用。
+`http://ha-track.<namespace>/api/` を内部通信に使用。
 外部から直接アクセスする場合は、`environments/dev/terraform.tfvars` で以下を設定する。
 
 ```hcl

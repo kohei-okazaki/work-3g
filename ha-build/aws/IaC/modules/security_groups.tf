@@ -117,8 +117,8 @@ resource "aws_security_group_rule" "dashboard_public_ingress" {
   type              = "ingress"
   security_group_id = aws_security_group.dashboard_ingress.id
   cidr_blocks       = ["0.0.0.0/0"]
-  from_port         = var.dashboard_container_port
-  to_port           = var.dashboard_container_port
+  from_port         = local.dashboard_container_port
+  to_port           = local.dashboard_container_port
   protocol          = "tcp"
   description       = "Allow direct web access to ha-dashboard"
 }
@@ -146,8 +146,8 @@ resource "aws_security_group_rule" "api_public_ingress" {
   type              = "ingress"
   security_group_id = aws_security_group.api_task.id
   cidr_blocks       = [var.api_public_allowed_cidr]
-  from_port         = var.api_container_port
-  to_port           = var.api_container_port
+  from_port         = local.api_container_port
+  to_port           = local.api_container_port
   protocol          = "tcp"
   description       = "Allow direct external access to ha-api"
 }
@@ -156,8 +156,8 @@ resource "aws_security_group_rule" "api_from_dashboard" {
   type                     = "ingress"
   security_group_id        = aws_security_group.api_task.id
   source_security_group_id = aws_security_group.internal_app_client.id
-  from_port                = var.api_container_port
-  to_port                  = var.api_container_port
+  from_port                = local.api_container_port
+  to_port                  = local.api_container_port
   protocol                 = "tcp"
   description              = "Allow ha-dashboard to call ha-api"
 }
@@ -183,8 +183,8 @@ resource "aws_security_group_rule" "track_from_internal_app" {
   type                     = "ingress"
   security_group_id        = aws_security_group.track_task.id
   source_security_group_id = aws_security_group.internal_app_client.id
-  from_port                = var.track_container_port
-  to_port                  = var.track_container_port
+  from_port                = local.track_container_port
+  to_port                  = local.track_container_port
   protocol                 = "tcp"
   description              = "Allow internal app services to call ha-track"
 }
@@ -195,8 +195,8 @@ resource "aws_security_group_rule" "track_public_ingress" {
   type              = "ingress"
   security_group_id = aws_security_group.track_task.id
   cidr_blocks       = [var.track_public_allowed_cidr]
-  from_port         = var.track_container_port
-  to_port           = var.track_container_port
+  from_port         = local.track_container_port
+  to_port           = local.track_container_port
   protocol          = "tcp"
   description       = "Allow direct external access to ha-track"
 }
@@ -224,8 +224,8 @@ resource "aws_security_group_rule" "root_api_public_ingress" {
   type              = "ingress"
   security_group_id = aws_security_group.root_api_task.id
   cidr_blocks       = [var.root_api_public_allowed_cidr]
-  from_port         = var.root_api_container_port
-  to_port           = var.root_api_container_port
+  from_port         = local.root_api_container_port
+  to_port           = local.root_api_container_port
   protocol          = "tcp"
   description       = "Allow direct external access to ha-root API"
 }
@@ -234,8 +234,8 @@ resource "aws_security_group_rule" "root_api_from_internal_app" {
   type                     = "ingress"
   security_group_id        = aws_security_group.root_api_task.id
   source_security_group_id = aws_security_group.internal_app_client.id
-  from_port                = var.root_api_container_port
-  to_port                  = var.root_api_container_port
+  from_port                = local.root_api_container_port
+  to_port                  = local.root_api_container_port
   protocol                 = "tcp"
   description              = "Allow internal app services to call ha-root API"
 }

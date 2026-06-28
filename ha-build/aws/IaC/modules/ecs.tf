@@ -194,7 +194,7 @@ resource "aws_ecs_task_definition" "dashboard" {
 
       portMappings = [
         {
-          containerPort = var.dashboard_container_port
+          containerPort = local.dashboard_container_port
           protocol      = "tcp"
         }
       ]
@@ -293,7 +293,7 @@ resource "aws_ecs_task_definition" "api" {
 
       portMappings = [
         {
-          containerPort = var.api_container_port
+          containerPort = local.api_container_port
           protocol      = "tcp"
         }
       ]
@@ -396,7 +396,7 @@ resource "aws_ecs_task_definition" "track" {
 
       portMappings = [
         {
-          containerPort = var.track_container_port
+          containerPort = local.track_container_port
           protocol      = "tcp"
         }
       ]
@@ -497,7 +497,7 @@ resource "aws_ecs_task_definition" "root_api" {
 
       portMappings = [
         {
-          containerPort = var.root_api_container_port
+          containerPort = local.root_api_container_port
           protocol      = "tcp"
         }
       ]

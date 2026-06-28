@@ -38,9 +38,14 @@ locals {
   track_image_uri     = "${aws_ecr_repository.track.repository_url}:${var.image_tag}"
   batch_image_uri     = "${aws_ecr_repository.batch.repository_url}:${var.image_tag}"
 
+  dashboard_container_port = 80
+  api_container_port       = 80
+  root_api_container_port  = 80
+  track_container_port     = 80
+
   api_internal_base_url         = "http://${var.api_service_discovery_name}.${local.service_discovery_namespace_name}/api/"
   root_api_internal_base_url    = "http://${var.root_api_service_discovery_name}.${local.service_discovery_namespace_name}/api/root/"
-  track_internal_base_url       = "http://${var.track_service_discovery_name}.${local.service_discovery_namespace_name}:${var.track_container_port}/api/"
+  track_internal_base_url       = "http://${var.track_service_discovery_name}.${local.service_discovery_namespace_name}/api/"
   dashboard_health_info_api_url = var.health_info_api_url != "" ? var.health_info_api_url : local.api_internal_base_url
   effective_root_api_url        = var.root_api_url != "" ? var.root_api_url : local.root_api_internal_base_url
   effective_track_api_url       = var.health_info_track_api_url != "" ? var.health_info_track_api_url : local.track_internal_base_url
@@ -53,7 +58,7 @@ locals {
       { name = "SPRING_FLYWAY_LOCATIONS", value = "classpath:/db/migration" },
       { name = "DB_URL", value = local.db_url },
       { name = "DB_USER", value = var.db_app_username },
-      { name = "SERVER_PORT", value = tostring(var.dashboard_container_port) },
+      { name = "SERVER_PORT", value = tostring(local.dashboard_container_port) },
       { name = "API_LOG_QUEUE_NAME", value = aws_sqs_queue.api_log.name },
       { name = "HEALTHINFO_API_URL", value = local.dashboard_health_info_api_url },
       { name = "ROOT_API_URL", value = local.effective_root_api_url },
@@ -68,7 +73,7 @@ locals {
       { name = "SPRING_FLYWAY_ENABLED", value = "false" },
       { name = "DB_URL", value = local.db_url },
       { name = "DB_USER", value = var.db_app_username },
-      { name = "SERVER_PORT", value = tostring(var.api_container_port) },
+      { name = "SERVER_PORT", value = tostring(local.api_container_port) },
       { name = "API_LOG_QUEUE_NAME", value = aws_sqs_queue.api_log.name },
       { name = "ROOT_API_URL", value = local.effective_root_api_url },
     ],
@@ -83,7 +88,7 @@ locals {
       { name = "SPRING_FLYWAY_ENABLED", value = "false" },
       { name = "DB_URL", value = local.db_url },
       { name = "DB_USER", value = var.db_app_username },
-      { name = "SERVER_PORT", value = tostring(var.root_api_container_port) },
+      { name = "SERVER_PORT", value = tostring(local.root_api_container_port) },
       { name = "API_LOG_QUEUE_NAME", value = aws_sqs_queue.api_log.name },
       { name = "FRONT_URL", value = var.root_front_url },
       { name = "AWS_S3_BACKET", value = var.app_data_bucket_name },
