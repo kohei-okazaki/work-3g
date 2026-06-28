@@ -4,7 +4,7 @@ resource "aws_vpc" "main" {
   enable_dns_support   = true
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-vpc"
+    Name = "${local.resource_prefix}-vpc"
   })
 }
 
@@ -12,7 +12,7 @@ resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-igw"
+    Name = "${local.resource_prefix}-igw"
   })
 }
 
@@ -25,7 +25,7 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-public-app-${count.index + 1}"
+    Name = "${local.resource_prefix}-public-app-${count.index + 1}"
     Type = "public-app"
   })
 }
@@ -39,7 +39,7 @@ resource "aws_subnet" "private_db" {
   map_public_ip_on_launch = false
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-private-db-${count.index + 1}"
+    Name = "${local.resource_prefix}-private-db-${count.index + 1}"
     Type = "private-db"
   })
 }
@@ -53,7 +53,7 @@ resource "aws_route_table" "public" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-public-rt"
+    Name = "${local.resource_prefix}-public-rt"
   })
 }
 
@@ -68,7 +68,7 @@ resource "aws_route_table" "private_db" {
   vpc_id = aws_vpc.main.id
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-private-db-rt"
+    Name = "${local.resource_prefix}-private-db-rt"
   })
 }
 

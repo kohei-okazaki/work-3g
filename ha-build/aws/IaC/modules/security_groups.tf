@@ -1,5 +1,5 @@
 resource "aws_security_group" "shared_db_client" {
-  name        = "${var.project_name}-shared-db-client-sg"
+  name        = "${local.resource_prefix}-shared-db-client-sg"
   description = "Attach this SG to app services to reach RDS"
   vpc_id      = aws_vpc.main.id
 
@@ -11,12 +11,12 @@ resource "aws_security_group" "shared_db_client" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-shared-db-client-sg"
+    Name = "${local.resource_prefix}-shared-db-client-sg"
   })
 }
 
 resource "aws_security_group" "internal_app_client" {
-  name        = "${var.project_name}-internal-app-client-sg"
+  name        = "${local.resource_prefix}-internal-app-client-sg"
   description = "Attach this SG to app services that call internal app endpoints"
   vpc_id      = aws_vpc.main.id
 
@@ -28,12 +28,12 @@ resource "aws_security_group" "internal_app_client" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-internal-app-client-sg"
+    Name = "${local.resource_prefix}-internal-app-client-sg"
   })
 }
 
 resource "aws_security_group" "db" {
-  name        = "${var.project_name}-db-sg"
+  name        = "${local.resource_prefix}-db-sg"
   description = "RDS MySQL SG"
   vpc_id      = aws_vpc.main.id
 
@@ -45,7 +45,7 @@ resource "aws_security_group" "db" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-db-sg"
+    Name = "${local.resource_prefix}-db-sg"
   })
 }
 
@@ -60,7 +60,7 @@ resource "aws_security_group_rule" "db_from_app" {
 }
 
 resource "aws_security_group" "bastion" {
-  name        = "${var.project_name}-bastion-sg"
+  name        = "${local.resource_prefix}-bastion-sg"
   description = "SSH bastion host SG for manual RDS setup"
   vpc_id      = aws_vpc.main.id
 
@@ -72,7 +72,7 @@ resource "aws_security_group" "bastion" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-bastion-sg"
+    Name = "${local.resource_prefix}-bastion-sg"
   })
 }
 
@@ -97,7 +97,7 @@ resource "aws_security_group_rule" "db_from_bastion" {
 }
 
 resource "aws_security_group" "dashboard_ingress" {
-  name        = "${var.project_name}-dashboard-web-sg"
+  name        = "${local.resource_prefix}-dashboard-web-sg"
   description = "Internet ingress for ha-dashboard without ALB"
   vpc_id      = aws_vpc.main.id
 
@@ -109,7 +109,7 @@ resource "aws_security_group" "dashboard_ingress" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-dashboard-web-sg"
+    Name = "${local.resource_prefix}-dashboard-web-sg"
   })
 }
 
@@ -124,7 +124,7 @@ resource "aws_security_group_rule" "dashboard_public_ingress" {
 }
 
 resource "aws_security_group" "api_task" {
-  name        = "${var.project_name}-api-task-sg"
+  name        = "${local.resource_prefix}-api-task-sg"
   description = "Ingress for ha-api tasks from internet and ha-dashboard"
   vpc_id      = aws_vpc.main.id
 
@@ -136,7 +136,7 @@ resource "aws_security_group" "api_task" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-api-task-sg"
+    Name = "${local.resource_prefix}-api-task-sg"
   })
 }
 
@@ -163,7 +163,7 @@ resource "aws_security_group_rule" "api_from_dashboard" {
 }
 
 resource "aws_security_group" "track_task" {
-  name        = "${var.project_name}-track-task-sg"
+  name        = "${local.resource_prefix}-track-task-sg"
   description = "Ingress for ha-track tasks from internal app services and optional external clients"
   vpc_id      = aws_vpc.main.id
 
@@ -175,7 +175,7 @@ resource "aws_security_group" "track_task" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-track-task-sg"
+    Name = "${local.resource_prefix}-track-task-sg"
   })
 }
 
@@ -202,7 +202,7 @@ resource "aws_security_group_rule" "track_public_ingress" {
 }
 
 resource "aws_security_group" "root_api_task" {
-  name        = "${var.project_name}-root-api-task-sg"
+  name        = "${local.resource_prefix}-root-api-task-sg"
   description = "Ingress for ha-root API tasks from internet and internal app services"
   vpc_id      = aws_vpc.main.id
 
@@ -214,7 +214,7 @@ resource "aws_security_group" "root_api_task" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-root-api-task-sg"
+    Name = "${local.resource_prefix}-root-api-task-sg"
   })
 }
 

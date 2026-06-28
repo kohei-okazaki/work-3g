@@ -9,16 +9,17 @@ data "aws_partition" "current" {}
 data "aws_region" "current" {}
 
 locals {
-  raw_project_dns_label = trim(replace(lower(var.project_name), "/[^a-z0-9-]/", "-"), "-")
-  project_dns_label     = local.raw_project_dns_label != "" ? local.raw_project_dns_label : "healthinfo-app"
+  resource_prefix        = "${var.project_name}-${var.app_env}"
+  raw_resource_dns_label = trim(replace(lower(local.resource_prefix), "/[^a-z0-9-]/", "-"), "-")
+  resource_dns_label     = local.raw_resource_dns_label != "" ? local.raw_resource_dns_label : "healthinfo-app-${var.app_env}"
 
   az_names = slice(data.aws_availability_zones.available.names, 0, var.az_count)
 
-  service_discovery_namespace_name = var.service_discovery_namespace_name != "" ? var.service_discovery_namespace_name : "${local.project_dns_label}.local"
+  service_discovery_namespace_name = var.service_discovery_namespace_name != "" ? var.service_discovery_namespace_name : "${local.resource_dns_label}.local"
 
-  db_master_password_parameter_name      = var.db_master_password_parameter_name != "" ? var.db_master_password_parameter_name : "/${var.project_name}/db/master/password"
-  db_app_password_parameter_name         = var.db_app_password_parameter_name != "" ? var.db_app_password_parameter_name : "/${var.project_name}/db/app/password"
-  track_django_secret_key_parameter_name = var.track_django_secret_key_parameter_name != "" ? var.track_django_secret_key_parameter_name : "/${var.project_name}/ha-track/django-secret-key"
+  db_master_password_parameter_name      = var.db_master_password_parameter_name != "" ? var.db_master_password_parameter_name : "/${local.resource_prefix}/db/master/password"
+  db_app_password_parameter_name         = var.db_app_password_parameter_name != "" ? var.db_app_password_parameter_name : "/${local.resource_prefix}/db/app/password"
+  track_django_secret_key_parameter_name = var.track_django_secret_key_parameter_name != "" ? var.track_django_secret_key_parameter_name : "/${local.resource_prefix}/ha-track/django-secret-key"
 
   db_master_password_parameter_selector      = var.db_master_password_parameter_version > 0 ? "${local.db_master_password_parameter_name}:${var.db_master_password_parameter_version}" : local.db_master_password_parameter_name
   db_app_password_parameter_resource         = trim(local.db_app_password_parameter_name, "/")
@@ -47,7 +48,7 @@ locals {
 
   dashboard_environment = concat(
     [
-      { name = "SPRING_PROFILES_ACTIVE", value = "dev" },
+      { name = "SPRING_PROFILES_ACTIVE", value = var.app_env },
       { name = "SPRING_FLYWAY_ENABLED", value = "true" },
       { name = "SPRING_FLYWAY_LOCATIONS", value = "classpath:/db/migration" },
       { name = "DB_URL", value = local.db_url },
@@ -63,7 +64,7 @@ locals {
 
   api_environment = concat(
     [
-      { name = "SPRING_PROFILES_ACTIVE", value = "dev" },
+      { name = "SPRING_PROFILES_ACTIVE", value = var.app_env },
       { name = "SPRING_FLYWAY_ENABLED", value = "false" },
       { name = "DB_URL", value = local.db_url },
       { name = "DB_USER", value = var.db_app_username },
@@ -78,7 +79,7 @@ locals {
 
   root_api_environment = concat(
     [
-      { name = "SPRING_PROFILES_ACTIVE", value = "dev" },
+      { name = "SPRING_PROFILES_ACTIVE", value = var.app_env },
       { name = "SPRING_FLYWAY_ENABLED", value = "false" },
       { name = "DB_URL", value = local.db_url },
       { name = "DB_USER", value = var.db_app_username },
@@ -102,7 +103,7 @@ locals {
   batch_environment = concat(
     [
       { name = "TZ", value = "Asia/Tokyo" },
-      { name = "SPRING_PROFILES_ACTIVE", value = "dev" },
+      { name = "SPRING_PROFILES_ACTIVE", value = var.app_env },
       { name = "SPRING_FLYWAY_ENABLED", value = "false" },
       { name = "DB_URL", value = local.db_url },
       { name = "DB_USER", value = var.db_app_username },
@@ -115,7 +116,8 @@ locals {
   )
 
   common_tags = {
-    Project   = var.project_name
-    ManagedBy = "terraform"
+    Project     = var.project_name
+    Environment = var.app_env
+    ManagedBy   = "terraform"
   }
 }

@@ -6,6 +6,10 @@ output "cluster_name" {
   value = aws_ecs_cluster.main.name
 }
 
+output "resource_prefix" {
+  value = local.resource_prefix
+}
+
 output "service_discovery_namespace_name" {
   value = local.service_discovery_namespace_name
 }
