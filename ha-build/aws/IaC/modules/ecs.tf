@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "dashboard" {
-  name                 = "${local.project_dns_label}/ha-dashboard"
+  name                 = "${local.resource_dns_label}/ha-dashboard"
   image_tag_mutability = "MUTABLE"
   force_delete         = true
 
@@ -12,12 +12,12 @@ resource "aws_ecr_repository" "dashboard" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-ha-dashboard"
+    Name = "${local.resource_prefix}-ha-dashboard"
   })
 }
 
 resource "aws_ecr_repository" "api" {
-  name                 = "${local.project_dns_label}/ha-api"
+  name                 = "${local.resource_dns_label}/ha-api"
   image_tag_mutability = "MUTABLE"
   force_delete         = true
 
@@ -30,12 +30,12 @@ resource "aws_ecr_repository" "api" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-ha-api"
+    Name = "${local.resource_prefix}-ha-api"
   })
 }
 
 resource "aws_ecr_repository" "root_api" {
-  name                 = "${local.project_dns_label}/ha-root-api"
+  name                 = "${local.resource_dns_label}/ha-root-api"
   image_tag_mutability = "MUTABLE"
   force_delete         = true
 
@@ -48,12 +48,12 @@ resource "aws_ecr_repository" "root_api" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-ha-root-api"
+    Name = "${local.resource_prefix}-ha-root-api"
   })
 }
 
 resource "aws_ecr_repository" "track" {
-  name                 = "${local.project_dns_label}/ha-track"
+  name                 = "${local.resource_dns_label}/ha-track"
   image_tag_mutability = "MUTABLE"
   force_delete         = true
 
@@ -66,12 +66,12 @@ resource "aws_ecr_repository" "track" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-ha-track"
+    Name = "${local.resource_prefix}-ha-track"
   })
 }
 
 resource "aws_ecr_repository" "batch" {
-  name                 = "${local.project_dns_label}/ha-batch"
+  name                 = "${local.resource_dns_label}/ha-batch"
   image_tag_mutability = "MUTABLE"
   force_delete         = true
 
@@ -84,7 +84,7 @@ resource "aws_ecr_repository" "batch" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-ha-batch"
+    Name = "${local.resource_prefix}-ha-batch"
   })
 }
 
@@ -119,7 +119,7 @@ resource "aws_ecr_lifecycle_policy" "expire_untagged_images" {
 }
 
 resource "aws_ecs_cluster" "main" {
-  name = "${var.project_name}-cluster"
+  name = "${local.resource_prefix}-cluster"
 
   setting {
     name  = "containerInsights"
@@ -131,49 +131,49 @@ resource "aws_ecs_cluster" "main" {
 
 resource "aws_service_discovery_private_dns_namespace" "app" {
   name        = local.service_discovery_namespace_name
-  description = "Private DNS namespace for ${var.project_name} app services"
+  description = "Private DNS namespace for ${local.resource_prefix} app services"
   vpc         = aws_vpc.main.id
 
   tags = local.common_tags
 }
 
 resource "aws_cloudwatch_log_group" "dashboard" {
-  name              = "/ecs/${var.project_name}/ha-dashboard"
+  name              = "/ecs/${local.resource_prefix}/ha-dashboard"
   retention_in_days = 1
 
   tags = local.common_tags
 }
 
 resource "aws_cloudwatch_log_group" "api" {
-  name              = "/ecs/${var.project_name}/ha-api"
+  name              = "/ecs/${local.resource_prefix}/ha-api"
   retention_in_days = 1
 
   tags = local.common_tags
 }
 
 resource "aws_cloudwatch_log_group" "root_api" {
-  name              = "/ecs/${var.project_name}/ha-root-api"
+  name              = "/ecs/${local.resource_prefix}/ha-root-api"
   retention_in_days = 1
 
   tags = local.common_tags
 }
 
 resource "aws_cloudwatch_log_group" "track" {
-  name              = "/ecs/${var.project_name}/ha-track"
+  name              = "/ecs/${local.resource_prefix}/ha-track"
   retention_in_days = 1
 
   tags = local.common_tags
 }
 
 resource "aws_cloudwatch_log_group" "batch" {
-  name              = "/ecs/${var.project_name}/ha-batch"
+  name              = "/ecs/${local.resource_prefix}/ha-batch"
   retention_in_days = 1
 
   tags = local.common_tags
 }
 
 resource "aws_ecs_task_definition" "dashboard" {
-  family                   = "${var.project_name}-ha-dashboard"
+  family                   = "${local.resource_prefix}-ha-dashboard"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu                      = "256"
@@ -194,7 +194,7 @@ resource "aws_ecs_task_definition" "dashboard" {
 
       portMappings = [
         {
-          containerPort = var.dashboard_container_port
+          containerPort = local.dashboard_container_port
           protocol      = "tcp"
         }
       ]
@@ -229,7 +229,7 @@ resource "aws_ecs_task_definition" "dashboard" {
 }
 
 resource "aws_ecs_service" "dashboard" {
-  name                               = "${var.project_name}-ha-dashboard-service"
+  name                               = "${local.resource_prefix}-ha-dashboard-service"
   cluster                            = aws_ecs_cluster.main.id
   task_definition                    = aws_ecs_task_definition.dashboard.arn
   desired_count                      = var.dashboard_desired_count
@@ -272,7 +272,7 @@ resource "aws_service_discovery_service" "api" {
 }
 
 resource "aws_ecs_task_definition" "api" {
-  family                   = "${var.project_name}-ha-api"
+  family                   = "${local.resource_prefix}-ha-api"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu                      = "256"
@@ -293,7 +293,7 @@ resource "aws_ecs_task_definition" "api" {
 
       portMappings = [
         {
-          containerPort = var.api_container_port
+          containerPort = local.api_container_port
           protocol      = "tcp"
         }
       ]
@@ -328,7 +328,7 @@ resource "aws_ecs_task_definition" "api" {
 }
 
 resource "aws_ecs_service" "api" {
-  name                               = "${var.project_name}-ha-api-service"
+  name                               = "${local.resource_prefix}-ha-api-service"
   cluster                            = aws_ecs_cluster.main.id
   task_definition                    = aws_ecs_task_definition.api.arn
   desired_count                      = var.api_desired_count
@@ -375,7 +375,7 @@ resource "aws_service_discovery_service" "track" {
 }
 
 resource "aws_ecs_task_definition" "track" {
-  family                   = "${var.project_name}-ha-track"
+  family                   = "${local.resource_prefix}-ha-track"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu                      = "256"
@@ -396,7 +396,7 @@ resource "aws_ecs_task_definition" "track" {
 
       portMappings = [
         {
-          containerPort = var.track_container_port
+          containerPort = local.track_container_port
           protocol      = "tcp"
         }
       ]
@@ -431,7 +431,7 @@ resource "aws_ecs_task_definition" "track" {
 }
 
 resource "aws_ecs_service" "track" {
-  name                               = "${var.project_name}-ha-track-service"
+  name                               = "${local.resource_prefix}-ha-track-service"
   cluster                            = aws_ecs_cluster.main.id
   task_definition                    = aws_ecs_task_definition.track.arn
   desired_count                      = var.track_desired_count
@@ -476,7 +476,7 @@ resource "aws_service_discovery_service" "root_api" {
 }
 
 resource "aws_ecs_task_definition" "root_api" {
-  family                   = "${var.project_name}-ha-root-api"
+  family                   = "${local.resource_prefix}-ha-root-api"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu                      = "256"
@@ -497,7 +497,7 @@ resource "aws_ecs_task_definition" "root_api" {
 
       portMappings = [
         {
-          containerPort = var.root_api_container_port
+          containerPort = local.root_api_container_port
           protocol      = "tcp"
         }
       ]
@@ -533,7 +533,7 @@ resource "aws_ecs_task_definition" "root_api" {
 }
 
 resource "aws_ecs_service" "root_api" {
-  name                               = "${var.project_name}-ha-root-api-service"
+  name                               = "${local.resource_prefix}-ha-root-api-service"
   cluster                            = aws_ecs_cluster.main.id
   task_definition                    = aws_ecs_task_definition.root_api.arn
   desired_count                      = var.root_api_desired_count
@@ -559,7 +559,7 @@ resource "aws_ecs_service" "root_api" {
 }
 
 resource "aws_ecs_task_definition" "batch" {
-  family                   = "${var.project_name}-ha-batch"
+  family                   = "${local.resource_prefix}-ha-batch"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu                      = "256"

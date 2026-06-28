@@ -4,17 +4,17 @@ data "aws_ssm_parameter" "db_master_password" {
 }
 
 resource "aws_db_subnet_group" "database" {
-  name        = "${var.project_name}-db-subnet-group"
+  name        = "${local.resource_prefix}-db-subnet-group"
   description = "Subnet group for private RDS MySQL"
   subnet_ids  = aws_subnet.private_db[*].id
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-db-subnet-group"
+    Name = "${local.resource_prefix}-db-subnet-group"
   })
 }
 
 resource "aws_db_instance" "database" {
-  identifier = "${local.project_dns_label}-database"
+  identifier = "${local.resource_dns_label}-database"
 
   engine         = "mysql"
   engine_version = var.db_engine_version
@@ -39,7 +39,7 @@ resource "aws_db_instance" "database" {
   apply_immediately          = true
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-database"
+    Name = "${local.resource_prefix}-database"
   })
 }
 
@@ -83,6 +83,6 @@ resource "aws_instance" "bastion" {
   USERDATA
 
   tags = merge(local.common_tags, {
-    Name = "${var.project_name}-bastion"
+    Name = "${local.resource_prefix}-bastion"
   })
 }
