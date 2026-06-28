@@ -6,6 +6,10 @@ output "cluster_name" {
   value = module.healthinfo.cluster_name
 }
 
+output "resource_prefix" {
+  value = module.healthinfo.resource_prefix
+}
+
 output "service_discovery_namespace_name" {
   value = module.healthinfo.service_discovery_namespace_name
 }
