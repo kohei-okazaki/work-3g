@@ -18,8 +18,6 @@ import org.springframework.web.method.annotation.HandlerMethodValidationExceptio
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.common.exception.BaseException;
@@ -28,6 +26,7 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.root.base.BaseRootApiResponse.ErrorData;
 import jp.co.ha.root.config.ApplicationProperties;
 import jp.co.ha.root.type.RootApiResult;
+import tools.jackson.databind.exc.InvalidFormatException;
 
 /**
  * RootAPI基底コントローラ<br>

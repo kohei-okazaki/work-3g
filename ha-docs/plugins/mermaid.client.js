@@ -5,7 +5,7 @@ export default defineNuxtPlugin(async () => {
 
     mermaid.initialize({
       startOnLoad: false,
-      securityLevel: "loose",
+      securityLevel: "antiscript",
     });
 
     return {
