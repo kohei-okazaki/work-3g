@@ -18,14 +18,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.jsonwebtoken.Jwts;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.root.contents.auth.AuthInfo;
 import jp.co.ha.root.contents.auth.request.LoginApiRequest;
+import tools.jackson.databind.ObjectMapper;
 
 /**
  * 認証フィルター

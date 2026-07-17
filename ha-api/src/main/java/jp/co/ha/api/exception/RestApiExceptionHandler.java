@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse;
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ErrorInfo;
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
@@ -23,6 +19,9 @@ import jp.co.ha.common.exception.BaseAppError;
 import jp.co.ha.common.exception.BaseExceptionHandler;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.exc.StreamReadException;
+import tools.jackson.databind.exc.InvalidFormatException;
 
 /***
  * REST APIの例外ハンドラークラス<br>
@@ -89,9 +88,9 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
             InvalidFormatException ife = (InvalidFormatException) e;
             error = new ApiException(JSON_FORMAT_ERROR, ife.getValue() + "はリクエスト形式エラーです",
                     e);
-        } else if (e instanceof JsonParseException) {
+        } else if (e instanceof StreamReadException) {
             error = new ApiException(JSON_PARSE_ERROR, "JSON形式ではありません", e);
-        } else if (e instanceof JsonProcessingException) {
+        } else if (e instanceof JacksonException) {
             error = new ApiException(JSON_PARSE_ERROR, "JSON生成処理が失敗しました", e);
         } else if (e instanceof MethodArgumentTypeMismatchException) {
             MethodArgumentTypeMismatchException matme = (MethodArgumentTypeMismatchException) e;
