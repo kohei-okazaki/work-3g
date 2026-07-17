@@ -78,7 +78,7 @@ public class AwsS3Component {
                     PutObjectRequest.builder()
                             .bucket(awsProps.backet())
                             .key(key)
-                            .acl(ObjectCannedACL.PUBLIC_READ)
+                            .acl(ObjectCannedACL.BUCKET_OWNER_FULL_CONTROL)
                             .build(),
                     RequestBody.fromInputStream(is, length));
         } catch (Exception e) {

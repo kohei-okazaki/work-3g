@@ -10,20 +10,42 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.ear
 *.zip
 *.tar.gz
 *.rar
+*.exe
 
-.classpath
-.project
-.settings
+# Java
 **/.classpath
 **/.project
 **/.settings
+**/target
+
+# Python
+__pycache__
+__init__.py
+*.pyc
+
+# Vue
+.env
+.nuxt
+.output
+**/dist
+**/node_modules
+
+# IaC
+aws/IaC/.env
+aws/IaC/.env.*
+!aws/IaC/.env.example
+aws/IaC/npm-debug.log*
+aws/IaC/yarn-debug.log*
+aws/IaC/yarn-error.log*
+aws/IaC/pnpm-debug.log*
+
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*

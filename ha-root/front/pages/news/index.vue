@@ -93,7 +93,7 @@
             </v-chip>
           </template>
           <template v-slot:[`item.detail`]="{ item }">
-            <div v-html="item.detail"></div>
+            <div v-html="sanitizeHtml(item.detail)"></div>
           </template>
           <template v-slot:[`item.edit_action`]="{ item }">
             <v-btn
@@ -138,6 +138,7 @@ import AppMessageError from "~/components/AppMessageError.vue";
 import AppLoading from "~/components/AppLoading.vue";
 
 import axios from "axios";
+import DOMPurify from "dompurify";
 let url = process.env.api_base_url + "news";
 
 export default {
@@ -221,6 +222,11 @@ export default {
     }
   },
   methods: {
+    sanitizeHtml: function (html) {
+      return DOMPurify.sanitize(html ?? "", {
+        USE_PROFILES: { html: true },
+      });
+    },
     /**
      * 指定したページのお知らせ情報を取得
      * @param page 取得対象ページ
