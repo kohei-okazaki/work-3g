@@ -131,7 +131,7 @@ output "dashboard_service_name" {
 }
 
 output "dashboard_health_info_api_url" {
-  value = local.dashboard_health_info_api_url
+  value = local.api_internal_base_url
 }
 
 output "dashboard_container_port" {

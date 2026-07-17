@@ -17,7 +17,7 @@ resource "aws_dynamodb_table" "health_info" {
   }
 
   point_in_time_recovery {
-    enabled = var.app_env == "prd"
+    enabled = false
   }
 
   server_side_encryption {

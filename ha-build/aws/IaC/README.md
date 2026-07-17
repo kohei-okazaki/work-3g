@@ -292,7 +292,7 @@ winpty docker run --rm -it mysql:8.0 \
 ```
 
 MySQL接続後、アプリ用DBユーザを作成。
-`<APP_DB_PASSWORD>`には `db_app_password_parameter_name` のSSM SecureStringと同じ値を指定。
+`<APP_DB_PASSWORD>`には `/${RESOURCE_PREFIX}/db/app/password` のSSM SecureStringと同じ値を指定。
 FlywayのDDLに外部キー作成が含まれるため、`REFERENCES`権限も付与。
 
 ```sql

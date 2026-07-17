@@ -65,12 +65,6 @@ variable "db_master_username" {
   default     = "healthapp_master"
 }
 
-variable "db_master_password_parameter_name" {
-  description = "RDSマスターパスワードのSSM SecureString名"
-  type        = string
-  default     = ""
-}
-
 variable "db_master_password_parameter_version" {
   description = "RDSマスターパスワードのSSM SecureStringバージョン。0を指定すると最新バージョンを使用します。"
   type        = number
@@ -81,18 +75,6 @@ variable "db_app_username" {
   description = "ha-dashboardおよびha-apiで使用するアプリケーションDBユーザ名"
   type        = string
   default     = "app_user"
-}
-
-variable "db_app_password_parameter_name" {
-  description = "アプリケーションDBパスワードの既存SSM SecureString名。空の場合は/$${project_name}-$${app_env}/db/app/passwordを使用します。"
-  type        = string
-  default     = ""
-}
-
-variable "db_app_password_parameter_version" {
-  description = "CDKとの互換性維持用。ECSはSSMパラメータARNを使用し、タスク起動時に現在値を読み込みます。"
-  type        = number
-  default     = 1
 }
 
 variable "api_log_queue_name" {
@@ -130,12 +112,6 @@ variable "bastion_key_name" {
   default     = ""
 }
 
-variable "service_discovery_namespace_name" {
-  description = "Cloud MapのプライベートDNS名前空間。空の場合は<sanitized-project-name>-<app_env>.localを使用します。"
-  type        = string
-  default     = ""
-}
-
 variable "dashboard_desired_count" {
   description = "ha-dashboard ECSサービスの初期希望タスク数"
   type        = number
@@ -154,12 +130,6 @@ variable "api_public_allowed_cidr" {
   default     = "0.0.0.0/0"
 }
 
-variable "api_service_discovery_name" {
-  description = "ha-apiのCloud Mapサービス名"
-  type        = string
-  default     = "ha-api"
-}
-
 variable "track_desired_count" {
   description = "ha-track ECSサービスの初期希望タスク数"
   type        = number
@@ -172,20 +142,8 @@ variable "track_public_allowed_cidr" {
   default     = ""
 }
 
-variable "track_service_discovery_name" {
-  description = "ha-trackのCloud Mapサービス名"
-  type        = string
-  default     = "ha-track"
-}
-
 variable "track_django_allowed_hosts" {
   description = "ha-trackのDjango ALLOWED_HOSTS（カンマ区切り）。空の場合はCloud Mapホスト名を使用します。"
-  type        = string
-  default     = ""
-}
-
-variable "track_django_secret_key_parameter_name" {
-  description = "ha-track Djangoシークレットキーの既存SSM SecureString名。空の場合は/$${project_name}-$${app_env}/ha-track/django-secret-keyを使用します。"
   type        = string
   default     = ""
 }
@@ -200,12 +158,6 @@ variable "root_api_public_allowed_cidr" {
   description = "ha-root APIのパブリックタスクIPへの直接呼び出しを許可するCIDR。空の場合は外部からのインバウンドを無効化します。"
   type        = string
   default     = "0.0.0.0/0"
-}
-
-variable "root_api_service_discovery_name" {
-  description = "ha-root APIのCloud Mapサービス名"
-  type        = string
-  default     = "ha-root"
 }
 
 variable "root_front_url" {
@@ -228,24 +180,6 @@ variable "image_tag" {
 
 variable "health_info_dashboard_url" {
   description = "HEALTHINFO_DASHBOARD_URLの任意の上書き値"
-  type        = string
-  default     = ""
-}
-
-variable "health_info_api_url" {
-  description = "HEALTHINFO_API_URLの任意の上書き値。空の場合、ha-dashboardはCloud MapプライベートDNS経由でha-apiを呼び出します。"
-  type        = string
-  default     = ""
-}
-
-variable "root_api_url" {
-  description = "ROOT_API_URLの任意の上書き値"
-  type        = string
-  default     = ""
-}
-
-variable "health_info_track_api_url" {
-  description = "HEALTHINFO_TRACK_API_URLの任意の上書き値"
   type        = string
   default     = ""
 }
