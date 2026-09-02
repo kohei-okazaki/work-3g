@@ -11,9 +11,9 @@ resource "aws_ecr_repository" "dashboard" {
     encryption_type = "AES256"
   }
 
-  tags = merge(local.common_tags, {
+  tags = {
     Name = "${local.resource_prefix}-ha-dashboard"
-  })
+  }
 }
 
 resource "aws_ecr_repository" "api" {
@@ -29,9 +29,9 @@ resource "aws_ecr_repository" "api" {
     encryption_type = "AES256"
   }
 
-  tags = merge(local.common_tags, {
+  tags = {
     Name = "${local.resource_prefix}-ha-api"
-  })
+  }
 }
 
 resource "aws_ecr_repository" "root_api" {
@@ -47,9 +47,9 @@ resource "aws_ecr_repository" "root_api" {
     encryption_type = "AES256"
   }
 
-  tags = merge(local.common_tags, {
+  tags = {
     Name = "${local.resource_prefix}-ha-root-api"
-  })
+  }
 }
 
 resource "aws_ecr_repository" "track" {
@@ -65,9 +65,9 @@ resource "aws_ecr_repository" "track" {
     encryption_type = "AES256"
   }
 
-  tags = merge(local.common_tags, {
+  tags = {
     Name = "${local.resource_prefix}-ha-track"
-  })
+  }
 }
 
 resource "aws_ecr_repository" "batch" {
@@ -83,9 +83,9 @@ resource "aws_ecr_repository" "batch" {
     encryption_type = "AES256"
   }
 
-  tags = merge(local.common_tags, {
+  tags = {
     Name = "${local.resource_prefix}-ha-batch"
-  })
+  }
 }
 
 resource "aws_ecr_lifecycle_policy" "expire_untagged_images" {
@@ -125,51 +125,37 @@ resource "aws_ecs_cluster" "main" {
     name  = "containerInsights"
     value = "disabled"
   }
-
-  tags = local.common_tags
 }
 
 resource "aws_service_discovery_private_dns_namespace" "app" {
   name        = local.service_discovery_namespace_name
   description = "Private DNS namespace for ${local.resource_prefix} app services"
   vpc         = aws_vpc.main.id
-
-  tags = local.common_tags
 }
 
 resource "aws_cloudwatch_log_group" "dashboard" {
   name              = "/ecs/${local.resource_prefix}/ha-dashboard"
   retention_in_days = 1
-
-  tags = local.common_tags
 }
 
 resource "aws_cloudwatch_log_group" "api" {
   name              = "/ecs/${local.resource_prefix}/ha-api"
   retention_in_days = 1
-
-  tags = local.common_tags
 }
 
 resource "aws_cloudwatch_log_group" "root_api" {
   name              = "/ecs/${local.resource_prefix}/ha-root-api"
   retention_in_days = 1
-
-  tags = local.common_tags
 }
 
 resource "aws_cloudwatch_log_group" "track" {
   name              = "/ecs/${local.resource_prefix}/ha-track"
   retention_in_days = 1
-
-  tags = local.common_tags
 }
 
 resource "aws_cloudwatch_log_group" "batch" {
   name              = "/ecs/${local.resource_prefix}/ha-batch"
   retention_in_days = 1
-
-  tags = local.common_tags
 }
 
 resource "aws_ecs_task_definition" "dashboard" {
@@ -224,8 +210,6 @@ resource "aws_ecs_task_definition" "dashboard" {
     aws_iam_role_policy.dashboard_execution_ssm,
     aws_iam_role_policy.dashboard_task_app,
   ]
-
-  tags = local.common_tags
 }
 
 resource "aws_ecs_service" "dashboard" {
@@ -246,8 +230,6 @@ resource "aws_ecs_service" "dashboard" {
     ]
     assign_public_ip = true
   }
-
-  tags = local.common_tags
 }
 
 resource "aws_service_discovery_service" "api" {
@@ -264,11 +246,7 @@ resource "aws_service_discovery_service" "api" {
     routing_policy = "MULTIVALUE"
   }
 
-  health_check_custom_config {
-    failure_threshold = 1
-  }
-
-  tags = local.common_tags
+  health_check_custom_config {}
 }
 
 resource "aws_ecs_task_definition" "api" {
@@ -323,8 +301,6 @@ resource "aws_ecs_task_definition" "api" {
     aws_iam_role_policy.api_execution_ssm,
     aws_iam_role_policy.api_task_app,
   ]
-
-  tags = local.common_tags
 }
 
 resource "aws_ecs_service" "api" {
@@ -349,8 +325,6 @@ resource "aws_ecs_service" "api" {
   service_registries {
     registry_arn = aws_service_discovery_service.api.arn
   }
-
-  tags = local.common_tags
 }
 
 resource "aws_service_discovery_service" "track" {
@@ -367,11 +341,7 @@ resource "aws_service_discovery_service" "track" {
     routing_policy = "MULTIVALUE"
   }
 
-  health_check_custom_config {
-    failure_threshold = 1
-  }
-
-  tags = local.common_tags
+  health_check_custom_config {}
 }
 
 resource "aws_ecs_task_definition" "track" {
@@ -426,8 +396,6 @@ resource "aws_ecs_task_definition" "track" {
     aws_iam_role_policy.track_execution_ssm,
     aws_iam_role_policy.track_task_dynamodb,
   ]
-
-  tags = local.common_tags
 }
 
 resource "aws_ecs_service" "track" {
@@ -450,8 +418,6 @@ resource "aws_ecs_service" "track" {
   service_registries {
     registry_arn = aws_service_discovery_service.track.arn
   }
-
-  tags = local.common_tags
 }
 
 resource "aws_service_discovery_service" "root_api" {
@@ -468,11 +434,7 @@ resource "aws_service_discovery_service" "root_api" {
     routing_policy = "MULTIVALUE"
   }
 
-  health_check_custom_config {
-    failure_threshold = 1
-  }
-
-  tags = local.common_tags
+  health_check_custom_config {}
 }
 
 resource "aws_ecs_task_definition" "root_api" {
@@ -528,8 +490,6 @@ resource "aws_ecs_task_definition" "root_api" {
     aws_iam_role_policy.root_api_task_app,
     aws_iam_role_policy.root_api_task_aws_access,
   ]
-
-  tags = local.common_tags
 }
 
 resource "aws_ecs_service" "root_api" {
@@ -554,8 +514,6 @@ resource "aws_ecs_service" "root_api" {
   service_registries {
     registry_arn = aws_service_discovery_service.root_api.arn
   }
-
-  tags = local.common_tags
 }
 
 resource "aws_ecs_task_definition" "batch" {
@@ -604,6 +562,4 @@ resource "aws_ecs_task_definition" "batch" {
     aws_iam_role_policy.batch_task_app,
     aws_iam_role_policy.batch_task_aws_access,
   ]
-
-  tags = local.common_tags
 }

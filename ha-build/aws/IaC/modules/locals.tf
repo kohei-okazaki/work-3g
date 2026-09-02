@@ -103,10 +103,4 @@ locals {
     { name = "ROOT_API_URL", value = local.root_api_internal_base_url },
     { name = "HEALTHINFO_TRACK_API_URL", value = local.track_internal_base_url },
   ]
-
-  common_tags = {
-    Project     = var.project_name
-    Environment = var.app_env
-    ManagedBy   = "terraform"
-  }
 }

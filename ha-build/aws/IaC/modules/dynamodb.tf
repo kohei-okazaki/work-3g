@@ -24,8 +24,7 @@ resource "aws_dynamodb_table" "health_info" {
     enabled = true
   }
 
-  tags = merge(local.common_tags, {
-    Name        = "health_info_${var.app_env}"
-    Environment = var.app_env
-  })
+  tags = {
+    Name = "health_info_${var.app_env}"
+  }
 }

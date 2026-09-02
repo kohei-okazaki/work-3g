@@ -23,61 +23,51 @@ data "aws_iam_policy_document" "ec2_assume_role" {
 resource "aws_iam_role" "dashboard_task_execution" {
   name               = "${local.resource_prefix}-dashboard-exec-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
-  tags               = local.common_tags
 }
 
 resource "aws_iam_role" "dashboard_task" {
   name               = "${local.resource_prefix}-dashboard-task-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
-  tags               = local.common_tags
 }
 
 resource "aws_iam_role" "api_task_execution" {
   name               = "${local.resource_prefix}-api-exec-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
-  tags               = local.common_tags
 }
 
 resource "aws_iam_role" "api_task" {
   name               = "${local.resource_prefix}-api-task-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
-  tags               = local.common_tags
 }
 
 resource "aws_iam_role" "root_api_task_execution" {
   name               = "${local.resource_prefix}-root-api-exec-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
-  tags               = local.common_tags
 }
 
 resource "aws_iam_role" "root_api_task" {
   name               = "${local.resource_prefix}-root-api-task-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
-  tags               = local.common_tags
 }
 
 resource "aws_iam_role" "track_task_execution" {
   name               = "${local.resource_prefix}-track-exec-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
-  tags               = local.common_tags
 }
 
 resource "aws_iam_role" "track_task" {
   name               = "${local.resource_prefix}-track-task-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
-  tags               = local.common_tags
 }
 
 resource "aws_iam_role" "batch_task_execution" {
   name               = "${local.resource_prefix}-batch-exec-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
-  tags               = local.common_tags
 }
 
 resource "aws_iam_role" "batch_task" {
   name               = "${local.resource_prefix}-batch-task-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
-  tags               = local.common_tags
 }
 
 resource "aws_iam_role_policy_attachment" "dashboard_task_execution_managed" {
@@ -330,7 +320,6 @@ resource "aws_iam_role_policy" "track_task_dynamodb" {
 resource "aws_iam_role" "bastion" {
   name               = "${local.resource_prefix}-bastion-role"
   assume_role_policy = data.aws_iam_policy_document.ec2_assume_role.json
-  tags               = local.common_tags
 }
 
 resource "aws_iam_role_policy_attachment" "bastion_ssm" {
