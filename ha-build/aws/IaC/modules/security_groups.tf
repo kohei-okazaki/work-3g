@@ -10,9 +10,9 @@ resource "aws_security_group" "shared_db_client" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, {
+  tags = {
     Name = "${local.resource_prefix}-shared-db-client-sg"
-  })
+  }
 }
 
 resource "aws_security_group" "internal_app_client" {
@@ -27,9 +27,9 @@ resource "aws_security_group" "internal_app_client" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, {
+  tags = {
     Name = "${local.resource_prefix}-internal-app-client-sg"
-  })
+  }
 }
 
 resource "aws_security_group" "db" {
@@ -44,9 +44,9 @@ resource "aws_security_group" "db" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, {
+  tags = {
     Name = "${local.resource_prefix}-db-sg"
-  })
+  }
 }
 
 resource "aws_security_group_rule" "db_from_app" {
@@ -71,9 +71,9 @@ resource "aws_security_group" "bastion" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, {
+  tags = {
     Name = "${local.resource_prefix}-bastion-sg"
-  })
+  }
 }
 
 resource "aws_security_group_rule" "bastion_ssh" {
@@ -108,9 +108,9 @@ resource "aws_security_group" "dashboard_ingress" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, {
+  tags = {
     Name = "${local.resource_prefix}-dashboard-web-sg"
-  })
+  }
 }
 
 resource "aws_security_group_rule" "dashboard_public_ingress" {
@@ -135,9 +135,9 @@ resource "aws_security_group" "api_task" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, {
+  tags = {
     Name = "${local.resource_prefix}-api-task-sg"
-  })
+  }
 }
 
 resource "aws_security_group_rule" "api_public_ingress" {
@@ -174,9 +174,9 @@ resource "aws_security_group" "track_task" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, {
+  tags = {
     Name = "${local.resource_prefix}-track-task-sg"
-  })
+  }
 }
 
 resource "aws_security_group_rule" "track_from_internal_app" {
@@ -213,9 +213,9 @@ resource "aws_security_group" "root_api_task" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(local.common_tags, {
+  tags = {
     Name = "${local.resource_prefix}-root-api-task-sg"
-  })
+  }
 }
 
 resource "aws_security_group_rule" "root_api_public_ingress" {

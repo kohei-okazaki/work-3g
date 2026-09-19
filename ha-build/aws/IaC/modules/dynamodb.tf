@@ -17,15 +17,14 @@ resource "aws_dynamodb_table" "health_info" {
   }
 
   point_in_time_recovery {
-    enabled = var.app_env == "prd"
+    enabled = false
   }
 
   server_side_encryption {
     enabled = true
   }
 
-  tags = merge(local.common_tags, {
-    Name        = "health_info_${var.app_env}"
-    Environment = var.app_env
-  })
+  tags = {
+    Name = "health_info_${var.app_env}"
+  }
 }
