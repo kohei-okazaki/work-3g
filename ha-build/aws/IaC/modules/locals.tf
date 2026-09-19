@@ -28,9 +28,9 @@ locals {
   app_ssm_parameter_prefix_resource          = trim(var.app_ssm_parameter_prefix, "/")
   track_django_secret_key_parameter_resource = trim(local.track_django_secret_key_parameter_name, "/")
 
-  db_app_password_parameter_arn         = "arn:${data.aws_partition.current.partition}:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/${local.db_app_password_parameter_resource}"
-  app_ssm_parameter_prefix_arn          = "arn:${data.aws_partition.current.partition}:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/${local.app_ssm_parameter_prefix_resource}/*"
-  track_django_secret_key_parameter_arn = "arn:${data.aws_partition.current.partition}:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter/${local.track_django_secret_key_parameter_resource}"
+  db_app_password_parameter_arn         = "arn:${data.aws_partition.current.partition}:ssm:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:parameter/${local.db_app_password_parameter_resource}"
+  app_ssm_parameter_prefix_arn          = "arn:${data.aws_partition.current.partition}:ssm:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:parameter/${local.app_ssm_parameter_prefix_resource}/*"
+  track_django_secret_key_parameter_arn = "arn:${data.aws_partition.current.partition}:ssm:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:parameter/${local.track_django_secret_key_parameter_resource}"
 
   db_url = "jdbc:mysql://${aws_db_instance.database.address}:${aws_db_instance.database.port}/${var.db_name}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo"
 

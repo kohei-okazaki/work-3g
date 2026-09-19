@@ -9,6 +9,7 @@ module "healthinfo" {
   private_db_subnet_cidrs              = var.private_db_subnet_cidrs
   db_name                              = var.db_name
   db_engine_version                    = var.db_engine_version
+  db_instance_class                    = var.db_instance_class
   db_master_username                   = var.db_master_username
   db_master_password_parameter_version = var.db_master_password_parameter_version
   db_app_username                      = var.db_app_username

@@ -1,22 +1,38 @@
 # Terraform for healthinfo application services
 
-作成する主なリソース:
+## 作成する主なリソース
 
-- VPC / public app subnet x 2 / private DB subnet x 2 / Internet Gateway
-- ECS Cluster
-- Cloud Map private DNS namespace
-- `ha-dashboard` ECS Fargate service / task definition / CloudWatch Logs
-- `ha-api` ECS Fargate service / task definition / CloudWatch Logs / Cloud Map service
-- `ha-root` API ECS Fargate service / task definition / CloudWatch Logs / Cloud Map service
-- `ha-track` ECS Fargate service / task definition / CloudWatch Logs / Cloud Map service
-- `ha-batch` ECS Fargate task definition / CloudWatch Logs
-- RDS MySQL `8.4.8`
-- DynamoDB 
-- SQS FIFO queue
-- RDS初期設定用のEC2踏み台
-- ECR repositories for `ha-dashboard`, `ha-api`, `ha-root` API, `ha-track`, and `ha-batch` images
+- ネットワーク
+  - VPC / Internet Gateway
+  - public app subnet / private DB subnet（それぞれ `az_count` 個、既定は2）
+  - public app subnet / private DB subnet用のルートテーブルと関連付け
+  - ECSタスク、RDS、踏み台EC2用のSecurity Groupと通信ルール
+- コンテナ実行環境
+  - ECS Cluster
+  - `ha-dashboard` ECS Fargate service / task definition
+  - `ha-api` ECS Fargate service / task definition
+  - `ha-root` API ECS Fargate service / task definition
+  - `ha-track` ECS Fargate service / task definition
+  - `ha-batch` 単発実行用ECS Fargate task definition
+  - 各ECSタスク用CloudWatch Logs log group
+- サービスディスカバリ
+  - Cloud Map private DNS namespace
+  - `ha-api` / `ha-root` API / `ha-track` 用Cloud Map service
+- コンテナイメージ
+  - `ha-dashboard` / `ha-api` / `ha-root` API / `ha-track` / `ha-batch` 用ECR repository
+  - 各ECR repositoryの未タグイメージをpushから1日後に削除するLifecycle Policy
+- データストア・キュー
+  - RDS MySQL（`db_engine_version` の既定値は `8.4.8`）とDB subnet group
+  - `health_info_<環境名>` DynamoDB table（On-demand / server-side encryption有効）
+  - API通信ログ用SQS FIFO queue（SQS managed server-side encryption有効）
+- 運用・権限
+  - RDS初期設定・接続用のEC2踏み台とIAM instance profile
+  - 各ECSタスクのexecution role / task roleと必要なIAM policy
 
-`ha-root` / `ha-api` / `ha-dashboard` は同じRDS databaseを同じアプリ用DBユーザで参照。
+`ha-dashboard` / `ha-api` / `ha-root` API / `ha-batch` は、同じRDS databaseを同じアプリ用DBユーザで参照する。
+`ha-track` はRDSを使用せず、環境ごとのDynamoDB tableを使用する。
+
+RDSのパスワードなどを保持するSSM Parameter、`ha-root/front` のS3 static website、およびアプリデータ用S3 bucketは既存リソースを参照し、このTerraformでは作成しない。
 
 ## 注意
 
@@ -34,9 +50,13 @@ ha-build/aws/IaC/
 │  ├─ security_groups.tf
 │  ├─ iam.tf
 │  ├─ rds.tf
+│  ├─ ec2.tf
 │  ├─ dynamodb.tf
 │  ├─ sqs.tf
 │  ├─ ecs.tf
+│  ├─ ecr.tf
+│  ├─ cloudwatch_logs.tf
+│  ├─ cloud_map.tf
 │  ├─ locals.tf
 │  ├─ variables.tf
 │  └─ outputs.tf

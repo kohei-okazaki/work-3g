@@ -59,6 +59,12 @@ variable "db_engine_version" {
   default     = "8.4.8"
 }
 
+variable "db_instance_class" {
+  description = "RDSインスタンスクラス"
+  type        = string
+  default     = "db.t3.micro"
+}
+
 variable "db_master_username" {
   description = "RDSマスターユーザ名"
   type        = string

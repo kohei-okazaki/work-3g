@@ -1,123 +1,3 @@
-resource "aws_ecr_repository" "dashboard" {
-  name                 = "${local.resource_dns_label}/ha-dashboard"
-  image_tag_mutability = "MUTABLE"
-  force_delete         = true
-
-  image_scanning_configuration {
-    scan_on_push = false
-  }
-
-  encryption_configuration {
-    encryption_type = "AES256"
-  }
-
-  tags = {
-    Name = "${local.resource_prefix}-ha-dashboard"
-  }
-}
-
-resource "aws_ecr_repository" "api" {
-  name                 = "${local.resource_dns_label}/ha-api"
-  image_tag_mutability = "MUTABLE"
-  force_delete         = true
-
-  image_scanning_configuration {
-    scan_on_push = false
-  }
-
-  encryption_configuration {
-    encryption_type = "AES256"
-  }
-
-  tags = {
-    Name = "${local.resource_prefix}-ha-api"
-  }
-}
-
-resource "aws_ecr_repository" "root_api" {
-  name                 = "${local.resource_dns_label}/ha-root-api"
-  image_tag_mutability = "MUTABLE"
-  force_delete         = true
-
-  image_scanning_configuration {
-    scan_on_push = false
-  }
-
-  encryption_configuration {
-    encryption_type = "AES256"
-  }
-
-  tags = {
-    Name = "${local.resource_prefix}-ha-root-api"
-  }
-}
-
-resource "aws_ecr_repository" "track" {
-  name                 = "${local.resource_dns_label}/ha-track"
-  image_tag_mutability = "MUTABLE"
-  force_delete         = true
-
-  image_scanning_configuration {
-    scan_on_push = false
-  }
-
-  encryption_configuration {
-    encryption_type = "AES256"
-  }
-
-  tags = {
-    Name = "${local.resource_prefix}-ha-track"
-  }
-}
-
-resource "aws_ecr_repository" "batch" {
-  name                 = "${local.resource_dns_label}/ha-batch"
-  image_tag_mutability = "MUTABLE"
-  force_delete         = true
-
-  image_scanning_configuration {
-    scan_on_push = false
-  }
-
-  encryption_configuration {
-    encryption_type = "AES256"
-  }
-
-  tags = {
-    Name = "${local.resource_prefix}-ha-batch"
-  }
-}
-
-resource "aws_ecr_lifecycle_policy" "expire_untagged_images" {
-  for_each = {
-    dashboard = aws_ecr_repository.dashboard.name
-    api       = aws_ecr_repository.api.name
-    root_api  = aws_ecr_repository.root_api.name
-    track     = aws_ecr_repository.track.name
-    batch     = aws_ecr_repository.batch.name
-  }
-
-  repository = each.value
-
-  policy = jsonencode({
-    rules = [
-      {
-        rulePriority = 1
-        description  = "Expire untagged images one day after they are pushed"
-        selection = {
-          tagStatus   = "untagged"
-          countType   = "sinceImagePushed"
-          countUnit   = "days"
-          countNumber = 1
-        }
-        action = {
-          type = "expire"
-        }
-      }
-    ]
-  })
-}
-
 resource "aws_ecs_cluster" "main" {
   name = "${local.resource_prefix}-cluster"
 
@@ -125,37 +5,6 @@ resource "aws_ecs_cluster" "main" {
     name  = "containerInsights"
     value = "disabled"
   }
-}
-
-resource "aws_service_discovery_private_dns_namespace" "app" {
-  name        = local.service_discovery_namespace_name
-  description = "Private DNS namespace for ${local.resource_prefix} app services"
-  vpc         = aws_vpc.main.id
-}
-
-resource "aws_cloudwatch_log_group" "dashboard" {
-  name              = "/ecs/${local.resource_prefix}/ha-dashboard"
-  retention_in_days = 1
-}
-
-resource "aws_cloudwatch_log_group" "api" {
-  name              = "/ecs/${local.resource_prefix}/ha-api"
-  retention_in_days = 1
-}
-
-resource "aws_cloudwatch_log_group" "root_api" {
-  name              = "/ecs/${local.resource_prefix}/ha-root-api"
-  retention_in_days = 1
-}
-
-resource "aws_cloudwatch_log_group" "track" {
-  name              = "/ecs/${local.resource_prefix}/ha-track"
-  retention_in_days = 1
-}
-
-resource "aws_cloudwatch_log_group" "batch" {
-  name              = "/ecs/${local.resource_prefix}/ha-batch"
-  retention_in_days = 1
 }
 
 resource "aws_ecs_task_definition" "dashboard" {
@@ -198,7 +47,7 @@ resource "aws_ecs_task_definition" "dashboard" {
         logDriver = "awslogs"
         options = {
           awslogs-group         = aws_cloudwatch_log_group.dashboard.name
-          awslogs-region        = data.aws_region.current.name
+          awslogs-region        = data.aws_region.current.region
           awslogs-stream-prefix = "ha-dashboard"
         }
       }
@@ -230,23 +79,6 @@ resource "aws_ecs_service" "dashboard" {
     ]
     assign_public_ip = true
   }
-}
-
-resource "aws_service_discovery_service" "api" {
-  name = local.api_service_discovery_name
-
-  dns_config {
-    namespace_id = aws_service_discovery_private_dns_namespace.app.id
-
-    dns_records {
-      ttl  = 30
-      type = "A"
-    }
-
-    routing_policy = "MULTIVALUE"
-  }
-
-  health_check_custom_config {}
 }
 
 resource "aws_ecs_task_definition" "api" {
@@ -289,7 +121,7 @@ resource "aws_ecs_task_definition" "api" {
         logDriver = "awslogs"
         options = {
           awslogs-group         = aws_cloudwatch_log_group.api.name
-          awslogs-region        = data.aws_region.current.name
+          awslogs-region        = data.aws_region.current.region
           awslogs-stream-prefix = "ha-api"
         }
       }
@@ -325,23 +157,6 @@ resource "aws_ecs_service" "api" {
   service_registries {
     registry_arn = aws_service_discovery_service.api.arn
   }
-}
-
-resource "aws_service_discovery_service" "track" {
-  name = local.track_service_discovery_name
-
-  dns_config {
-    namespace_id = aws_service_discovery_private_dns_namespace.app.id
-
-    dns_records {
-      ttl  = 30
-      type = "A"
-    }
-
-    routing_policy = "MULTIVALUE"
-  }
-
-  health_check_custom_config {}
 }
 
 resource "aws_ecs_task_definition" "track" {
@@ -384,7 +199,7 @@ resource "aws_ecs_task_definition" "track" {
         logDriver = "awslogs"
         options = {
           awslogs-group         = aws_cloudwatch_log_group.track.name
-          awslogs-region        = data.aws_region.current.name
+          awslogs-region        = data.aws_region.current.region
           awslogs-stream-prefix = "ha-track"
         }
       }
@@ -418,23 +233,6 @@ resource "aws_ecs_service" "track" {
   service_registries {
     registry_arn = aws_service_discovery_service.track.arn
   }
-}
-
-resource "aws_service_discovery_service" "root_api" {
-  name = local.root_api_service_discovery_name
-
-  dns_config {
-    namespace_id = aws_service_discovery_private_dns_namespace.app.id
-
-    dns_records {
-      ttl  = 30
-      type = "A"
-    }
-
-    routing_policy = "MULTIVALUE"
-  }
-
-  health_check_custom_config {}
 }
 
 resource "aws_ecs_task_definition" "root_api" {
@@ -477,7 +275,7 @@ resource "aws_ecs_task_definition" "root_api" {
         logDriver = "awslogs"
         options = {
           awslogs-group         = aws_cloudwatch_log_group.root_api.name
-          awslogs-region        = data.aws_region.current.name
+          awslogs-region        = data.aws_region.current.region
           awslogs-stream-prefix = "ha-root-api"
         }
       }
@@ -549,7 +347,7 @@ resource "aws_ecs_task_definition" "batch" {
         logDriver = "awslogs"
         options = {
           awslogs-group         = aws_cloudwatch_log_group.batch.name
-          awslogs-region        = data.aws_region.current.name
+          awslogs-region        = data.aws_region.current.region
           awslogs-stream-prefix = "ha-batch"
         }
       }
