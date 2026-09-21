@@ -172,12 +172,6 @@ variable "root_front_url" {
   default     = "http://localhost:8083"
 }
 
-variable "app_data_bucket_name" {
-  description = "Spring Bootアプリが使用する既存アプリケーションデータ用S3バケット。Terraformではこのバケットを作成しません。"
-  type        = string
-  default     = "healthinfo-app-dev"
-}
-
 variable "image_tag" {
   description = "すべてのECRイメージで使用するDockerイメージタグ"
   type        = string

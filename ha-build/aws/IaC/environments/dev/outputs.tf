@@ -90,6 +90,14 @@ output "app_env" {
   value = module.healthinfo.app_env
 }
 
+output "app_data_bucket_name" {
+  value = module.healthinfo.app_data_bucket_name
+}
+
+output "app_data_bucket_arn" {
+  value = module.healthinfo.app_data_bucket_arn
+}
+
 output "health_info_dynamodb_table_name" {
   value = module.healthinfo.health_info_dynamodb_table_name
 }

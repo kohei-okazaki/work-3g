@@ -90,6 +90,14 @@ output "app_env" {
   value = var.app_env
 }
 
+output "app_data_bucket_name" {
+  value = aws_s3_bucket.app_data.id
+}
+
+output "app_data_bucket_arn" {
+  value = aws_s3_bucket.app_data.arn
+}
+
 output "health_info_dynamodb_table_name" {
   value = aws_dynamodb_table.health_info.name
 }

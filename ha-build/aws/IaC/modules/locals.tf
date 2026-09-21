@@ -82,7 +82,7 @@ locals {
     { name = "SERVER_PORT", value = tostring(local.root_api_container_port) },
     { name = "API_LOG_QUEUE_NAME", value = aws_sqs_queue.api_log.name },
     { name = "FRONT_URL", value = var.root_front_url },
-    { name = "AWS_S3_BACKET", value = var.app_data_bucket_name },
+    { name = "AWS_S3_BACKET", value = aws_s3_bucket.app_data.id },
   ]
 
   track_environment = [

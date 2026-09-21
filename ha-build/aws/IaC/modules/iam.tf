@@ -230,7 +230,7 @@ data "aws_iam_policy_document" "batch_task_aws_access" {
       "s3:ListBucket",
     ]
     resources = [
-      "arn:${data.aws_partition.current.partition}:s3:::${var.app_data_bucket_name}",
+      aws_s3_bucket.app_data.arn,
     ]
   }
 
@@ -242,7 +242,7 @@ data "aws_iam_policy_document" "batch_task_aws_access" {
       "s3:PutObjectAcl",
     ]
     resources = [
-      "arn:${data.aws_partition.current.partition}:s3:::${var.app_data_bucket_name}/*",
+      "${aws_s3_bucket.app_data.arn}/*",
     ]
   }
 
@@ -268,7 +268,7 @@ data "aws_iam_policy_document" "root_api_task_aws_access" {
       "s3:ListBucket",
     ]
     resources = [
-      "arn:${data.aws_partition.current.partition}:s3:::${var.app_data_bucket_name}",
+      aws_s3_bucket.app_data.arn,
     ]
   }
 
@@ -280,7 +280,7 @@ data "aws_iam_policy_document" "root_api_task_aws_access" {
       "s3:DeleteObject",
     ]
     resources = [
-      "arn:${data.aws_partition.current.partition}:s3:::${var.app_data_bucket_name}/*",
+      "${aws_s3_bucket.app_data.arn}/*",
     ]
   }
 

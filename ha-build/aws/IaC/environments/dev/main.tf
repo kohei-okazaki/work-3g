@@ -27,7 +27,6 @@ module "healthinfo" {
   root_api_desired_count               = var.root_api_desired_count
   root_api_public_allowed_cidr         = var.root_api_public_allowed_cidr
   root_front_url                       = var.root_front_url
-  app_data_bucket_name                 = var.app_data_bucket_name
   image_tag                            = var.image_tag
   health_info_dashboard_url            = var.health_info_dashboard_url
 }

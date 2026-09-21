@@ -24,6 +24,7 @@
 - データストア・キュー
   - RDS MySQL（`db_engine_version` の既定値は `8.4.8`）とDB subnet group
   - `health_info_<環境名>` DynamoDB table（On-demand / server-side encryption有効）
+  - `healthinfo-app-<環境名>` アプリデータ用S3 bucket（ACL無効 / public access block / server-side encryption有効）
   - API通信ログ用SQS FIFO queue（SQS managed server-side encryption有効）
 - 運用・権限
   - RDS初期設定・接続用のEC2踏み台とIAM instance profile
@@ -32,12 +33,14 @@
 `ha-dashboard` / `ha-api` / `ha-root` API / `ha-batch` は、同じRDS databaseを同じアプリ用DBユーザで参照する。
 `ha-track` はRDSを使用せず、環境ごとのDynamoDB tableを使用する。
 
-RDSのパスワードなどを保持するSSM Parameter、`ha-root/front` のS3 static website、およびアプリデータ用S3 bucketは既存リソースを参照し、このTerraformでは作成しない。
+RDSのパスワードなどを保持するSSM Parameterと `ha-root/front` のS3 static websiteは既存リソースを参照し、このTerraformでは作成しない。
+アプリデータ用S3 bucketは `healthinfo-app-<app_env>` という名前でこのTerraformが作成する。
 
 ## 注意
 
 - このTerraform構成でECRリポジトリを作成し、Docker imageは手順に沿って `docker build` / `docker push`
 - `ha-root/front` のS3 static websiteは既存管理のままとし、このTerraformでは作成・変更対象外
+- S3 bucket名はグローバルで一意。同一AWSアカウントの既存bucketを管理対象へ移す場合は、適用前にTerraform stateへimportする
 - TerraformでRDS master passwordをSSM SecureStringから読むため、値はTerraform stateにsensitive値として保持
 - `terraform.tfstate` と `*.tfvars` はGit管理対象外。環境ごとの `environments/<環境名>` 配下に配置
 
@@ -52,6 +55,7 @@ ha-build/aws/IaC/
 │  ├─ rds.tf
 │  ├─ ec2.tf
 │  ├─ dynamodb.tf
+│  ├─ s3.tf
 │  ├─ sqs.tf
 │  ├─ ecs.tf
 │  ├─ ecr.tf
@@ -82,7 +86,6 @@ ha-build/aws/IaC/
 - `Dockerfile.ha-dashboard`、`Dockerfile.ha-api`、`Dockerfile.ha-root-api`、`Dockerfile.ha-track` がリポジトリ直下にあること
 - RDS master passwordとapp user passwordのSSM SecureStringを事前に作っておくこと
 - `ha-root/front` の既存S3サイトURLを `root_front_url` として渡せること
-- `ha-root` API が利用する既存アプリデータ用S3 bucket名を `app_data_bucket_name` として渡せること
 
 ## Terraformのインストール
 
