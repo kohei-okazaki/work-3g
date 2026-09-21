@@ -104,3 +104,20 @@ locals {
     { name = "HEALTHINFO_TRACK_API_URL", value = local.track_internal_base_url },
   ]
 }
+
+locals {
+  healthinfo_analysis_resource_prefix = "healthinfo-analysis-${var.app_env}"
+  state_machine_name                  = "healthinfo-analyze-statement-${var.app_env}"
+  input_prefix                        = "monthly/healthinfo/"
+  input_key_pattern                   = "${local.input_prefix}year=*/*.csv.gz"
+  athena_result_prefix                = "monthly/athena-results/"
+
+  glue_database_name = "healthinfo_${var.app_env}"
+  glue_table_name    = "health_info"
+  athena_query       = "SELECT COUNT(*) AS record_count FROM \"${local.glue_table_name}\" WHERE \"year\" = ? AND \"$path\" = ?"
+
+  athena_result_s3_uri = "s3://${aws_s3_bucket.app_data.id}/${local.athena_result_prefix}"
+  input_bucket_arn     = aws_s3_bucket.app_data.arn
+  sns_topic_arn        = "arn:${data.aws_partition.current.partition}:sns:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:${local.healthinfo_analysis_resource_prefix}"
+  state_machine_arn    = "arn:${data.aws_partition.current.partition}:states:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:stateMachine:${local.state_machine_name}"
+}

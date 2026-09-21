@@ -26,6 +26,12 @@
   - `health_info_<環境名>` DynamoDB table（On-demand / server-side encryption有効）
   - `healthinfo-app-<環境名>` アプリデータ用S3 bucket（ACL無効 / public access block / server-side encryption有効）
   - API通信ログ用SQS FIFO queue（SQS managed server-side encryption有効）
+- 月次健康情報分析・通知
+  - S3 Object Created eventを受け取るEventBridge ruleと配信失敗用SQS DLQ
+  - `healthinfo-analyze-statement-<環境名>` Step Functions Standard workflow
+  - Glue Data CatalogのCSV tableとAthena workgroup
+  - Athena query結果用S3 prefixと7日保持のLifecycle rule
+  - SNSとAmazon Q Developer in chat applicationsを経由するSlack通知
 - 運用・権限
   - RDS初期設定・接続用のEC2踏み台とIAM instance profile
   - 各ECSタスクのexecution role / task roleと必要なIAM policy
@@ -43,6 +49,8 @@ RDSのパスワードなどを保持するSSM Parameterと `ha-root/front` のS3
 - S3 bucket名はグローバルで一意。同一AWSアカウントの既存bucketを管理対象へ移す場合は、適用前にTerraform stateへimportする
 - TerraformでRDS master passwordをSSM SecureStringから読むため、値はTerraform stateにsensitive値として保持
 - `terraform.tfstate` と `*.tfvars` はGit管理対象外。環境ごとの `environments/<環境名>` 配下に配置
+- `environments/dev` の同じstateでアプリ基盤と月次健康情報分析基盤を管理するため、`plan` / `apply` / `destroy` は両方を対象にする
+- S3 bucket notificationとLifecycleはbucket単位の設定。手動または別stateで設定を追加する場合はTerraform定義へ統合する
 
 ## ディレクトリ構成
 
@@ -59,13 +67,17 @@ ha-build/aws/IaC/
 │  ├─ sqs.tf
 │  ├─ ecs.tf
 │  ├─ ecr.tf
+│  ├─ athena.tf
+│  ├─ eventbridge.tf
+│  ├─ step_functions.tf
+│  ├─ notifications.tf
 │  ├─ cloudwatch_logs.tf
 │  ├─ cloud_map.tf
 │  ├─ locals.tf
 │  ├─ variables.tf
 │  └─ outputs.tf
 ├─ environments/
-│  └─ dev/               # dev環境のTerraform実行ルート
+│  └─ dev/               # アプリ基盤と分析基盤を管理するdev環境Terraform実行ルート
 │     ├─ main.tf
 │     ├─ versions.tf
 │     ├─ providers.tf
@@ -76,7 +88,9 @@ ha-build/aws/IaC/
 └─ README.md
 ```
 
-`modules` は単独で実行せず、`environments/dev` からmoduleとして呼び出す。
+`modules` は単独で実行せず、`environments` 配下の対応する実行ルートからmoduleとして呼び出す。
+
+`environments/dev` は単一の `module.healthinfo` でWebアプリ基盤と月次健康情報分析基盤をまとめて作成し、同じbackend・stateで管理する。
 
 ## 前提
 
@@ -175,6 +189,39 @@ terraform init -backend-config=backend.hcl
 terraform fmt -recursive ../..
 terraform validate
 ```
+
+## 月次健康情報CSVのAthena分析・Slack通知
+
+```mermaid
+flowchart LR
+    Batch["monthly_health_info_summary.sh"] -->|"monthly/healthinfo/year=YYYY/YYYYMM.csv.gz"| S3[("healthinfo-app-dev")]
+    S3 --> EventBridge["EventBridge<br/>Object Created"]
+    EventBridge --> SF["Step Functions Standard<br/>healthinfo-analyze-statement-dev"]
+    EventBridge -.->|"配信失敗"| DLQ["SQS DLQ"]
+    SF -->|"StartQueryExecution.sync<br/>GetQueryResults"| Athena["Athena"]
+    Glue["Glue Data Catalog"] -.-> Athena
+    Athena --> Results[("S3<br/>monthly/athena-results/")]
+    SF --> SNS["SNS"] --> Q["Amazon Q Developer"] --> Slack["Slack"]
+```
+
+Athena queryはEventBridgeが受け取った1ファイルだけを対象に `COUNT(*)` を実行する。空CSVは0件として処理し、Slackには健康情報の明細を送らず、件数・入力S3 key・Athena QueryExecutionId・結果prefixだけを通知する。
+
+個人dev向けの既定値:
+
+- Athena scan上限: 1 query当たり100 MiB
+- Athena結果保持: 7日
+- Step Functions log: `ERROR` のみ、実行データを含めず1日保持
+- Amazon Q診断log: 無効
+- customer managed KMS key、Glue Crawler、Lambda、Athena Provisioned Capacity: 作成しない
+
+Slack通知を有効にする場合は、AWSコンソールでAmazon QとSlack workspaceを認可し、channelへAmazon Qを招待してから `environments/dev/terraform.tfvars` に次を追加する。両方が空の場合はAmazon QのSlack channel configurationを作成せず、SNSまでを構築する。
+
+```hcl
+slack_team_id    = "T0123456789"
+slack_channel_id = "C0123456789"
+```
+
+現在の `MonthlyHealthInfoSummaryWriter` はS3 upload後に `slack.sendFile(...)` でもCSV.gzを送信するため、新経路を有効にすると通知が二重になる。新経路へ完全移行する場合は、動作確認後に既存のファイル送信を無効化する。
 
 ## リソース確認(terraform plan)
 

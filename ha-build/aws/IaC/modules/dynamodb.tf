@@ -24,7 +24,4 @@ resource "aws_dynamodb_table" "health_info" {
     enabled = true
   }
 
-  tags = {
-    Name = "health_info_${var.app_env}"
-  }
 }

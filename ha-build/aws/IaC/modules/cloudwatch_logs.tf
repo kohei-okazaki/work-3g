@@ -22,3 +22,8 @@ resource "aws_cloudwatch_log_group" "batch" {
   name              = "/ecs/${local.resource_prefix}/ha-batch"
   retention_in_days = 1
 }
+
+resource "aws_cloudwatch_log_group" "step_functions" {
+  name              = "/aws/vendedlogs/states/${local.state_machine_name}"
+  retention_in_days = var.step_functions_log_retention_days
+}

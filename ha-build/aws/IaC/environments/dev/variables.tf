@@ -181,3 +181,51 @@ variable "health_info_dashboard_url" {
   type        = string
   default     = ""
 }
+
+variable "athena_bytes_scanned_cutoff_per_query" {
+  description = "Athena query 1回当たりの最大scan byte数。devの既定値は100 MiBです。"
+  type        = number
+  default     = 104857600
+
+  validation {
+    condition     = var.athena_bytes_scanned_cutoff_per_query >= 10000000
+    error_message = "Athenaのquery scan上限は10,000,000 byte以上にしてください。"
+  }
+}
+
+variable "athena_result_expiration_days" {
+  description = "Athena query結果をS3に保持する日数"
+  type        = number
+  default     = 7
+
+  validation {
+    condition     = var.athena_result_expiration_days >= 1
+    error_message = "athena_result_expiration_daysは1以上にしてください。"
+  }
+}
+
+variable "step_functions_log_retention_days" {
+  description = "Step FunctionsのERROR logをCloudWatch Logsに保持する日数"
+  type        = number
+  default     = 1
+
+  validation {
+    condition = contains([
+      1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365,
+      400, 545, 731, 1096, 1827, 2192, 2557, 2922, 3288, 3653,
+    ], var.step_functions_log_retention_days)
+    error_message = "step_functions_log_retention_daysはCloudWatch Logsが対応する保持日数にしてください。"
+  }
+}
+
+variable "slack_team_id" {
+  description = "Amazon Qで認可済みのSlack Workspace ID。Slack通知を作成しない場合はslack_channel_idと共に空にします。"
+  type        = string
+  default     = ""
+}
+
+variable "slack_channel_id" {
+  description = "通知先Slack Channel ID。Slack通知を作成しない場合はslack_team_idと共に空にします。"
+  type        = string
+  default     = ""
+}
