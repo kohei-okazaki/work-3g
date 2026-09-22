@@ -294,10 +294,6 @@ output "healthinfo_analysis_athena_result_s3_uri" {
   value = module.healthinfo.healthinfo_analysis_athena_result_s3_uri
 }
 
-output "healthinfo_analysis_slack_notifications_enabled" {
-  value = module.healthinfo.healthinfo_analysis_slack_notifications_enabled
-}
-
 output "healthinfo_analysis_amazon_q_slack_configuration_arn" {
   value = module.healthinfo.healthinfo_analysis_amazon_q_slack_configuration_arn
 }

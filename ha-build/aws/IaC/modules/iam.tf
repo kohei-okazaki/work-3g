@@ -307,13 +307,13 @@ resource "aws_iam_role_policy" "track_task_dynamodb_policy" {
 }
 
 resource "aws_iam_role" "bastion_role" {
-  name               = "${local.resource_prefix}-bastion-role"
+  name = "${local.resource_prefix}-bastion-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
-        Effect    = "Allow"
-        Action    = "sts:AssumeRole"
+        Effect = "Allow"
+        Action = "sts:AssumeRole"
         Principal = {
           Service = "ec2.amazonaws.com"
         }
@@ -334,7 +334,7 @@ resource "aws_iam_instance_profile" "bastion" {
 
 # IAM roles and policies for the monthly health information analysis workflow.
 resource "aws_iam_role" "step_functions_role" {
-  name               = "${local.resource_prefix}-sfn-role"
+  name = "${local.resource_prefix}-sfn-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -473,7 +473,7 @@ resource "aws_iam_role_policy" "step_functions_policy" {
 }
 
 resource "aws_iam_role" "eventbridge_role" {
-  name               = "${local.resource_prefix}-events-role"
+  name = "${local.resource_prefix}-events-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -497,8 +497,8 @@ resource "aws_iam_role" "eventbridge_role" {
 }
 
 resource "aws_iam_role_policy" "eventbridge_policy" {
-  name   = "${local.resource_prefix}-events-policy"
-  role   = aws_iam_role.eventbridge_role.id
+  name = "${local.resource_prefix}-events-policy"
+  role = aws_iam_role.eventbridge_role.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -513,7 +513,7 @@ resource "aws_iam_role_policy" "eventbridge_policy" {
 }
 
 resource "aws_iam_role" "amazon_q_role" {
-  name               = "${local.resource_prefix}-amazon-q-role"
+  name = "${local.resource_prefix}-amazon-q-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [

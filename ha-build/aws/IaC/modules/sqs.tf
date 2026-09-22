@@ -18,13 +18,13 @@ resource "aws_sqs_queue_policy" "eventbridge_dlq" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid       = "AllowEventBridgeDelivery"
-        Effect    = "Allow"
+        Sid    = "AllowEventBridgeDelivery"
+        Effect = "Allow"
         Principal = {
           Service = "events.amazonaws.com"
         }
-        Action    = "sqs:SendMessage"
-        Resource  = aws_sqs_queue.eventbridge_dlq.arn
+        Action   = "sqs:SendMessage"
+        Resource = aws_sqs_queue.eventbridge_dlq.arn
         Condition = {
           ArnEquals = {
             "aws:SourceArn" = aws_cloudwatch_event_rule.healthinfo_object_created.arn

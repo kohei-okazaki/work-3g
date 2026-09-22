@@ -32,7 +32,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "app_data" {
 resource "aws_s3_bucket_notification" "eventbridge" {
   bucket      = aws_s3_bucket.app_data.id
   eventbridge = true
-  depends_on = [aws_cloudwatch_event_target.step_functions]
+  depends_on  = [aws_cloudwatch_event_target.step_functions]
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "athena_results" {

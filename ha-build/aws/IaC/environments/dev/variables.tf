@@ -219,13 +219,13 @@ variable "step_functions_log_retention_days" {
 }
 
 variable "slack_team_id" {
-  description = "Amazon Qで認可済みのSlack Workspace ID。Slack通知を作成しない場合はslack_channel_idと共に空にします。"
+  description = "Amazon Qで認可済みのSlack Workspace ID。"
   type        = string
   default     = ""
 }
 
 variable "slack_channel_id" {
-  description = "通知先Slack Channel ID。Slack通知を作成しない場合はslack_team_idと共に空にします。"
+  description = "通知先Slack Channel ID。"
   type        = string
   default     = ""
 }
