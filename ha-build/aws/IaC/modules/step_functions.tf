@@ -1,5 +1,3 @@
-# Monthly health information analysis workflow.
-
 resource "aws_sfn_state_machine" "healthinfo_analysis" {
   name     = local.state_machine_name
   role_arn = aws_iam_role.step_functions_role.arn

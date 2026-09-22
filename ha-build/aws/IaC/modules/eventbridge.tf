@@ -1,4 +1,3 @@
-# Starts the analysis workflow when a monthly CSV.gz object is created.
 resource "aws_cloudwatch_event_rule" "healthinfo_object_created" {
   name        = "${local.resource_prefix}-object-created"
   description = "Starts health information analysis for monthly CSV.gz uploads."
