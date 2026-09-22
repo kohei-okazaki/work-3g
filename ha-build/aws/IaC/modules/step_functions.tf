@@ -2,7 +2,7 @@
 
 resource "aws_sfn_state_machine" "healthinfo_analysis" {
   name     = local.state_machine_name
-  role_arn = aws_iam_role.step_functions.arn
+  role_arn = aws_iam_role.step_functions_role.arn
   type     = "STANDARD"
 
   logging_configuration {
@@ -213,5 +213,5 @@ resource "aws_sfn_state_machine" "healthinfo_analysis" {
     }
   })
 
-  depends_on = [aws_iam_role_policy.step_functions]
+  depends_on = [aws_iam_role_policy.step_functions_policy]
 }

@@ -1,7 +1,7 @@
 resource "aws_chatbot_slack_channel_configuration" "healthinfo_analysis" {
 
   configuration_name = local.state_machine_name
-  iam_role_arn       = aws_iam_role.amazon_q.arn
+  iam_role_arn       = aws_iam_role.amazon_q_role.arn
   slack_team_id      = var.slack_team_id
   slack_channel_id   = var.slack_channel_id
   sns_topic_arns     = [aws_sns_topic.healthinfo_analysis.arn]

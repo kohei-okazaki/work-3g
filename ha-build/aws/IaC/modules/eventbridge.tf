@@ -1,6 +1,6 @@
 # Starts the analysis workflow when a monthly CSV.gz object is created.
 resource "aws_cloudwatch_event_rule" "healthinfo_object_created" {
-  name        = "${local.healthinfo_analysis_resource_prefix}-object-created"
+  name        = "${local.resource_prefix}-object-created"
   description = "Starts health information analysis for monthly CSV.gz uploads."
   state       = "ENABLED"
 
@@ -27,7 +27,7 @@ resource "aws_cloudwatch_event_target" "step_functions" {
   rule      = aws_cloudwatch_event_rule.healthinfo_object_created.name
   target_id = "HealthInfoAnalysisStateMachine"
   arn       = aws_sfn_state_machine.healthinfo_analysis.arn
-  role_arn  = aws_iam_role.eventbridge.arn
+  role_arn  = aws_iam_role.eventbridge_role.arn
 
   dead_letter_config {
     arn = aws_sqs_queue.eventbridge_dlq.arn
@@ -39,7 +39,7 @@ resource "aws_cloudwatch_event_target" "step_functions" {
   }
 
   depends_on = [
-    aws_iam_role_policy.eventbridge,
+    aws_iam_role_policy.eventbridge_policy,
     aws_sqs_queue_policy.eventbridge_dlq,
   ]
 }

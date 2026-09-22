@@ -46,84 +46,84 @@ data "aws_iam_policy_document" "app_task_policy" {
   }
 }
 
-resource "aws_iam_role" "dashboard_task_execution" {
+resource "aws_iam_role" "dashboard_task_execution_role" {
   name               = "${local.resource_prefix}-dashboard-exec-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
 }
 
-resource "aws_iam_role" "dashboard_task" {
+resource "aws_iam_role" "dashboard_task_role" {
   name               = "${local.resource_prefix}-dashboard-task-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
 }
 
-resource "aws_iam_role" "api_task_execution" {
+resource "aws_iam_role" "api_task_execution_role" {
   name               = "${local.resource_prefix}-api-exec-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
 }
 
-resource "aws_iam_role" "api_task" {
+resource "aws_iam_role" "api_task_role" {
   name               = "${local.resource_prefix}-api-task-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
 }
 
-resource "aws_iam_role" "root_api_task_execution" {
+resource "aws_iam_role" "root_api_task_execution_role" {
   name               = "${local.resource_prefix}-root-api-exec-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
 }
 
-resource "aws_iam_role" "root_api_task" {
+resource "aws_iam_role" "root_api_task_role" {
   name               = "${local.resource_prefix}-root-api-task-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
 }
 
-resource "aws_iam_role" "track_task_execution" {
+resource "aws_iam_role" "track_task_execution_role" {
   name               = "${local.resource_prefix}-track-exec-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
 }
 
-resource "aws_iam_role" "track_task" {
+resource "aws_iam_role" "track_task_role" {
   name               = "${local.resource_prefix}-track-task-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
 }
 
-resource "aws_iam_role" "batch_task_execution" {
+resource "aws_iam_role" "batch_task_execution_role" {
   name               = "${local.resource_prefix}-batch-exec-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
 }
 
-resource "aws_iam_role" "batch_task" {
+resource "aws_iam_role" "batch_task_role" {
   name               = "${local.resource_prefix}-batch-task-role"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
 }
 
 resource "aws_iam_role_policy_attachment" "dashboard_task_execution_managed" {
-  role       = aws_iam_role.dashboard_task_execution.name
+  role       = aws_iam_role.dashboard_task_execution_role.name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
 resource "aws_iam_role_policy_attachment" "api_task_execution_managed" {
-  role       = aws_iam_role.api_task_execution.name
+  role       = aws_iam_role.api_task_execution_role.name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
 resource "aws_iam_role_policy_attachment" "root_api_task_execution_managed" {
-  role       = aws_iam_role.root_api_task_execution.name
+  role       = aws_iam_role.root_api_task_execution_role.name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
 resource "aws_iam_role_policy_attachment" "track_task_execution_managed" {
-  role       = aws_iam_role.track_task_execution.name
+  role       = aws_iam_role.track_task_execution_role.name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
 resource "aws_iam_role_policy_attachment" "batch_task_execution_managed" {
-  role       = aws_iam_role.batch_task_execution.name
+  role       = aws_iam_role.batch_task_execution_role.name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
-resource "aws_iam_role_policy" "track_execution_ssm" {
+resource "aws_iam_role_policy" "track_execution_ssm_policy" {
   name = "${local.resource_prefix}-track-exec-ssm"
-  role = aws_iam_role.track_task_execution.id
+  role = aws_iam_role.track_task_execution_role.id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -155,59 +155,59 @@ resource "aws_iam_role_policy" "track_execution_ssm" {
 
 
 
-resource "aws_iam_role_policy" "dashboard_execution_ssm" {
+resource "aws_iam_role_policy" "dashboard_execution_ssm_policy" {
   name   = "${local.resource_prefix}-dashboard-exec-ssm"
-  role   = aws_iam_role.dashboard_task_execution.id
+  role   = aws_iam_role.dashboard_task_execution_role.id
   policy = data.aws_iam_policy_document.ecs_execution_ssm.json
 }
 
-resource "aws_iam_role_policy" "api_execution_ssm" {
+resource "aws_iam_role_policy" "api_execution_ssm_policy" {
   name   = "${local.resource_prefix}-api-exec-ssm"
-  role   = aws_iam_role.api_task_execution.id
+  role   = aws_iam_role.api_task_execution_role.id
   policy = data.aws_iam_policy_document.ecs_execution_ssm.json
 }
 
-resource "aws_iam_role_policy" "root_api_execution_ssm" {
+resource "aws_iam_role_policy" "root_api_execution_ssm_policy" {
   name   = "${local.resource_prefix}-root-api-exec-ssm"
-  role   = aws_iam_role.root_api_task_execution.id
+  role   = aws_iam_role.root_api_task_execution_role.id
   policy = data.aws_iam_policy_document.ecs_execution_ssm.json
 }
 
-resource "aws_iam_role_policy" "batch_execution_ssm" {
+resource "aws_iam_role_policy" "batch_execution_ssm_policy" {
   name   = "${local.resource_prefix}-batch-exec-ssm"
-  role   = aws_iam_role.batch_task_execution.id
+  role   = aws_iam_role.batch_task_execution_role.id
   policy = data.aws_iam_policy_document.ecs_execution_ssm.json
 }
 
 
 
-resource "aws_iam_role_policy" "dashboard_task_app" {
+resource "aws_iam_role_policy" "dashboard_task_app_policy" {
   name   = "${local.resource_prefix}-dashboard-task-app"
-  role   = aws_iam_role.dashboard_task.id
+  role   = aws_iam_role.dashboard_task_role.id
   policy = data.aws_iam_policy_document.app_task_policy.json
 }
 
-resource "aws_iam_role_policy" "api_task_app" {
+resource "aws_iam_role_policy" "api_task_app_policy" {
   name   = "${local.resource_prefix}-api-task-app"
-  role   = aws_iam_role.api_task.id
+  role   = aws_iam_role.api_task_role.id
   policy = data.aws_iam_policy_document.app_task_policy.json
 }
 
-resource "aws_iam_role_policy" "root_api_task_app" {
+resource "aws_iam_role_policy" "root_api_task_app_policy" {
   name   = "${local.resource_prefix}-root-api-task-app"
-  role   = aws_iam_role.root_api_task.id
+  role   = aws_iam_role.root_api_task_role.id
   policy = data.aws_iam_policy_document.app_task_policy.json
 }
 
-resource "aws_iam_role_policy" "batch_task_app" {
+resource "aws_iam_role_policy" "batch_task_app_policy" {
   name   = "${local.resource_prefix}-batch-task-app"
-  role   = aws_iam_role.batch_task.id
+  role   = aws_iam_role.batch_task_role.id
   policy = data.aws_iam_policy_document.app_task_policy.json
 }
 
-resource "aws_iam_role_policy" "batch_task_aws_access" {
+resource "aws_iam_role_policy" "batch_task_aws_access_policy" {
   name = "${local.resource_prefix}-batch-task-aws-access"
-  role = aws_iam_role.batch_task.id
+  role = aws_iam_role.batch_task_role.id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -251,9 +251,9 @@ resource "aws_iam_role_policy" "batch_task_aws_access" {
   })
 }
 
-resource "aws_iam_role_policy" "root_api_task_aws_access" {
+resource "aws_iam_role_policy" "root_api_task_aws_access_policy" {
   name = "${local.resource_prefix}-root-api-task-aws-access"
-  role = aws_iam_role.root_api_task.id
+  role = aws_iam_role.root_api_task_role.id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -288,9 +288,9 @@ resource "aws_iam_role_policy" "root_api_task_aws_access" {
   })
 }
 
-resource "aws_iam_role_policy" "track_task_dynamodb" {
+resource "aws_iam_role_policy" "track_task_dynamodb_policy" {
   name = "${local.resource_prefix}-track-task-dynamodb"
-  role = aws_iam_role.track_task.id
+  role = aws_iam_role.track_task_role.id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -306,7 +306,7 @@ resource "aws_iam_role_policy" "track_task_dynamodb" {
   })
 }
 
-resource "aws_iam_role" "bastion" {
+resource "aws_iam_role" "bastion_role" {
   name               = "${local.resource_prefix}-bastion-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -323,18 +323,18 @@ resource "aws_iam_role" "bastion" {
 }
 
 resource "aws_iam_role_policy_attachment" "bastion_ssm" {
-  role       = aws_iam_role.bastion.name
+  role       = aws_iam_role.bastion_role.name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
 resource "aws_iam_instance_profile" "bastion" {
   name = "${local.resource_prefix}-bastion-profile"
-  role = aws_iam_role.bastion.name
+  role = aws_iam_role.bastion_role.name
 }
 
 # IAM roles and policies for the monthly health information analysis workflow.
-resource "aws_iam_role" "step_functions" {
-  name               = "${local.healthinfo_analysis_resource_prefix}-sfn-role"
+resource "aws_iam_role" "step_functions_role" {
+  name               = "${local.resource_prefix}-sfn-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -357,9 +357,9 @@ resource "aws_iam_role" "step_functions" {
   })
 }
 
-resource "aws_iam_role_policy" "step_functions" {
-  name = "${local.healthinfo_analysis_resource_prefix}-sfn-policy"
-  role = aws_iam_role.step_functions.id
+resource "aws_iam_role_policy" "step_functions_policy" {
+  name = "${local.resource_prefix}-sfn-policy"
+  role = aws_iam_role.step_functions_role.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -472,8 +472,8 @@ resource "aws_iam_role_policy" "step_functions" {
   })
 }
 
-resource "aws_iam_role" "eventbridge" {
-  name               = "${local.healthinfo_analysis_resource_prefix}-events-role"
+resource "aws_iam_role" "eventbridge_role" {
+  name               = "${local.resource_prefix}-events-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -496,9 +496,9 @@ resource "aws_iam_role" "eventbridge" {
   })
 }
 
-resource "aws_iam_role_policy" "eventbridge" {
-  name   = "${local.healthinfo_analysis_resource_prefix}-events-policy"
-  role   = aws_iam_role.eventbridge.id
+resource "aws_iam_role_policy" "eventbridge_policy" {
+  name   = "${local.resource_prefix}-events-policy"
+  role   = aws_iam_role.eventbridge_role.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -512,8 +512,8 @@ resource "aws_iam_role_policy" "eventbridge" {
   })
 }
 
-resource "aws_iam_role" "amazon_q" {
-  name               = "${local.healthinfo_analysis_resource_prefix}-amazon-q-role"
+resource "aws_iam_role" "amazon_q_role" {
+  name               = "${local.resource_prefix}-amazon-q-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
