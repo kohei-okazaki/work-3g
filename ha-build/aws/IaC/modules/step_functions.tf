@@ -46,12 +46,12 @@ resource "aws_sfn_state_machine" "healthinfo_analysis" {
         Resource       = "arn:${data.aws_partition.current.partition}:states:::athena:startQueryExecution.sync"
         TimeoutSeconds = 300
         Parameters = {
-          QueryString = local.athena_query
+          QueryString = "SELECT COUNT(*) AS record_count FROM \"${local.glue_table_name}\" WHERE \"year\" = ? AND \"$path\" = ?"
           QueryExecutionContext = {
             Catalog  = "AwsDataCatalog"
             Database = local.glue_database_name
           }
-          WorkGroup               = local.healthinfo_analysis_resource_prefix
+          WorkGroup               = "${local.resource_prefix}-athena-workgroup"
           "ClientRequestToken.$"  = "States.Hash($.eventId, 'SHA-256')"
           "ExecutionParameters.$" = "States.Array(States.Format('\\'{}\\'', $.year), States.Format('\\'s3://{}/{}\\'', $.bucket, $.key))"
         }
@@ -166,7 +166,7 @@ resource "aws_sfn_state_machine" "healthinfo_analysis" {
         Type     = "Task"
         Resource = "arn:${data.aws_partition.current.partition}:states:::sns:publish"
         Parameters = {
-          TopicArn    = local.sns_topic_arn
+          TopicArn    = aws_sns_topic.healthinfo_analysis.arn
           "Message.$" = "States.JsonToString($.notification)"
         }
         Next = "AnalysisSucceeded"
@@ -199,7 +199,7 @@ resource "aws_sfn_state_machine" "healthinfo_analysis" {
         Type     = "Task"
         Resource = "arn:${data.aws_partition.current.partition}:states:::sns:publish"
         Parameters = {
-          TopicArn    = local.sns_topic_arn
+          TopicArn    = aws_sns_topic.healthinfo_analysis.arn
           "Message.$" = "States.JsonToString($.notification)"
         }
         Next = "AnalysisFailed"

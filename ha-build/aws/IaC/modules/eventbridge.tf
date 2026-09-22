@@ -15,7 +15,7 @@ resource "aws_cloudwatch_event_rule" "healthinfo_object_created" {
       object = {
         key = [
           {
-            wildcard = local.input_key_pattern
+            wildcard = "${local.input_prefix}year=*/*.csv.gz"
           }
         ]
       }

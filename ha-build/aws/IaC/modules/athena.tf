@@ -1,5 +1,5 @@
 resource "aws_athena_workgroup" "healthinfo" {
-  name          = local.healthinfo_analysis_resource_prefix
+  name          = "${local.resource_prefix}-athena-workgroup"
   description   = "Cost-limited workgroup for monthly health information analysis."
   state         = "ENABLED"
   force_destroy = true

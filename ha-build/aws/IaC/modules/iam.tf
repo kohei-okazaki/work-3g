@@ -153,8 +153,6 @@ resource "aws_iam_role_policy" "track_execution_ssm_policy" {
   })
 }
 
-
-
 resource "aws_iam_role_policy" "dashboard_execution_ssm_policy" {
   name   = "${local.resource_prefix}-dashboard-exec-ssm"
   role   = aws_iam_role.dashboard_task_execution_role.id
@@ -178,8 +176,6 @@ resource "aws_iam_role_policy" "batch_execution_ssm_policy" {
   role   = aws_iam_role.batch_task_execution_role.id
   policy = data.aws_iam_policy_document.ecs_execution_ssm.json
 }
-
-
 
 resource "aws_iam_role_policy" "dashboard_task_app_policy" {
   name   = "${local.resource_prefix}-dashboard-task-app"
@@ -349,7 +345,7 @@ resource "aws_iam_role" "step_functions_role" {
             "aws:SourceAccount" = data.aws_caller_identity.current.account_id
           }
           ArnLike = {
-            "aws:SourceArn" = local.state_machine_arn
+            "aws:SourceArn" = "arn:${data.aws_partition.current.partition}:states:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:stateMachine:${local.state_machine_name}"
           }
         }
       }
@@ -412,13 +408,13 @@ resource "aws_iam_role_policy" "step_functions_policy" {
           "s3:GetBucketLocation",
           "s3:ListBucketMultipartUploads",
         ]
-        Resource = local.input_bucket_arn
+        Resource = aws_s3_bucket.app_data.arn
       },
       {
         Sid      = "ListInputAndResultPrefixes"
         Effect   = "Allow"
         Action   = "s3:ListBucket"
-        Resource = local.input_bucket_arn
+        Resource = aws_s3_bucket.app_data.arn
         Condition = {
           StringLike = {
             "s3:prefix" = [
@@ -433,8 +429,8 @@ resource "aws_iam_role_policy" "step_functions_policy" {
         Effect = "Allow"
         Action = "s3:GetObject"
         Resource = [
-          "${local.input_bucket_arn}/${local.input_prefix}*",
-          "${local.input_bucket_arn}/${local.athena_result_prefix}*",
+          "${aws_s3_bucket.app_data.arn}/${local.input_prefix}*",
+          "${aws_s3_bucket.app_data.arn}/${local.athena_result_prefix}*",
         ]
       },
       {
@@ -445,7 +441,7 @@ resource "aws_iam_role_policy" "step_functions_policy" {
           "s3:ListMultipartUploadParts",
           "s3:PutObject",
         ]
-        Resource = "${local.input_bucket_arn}/${local.athena_result_prefix}*"
+        Resource = "${aws_s3_bucket.app_data.arn}/${local.athena_result_prefix}*"
       },
       {
         Sid      = "PublishNotification"

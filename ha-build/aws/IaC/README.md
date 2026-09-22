@@ -28,7 +28,7 @@
   - API通信ログ用SQS FIFO queue（SQS managed server-side encryption有効）
 - 月次健康情報分析・通知
   - S3 Object Created eventを受け取るEventBridge ruleと配信失敗用SQS DLQ
-  - `healthinfo-analyze-statement-<環境名>` Step Functions Standard workflow
+  - `<プロジェクト名>-<環境名>-healthinfo-analysis` Step Functions Standard workflow
   - Glue Data CatalogのCSV tableとAthena workgroup
   - Athena query結果用S3 prefixと7日保持のLifecycle rule
   - SNSとAmazon Q Developer in chat applicationsを経由するSlack通知
@@ -196,7 +196,7 @@ terraform validate
 flowchart LR
     Batch["monthly_health_info_summary.sh"] -->|"monthly/healthinfo/year=YYYY/YYYYMM.csv.gz"| S3[("healthinfo-app-dev")]
     S3 --> EventBridge["EventBridge<br/>Object Created"]
-    EventBridge --> SF["Step Functions Standard<br/>healthinfo-analyze-statement-dev"]
+    EventBridge --> SF["Step Functions Standard<br/>healthinfo-app-dev-healthinfo-analysis"]
     EventBridge -.->|"配信失敗"| DLQ["SQS DLQ"]
     SF -->|"StartQueryExecution.sync<br/>GetQueryResults"| Athena["Athena"]
     Glue["Glue Data Catalog"] -.-> Athena
