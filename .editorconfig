@@ -1,0 +1,32 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+
+# Terraform
+[*.tf]
+indent_size = 2
+
+# ShellScript
+[*.tf]
+indent_size = 2
+
+# Python
+[*.py]
+indent_size = 4
+
+# JavaScript / TypeScript / JSON
+[*.{js,jsx,ts,tsx,json}]
+indent_size = 2
+
+# YAML
+[*.{yml,yaml}]
+indent_size = 2
+
+# Markdownは行末スペースが意味を持つ場合があるため除去しない
+[*.md]
+trim_trailing_whitespace = false

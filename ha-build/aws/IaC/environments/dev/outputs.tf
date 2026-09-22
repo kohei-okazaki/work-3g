@@ -90,6 +90,14 @@ output "app_env" {
   value = module.healthinfo.app_env
 }
 
+output "app_data_bucket_name" {
+  value = module.healthinfo.app_data_bucket_name
+}
+
+output "app_data_bucket_arn" {
+  value = module.healthinfo.app_data_bucket_arn
+}
+
 output "health_info_dynamodb_table_name" {
   value = module.healthinfo.health_info_dynamodb_table_name
 }
@@ -248,4 +256,44 @@ output "db_create_database_command" {
 
 output "db_connect_command" {
   value = module.healthinfo.db_connect_command
+}
+
+output "healthinfo_analysis_state_machine_name" {
+  value = module.healthinfo.healthinfo_analysis_state_machine_name
+}
+
+output "healthinfo_analysis_state_machine_arn" {
+  value = module.healthinfo.healthinfo_analysis_state_machine_arn
+}
+
+output "healthinfo_analysis_athena_workgroup_name" {
+  value = module.healthinfo.healthinfo_analysis_athena_workgroup_name
+}
+
+output "healthinfo_analysis_glue_database_name" {
+  value = module.healthinfo.healthinfo_analysis_glue_database_name
+}
+
+output "healthinfo_analysis_glue_table_name" {
+  value = module.healthinfo.healthinfo_analysis_glue_table_name
+}
+
+output "healthinfo_analysis_sns_topic_arn" {
+  value = module.healthinfo.healthinfo_analysis_sns_topic_arn
+}
+
+output "healthinfo_analysis_eventbridge_rule_name" {
+  value = module.healthinfo.healthinfo_analysis_eventbridge_rule_name
+}
+
+output "healthinfo_analysis_eventbridge_dlq_url" {
+  value = module.healthinfo.healthinfo_analysis_eventbridge_dlq_url
+}
+
+output "healthinfo_analysis_athena_result_s3_uri" {
+  value = module.healthinfo.healthinfo_analysis_athena_result_s3_uri
+}
+
+output "healthinfo_analysis_amazon_q_slack_configuration_arn" {
+  value = module.healthinfo.healthinfo_analysis_amazon_q_slack_configuration_arn
 }
