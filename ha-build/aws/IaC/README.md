@@ -261,6 +261,8 @@ aws ecr get-login-password --region ap-northeast-1 \
 ```bash
 cd ../../../../..
 
+# DockerDesktopを起動
+
 docker build -f Dockerfile.ha-dashboard -t "${DASHBOARD_REPO}:dev" .
 docker push "${DASHBOARD_REPO}:dev"
 
