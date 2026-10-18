@@ -7,17 +7,17 @@ DDLを自動生成するモジュール
 
 
 def execute():
-    """
-    DDL自動生成のメイン関数
-    """
+    """DB 定義書からテーブルごとの DDL ファイルを生成する。"""
     tables: dict[str, list[dict]] = read_tables()
     generate(tables)
 
 
 def read_tables() -> dict[str, list[dict]]:
-    """
-    Excelファイルからテーブルリストを読み込む関数
-    @return: (テーブル名, カラム情報リスト)の辞書
+    """DB 定義書からテーブルごとのカラム情報を読み込む。
+
+    Returns:
+        「論理テーブル名.物理テーブル名」をキーとし、カラム情報のリストを
+        値とする辞書。
     """
 
     # Excelファイルから行データリストを取得
@@ -101,9 +101,13 @@ def read_tables() -> dict[str, list[dict]]:
 
 
 def generate(tables: dict[str, list[dict]]):
-    """
-    DDLを生成してファイルに出力する
-    @param tables: (テーブル名, カラム情報リスト)の辞書
+    """テーブルごとの DDL を生成し、設定された出力先へ保存する。
+
+    同名の既存ファイルは UTF-8 で上書きする。
+
+    Args:
+        tables: 「論理テーブル名.物理テーブル名」をキーとし、カラム情報の
+            リストを値とする辞書。
     """
 
     # テンプレートファイルを取得
