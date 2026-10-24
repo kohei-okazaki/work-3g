@@ -32,7 +32,7 @@
               以下の情報をログイン画面より入力し、ログインしてください
               <ul>
                 <li>ログインID = {{ api_data.seq_login_id }}</li>
-                <li>パスワード = {{ this.password }}</li>
+                <li>パスワード = {{ password }}</li>
               </ul>
             </v-card-text>
           </v-card-text>
@@ -54,7 +54,7 @@
             </template>
           </v-card-actions>
         </v-card>
-        <AppConfirm ref="confirm" />
+        <ModalConfirmModal ref="confirm" />
         <AppLoading :loading="loading" />
       </v-col>
     </v-row>
@@ -69,10 +69,6 @@ definePageMeta({
 </script>
 
 <script>
-import AppConfirm from "~/components/modal/ConfirmModal.vue";
-import AppMessageError from "~/components/AppMessageError.vue";
-import AppLoading from "~/components/AppLoading.vue";
-
 import axios from "axios";
 let url = process.env.api_base_url + "user";
 
@@ -81,11 +77,6 @@ export default {
   layout: "non-auth-layout",
   // ログイン認証情報は不要
   auth: false,
-  components: {
-    AppConfirm,
-    AppMessageError,
-    AppLoading,
-  },
   data: function () {
     return {
       title: "管理ユーザ作成",

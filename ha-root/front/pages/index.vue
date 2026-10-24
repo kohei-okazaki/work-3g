@@ -2,7 +2,7 @@
   <div>
     <AppMessageError v-if="error.hasError" :data="error" />
     <br />
-    <v-alert type="info" border="left" elevation="2" v-if="hasInquiryNotice">
+    <v-alert type="info" border="start" elevation="2" v-if="hasInquiryNotice">
       <nuxt-link to="/inquiry" class="inquiry-link"
         >問い合わせ通知があります</nuxt-link
       >
@@ -10,7 +10,7 @@
     <br />
     <v-row justify="center" align="center">
       <v-col cols="6" xs="12" sm="12" md="6">
-        <AccountRegByMonthly
+        <TopMonthlyGraph
           :error="error"
           :labels="accountLabels"
           :values="accountValues"
@@ -21,7 +21,7 @@
         />
       </v-col>
       <v-col cols="6" xs="12" sm="12" md="6">
-        <HealthInfoRegByMonthly
+        <TopMonthlyGraph
           :error="error"
           :labels="healthInfoLabels"
           :values="healthInfoValues"
@@ -36,20 +36,11 @@
 </template>
 
 <script>
-import AppMessageError from "~/components/AppMessageError.vue";
-import HealthInfoRegByMonthly from "~/components/top/MonthlyGraph.vue";
-import AccountRegByMonthly from "~/components/top/MonthlyGraph.vue";
-
 import axios from "axios";
 let url = process.env.api_base_url + "top";
 let inquiryNoticeUrl = process.env.api_base_url + "inquiry/notice";
 
 export default {
-  components: {
-    AppMessageError,
-    HealthInfoRegByMonthly,
-    AccountRegByMonthly,
-  },
   data: function () {
     return {
       error: {

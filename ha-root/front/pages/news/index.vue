@@ -33,14 +33,14 @@
                     :rules="[required]"
                   ></v-text-field>
                   <template v-if="newsEditModal.isDispCalendar">
-                    <v-date-picker
+                    <AppDatePicker
                       v-model="newsEditModal.date"
                       no-title
                       @update:model-value="
                         newsEditModal.isDispCalendar =
                           !newsEditModal.isDispCalendar
                       "
-                    ></v-date-picker>
+                    ></AppDatePicker>
                   </template>
                   <v-textarea
                     v-model="newsEditModal.detail"
@@ -81,7 +81,7 @@
         <v-data-table
           :headers="headers"
           :items="news_list"
-          hide-default-footer="true"
+          hide-default-footer
         >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
           <template v-slot:[`item.tag.name`]="{ item }">
@@ -115,8 +115,8 @@
             </v-btn>
           </template>
         </v-data-table>
-        <ConfirmModal ref="confirm" />
-        <ProcessFinishModal ref="finish" />
+        <ModalConfirmModal ref="confirm" />
+        <ModalProcessFinishModal ref="finish" />
         <AppLoading :loading="loading" />
         <v-pagination
           v-model="paging.page"
@@ -129,28 +129,11 @@
 </template>
 
 <script>
-import NewsEntry from "~/components/news/NewsEntry.vue";
-import NewsTagPullDown from "~/components/news/NewsTagPullDown.vue";
-import ConfirmModal from "~/components/modal/ConfirmModal.vue";
-import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
-import AppTitle from "~/components/AppTitle.vue";
-import AppMessageError from "~/components/AppMessageError.vue";
-import AppLoading from "~/components/AppLoading.vue";
-
 import axios from "axios";
 import DOMPurify from "dompurify";
 let url = process.env.api_base_url + "news";
 
 export default {
-  components: {
-    NewsEntry,
-    NewsTagPullDown,
-    ConfirmModal,
-    ProcessFinishModal,
-    AppTitle,
-    AppMessageError,
-    AppLoading,
-  },
   data: function () {
     return {
       error: {
@@ -225,6 +208,8 @@ export default {
     sanitizeHtml: function (html) {
       return DOMPurify.sanitize(html ?? "", {
         USE_PROFILES: { html: true },
+        // v-html に渡す値は、更新前と同じ文字列形式に固定する。
+        RETURN_TRUSTED_TYPE: false,
       });
     },
     /**

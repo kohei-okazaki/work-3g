@@ -54,7 +54,7 @@
         <v-data-table
           :headers="headers"
           :items="note_list"
-          hide-default-footer="true"
+          hide-default-footer
         >
           <template v-slot:[`item.edit_action`]="{ item }">
             <v-btn
@@ -79,8 +79,8 @@
             {{ viewMemoDetail(item.detail) }}
           </template>
         </v-data-table>
-        <ConfirmModal ref="confirm" />
-        <ProcessFinishModal ref="finish" />
+        <ModalConfirmModal ref="confirm" />
+        <ModalProcessFinishModal ref="finish" />
         <AppLoading :loading="loading" />
         <v-pagination
           v-model="paging.page"
@@ -93,25 +93,10 @@
 </template>
 
 <script>
-import NoteEntry from "~/components/note/NoteEntry.vue";
-import ConfirmModal from "~/components/modal/ConfirmModal.vue";
-import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
-import AppTitle from "~/components/AppTitle.vue";
-import AppMessageError from "~/components/AppMessageError.vue";
-import AppLoading from "~/components/AppLoading.vue";
-
 import axios from "axios";
 let url = process.env.api_base_url + "note";
 
 export default {
-  components: {
-    NoteEntry,
-    ConfirmModal,
-    ProcessFinishModal,
-    AppTitle,
-    AppMessageError,
-    AppLoading,
-  },
   data: function () {
     return {
       error: {
