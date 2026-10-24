@@ -14,30 +14,30 @@
     <div class="row justify-content-center">
       <div class="col-md-10 col-lg-8">
         <div class="card shadow border-0 rounded">
-           <div class="card-header bg-primary text-white">
+          <div class="card-header bg-primary text-white">
             <h4 class="mb-0">📝 お知らせ一覧</h4>
           </div><!-- /.card-header -->
 
           <div class="card-body bg-white">
             <table class="table table-striped">
               <tbody class="list">
-                 <tr th:each="news : ${newsList}">
-                   <td class="card card-body bg-light">
-                     <div>
-                       <!-- リリース情報 -->
-                       <span class="badge badge-primary" th:if="${news.tag.color == 'blue'}" th:text="${news.tag.name}"></span>
-                       <!-- バグ情報 -->
-                       <span class="badge badge-danger" th:if="${news.tag.color == 'red'}" th:text="${news.tag.name}"></span>
-                       <!-- 警告情報 -->
-                       <span class="badge badge-warning" th:if="${news.tag.color == 'yellow'}" th:text="${news.tag.name}"></span>
-                     </div>
-                     <a data-toggle="collapse" th:href="${'#newsId' + news.seqNewsInfoId}" role="button" aria-expanded="false" th:aria-controls="${'newsId' + news.seqNewsInfoId}" th:text="${news.date + '　' + news.title}"></a>
-                     <div class="collapse" th:id="${'newsId' + news.seqNewsInfoId}">
-                       <div class="card card-body">
-                         <div th:utext="${news.detail}"></div>
-                       </div><!-- /.card card-body -->
-                     </div><!-- /.collapse /#newsId[i] -->
-                   </td><!-- /.card card-body bg-light -->
+                <tr th:each="news : ${newsList}">
+                  <td class="card card-body bg-light">
+                    <div>
+                      <!-- リリース情報 -->
+                      <span class="badge badge-primary" th:if="${news.tag.color == 'blue'}" th:text="${news.tag.name}"></span>
+                      <!-- バグ情報 -->
+                      <span class="badge badge-danger" th:if="${news.tag.color == 'red'}" th:text="${news.tag.name}"></span>
+                      <!-- 警告情報 -->
+                      <span class="badge badge-warning" th:if="${news.tag.color == 'yellow'}" th:text="${news.tag.name}"></span>
+                    </div>
+                    <a data-toggle="collapse" th:href="${'#newsId' + news.seqNewsInfoId}" role="button" aria-expanded="false" th:aria-controls="${'newsId' + news.seqNewsInfoId}" th:text="${news.date + '　' + news.title}"></a>
+                    <div class="collapse" th:id="${'newsId' + news.seqNewsInfoId}">
+                      <div class="card card-body">
+                        <div th:utext="${news.detail}"></div>
+                      </div><!-- /.card card-body -->
+                    </div><!-- /.collapse /#newsId[i] -->
+                  </td><!-- /.card card-body bg-light -->
                 </tr>
               </tbody><!-- /.list -->
             </table><!-- /.table -->

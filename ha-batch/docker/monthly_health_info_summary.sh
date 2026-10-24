@@ -9,7 +9,7 @@
 # 
 # input: MySQL.HEALTH_INFO
 # 
-# output: S3.monthly/healthinfo/year=YYYY/YYYYMMDD.csv.gz
+# output: S3.monthly/healthinfo/year=YYYY/YYYYMM.csv.gz
 # ----------------------------------------------------------------------------------------
 set -eu
 

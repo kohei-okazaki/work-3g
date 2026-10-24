@@ -2,18 +2,15 @@ import ddl_gen, dml_gen, define_gen, drop_gen
 
 """
 自動生成処理のメインモジュール
- - DDL生成
- - DML生成
- - Define SQL生成
- - Drop SQL生成
+    - DDL生成
+    - DML生成
+    - Define SQL生成
+    - Drop SQL生成
 """
 
 
 def execute():
-    """
-    メイン処理
-    """
-
+    """DDL、DML、テーブル定義参照 SQL、テーブル削除 SQL を順に生成する。"""
     # DDL生成
     ddl_gen.execute()
 

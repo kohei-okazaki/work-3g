@@ -8,10 +8,13 @@ from openpyxl import load_workbook
 
 
 def get_template(template_file_name: str):
-    """
-    テンプレート環境を取得する関数
-    @param template_file_name: テンプレートファイル名
-    @return: Jinja2テンプレート環境
+    """指定された Jinja2 テンプレートを取得する。
+
+    Args:
+        template_file_name: templates ディレクトリ内のテンプレートファイル名。
+
+    Returns:
+        読み込んだ Jinja2 の Template オブジェクト。
     """
 
     # Jinja2環境設定
@@ -22,10 +25,13 @@ def get_template(template_file_name: str):
 
 
 def get_sheet_names(excel_path: str) -> list[str]:
-    """
-    Excelファイルからシート名リストを取得する関数
-    @param excel_path: Excelファイルパス
-    @return: シート名のリスト
+    """Excel ファイルからシート名の一覧を取得する。
+
+    Args:
+        excel_path: 読み込む Excel ファイルのパス。
+
+    Returns:
+        ブック内の順序で並んだシート名のリスト。
     """
 
     # Excelファイル取得
@@ -45,12 +51,18 @@ def read_rows(
     sheet_name: str,
     ignore_header: bool = False,
 ) -> list[str]:
-    """
-    Excelファイルから行情報を読み込む関数
-    @param excel_path: Excelファイルパス
-    @param sheet_name: Excelシート名
-    @param ignore_header: ヘッダ行を無視するかどうか。無視する場合、2行目から読み込む。
-    @return: 行情報のリスト
+    """指定された Excel シートから空行を除いて行データを読み込む。
+
+    Args:
+        excel_path: 読み込む Excel ファイルのパス。
+        sheet_name: 読み込むシートの名前。
+        ignore_header: True の場合は先頭行を除外する。既定値は False。
+
+    Returns:
+        各行のセル値をタプルとして格納したリスト。
+
+    Raises:
+        ValueError: 指定されたシートが存在しない場合。
     """
 
     # Excelファイル取得

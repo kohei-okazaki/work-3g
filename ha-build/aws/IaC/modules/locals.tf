@@ -8,6 +8,7 @@ data "aws_partition" "current" {}
 
 data "aws_region" "current" {}
 
+# アプリ基盤用変数
 locals {
   resource_prefix    = "${var.project_name}-${var.app_env}"
   resource_dns_label = trim(replace(lower(local.resource_prefix), "/[^a-z0-9-]/", "-"), "-")
@@ -82,7 +83,7 @@ locals {
     { name = "SERVER_PORT", value = tostring(local.root_api_container_port) },
     { name = "API_LOG_QUEUE_NAME", value = aws_sqs_queue.api_log.name },
     { name = "FRONT_URL", value = var.root_front_url },
-    { name = "AWS_S3_BACKET", value = var.app_data_bucket_name },
+    { name = "AWS_S3_BACKET", value = aws_s3_bucket.app_data.id },
   ]
 
   track_environment = [
@@ -103,4 +104,16 @@ locals {
     { name = "ROOT_API_URL", value = local.root_api_internal_base_url },
     { name = "HEALTHINFO_TRACK_API_URL", value = local.track_internal_base_url },
   ]
+}
+
+# 分析基盤用変数
+locals {
+  state_machine_name   = "${local.resource_prefix}-healthinfo-analysis"
+  input_prefix         = "monthly/healthinfo/"
+  athena_result_prefix = "monthly/athena-results/"
+
+  glue_database_name = "healthinfo_${var.app_env}"
+  glue_table_name    = "health_info"
+
+  athena_result_s3_uri = "s3://${aws_s3_bucket.app_data.id}/${local.athena_result_prefix}"
 }

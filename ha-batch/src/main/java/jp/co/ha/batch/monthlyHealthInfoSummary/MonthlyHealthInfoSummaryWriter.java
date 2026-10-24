@@ -58,8 +58,7 @@ public class MonthlyHealthInfoSummaryWriter
     /** CSV項目名配列 */
     private static final String[] COLUMN_NAME_ARRAY = new String[] {
             "seqUserId", "height", "weight", "bmi", "standardWeight",
-            "healthInfoRegDate", "seqBmiRangeMtId", "updateDate",
-            "regDate"
+            "healthInfoRegDate", "seqBmiRangeMtId", "regDate", "updateDate"
     };
 
     /** バッチプロパティファイル */
@@ -134,10 +133,6 @@ public class MonthlyHealthInfoSummaryWriter
                     || stepExecution.getStatus().isUnsuccessful()) {
                 // 異常終了時
                 return;
-            } else if (stepExecution.getWriteCount() == 0) {
-                // 対象データ0件ならアップロードしない
-                Files.deleteIfExists(targetPath);
-                return;
             }
 
             // 正常終了時
@@ -184,6 +179,7 @@ public class MonthlyHealthInfoSummaryWriter
         setName(this.getClass().getSimpleName());
         setAppendAllowed(false);
         setShouldDeleteIfExists(true);
+        setShouldDeleteIfEmpty(false);
         setSaveState(true);
 
         // BeanWrapperFieldExtractor<MonthlyHealthInfoSummaryModel> extractor =

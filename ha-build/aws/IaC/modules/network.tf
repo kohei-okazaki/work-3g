@@ -2,18 +2,10 @@ resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
   enable_dns_support   = true
-
-  tags = {
-    Name = "${local.resource_prefix}-vpc"
-  }
 }
 
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
-
-  tags = {
-    Name = "${local.resource_prefix}-igw"
-  }
 }
 
 resource "aws_subnet" "public" {
@@ -51,10 +43,6 @@ resource "aws_route_table" "public" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.main.id
   }
-
-  tags = {
-    Name = "${local.resource_prefix}-public-rt"
-  }
 }
 
 resource "aws_route_table_association" "public" {
@@ -66,10 +54,6 @@ resource "aws_route_table_association" "public" {
 
 resource "aws_route_table" "private_db" {
   vpc_id = aws_vpc.main.id
-
-  tags = {
-    Name = "${local.resource_prefix}-private-db-rt"
-  }
 }
 
 resource "aws_route_table_association" "private_db" {

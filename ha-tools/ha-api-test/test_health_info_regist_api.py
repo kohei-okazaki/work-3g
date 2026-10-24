@@ -16,10 +16,7 @@ headers = {
 
 
 def test_health_info_registration():
-    """
-    健康情報登録APIの動作確認テスト
-    """
-
+    """健康情報登録 API が HTTP 200 と解析可能な JSON を返すことを確認する。"""
     payload = {
         "height": 170.00,
         "weight": 60,

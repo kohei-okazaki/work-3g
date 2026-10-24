@@ -7,10 +7,7 @@ DMLを自動生成するモジュール
 
 
 def execute():
-    """
-    DML自動生成のメイン関数
-    """
-
+    """DB 定義書のデータシートから DML ファイルを生成する。"""
     for sheet_name in utils.get_sheet_names(excel_path=const.EXCEL_PATH):
         if sheet_name == const.DDL_SHEET_NAME or sheet_name == "TEMPLATE":
             # テーブル定義、テンプレートシートはスキップ
@@ -20,10 +17,16 @@ def execute():
 
 
 def read_data(sheet_name: str) -> list[list[str]]:
-    """
-    指定されたシート名のDMLデータを読み込む関数
-    @param sheet_name: シート名
-    @return: 行情報リスト
+    """指定されたシートからヘッダーを含む DML データを読み込む。
+
+    Args:
+        sheet_name: DB 定義書内のデータシート名。
+
+    Returns:
+        各行のセル値をタプルとして格納したリスト。空行は含まない。
+
+    Raises:
+        ValueError: 指定されたシートが存在しない場合。
     """
 
     # 行情報リストを取得
@@ -34,10 +37,14 @@ def read_data(sheet_name: str) -> list[list[str]]:
 
 
 def generate(sheet_name: str, row_list: list[list[str]]):
-    """
-    DMLを生成する関数
-    @param sheet_name: シート名
-    @param row_list: 行情報リスト
+    """行データから DML を生成し、設定された出力先へ保存する。
+
+    シート名を大文字にした SQL ファイル名を使用し、同名の既存ファイルは
+    UTF-8 で上書きする。
+
+    Args:
+        sheet_name: 挿入先のテーブル名として使用するシート名。
+        row_list: 先頭行をカラム名、残りの行を挿入データとする行データ。
     """
 
     # テンプレートファイルを取得
@@ -86,10 +93,13 @@ def generate(sheet_name: str, row_list: list[list[str]]):
 
 
 def get_header(row_list: list[list[str]]) -> str:
-    """
-    行情報リストからヘッダ情報を取得する関数
-    @param row_list: 行情報リスト
-    @return: ヘッダ情報
+    """行データの先頭行からカンマ区切りのカラム名を取得する。
+
+    Args:
+        row_list: 先頭行にカラム名を格納した行データ。
+
+    Returns:
+        カンマ区切りのカラム名。行データが空の場合は空文字列。
     """
     if not row_list:
         return ""
