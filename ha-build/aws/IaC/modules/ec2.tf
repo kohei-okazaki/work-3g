@@ -37,7 +37,4 @@ resource "aws_instance" "bastion" {
     yum install -y mariadb
   USERDATA
 
-  tags = {
-    Name = "${local.resource_prefix}-bastion"
-  }
 }

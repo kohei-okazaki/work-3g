@@ -1,7 +1,5 @@
-import os
-import time
-import requests
 import pytest
+import requests
 
 """
 健康情報登録APIの自動テスト
@@ -16,21 +14,17 @@ headers = {
 
 
 def test_health_info_registration():
-    """
-    健康情報登録APIの動作確認テスト
-    """
-
+    """健康情報登録 API が HTTP 200 と解析可能な JSON を返すことを確認する。"""
     payload = {
         "height": 170.00,
         "weight": 60,
-        "test_mode": 0,
         "transaction_id": 999999999,
     }
-    
+
     post_url = f"{BASE_URL}/api/1/healthinfo"
     post_res = requests.post(post_url, json=payload, headers=headers, timeout=10)
 
     if post_res.status_code != 200:
         pytest.fail("POST request failed with status code {}".format(post_res.status_code))
-        
+
     post_json = post_res.json()

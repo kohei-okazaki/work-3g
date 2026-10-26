@@ -1,4 +1,4 @@
-Django==4.2.27
-djangorestframework==3.16.1
-boto3==1.42.96
-gunicorn==23.0.0
+Django==5.2.18
+djangorestframework==3.18.3
+boto3==1.43.114
+gunicorn==26.2.0

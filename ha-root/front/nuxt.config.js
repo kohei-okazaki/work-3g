@@ -9,7 +9,7 @@ const environment =
 const envSet = require(`./env.${environment}.js`);
 const apiBaseURL = envSet.api_base_url;
 
-export default defineNuxtConfig({
+module.exports = defineNuxtConfig({
   compatibilityDate: "2026-04-28",
 
   ssr: false,

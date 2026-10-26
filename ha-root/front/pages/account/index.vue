@@ -33,7 +33,7 @@
                       :rules="[required]"
                     ></v-text-field>
                     <template v-if="accountEditModal.isDispCalendar">
-                      <v-date-picker
+                      <AppDatePicker
                         v-model="accountEditModal.passwordExpire"
                         no-title
                         @update:model-value="
@@ -41,7 +41,7 @@
                             !accountEditModal.isDispCalendar
                         "
                       >
-                      </v-date-picker>
+                      </AppDatePicker>
                     </template>
                   </v-form>
                 </v-col>
@@ -69,7 +69,7 @@
         <v-data-table
           :headers="headers"
           :items="accountList"
-          hide-default-footer="true"
+          hide-default-footer
         >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
           <template v-slot:[`item.edit_action`]="{ item }">
@@ -111,8 +111,8 @@
             <v-icon v-else-if="item.enclosure_char_flag == 0">mdi-minus</v-icon>
           </template>
         </v-data-table>
-        <ConfirmModal ref="confirm" />
-        <ProcessFinishModal ref="finish" />
+        <ModalConfirmModal ref="confirm" />
+        <ModalProcessFinishModal ref="finish" />
         <AppLoading :loading="loading" />
         <v-pagination
           v-model="paging.page"
@@ -125,23 +125,10 @@
 </template>
 
 <script>
-import AppTitle from "~/components/AppTitle.vue";
-import AppMessageError from "~/components/AppMessageError.vue";
-import AppLoading from "~/components/AppLoading.vue";
-import ConfirmModal from "~/components/modal/ConfirmModal.vue";
-import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
-
 import axios from "axios";
 let url = process.env.api_base_url + "account";
 
 export default {
-  components: {
-    AppTitle,
-    AppMessageError,
-    AppLoading,
-    ConfirmModal,
-    ProcessFinishModal,
-  },
   data: function () {
     return {
       error: {

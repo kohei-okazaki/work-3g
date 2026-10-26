@@ -2,28 +2,32 @@
   "name": "ha-docs",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
+  },
   "scripts": {
     "dev": "nuxt dev --port 8085",
     "build": "nuxt build",
     "start": "nuxt preview",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
-    "vue": "^3.5.38",
-    "nuxt": "^4.4.8",
-    "vuetify": "^4.1.2",
+    "vue": "^3.5.44",
+    "nuxt": "^4.6.2",
+    "vuetify": "^4.3.0",
     "vuetify-nuxt-module": "^0.19.5",
     "@mdi/font": "^7.4.47",
-    "mermaid": "^11.15.0",
-    "postcss": "^8.5.15"
+    "mermaid": "^12.2.0",
+    "postcss": "^8.5.31"
   },
   "devDependencies": {
-    "commander": "^13.1.0",
-    "sass": "~1.101.0"
+    "commander": "^15.0.0",
+    "sass": "~1.106.1"
   },
   "overrides": {
-    "langium": "4.3.0",
+    "langium": "4.4.0",
     "lodash-es": "^4.18.1",
-    "uuid": "^14.0.1"
+    "uuid": "^14.0.3"
   }
 }

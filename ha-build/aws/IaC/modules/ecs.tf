@@ -13,8 +13,8 @@ resource "aws_ecs_task_definition" "dashboard" {
   network_mode             = "awsvpc"
   cpu                      = "256"
   memory                   = "512"
-  execution_role_arn       = aws_iam_role.dashboard_task_execution.arn
-  task_role_arn            = aws_iam_role.dashboard_task.arn
+  execution_role_arn       = aws_iam_role.dashboard_task_execution_role.arn
+  task_role_arn            = aws_iam_role.dashboard_task_role.arn
 
   runtime_platform {
     operating_system_family = "LINUX"
@@ -56,8 +56,8 @@ resource "aws_ecs_task_definition" "dashboard" {
 
   depends_on = [
     aws_iam_role_policy_attachment.dashboard_task_execution_managed,
-    aws_iam_role_policy.dashboard_execution_ssm,
-    aws_iam_role_policy.dashboard_task_app,
+    aws_iam_role_policy.dashboard_execution_ssm_policy,
+    aws_iam_role_policy.dashboard_task_app_policy,
   ]
 }
 
@@ -87,8 +87,8 @@ resource "aws_ecs_task_definition" "api" {
   network_mode             = "awsvpc"
   cpu                      = "256"
   memory                   = "512"
-  execution_role_arn       = aws_iam_role.api_task_execution.arn
-  task_role_arn            = aws_iam_role.api_task.arn
+  execution_role_arn       = aws_iam_role.api_task_execution_role.arn
+  task_role_arn            = aws_iam_role.api_task_role.arn
 
   runtime_platform {
     operating_system_family = "LINUX"
@@ -130,8 +130,8 @@ resource "aws_ecs_task_definition" "api" {
 
   depends_on = [
     aws_iam_role_policy_attachment.api_task_execution_managed,
-    aws_iam_role_policy.api_execution_ssm,
-    aws_iam_role_policy.api_task_app,
+    aws_iam_role_policy.api_execution_ssm_policy,
+    aws_iam_role_policy.api_task_app_policy,
   ]
 }
 
@@ -165,8 +165,8 @@ resource "aws_ecs_task_definition" "track" {
   network_mode             = "awsvpc"
   cpu                      = "256"
   memory                   = "512"
-  execution_role_arn       = aws_iam_role.track_task_execution.arn
-  task_role_arn            = aws_iam_role.track_task.arn
+  execution_role_arn       = aws_iam_role.track_task_execution_role.arn
+  task_role_arn            = aws_iam_role.track_task_role.arn
 
   runtime_platform {
     operating_system_family = "LINUX"
@@ -208,8 +208,8 @@ resource "aws_ecs_task_definition" "track" {
 
   depends_on = [
     aws_iam_role_policy_attachment.track_task_execution_managed,
-    aws_iam_role_policy.track_execution_ssm,
-    aws_iam_role_policy.track_task_dynamodb,
+    aws_iam_role_policy.track_execution_ssm_policy,
+    aws_iam_role_policy.track_task_dynamodb_policy,
   ]
 }
 
@@ -241,8 +241,8 @@ resource "aws_ecs_task_definition" "root_api" {
   network_mode             = "awsvpc"
   cpu                      = "256"
   memory                   = "512"
-  execution_role_arn       = aws_iam_role.root_api_task_execution.arn
-  task_role_arn            = aws_iam_role.root_api_task.arn
+  execution_role_arn       = aws_iam_role.root_api_task_execution_role.arn
+  task_role_arn            = aws_iam_role.root_api_task_role.arn
 
   runtime_platform {
     operating_system_family = "LINUX"
@@ -284,9 +284,9 @@ resource "aws_ecs_task_definition" "root_api" {
 
   depends_on = [
     aws_iam_role_policy_attachment.root_api_task_execution_managed,
-    aws_iam_role_policy.root_api_execution_ssm,
-    aws_iam_role_policy.root_api_task_app,
-    aws_iam_role_policy.root_api_task_aws_access,
+    aws_iam_role_policy.root_api_execution_ssm_policy,
+    aws_iam_role_policy.root_api_task_app_policy,
+    aws_iam_role_policy.root_api_task_aws_access_policy,
   ]
 }
 
@@ -320,8 +320,8 @@ resource "aws_ecs_task_definition" "batch" {
   network_mode             = "awsvpc"
   cpu                      = "256"
   memory                   = "512"
-  execution_role_arn       = aws_iam_role.batch_task_execution.arn
-  task_role_arn            = aws_iam_role.batch_task.arn
+  execution_role_arn       = aws_iam_role.batch_task_execution_role.arn
+  task_role_arn            = aws_iam_role.batch_task_role.arn
 
   runtime_platform {
     operating_system_family = "LINUX"
@@ -356,8 +356,8 @@ resource "aws_ecs_task_definition" "batch" {
 
   depends_on = [
     aws_iam_role_policy_attachment.batch_task_execution_managed,
-    aws_iam_role_policy.batch_execution_ssm,
-    aws_iam_role_policy.batch_task_app,
-    aws_iam_role_policy.batch_task_aws_access,
+    aws_iam_role_policy.batch_execution_ssm_policy,
+    aws_iam_role_policy.batch_task_app_policy,
+    aws_iam_role_policy.batch_task_aws_access_policy,
   ]
 }

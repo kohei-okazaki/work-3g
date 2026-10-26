@@ -89,15 +89,6 @@ export default {
               description: "ユーザの登録したい体重",
             },
             {
-              physicalName: "test_mode",
-              logicalName: "テストモード種別",
-              required: true,
-              type: "半角数字",
-              byte: null,
-              description:
-                "<ul><li>0:DB登録を行うモード</li><li>1:テストモード(DB登録を行わない)</li></ul>",
-            },
-            {
               physicalName: "transaction_id",
               logicalName: "トランザクションID",
               required: false,

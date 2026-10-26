@@ -15,7 +15,6 @@ import jp.co.ha.business.api.healthinfoapp.HealthInfoRegistApi;
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
-import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
@@ -109,7 +108,6 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         HealthInfoRegistApiRequest request = new HealthInfoRegistApiRequest();
         request.setHeight(dto.height());
         request.setWeight(dto.weight());
-        request.setTestMode(TestMode.DB_REGIST);
         request.setTransactionId(transactionId);
 
         HealthInfoRegistApiResponse response = registApi.callApi(request,

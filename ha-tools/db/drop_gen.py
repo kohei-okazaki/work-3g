@@ -1,5 +1,7 @@
 from pathlib import Path
-import const, utils
+
+import const
+import utils
 
 """
 Drop SQLを自動生成するモジュール
@@ -7,17 +9,16 @@ Drop SQLを自動生成するモジュール
 
 
 def execute():
-    """
-    Drop SQL自動生成のメイン関数
-    """
+    """DB 定義書からテーブル削除用の SQL ファイルを生成する。"""
     tables: dict[str, str] = read_tables()
     generate(tables)
 
 
 def read_tables() -> dict[str, str]:
-    """
-    Excelファイルからテーブルリストを読み込む関数
-    @return: (テーブル名（物理）, テーブル名（論理）)の辞書
+    """DB 定義書から重複を除いたテーブル名の一覧を読み込む。
+
+    Returns:
+        物理テーブル名をキーとし、論理テーブル名を値とする辞書。
     """
 
     # Excelファイルから行データリストを取得(テーブル定義のみ取得するのでDDLとシート名は同じ)
@@ -42,9 +43,12 @@ def read_tables() -> dict[str, str]:
 
 
 def generate(tables: dict[str, str]):
-    """
-    Drop SQLを生成する関数
-    @param tables: (テーブル名（物理）, テーブル名（論理）)の辞書
+    """テーブル削除用の SQL を生成し、設定された出力先へ保存する。
+
+    同名の既存ファイルは UTF-8 で上書きする。
+
+    Args:
+        tables: 物理テーブル名をキーとし、論理テーブル名を値とする辞書。
     """
 
     # テンプレートファイルを取得

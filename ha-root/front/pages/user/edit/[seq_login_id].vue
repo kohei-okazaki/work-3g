@@ -45,11 +45,11 @@
                 :rules="[required]"
               ></v-text-field>
               <template v-if="isDispCalendar">
-                <v-date-picker
+                <AppDatePicker
                   v-model="editUserForm.passwordExpire"
                   no-title
                   @update:model-value="isDispCalendar = !isDispCalendar"
-                ></v-date-picker>
+                ></AppDatePicker>
               </template>
             </v-card-text>
 
@@ -84,7 +84,7 @@
             </v-card-actions>
           </v-form>
         </v-card>
-        <AppConfirm ref="confirm" />
+        <ModalConfirmModal ref="confirm" />
         <AppLoading :loading="loading" />
         <UserRetrieve
           :seqLoginId="editUserForm.seqLoginId"
@@ -97,28 +97,11 @@
 </template>
 
 <script>
-import AppConfirm from "~/components/modal/ConfirmModal.vue";
-import AppTitle from "~/components/AppTitle.vue";
-import AppMessageError from "~/components/AppMessageError.vue";
-import AppMessageSuccess from "~/components/AppMessageSuccess.vue";
-import AppLoading from "~/components/AppLoading.vue";
-import UserRetrieve from "~/components/user/UserRetrieve.vue";
-import UserDataSave from "~/components/user/UserDataSave.vue";
-
 import axios from "axios";
 let url = process.env.api_base_url + "user/";
 let rolesUrl = process.env.api_base_url + "roles";
 
 export default {
-  components: {
-    AppConfirm,
-    AppTitle,
-    AppMessageError,
-    AppMessageSuccess,
-    AppLoading,
-    UserRetrieve,
-    UserDataSave,
-  },
   data: function () {
     return {
       loading: false,
@@ -154,6 +137,9 @@ export default {
         // 妥当性チェックエラーの場合
         this.error.hasError = true;
         this.error.message = validateResult.message;
+        return;
+      }
+      if (!(await this.$isValidForm(this.$refs.editForm))) {
         return;
       }
       if (

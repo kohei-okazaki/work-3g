@@ -1,0 +1,21 @@
+# Maven wrappers
+/ha-api/mvnw text eol=lf
+/ha-dashboard/mvnw text eol=lf
+
+# Windows command scripts
+/ha-api/**/*.cmd text eol=crlf
+/ha-dashboard/**/*.cmd text eol=crlf
+
+# Windows batch scripts
+/ha-asset/**/*.bat text eol=crlf
+/ha-batch/**/*.bat text eol=crlf
+/ha-build/**/*.bat text eol=crlf
+/ha-business/**/*.bat text eol=crlf
+/ha-db/**/*.bat text eol=crlf
+
+# Shell scripts
+/ha-asset/**/*.sh text eol=lf
+/ha-batch/**/*.sh text eol=lf
+/ha-build/**/*.sh text eol=lf
+/ha-business/**/*.sh text eol=lf
+/ha-db/**/*.sh text eol=lf

@@ -13,7 +13,21 @@
 - 文字コード：UTF-8
 
 ## 必要
-- Python3系
+- Python 3.14.8（Docker）、Python 3.14 系（CI）
+- Django 5.2 LTS（2028年4月までサポート）
+
+Python は Django 5.2 LTS が公式に対応する最新の 3.14 系を使用する。
+Python、Django REST framework、boto3、Gunicorn、Ruff には LTS の区分がないため、
+この構成に対応する最新の安定版を使用する（2026年10月18日確認）。
+
+更新時の確認先：
+- [Python リリース](https://www.python.org/downloads/)
+- [Django のサポート期間](https://www.djangoproject.com/download/)
+- [Django の Python 対応表](https://docs.djangoproject.com/en/5.2/faq/install/#what-python-version-can-i-use-with-django)
+- [Django REST framework](https://pypi.org/project/djangorestframework/)
+- [boto3](https://pypi.org/project/boto3/)
+- [Gunicorn](https://pypi.org/project/gunicorn/)
+- [Ruff](https://pypi.org/project/ruff/)
 
 ## package install
 pip install -r requirements.txt
