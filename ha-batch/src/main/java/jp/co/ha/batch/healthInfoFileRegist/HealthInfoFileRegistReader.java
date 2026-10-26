@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.batch.base.BatchProperties;
 import jp.co.ha.batch.healthInfoFileRegist.HealthInfoFileRegistDto.HealthInfoRequestData;
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
-import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
@@ -138,8 +137,6 @@ public class HealthInfoFileRegistReader
         request.setHeight(healthInfoJson.getHeight());
         // 体重
         request.setWeight(healthInfoJson.getWeight());
-        // モード設定
-        request.setTestMode(TestMode.DB_REGIST);
         // トランザクションID
         request.setTransactionId(component.transactionId());
 

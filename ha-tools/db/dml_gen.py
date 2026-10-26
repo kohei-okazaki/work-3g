@@ -1,5 +1,7 @@
 from pathlib import Path
-import const, utils
+
+import const
+import utils
 
 """
 DMLを自動生成するモジュール

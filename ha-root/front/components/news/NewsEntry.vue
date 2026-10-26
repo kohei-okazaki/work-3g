@@ -22,11 +22,11 @@
                 :rules="[required]"
               ></v-text-field>
               <template v-if="isDispCalendar">
-                <v-date-picker
+                <AppDatePicker
                   v-model="entryInfo.date"
                   no-title
                   @update:model-value="controllCalendar"
-                ></v-date-picker>
+                ></AppDatePicker>
               </template>
               <v-textarea
                 v-model="entryInfo.detail"
@@ -51,7 +51,7 @@
               <v-icon>mdi-alert</v-icon>&ensp;リセット
             </v-btn>
           </v-card-actions>
-          <ProcessFinishModal ref="finish" />
+          <ModalProcessFinishModal ref="finish" />
           <AppLoading :loading="loading" />
         </v-card>
       </v-col>
@@ -60,21 +60,10 @@
 </template>
 
 <script>
-import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
-import NewsTagPullDown from "~/components/news/NewsTagPullDown.vue";
-import AppMessageError from "~/components/AppMessageError.vue";
-import AppLoading from "~/components/AppLoading.vue";
-
 import axios from "axios";
 let url = process.env.api_base_url + "news";
 
 export default {
-  components: {
-    ProcessFinishModal,
-    NewsTagPullDown,
-    AppMessageError,
-    AppLoading,
-  },
   data: function () {
     return {
       error: {

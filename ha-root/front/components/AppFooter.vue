@@ -8,7 +8,7 @@
         <v-btn color="info" variant="text" @click="openContentAlertModal"
           >管理者サイトについて</v-btn
         >
-        <ContentAlertModal ref="contentAlertModal" />
+        <ModalContentAlertModal ref="contentAlertModal" />
       </v-col>
       <v-col xs="12" md="3" lg="2">
         <v-btn
@@ -25,12 +25,7 @@
 </template>
 
 <script>
-import ContentAlertModal from "~/components/modal/ContentAlertModal.vue";
-
 export default {
-  components: {
-    ContentAlertModal,
-  },
   data: function () {
     return {
       fixed: true,

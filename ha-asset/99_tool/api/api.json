@@ -24,7 +24,7 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n  \"height\": 170.00,\n  \"weight\": 60,\n  \"test_mode\": 0,\n  \"transaction_id\": 999999999\n}"
+              "textBody": "{\n  \"height\": 170.00,\n  \"weight\": 60,\n  \"transaction_id\": 999999999\n}"
             },
             "uri": {
               "query": {

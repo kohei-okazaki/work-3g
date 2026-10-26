@@ -53,19 +53,19 @@ export default {
       flow: [
         {
           id: "1",
-          text: "リクエスト受付",
+          text: "GET /api/healthcheck 受付",
           edgeType: "round",
           next: ["2"],
         },
         {
           id: "2",
-          text: "ヘルスチェックレスポンス生成",
+          text: "正常レスポンス生成<br/>処理結果: 成功",
           edgeType: "round",
           next: ["3"],
         },
         {
           id: "3",
-          text: "レスポンスJSON返却",
+          text: "HTTP 200 OKでJSON返却<br/>result: #quot;0#quot;",
           edgeType: "round",
         },
       ],

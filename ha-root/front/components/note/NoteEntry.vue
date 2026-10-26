@@ -28,7 +28,7 @@
               <v-icon>mdi-alert</v-icon>&ensp;リセット
             </v-btn>
           </v-card-actions>
-          <ProcessFinishModal ref="finish" />
+          <ModalProcessFinishModal ref="finish" />
           <AppLoading :loading="loading" />
         </v-card>
       </v-col>
@@ -37,19 +37,10 @@
 </template>
 
 <script>
-import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
-import AppMessageError from "~/components/AppMessageError.vue";
-import AppLoading from "~/components/AppLoading.vue";
-
 import axios from "axios";
 let url = process.env.api_base_url + "note";
 
 export default {
-  components: {
-    ProcessFinishModal,
-    AppMessageError,
-    AppLoading,
-  },
   data: function () {
     return {
       error: {

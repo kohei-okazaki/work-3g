@@ -17,23 +17,12 @@
 </template>
 
 <script>
-import AppFooter from "~/components/AppFooter.vue";
-import AppTop from "~/components/AppTop.vue";
-import AppTheme from "~/components/AppTheme.vue";
-import AppScroll from "~/components/AppScroll.vue";
-
 // ログイン前のレイアウト
 export default {
   data: function () {
     return {
       clipped: false,
     };
-  },
-  components: {
-    AppFooter,
-    AppTop,
-    AppTheme,
-    AppScroll,
   },
   computed: {
     isDark: function () {
