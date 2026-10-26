@@ -9,6 +9,15 @@ HEADERS = {
 
 
 def _response(status_code: int, body: dict) -> dict:
+    """API Gateway向けのJSONレスポンスを生成する。
+
+    Args:
+        status_code (int): HTTPステータスコード。
+        body (dict): JSONに変換するレスポンス本文。
+
+    Returns:
+        dict: ステータスコード、共通ヘッダー、JSON文字列の本文を含むレスポンス。
+    """
     return {
         "statusCode": status_code,
         "headers": HEADERS,
@@ -17,10 +26,32 @@ def _response(status_code: int, body: dict) -> dict:
 
 
 def _floor_3(value: float) -> float:
+    """値を小数第3位まで残して負の無限大方向に丸める。
+
+    Args:
+        value (float): 丸める数値。
+
+    Returns:
+        float: 小数第4位以下を負の無限大方向に丸めた値。
+    """
     return math.floor(value * 1000) / 1000
 
 
 def lambda_handler(event, context):
+    """クエリパラメータから予測肺活量と肺活量の割合を計算する。
+
+    Args:
+        event (dict): API Gatewayのイベント。queryStringParametersに以下を含む。
+            gender: 性別（0: 男性、1: 女性）。
+            age: 年齢（歳、0以上の整数）。
+            height: 身長（cm、正の数）。
+        context (object): Lambdaの実行コンテキスト。この関数では使用しない。
+
+    Returns:
+        dict: 成功時はHTTP 200で予測肺活量（mL）、基準肺活量の予測肺活量に
+            対する割合（%）、入力値を返す。入力不備時はHTTP 400で
+            エラー詳細を返す。本文はJSON文字列として格納する。
+    """
     params = event.get("queryStringParameters") or {}
 
     try:

@@ -1,4 +1,7 @@
-import ddl_gen, dml_gen, define_gen, drop_gen
+import ddl_gen
+import define_gen
+import dml_gen
+import drop_gen
 
 """
 自動生成処理のメインモジュール

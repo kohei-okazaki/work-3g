@@ -1,5 +1,7 @@
 from pathlib import Path
-import const, utils
+
+import const
+import utils
 
 """
 Define SQLを自動生成するモジュール

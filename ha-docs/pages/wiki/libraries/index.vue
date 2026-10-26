@@ -299,19 +299,19 @@ export default {
         },
         {
           name: "Vue",
-          version: "3.5.38",
+          version: "3.5.44",
           description: "フロントエンドUIフレームワーク",
           projects: ["root front", "docs"],
         },
         {
           name: "Nuxt",
-          version: "4.4.8",
+          version: "4.6.2",
           description: "Vueベースのアプリケーションフレームワーク",
           projects: ["root front", "docs"],
         },
         {
           name: "Vuetify",
-          version: "4.1.2",
+          version: "4.3.0",
           description: "Vue向けUIコンポーネントライブラリ",
           projects: ["root front", "docs"],
         },
@@ -337,7 +337,13 @@ export default {
           name: "Sass",
           version: "1.101.0",
           description: "CSSプリプロセッサ",
-          projects: ["root front", "docs"],
+          projects: ["root front"],
+        },
+        {
+          name: "Sass",
+          version: "1.106.1",
+          description: "CSSプリプロセッサ",
+          projects: ["docs"],
         },
         {
           name: "TypeScript",
@@ -359,13 +365,13 @@ export default {
         },
         {
           name: "Mermaid",
-          version: "11.15.0",
+          version: "12.2.0",
           description: "ドキュメント内の図を生成するライブラリ",
           projects: ["docs"],
         },
         {
           name: "PostCSS",
-          version: "8.5.15",
+          version: "8.5.31",
           description: "CSS変換ツール",
           projects: ["docs"],
         },

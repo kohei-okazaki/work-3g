@@ -52,20 +52,20 @@ export default {
       ],
       flow: [
         {
-          id: "1",
-          text: "リクエスト受付",
+          id: "start",
+          text: "ヘルスチェックリクエスト受付",
           edgeType: "round",
-          next: ["2"],
+          next: ["response"],
         },
         {
-          id: "2",
-          text: "ヘルスチェックレスポンス生成",
+          id: "response",
+          text: "正常レスポンス生成",
           edgeType: "round",
-          next: ["3"],
+          next: ["success"],
         },
         {
-          id: "3",
-          text: "レスポンス返却",
+          id: "success",
+          text: "正常レスポンス返却<br/>HTTP 200・result: #quot;0#quot;",
           edgeType: "round",
         },
       ],

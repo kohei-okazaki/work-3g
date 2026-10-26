@@ -13,12 +13,12 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java-version>25</java-version>
 
-    <springboot-version>4.1.0</springboot-version>
-    <aws-version>2.47.2</aws-version>
-    <poi-version>5.5.1</poi-version>
+    <springboot-version>4.1.2</springboot-version>
+    <aws-version>2.57.3</aws-version>
+    <poi-version>6.0.0</poi-version>
     <mysql-version>8.4.0</mysql-version>
-    <mybatis-version>3.5.19</mybatis-version>
-    <mybatis-spring-version>4.0.0</mybatis-spring-version>
+    <mybatis-version>3.6.0</mybatis-version>
+    <mybatis-spring-version>4.1.0</mybatis-spring-version>
     <okhttp-version>5.3.2</okhttp-version>
 
     <maven-compiler-version>3.11.0</maven-compiler-version>
