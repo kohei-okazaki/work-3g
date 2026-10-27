@@ -78,7 +78,7 @@
 
 ### ha-track  
 健康情報蓄積用プロジェクト。  
-  - Python3.13.8
+  - Python3.14.8
   - Django rest framework
 
 ### ha-build  

@@ -113,7 +113,7 @@ services:
         condition: service_healthy
     networks:
       - work-3g-network
-  
+
   # 管理者用サイト Front Container
   ha-root-front:
     image: work3g/ha-root-front:local
@@ -194,8 +194,9 @@ services:
 
   # MySQL Container
   mysql:
-    image: mysql:8.4
+    image: mysql:9.7.4
     container_name: work3g-mysql
+    stop_grace_period: 2m
     environment:
       TZ: Asia/Tokyo
       MYSQL_ROOT_PASSWORD: rootpass

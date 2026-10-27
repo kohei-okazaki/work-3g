@@ -142,7 +142,7 @@ public class UpperCaseTableNamePlugin extends PluginAdapter {
         for (VisitableElement e : element.getElements()) {
             if (e instanceof TextElement) {
                 TextElement textElement = (TextElement) e;
-                String content = textElement.getContent();
+                String content = textElement.content();
                 // 元のテーブル名を見つけて大文字に置換
                 if (content.contains(originalTableName)) {
                     element.getElements().set(
