@@ -72,6 +72,13 @@ definePageMeta({
 import axios from "axios";
 let url = process.env.api_base_url + "user";
 
+function getErrorMessage(data, fallback) {
+  const messages = Array.isArray(data?.errors)
+    ? data.errors.map((error) => error?.message).filter(Boolean).join("\n")
+    : "";
+  return messages || data?.error?.message || fallback;
+}
+
 export default {
   // ログイン前のレイアウトを適用
   layout: "non-auth-layout",
@@ -139,32 +146,37 @@ export default {
         this.entryUser();
       }
     },
-    entryUser: function () {
+    entryUser: async function () {
       this.loading = true;
+      this.error.hasError = false;
+      this.error.message = null;
       let reqBody = {
         password: this.password,
         conf_password: this.confPassword,
       };
-      axios.post(url, reqBody).then(
-        (result) => {
-          if (result.data.result === "0") {
-            // ユーザ作成APIが正常終了した場合
-            this.api_data.api_result = result.data.result;
-            this.api_data.seq_login_id = result.data.seq_login_id;
-          } else {
-            this.error.hasError = true;
-            this.error.message = response.data.error.message;
-          }
-          this.loading = false;
-        },
-        (error) => {
+      try {
+        const result = await axios.post(url, reqBody);
+        if (result?.data?.result === "0") {
+          // ユーザ作成APIが正常終了した場合
+          this.api_data.api_result = result.data.result;
+          this.api_data.seq_login_id = result.data.seq_login_id;
+        } else {
           this.error.hasError = true;
-          this.error.message = error;
-          this.loading = false;
-          console.log("userentry [error]=" + error);
-          return error;
-        },
-      );
+          this.error.message = getErrorMessage(
+            result?.data,
+            "ユーザ作成に失敗しました。",
+          );
+        }
+      } catch (error) {
+        this.error.hasError = true;
+        this.error.message = getErrorMessage(
+          error?.response?.data,
+          error?.message || "ユーザ作成に失敗しました。",
+        );
+        console.log("userentry [error]=" + error);
+      } finally {
+        this.loading = false;
+      }
     },
   },
 };

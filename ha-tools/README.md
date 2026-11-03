@@ -57,7 +57,7 @@ py -3.15 -m venv .venv
 ## ツール利用方法
 
 ### 自動生成
-```text
+```bash
 cd C:\app\git\work-3g\ha-tools\db
 .\.venv\Scripts\python.exe main.py
 ```
@@ -65,7 +65,7 @@ cd C:\app\git\work-3g\ha-tools\db
 ### API自動テスト
 テスト対象のAPIを `http://localhost:8081` で起動してから実行します。
 
-```text
+```bash
 cd C:\app\git\work-3g\ha-tools\ha-api-test
 .\.venv\Scripts\python.exe -m pytest
 ```
