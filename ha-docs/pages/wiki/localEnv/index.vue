@@ -14,7 +14,9 @@
     <v-row align="center">
       <v-col sm="12">
         <v-alert text type="error" elevation="2" border="left">
-            MySQLの設定等が必要のため、最新版のDockerローカル環境構築手順書を参照してください。
+            現在のMySQLサーバーはRDSの設定と同じ8.4.8を使用します。
+            新規構築は<nuxt-link to="/wiki/dockerEnv">Docker環境構築手順</nuxt-link>を参照してください。
+            このページのMySQLインストール・初期設定の画面と8.0のインストーラ名は、旧環境の参考資料です。
         </v-alert>
       </v-col>
     </v-row>
@@ -24,8 +26,8 @@
         <v-alert text type="info" elevation="2" border="left">
           <div class="text-subtitle-1">概要</div>
           <div class="text-body-2">
-            ローカル環境の開発構築手順書になります<br />
-            以下の手順に従って環境構築を行って下さい<br />
+            Docker導入前のローカル環境の開発構築手順書です。<br />
+            現在の環境構築にはDocker環境構築手順を使用してください。<br />
           </div>
         </v-alert>
       </v-col>
@@ -1176,7 +1178,7 @@ export default {
         {
           type: "データベース",
           name: "MySQL",
-          version: "8.4.0",
+          version: "8.4.8",
         },
         {
           type: "DBマイグレーション",

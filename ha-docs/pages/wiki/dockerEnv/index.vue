@@ -18,6 +18,9 @@
           <div class="text-body-2">
             Dockerによるローカル環境の開発構築手順書になります<br />
             以下の手順に従って環境構築を行って下さい<br />
+            MySQLサーバーはRDSの設定と同じ8.4.8を使用し、
+            <kbd>ha-build/docker/docker-compose.yml</kbd>のイメージを<kbd>mysql:8.4.8</kbd>に固定しています。
+            既存DBから切り替える場合は、先に<kbd>ha-build/docker/MYSQL_UPGRADE.md</kbd>の手順を確認してください。
           </div>
         </v-alert>
       </v-col>
@@ -777,7 +780,7 @@ export default {
         {
           type: "データベース",
           name: "MySQL",
-          version: "8.4.0",
+          version: "8.4.8",
         },
         {
           type: "DBマイグレーション",

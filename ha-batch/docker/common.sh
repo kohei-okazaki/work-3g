@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # ----------------------------------------------------------------------------------------
 # 全バッチで共通的に処理するシェルスクリプト
@@ -6,7 +6,8 @@
 set -eu
 
 # read const.txt
-. ./const.txt
+COMMON_SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+. "${COMMON_SCRIPT_DIR}/const.txt"
 
 create_run_id() {
   date "+%Y%m%d%H%M%S%N-$$"

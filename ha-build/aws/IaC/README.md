@@ -339,7 +339,7 @@ aws ssm start-session \
 
 ポートフォワード中に、元のGit Bashターミナルから実行。
 ローカルPCへのMySQL clientのインストールは不要。DockerのMySQL clientを利用。
-初回実行時は `mysql:8.0` imageをダウンロード。
+初回実行時はRDSの設定と同じ `mysql:8.4.8` imageをダウンロード。
 
 ```bash
 # SSMから値を設定
@@ -348,7 +348,7 @@ echo
 
 docker run --rm -i \
   -e MYSQL_PWD="${DB_MASTER_PASSWORD}" \
-  mysql:8.0 \
+  mysql:8.4.8 \
   mysql -h host.docker.internal -P 13306 -u ${DbMasterUsername} < ../../../../../ha-asset/02_db/others/CREATE_DATABASE.sql
 
 unset DB_MASTER_PASSWORD
@@ -359,7 +359,7 @@ unset DB_MASTER_PASSWORD
 RDS master userでMySQLへ接続。
 
 ```bash
-winpty docker run --rm -it mysql:8.0 \
+winpty docker run --rm -it mysql:8.4.8 \
   mysql -h host.docker.internal -P 13306 -u ${DbMasterUsername} -p
 ```
 
@@ -378,7 +378,7 @@ FLUSH PRIVILEGES;
 ユーザ作成後に実行。
 
 ```bash
-winpty docker run --rm -it mysql:8.0 \
+winpty docker run --rm -it mysql:8.4.8 \
   mysql -h host.docker.internal -P 13306 -u app_user -p work3g
 ```
 

@@ -219,7 +219,7 @@
                     <li>
                       <p>以下のコマンドをwsl上で実行</p>
                       <ol>
-                        <li><kbd>/ha-build/docker/docker.sh build</kbd></li>
+                        <li><kbd>bash ha-build/docker/docker.sh build</kbd>（リポジトリルートから実行）</li>
                       </ol>
                     </li>
                   </ol>

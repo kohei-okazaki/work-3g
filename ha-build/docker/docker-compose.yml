@@ -194,7 +194,8 @@ services:
 
   # MySQL Container
   mysql:
-    image: mysql:9.7.4
+    # 9.7系で使用したデータの切り替えは MYSQL_UPGRADE.md を参照。
+    image: mysql:8.4.8
     container_name: work3g-mysql
     stop_grace_period: 2m
     environment:

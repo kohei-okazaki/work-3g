@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # ----------------------------------------------------------------------------------------
 # AWS SQS取込バッチ
@@ -18,7 +18,8 @@ echo "START $0"
 echo "------------------------------------------------------------------------"
 
 # call common.sh
-. ./common.sh
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+. "${SCRIPT_DIR}/common.sh"
 
 RUN_ID=$(create_run_id)
 

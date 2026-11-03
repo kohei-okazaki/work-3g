@@ -1,6 +1,8 @@
 # Maven wrappers
 /ha-api/mvnw text eol=lf
+/ha-batch/mvnw text eol=lf
 /ha-dashboard/mvnw text eol=lf
+/ha-root/mvnw text eol=lf
 
 # Windows command scripts
 /ha-api/**/*.cmd text eol=crlf
@@ -19,3 +21,7 @@
 /ha-build/**/*.sh text eol=lf
 /ha-business/**/*.sh text eol=lf
 /ha-db/**/*.sh text eol=lf
+
+# Sourced shell configuration
+/ha-batch/docker/const.txt text eol=lf
+/ha-build/docker/const.txt text eol=lf

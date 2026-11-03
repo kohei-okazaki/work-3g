@@ -41,5 +41,5 @@ CodeBuildプロジェクトはAWSコンソールまたはAWS CLIから手動で�
 
 ```bash
 cd ha-asset/90_aws/calc_api
-ARTIFACT_BUCKET=<bucket-name> ./build.sh
+ARTIFACT_BUCKET=<bucket-name> bash ./build.sh
 ```
