@@ -21,7 +21,7 @@ import jp.co.ha.db.mapper.custom.PagingHealthInfoMapper;
 
 /**
  * 健康情報連携処理-Reader
- * 
+ *
  * @version 1.0.0
  */
 @Component
@@ -34,7 +34,7 @@ public class HealthInfoMigrateReader extends MyBatisPagingItemReader<HealthInfo>
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param sqlSessionFactory
      *     SqlSessionFactory
      * @param targetDate
