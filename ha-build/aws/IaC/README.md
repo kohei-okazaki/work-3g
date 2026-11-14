@@ -349,7 +349,7 @@ echo
 docker run --rm -i \
   -e MYSQL_PWD="${DB_MASTER_PASSWORD}" \
   mysql:8.4.8 \
-  mysql -h host.docker.internal -P 13306 -u ${DbMasterUsername} < ../../../../../ha-asset/02_db/others/CREATE_DATABASE.sql
+  mysql -h host.docker.internal -P 13306 -u ${DbMasterUsername} < ../../../../../ha-docs/db/others/CREATE_DATABASE.sql
 
 unset DB_MASTER_PASSWORD
 ```

@@ -13,7 +13,9 @@
 - 健康情報連携バッチ：docker/health_info_migrate.sh
     - 概要：指定した日の健康情報をha-trackへ連携する。
 - AWS SQS取込バッチ：docker/aws_sqs_import.sh
-    - 概要：SQSからメッセージを取得し、以下のテーブルに登録する。
+    - 概要：SQSからAPI通信ログのメッセージを取得し、API_LOGに登録する。
+- データパージバッチ：docker/data_purge.sh
+    - 概要：論理削除済みで保持期間の条件に合致するデータを物理削除する。
 - 日次データ分析連携JobSet：docker/daily_analysis_jobset.sh
     - 概要：指定した年月日の健康情報/ユーザ情報/API通信ログ/バッチ実行ログをCSVファイルに出力し圧縮してS3へ転送するための各子シェルでジョブを実行する。
 - 日次健康情報データ分析連携バッチ：docker/daily_analysis_health_info.sh
@@ -24,6 +26,10 @@
     - 概要：指定した年月日のAPI通信ログをCSVファイルに出力し圧縮してS3へ転送する。
 - 日次バッチ実行ログデータ分析連携バッチ：docker/daily_analysis_batch_log.sh
     - 概要：指定した年月日のバッチ実行ログをCSVファイルに出力し圧縮してS3へ転送する。
+
+## 設計書
+
+[バッチ設計書一覧](../ha-docs/design/03_batch/README.md)を参照。
 
 ## ログ
 - 文字コード：UTF-8

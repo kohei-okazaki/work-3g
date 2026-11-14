@@ -352,7 +352,7 @@
                 <p>
                   以下のファイルMySQLクライアントから実行し、データベース「work3g」を作成する
                 </p>
-                <kbd>/ha-asset/02_db/others/CREATE_DATABASE.sql</kbd>
+                <kbd>/ha-docs/db/others/CREATE_DATABASE.sql</kbd>
               </details>
 
               <br />
@@ -360,7 +360,7 @@
               <details>
                 <summary>ユーザ作成</summary>
                 <p>MySQLクライアント上で以下のSQLを実行し、ユーザを作成する</p>
-                <kbd>/ha-asset/02_db/others/CREATE_USER.sql</kbd>
+                <kbd>/ha-docs/db/others/CREATE_USER.sql</kbd>
               </details>
 
               <br />
@@ -672,8 +672,8 @@
             <v-expansion-panel-content class="text-body-2">
               <v-alert text type="error" elevation="2" border="left">
                 <div class="text-body-2">
-                  健康情報計算APIはAWS API Gateway+Lambda化しローカルサーバを構築する必要はないため後続処理は基本不要。<br>
-                  ha-docsやha-rootのfrontでnodeやnpmでサーバ起動するため必要。
+                  Node.jsとnpmはha-docs・ha-root/frontの開発とビルドに使用する。<br />
+                  健康情報計算APIはha-calc-apiのPython 3.14 LambdaをAPI Gateway経由で呼び出す。配置・デプロイ手順は<kbd>ha-calc-api/README.md</kbd>を参照。
                 </div>
               </v-alert>
               <details>
@@ -682,7 +682,7 @@
                   <a href="https://nodejs.org/ja/download/" target="_blank"
                     rel="noopener noreferrer">ここ</a>から各OSに合わせてインストーラをダウンロード
                 </p>
-                <p>バージョンは偶数バージョンで20.x.xを選択</p>
+                <p>バージョンは24.15.0以降の24系を選択（ha-docs/package.jsonのengines.nodeに従う）</p>
                 <p>
                   インストール完了後、コマンドプロンプトまたはターミナルで実行
                 </p>
@@ -715,18 +715,6 @@
               <br />
 
               <details>
-                <summary>Vue cliインストール</summary>
-                <p>コマンドプロンプトより以下のコマンドを実行</p>
-                <kbd>npm install -g @vue/cli</kbd>
-                <p>
-                  以下のコマンドを実行し、任意のvue/cliのバージョンが表示されていればOK
-                </p>
-                <kbd>vue -V</kbd>
-              </details>
-
-              <br />
-
-              <details>
                 <summary>npm モジュールの更新</summary>
                 <v-alert text type="error" elevation="2" border="left">
                   <div class="text-body-2">
@@ -734,7 +722,7 @@
                   </div>
                 </v-alert>
                 <p>
-                  Eclipseのha-calc_apiプロジェクト上でコマンドプロンプトを開き、以下のコマンドを実行
+                  ha-docsディレクトリ上でコマンドプロンプトを開き、以下のコマンドを実行
                 </p>
                 <kbd>npm update</kbd>
                 <p>
@@ -753,7 +741,7 @@
                   </div>
                 </v-alert>
                 <p>
-                  開発中、新しくモジュールを追加したい場合、Eclipseのha-calc_apiプロジェクト上でコマンドプロンプトを開き、以下のコマンドを実行
+                  開発中、新しくモジュールを追加したい場合、ha-docsディレクトリ上でコマンドプロンプトを開き、以下のコマンドを実行
                 </p>
                 <kbd>npm install --save ${module_name}</kbd>
                 <p>
@@ -768,7 +756,7 @@
                 <summary>Node.js の更新</summary>
                 <p>
                   Node.jsのバージョンを更新したい場合、<a href="https://nodejs.org/ja/download/" target="_blank"
-                    rel="noopener noreferrer">ここ</a>を開き<b>「LTS」</b>の最新版のインストーラをダウンロードし、ウィザードの指示に従って画面を進めればOK
+                    rel="noopener noreferrer">ここ</a>を開き、ha-docs/package.jsonのengines.nodeを満たすバージョンのインストーラをダウンロードして更新する
                 </p>
                 <p>
                   以下のコマンドを実行し、更新したNodeのバージョンになっていればOK
@@ -878,7 +866,7 @@
                     <tr>
                       <td>2</td>
                       <td>
-                        以下のxmlをインポート<br /><kbd>/ha-asset/00_local/codecleanup.xml</kbd>
+                        以下のxmlをインポート<br /><kbd>/ha-tools/eclipse_tools/codecleanup.xml</kbd>
                       </td>
                     </tr>
                     <tr>
@@ -891,7 +879,7 @@
                     <tr>
                       <td>4</td>
                       <td>
-                        以下のxmlをインポート<br /><kbd>/ha-asset/00_local/codetemplates.xml</kbd>
+                        以下のxmlをインポート<br /><kbd>/ha-tools/eclipse_tools/codetemplates.xml</kbd>
                       </td>
                     </tr>
                     <tr>
@@ -904,7 +892,7 @@
                     <tr>
                       <td>6</td>
                       <td>
-                        以下のxmlをインポート<br /><kbd>/ha-asset/00_local/codeformatter.xml</kbd>
+                        以下のxmlをインポート<br /><kbd>/ha-tools/eclipse_tools/codeformatter.xml</kbd>
                       </td>
                     </tr>
                   </tbody>

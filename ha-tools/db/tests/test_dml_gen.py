@@ -136,7 +136,7 @@ class DmlGenerationTest(unittest.TestCase):
                 self.assertEqual("existing SQL\n", target.read_text(encoding="utf-8"))
 
     def test_current_workbook_produces_unchanged_seed_sql(self):
-        workbook = REPO_ROOT / "ha-asset" / "02_db" / "DB.xlsx"
+        workbook = REPO_ROOT / "ha-docs" / "db" / "DB.xlsx"
         data_sheets = [
             name
             for name in dml_gen.utils.get_sheet_names(str(workbook))
@@ -148,7 +148,7 @@ class DmlGenerationTest(unittest.TestCase):
                 rows = dml_gen.utils.read_rows(str(workbook), sheet_name)
                 dml_gen.generate(sheet_name, rows)
                 filename = sheet_name.upper() + ".sql"
-                original = REPO_ROOT / "ha-asset" / "02_db" / "dml" / filename
+                original = REPO_ROOT / "ha-docs" / "db" / "dml" / filename
                 self.assertEqual(
                     original.read_text(encoding="utf-8"),
                     (self.output / filename).read_text(encoding="utf-8"),

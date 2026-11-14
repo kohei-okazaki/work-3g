@@ -1,0 +1,289 @@
+openapi: 3.1.0
+info:
+  title: 健康管理アプリ API入出力仕様
+  version: 1.0.0
+  description: |
+    健康情報の登録・照会と、APIの応答確認に用いる入出力仕様。
+    内部処理は同じフォルダの「設計書_2.0.ヘルスチェックAPI.md」、
+    「設計書_2.1.健康情報登録API.md」、「設計書_2.2.健康情報照会API.md」を参照する。
+    接続先のホスト・ポートは実行環境に従う。
+    HTTP 400は共通エラー処理の対象となる異常応答を示す。
+servers:
+  - url: /
+    description: ha-apiの配置先を基準とする相対URL
+tags:
+  - name: HealthInfo
+    description: 健康情報の登録・照会
+  - name: HealthCheck
+    description: APIの応答確認
+security:
+  - ApiKey: []
+paths:
+  /api/{seq_user_id}/healthinfo:
+    post:
+      tags: [HealthInfo]
+      operationId: registerHealthInfo
+      summary: 健康情報を登録する
+      description: |
+        ユーザIDをURL、APIキーをApi-Keyヘッダーから取得する。
+        入力を検証し、ユーザとAPIキーを照合した後、基礎健康情報計算APIを呼び出して登録する。
+      parameters:
+        - $ref: '#/components/parameters/SeqUserId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HealthInfoRegistrationRequest'
+            examples:
+              registration:
+                summary: 身長・体重を指定し、トランザクションIDは自動生成
+                value:
+                  height: 170.5
+                  weight: 65.2
+      responses:
+        '200':
+          description: 健康情報を登録した
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthInfoSuccessResponse'
+              example:
+                result: '0'
+                account:
+                  seq_user_id: 1
+                health_info:
+                  seq_health_info_id: 100
+                  height: 170.5
+                  weight: 65.2
+                  bmi: 22.428
+                  standard_weight: 63.954
+                  reg_date: '20261110120000'
+        '400':
+          $ref: '#/components/responses/HandledError'
+  /api/{seq_user_id}/healthinfo/{seq_health_info_id}:
+    get:
+      tags: [HealthInfo]
+      operationId: getHealthInfo
+      summary: 健康情報を照会する
+      description: |
+        ユーザとAPIキーを照合し、ユーザIDと健康情報IDに一致する健康情報を返す。
+        リクエストボディは受け取らない。
+      parameters:
+        - $ref: '#/components/parameters/SeqUserId'
+        - $ref: '#/components/parameters/SeqHealthInfoId'
+      responses:
+        '200':
+          description: 健康情報が1件取得できた
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthInfoSuccessResponse'
+              example:
+                result: '0'
+                account:
+                  seq_user_id: 1
+                health_info:
+                  seq_health_info_id: 100
+                  height: 170.5
+                  weight: 65.2
+                  bmi: 22.428
+                  standard_weight: 63.954
+                  reg_date: '20261110120000'
+        '400':
+          $ref: '#/components/responses/HandledError'
+  /api/healthcheck:
+    get:
+      tags: [HealthCheck]
+      operationId: getHealthCheck
+      summary: APIの応答を確認する
+      description: |
+        成功応答を返す。APIキー認証、個別の入力チェック、DB検査、外部API呼び出しは行わない。
+        リクエストボディと独自のヘッダー引数はない。
+      security: []
+      responses:
+        '200':
+          description: ヘルスチェックの正常応答
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckSuccessResponse'
+              example:
+                result: '0'
+        '400':
+          $ref: '#/components/responses/HandledError'
+components:
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: Api-Key
+      description: |
+        必須。URLのseq_user_idで取得したUSER.API_KEYとの完全一致を検査する。
+        ユーザはDELETE_FLAGがfalse、PASSWORD_EXPIREが日本時間のシステム日付以上であること。
+        有効期限当日を含めて利用できる。対象ユーザが存在しない、削除済み、または期限切れの場合はDW0021を返す。
+        長さは64文字とし、UTF-16コード単位で数える。
+        ヘッダーが欠落した場合は異常応答とする。
+        ヘルスチェックAPIではこの認証を使用しない。
+  parameters:
+    SeqUserId:
+      name: seq_user_id
+      in: path
+      required: true
+      description: ユーザID。64ビット符号付き整数。正数限定の入力制限は設けない。
+      schema:
+        type: integer
+        format: int64
+    SeqHealthInfoId:
+      name: seq_health_info_id
+      in: path
+      required: true
+      description: |
+        健康情報ID。必須の0以上の整数。64ビット符号付き整数として読み取る。
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+  responses:
+    HandledError:
+      description: |
+        共通エラー処理の対象となる異常応答。
+        resultは文字列の"1"。accountとhealth_infoは含めない。
+        主なコードはCW0017（入力検証・パス変数型変換）、DW0021（ユーザ不存在・削除済み・期限切れ）、
+        AE0018（APIキー不一致）、CW0009（データなし・BMI範囲不一致）、
+        CW0016（複数データ）、BE0032（計算API失敗）、
+        CE0041（SQS登録失敗）、CE0002（一般例外）など。
+        エラーコード・詳細は、APIと異常の発生条件に応じて設定する。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorResponse'
+          examples:
+            missingUser:
+              summary: 健康情報APIのユーザ不存在
+              value:
+                result: '1'
+                error:
+                  code: DW0021
+                  detail: ユーザ情報が存在しません seqUserId:1
+            validation:
+              summary: 健康情報登録APIの身長必須検証
+              value:
+                result: '1'
+                error:
+                  code: CW0017
+                  detail: heightが未設定です height=
+            unexpected:
+              summary: 共通の一般例外
+              value:
+                result: '1'
+                error:
+                  code: CE0002
+                  detail: 予期せぬエラーが発生しました
+  schemas:
+    HealthInfoRegistrationRequest:
+      type: object
+      required: [height, weight]
+      additionalProperties: true
+      description: |
+        未定義のJSON項目は無視する。
+        seq_user_idとAPIキーはボディでは受け取らず、URL・ヘッダーから設定する。
+        height/weightは、読み取った数値の文字列表現が符号なしの10進表記であることを検証する。
+        数値の最大値・小数桁数の入力制限は設けない。
+      properties:
+        height:
+          type: number
+          description: |
+            身長。必須。数値変換後の文字列表現が符号なしの10進表記であることを検証する。
+            0は許容する。負数や、数値変換後に指数表記となる値は形式エラーとする。
+          x-java-validation-pattern: '^?(0|[1-9]\d*)(\.\d+|)$'
+        weight:
+          type: number
+          description: 体重。heightと同じ必須・数値表記の検証を行う。
+          x-java-validation-pattern: '^?(0|[1-9]\d*)(\.\d+|)$'
+        transaction_id:
+          type: [string, 'null']
+          description: |
+            任意のトランザクションID。未指定またはnullの場合だけUUID文字列を生成する。
+            空文字列を含む指定済み文字列はそのまま使用する。
+            入力時のUUID形式・文字種・最大長の制限は設けない。
+    HealthInfoSuccessResponse:
+      type: object
+      required: [result, account, health_info]
+      additionalProperties: false
+      description: 登録・照会の通常成功応答。errorはnullのため省略される。
+      properties:
+        result:
+          type: string
+          const: '0'
+          description: 成功。JSON数値ではなく文字列。
+        account:
+          $ref: '#/components/schemas/Account'
+        health_info:
+          $ref: '#/components/schemas/HealthInfo'
+    Account:
+      type: object
+      required: [seq_user_id]
+      additionalProperties: false
+      properties:
+        seq_user_id:
+          type: integer
+          format: int64
+          description: URLから取得したユーザID。
+    HealthInfo:
+      type: object
+      required: [seq_health_info_id, height, weight, bmi, standard_weight, reg_date]
+      additionalProperties: false
+      description: |
+        DBへ保存した、またはDBから取得した健康情報。
+        各項目の値がnullの場合も、項目自体は省略せずJSON nullを出力する。
+      properties:
+        seq_health_info_id:
+          type: [integer, 'null']
+          format: int64
+          description: 健康情報ID。
+        height:
+          type: [number, 'null']
+          description: 身長。
+        weight:
+          type: [number, 'null']
+          description: 体重。
+        bmi:
+          type: [number, 'null']
+          description: 基礎健康情報計算APIから取得したBMI。
+        standard_weight:
+          type: [number, 'null']
+          description: 基礎健康情報計算APIから取得した標準体重。
+        reg_date:
+          type: [string, 'null']
+          pattern: '^[0-9]{14}$'
+          description: 健康情報登録日時。yyyyMMddHHmmss形式、Asia/Tokyo。
+    HealthCheckSuccessResponse:
+      type: object
+      required: [result]
+      additionalProperties: false
+      properties:
+        result:
+          type: string
+          const: '0'
+          description: 成功。errorとaccountはnullのため省略される。
+    ApiErrorResponse:
+      type: object
+      required: [result, error]
+      additionalProperties: false
+      properties:
+        result:
+          type: string
+          const: '1'
+          description: 失敗。JSON数値ではなく文字列。
+        error:
+          type: object
+          required: [code, detail]
+          additionalProperties: false
+          properties:
+            code:
+              type: string
+              description: 異常の発生条件に応じたエラーコード。
+            detail:
+              type: [string, 'null']
+              description: エラー詳細。日本語を含む。nullの場合も子項目自体は出力する。

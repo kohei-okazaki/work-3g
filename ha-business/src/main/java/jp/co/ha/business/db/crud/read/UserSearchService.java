@@ -26,6 +26,16 @@ public interface UserSearchService {
     Optional<User> findById(Long seqUserId);
 
     /**
+     * 指定したユーザIDからAPIを利用可能なユーザ情報を検索する<br>
+     * 未削除かつパスワード有効期限がシステム日付以降のユーザを対象とする
+     *
+     * @param seqUserId
+     *     ユーザID
+     * @return APIを利用可能なユーザ情報
+     */
+    Optional<User> findApiUsableById(Long seqUserId);
+
+    /**
      * ユーザIDからユーザ情報と健康情報ファイル設定の複合Entityをを検索する
      *
      * @param seqUserId

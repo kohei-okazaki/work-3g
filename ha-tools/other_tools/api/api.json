@@ -1,0 +1,1485 @@
+{
+  "version": 6,
+  "entities": [
+    {
+      "entity": {
+        "type": "Project",
+        "description": "",
+        "id": "9fc870d5-6673-4119-9b9c-bcf3bcddfcd4",
+        "name": "1.健康管理API"
+      },
+      "children": [
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+              "name": "POST"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"height\": 170.00,\n  \"weight\": 60,\n  \"transaction_id\": 999999999\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${APP_API_URL}",
+              "path": "/api/6/healthinfo"
+            },
+            "id": "0ced36ef-ab5f-4b7d-9399-36fc7053ee7e",
+            "name": "1.健康情報登録API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "enabled": true,
+                "name": "Accept-Charset",
+                "value": "UTF-8"
+              },
+              {
+                "enabled": true,
+                "name": "API-KEY",
+                "value": "${APP_API_KEY}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${APP_API_URL}",
+              "path": "/api/1/healthinfo/1"
+            },
+            "id": "bcbfea08-3e2a-4cc2-bdab-29b41455eb0a",
+            "name": "2.健康情報照会API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "API-KEY",
+                "value": "${APP_API_KEY}"
+              },
+              {
+                "enabled": true,
+                "name": "Accept-Charset",
+                "value": "UTF-8"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${APP_API_URL}",
+              "path": "/api/healthcheck"
+            },
+            "id": "93f2a63e-f6da-4076-ad16-5d1baf108dca",
+            "name": "3.ヘルスチェックAPI",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Accept-Charset",
+                "value": "UTF-8"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "entity": {
+        "type": "Project",
+        "id": "c2dbb07a-5aa4-48dc-a4c1-959158d2154a",
+        "name": "2.健康情報計算API"
+      },
+      "children": [
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "height",
+                    "value": "170.5"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "weight",
+                    "value": "60"
+                  }
+                ]
+              },
+              "host": "${CALC_API_GW_URL}",
+              "path": "/basic"
+            },
+            "id": "e51e715e-0fc3-4a7b-8211-5d17979f89de",
+            "name": "1.基礎健康情報計算API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "Bearer my-secret-token"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "gender",
+                    "value": "0"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "age",
+                    "value": "20"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "height",
+                    "value": "170.0"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "weight",
+                    "value": "50.0"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "life_work_metabolism",
+                    "value": "1200"
+                  }
+                ]
+              },
+              "host": "${CALC_API_GW_URL}",
+              "path": "/calorie"
+            },
+            "id": "47a55cc1-e647-440e-8171-5741b0246a60",
+            "name": "2.カロリー計算API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "Bearer my-secret-token"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "age",
+                    "value": "20"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "height",
+                    "value": "170.00"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "gender",
+                    "value": "0"
+                  }
+                ]
+              },
+              "host": "${CALC_API_GW_URL}",
+              "path": "/breathing_capacity"
+            },
+            "id": "06eb5438-f744-41da-a2a6-35c9b97a49d7",
+            "name": "3.肺活量計算API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "Bearer my-secret-token"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "entity": {
+        "type": "Project",
+        "description": "",
+        "id": "7a58f6af-f105-4b22-8728-6d6e1500ceb0",
+        "name": "3.管理者用API"
+      },
+      "children": [
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/healthcheck"
+            },
+            "id": "14ff3f1b-39c1-44f1-9ab4-8a7f931684bb",
+            "name": "01.ヘルスチェックAPI",
+            "headers": []
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+              "name": "POST"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"seq_login_id\": 1,\n  \"password\": \"test\"\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/login"
+            },
+            "id": "cf00c297-412e-46fa-9395-dcd6aaf16ee2",
+            "name": "02.ログインAPI",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "name": "date",
+                    "value": "202507"
+                  }
+                ]
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/top"
+            },
+            "id": "86edf0d4-106c-4d4c-afd1-73c063abc57c",
+            "name": "03.Top情報取得API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "date",
+                    "value": "202507"
+                  }
+                ]
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/top/healthinfo"
+            },
+            "id": "cfbb73bf-79c2-4af5-b76a-8bee7a44c299",
+            "name": "04.Top情報(健康情報)取得API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "name": "date",
+                    "value": "202507"
+                  }
+                ]
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/top/account"
+            },
+            "id": "e1bbd8b3-436c-40c6-86ed-34e74eefa794",
+            "name": "05.Top情報(アカウント情報)取得API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/user/36"
+            },
+            "id": "8864d3e3-2826-4f7b-ba51-429d6e094b38",
+            "name": "06.管理ユーザ取得API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+              "name": "POST"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"password\": \"test\",\n  \"conf_password\": \"test\"\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/user"
+            },
+            "id": "f1322750-0d58-4211-9a9c-1e3829b8183f",
+            "name": "07.管理ユーザ作成API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+              "name": "PUT"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"roles\": [\"00\", \"01\", \"02\"],\n  \"remarks\": \"test user.\",\n  \"password\": \"test\",\n  \"password_expire\": \"2099/01/31\"\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/user/36"
+            },
+            "id": "6c2d70a9-8495-431b-a0a3-d534b3dca165",
+            "name": "08.管理ユーザ編集API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"rules\": [\"00\", \"01\"],\n  \"delete_flag\": true,\n  \"password\": \"test\",\n  \"password_expire\": \"2022/06/01\",\n  \"remarks\": \"備考欄\",\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "page",
+                    "value": "0"
+                  }
+                ]
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/account"
+            },
+            "id": "36e8dc55-a58d-42f8-9d72-627f2fd9eb02",
+            "name": "09.アカウント情報一覧取得API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+              "name": "PUT"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"mail_address\": \"hoge@gmail.com\",\n  \"password_expire\": \"9999/12/31\"\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/account/1"
+            },
+            "id": "b3a3edab-7a21-4cac-84c9-f0dc8d9a41f0",
+            "name": "10.アカウント情報編集API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              },
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"rules\": [\"00\", \"01\"],\n  \"delete_flag\": true,\n  \"password\": \"test\",\n  \"password_expire\": \"2022/06/01\",\n  \"remarks\": \"備考欄\",\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "page",
+                    "value": "0"
+                  }
+                ]
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/apidata"
+            },
+            "id": "f7700f92-9f03-41d8-a810-19b71456ffaa",
+            "name": "11.API通信情報一覧API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"rules\": [\"00\", \"01\"],\n  \"delete_flag\": true,\n  \"password\": \"test\",\n  \"password_expire\": \"2022/06/01\",\n  \"remarks\": \"備考欄\",\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "page",
+                    "value": "0"
+                  }
+                ]
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/healthinfo"
+            },
+            "id": "ebd7fe7f-52ec-4882-9d1f-211ccdab101e",
+            "name": "12.健康情報一覧API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+              "name": "PUT"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"seq_user_id\": 2,\n  \"height\": 170.0,\n  \"weight\": 50.0\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/healthinfo/1"
+            },
+            "id": "1126910f-a85f-4137-8816-d9bc725c9948",
+            "name": "13.健康情報編集API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              },
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"seq_user_id\": true,\n  \"height\": 170.0,\n  \"weight\": 50.0,\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "page",
+                    "value": "0"
+                  }
+                ]
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/news"
+            },
+            "id": "a320f966-fe91-4b60-ad98-0fc9943980cd",
+            "name": "14.お知らせ情報一覧取得API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+              "name": "POST"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"title\": \"お知らせ名\",\n  \"date\": \"2021/02/05\",\n  \"detail\": \"詳細\",\n  \"tag\": {\n    \"color\": \"blue\",\n    \"name\": \"タグ名\"\n  }\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/news"
+            },
+            "id": "1581a1d6-137b-41e0-a967-a429e788a2a2",
+            "name": "15.お知らせ情報登録API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              },
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+              "name": "PUT"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n\n  \"date\": \"2020/12/01\",\n  \"detail\": \"ローカル環境用<br>Version 1.0.0 リリース情報<br><li>アカウント登録/変更機能</li><li>健康情報登録/照会機能</li><li>カロリー計算機能</li><li>肺活量計算機能</li><li>パスワード再設定機能</li>\",\n  \"tag\":{\n    \"color\": \"blue\",\n    \"name\": \"リリース\"\n  }\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/news/1"
+            },
+            "id": "c2a0d1b6-056d-4461-bece-9dc1dadb20f8",
+            "name": "16.お知らせ情報編集API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              },
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+              "name": "DELETE"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"index\": \"お知らせ名\",\n  \"date\": \"2021/02/05\",\n  \"detail\": \"詳細\",\n  \"tag\": {\n    \"color\": \"blue\",\n    \"name\": \"タグ名\"\n  }\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/news/10"
+            },
+            "id": "6c7b8336-fa00-4193-83e8-1442f13784b8",
+            "name": "17.お知らせ情報削除API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"index\": \"お知らせ名\",\n  \"date\": \"2021/02/05\",\n  \"detail\": \"詳細\",\n  \"tag\": {\n    \"color\": \"blue\",\n    \"name\": \"タグ名\"\n  }\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "seq_login_id",
+                    "value": ""
+                  },
+                  {
+                    "enabled": true,
+                    "name": "page",
+                    "value": "あ"
+                  }
+                ]
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/note"
+            },
+            "id": "a8a05d95-39ac-4dbc-baf8-50852f3290c4",
+            "name": "18.メモ情報一覧API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+              "name": "POST"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"seq_login_id\": 1,\n  \"title\": \"タイトル\",\n  \"detail\": \"詳細\"\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/note"
+            },
+            "id": "aabc331b-db73-433b-b99b-2c49332255e6",
+            "name": "19.メモ情報登録API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              },
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+              "name": "PUT"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"title\": \"タイトル\",\n  \"detail\": \"詳細\"\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/note/"
+            },
+            "id": "6c308ba2-f11a-48d8-96c7-af7f8ed6ae2b",
+            "name": "20.メモ情報編集API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              },
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+              "name": "DELETE"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": ""
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/note/"
+            },
+            "id": "d87dd337-2d10-4077-8692-43b3bf855cc5",
+            "name": "21.メモ情報削除API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": ""
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/roles"
+            },
+            "id": "d66081dd-9373-4eb2-950d-0f67be1897c5",
+            "name": "22.権限マスタ一覧取得API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/inquiry"
+            },
+            "id": "08d111ea-e927-45a3-b994-239e27e8c452",
+            "name": "23.問い合わせ情報一覧取得API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+              "name": "PUT"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"status\": \"00\",\n  \"seq_login_id\": 1\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/inquiry/1"
+            },
+            "id": "1a46db56-4177-47b0-9465-57fddf83bb5d",
+            "name": "24.問い合わせ情報編集API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBody": "{\n  \"status\": \"00\",\n  \"seq_login_id\": 1\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/inquiry/status"
+            },
+            "id": "6a74a65e-6656-4bca-b03e-c32b5c0e7ebf",
+            "name": "25.問い合わせステータスマスタ一覧取得API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "status",
+                    "value": "00"
+                  }
+                ]
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/inquiry/notice"
+            },
+            "id": "032bfe75-e93f-46d4-8419-5ffd4d98fad1",
+            "name": "26.問い合わせ情報通知API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "page",
+                    "value": "0"
+                  }
+                ]
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/job"
+            },
+            "id": "2bbb8fcd-985b-4e57-b064-13112204a8b7",
+            "name": "27.Job履歴情報一覧取得API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "entity": {
+        "type": "Project",
+        "id": "d151d4b3-2aaa-4a71-8e7f-d0903f1b3cec",
+        "name": "4.健康情報蓄積API"
+      },
+      "children": [
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+              "name": "POST"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBodyEditorHeight": 384,
+              "textBody": "{\n  \"seq_user_id\":100,\n  \"health_infos\":[\n    {\n      \"seq_health_info_id\":1,\n      \"height\":170.01,\n      \"weight\":65.53,\n      \"bmi\":10.05,\n      \"standard_weight\":60.09,\n      \"created_at\":\"2000/01/05 12:50:39\"\n    },\n    {\n      \"seq_health_info_id\":2,\n      \"height\":170.01,\n      \"weight\":65.53,\n      \"bmi\":10.05,\n      \"standard_weight\":60.09,\n      \"created_at\":\"2000/01/05 12:50:40\"\n    }\n  ],\n  \"migrate_flg\": true\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${TRACK_API_URL}",
+              "path": "/api/healthinfo/"
+            },
+            "id": "1204a1a6-9a88-425f-87e7-2b3cef909325",
+            "name": "01.健康情報連携API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "enabled": true,
+                "name": "Accept-Charset",
+                "value": "utf-8"
+              },
+              {
+                "enabled": true,
+                "name": "Accept",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "environments": [
+    {
+      "id": "1ed7224a-6242-417c-9455-febbd693a618",
+      "name": "local環境",
+      "variables": {
+        "aa846eaf-cf9a-4ed0-83e5-5091c38f5432": {
+          "createdAt": "2025-10-13T16:12:16.354+09:00",
+          "name": "APP_API_URL",
+          "value": "http://localhost:8081",
+          "enabled": true,
+          "private": false
+        },
+        "5c3bc12d-a4a0-4599-ad12-7a977026c3ce": {
+          "createdAt": "2025-10-13T16:12:16.354+09:00",
+          "name": "ROOT_API_URL",
+          "value": "http://localhost:8082",
+          "enabled": true,
+          "private": false
+        },
+        "b1d0f693-84c9-4710-9902-5f178e1fb464": {
+          "createdAt": "2025-10-13T16:12:16.354+09:00",
+          "name": "TRACK_API_URL",
+          "value": "http://localhost:8086",
+          "enabled": true,
+          "private": false
+        },
+        "6fbf033b-618d-4de8-b651-82d0794a0518": {
+          "createdAt": "2025-10-13T16:12:16.354+09:00",
+          "name": "ROOT_API_TOKEN",
+          "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzY3Njk5ODA3LCJleHAiOjE3Njc3Mjg2MDd9.Ww8OStg24CY12CN0XG64ZY03Vjav3Ci0rJF2I2PPu56YiWScVfg-Z0dpU57zbBitXGcwpNvFYmR_BiKcayFagQ",
+          "enabled": true,
+          "private": false
+        },
+        "bd912177-5431-4678-abb9-e4b444ce1522": {
+          "createdAt": "2025-10-13T16:12:16.354+09:00",
+          "name": "APP_API_KEY",
+          "value": "d5cd823555e5d392d9bd2b7121a4797aa6022ca055aaa4dfe1ec844e918df2b9",
+          "enabled": true,
+          "private": false
+        },
+        "da805386-cdc0-4f25-830a-2054b7280461": {
+          "createdAt": "2025-10-13T16:12:16.354+09:00",
+          "name": "CALC_API_GW_URL",
+          "value": "https://uktlejp7a7.execute-api.ap-northeast-1.amazonaws.com/dev",
+          "enabled": true,
+          "private": false
+        },
+        "b7876a47-4458-4cb8-9e29-dbb830d5ad9d": {
+          "createdAt": "2025-12-22T15:02:20.906+09:00",
+          "name": "FCD_ID",
+          "value": "2617439",
+          "enabled": true,
+          "private": false
+        }
+      }
+    }
+  ]
+}

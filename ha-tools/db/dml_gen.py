@@ -51,14 +51,20 @@ def _mysql_literal(value: object) -> str:
     if isinstance(value, int):
         return str(value)
     if isinstance(value, (float, Decimal)):
-        finite = value.is_finite() if isinstance(value, Decimal) else math.isfinite(value)
+        finite = (
+            value.is_finite() if isinstance(value, Decimal) else math.isfinite(value)
+        )
         if not finite:
             raise ValueError("Non-finite numeric cell values cannot be written to SQL")
         return str(value)
     if isinstance(value, (datetime, time)):
         if value.utcoffset() is not None:
             raise ValueError("Timezone-aware cell values cannot be written to SQL")
-        text = value.isoformat(sep=" ") if isinstance(value, datetime) else value.isoformat()
+        text = (
+            value.isoformat(sep=" ")
+            if isinstance(value, datetime)
+            else value.isoformat()
+        )
         return "'{}'".format(text)
     if isinstance(value, date):
         return "'{}'".format(value.isoformat())
@@ -70,7 +76,9 @@ def _mysql_literal(value: object) -> str:
             encoded = value.encode("utf-8")
         except UnicodeEncodeError as error:
             raise ValueError("Text cell values must be valid UTF-8") from error
-        if "\\" in value or any(ord(char) < 32 or 127 <= ord(char) <= 159 for char in value):
+        if "\\" in value or any(
+            ord(char) < 32 or 127 <= ord(char) <= 159 for char in value
+        ):
             # バックスラッシュの解釈は sql_mode に依存するため、制御文字とともに
             # UTF-8 の16進表現を使う。NO_BACKSLASH_ESCAPES の有無で値が変わらない。
             # https://dev.mysql.com/doc/refman/8.4/en/hexadecimal-literals.html

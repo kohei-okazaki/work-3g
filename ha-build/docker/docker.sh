@@ -56,7 +56,8 @@ case ${args} in
     docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" restart mysql ha-api ha-dashboard ha-root-api ha-root-front ha-track
     ;;
   *)
-    echo "不正な引数です。build/start/stop/clear/check/restartのいずれかを指定してください。"
+    echo "不正な引数です。build/start/stop/clear/check/restartのいずれかを指定してください。" >&2
+    exit 1
     ;;
 esac
 
