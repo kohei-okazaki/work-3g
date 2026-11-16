@@ -11,7 +11,7 @@ import jp.co.ha.db.mapper.custom.PagingHealthInfoMapper;
 
 /**
  * 日次健康情報データ分析連携バッチ-Reader
- * 
+ *
  * @version 1.0.0
  */
 @Component
@@ -20,7 +20,7 @@ public class DailyHealthInfoReader extends BaseDailyAnalysisMySQLReader<HealthIn
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param sqlSessionFactory
      *     SqlSessionFactory
      * @param targetDate

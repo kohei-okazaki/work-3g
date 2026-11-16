@@ -1,2 +1,7 @@
 -- 任意のSQLを記載
-select * from health_info;
+SELECT
+    *
+FROM
+    HEALTH_INFO
+WHERE
+    DELETE_FLAG = false;

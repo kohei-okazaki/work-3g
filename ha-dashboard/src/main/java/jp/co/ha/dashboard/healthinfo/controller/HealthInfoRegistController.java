@@ -1,12 +1,12 @@
 package jp.co.ha.dashboard.healthinfo.controller;
 
 import static jp.co.ha.business.exception.DashboardErrorCode.*;
-import static jp.co.ha.common.db.SelectOption.SortType.*;
 import static jp.co.ha.common.exception.CommonErrorCode.*;
 import static jp.co.ha.dashboard.view.DashboardView.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,8 +34,6 @@ import jp.co.ha.business.healthInfo.service.annotation.HealthInfoDownloadCsv;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoDownloadExcel;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.HealthInfoExcelComponent;
-import jp.co.ha.common.db.SelectOption;
-import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
@@ -134,17 +132,13 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         Long seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Long.class).get();
 
-        boolean isFirstReg = healthInfoService.isFirstReg(seqUserId);
+        Optional<HealthInfo> lastHealthInfo = healthInfoSearchService
+                .findLatestBySeqUserId(seqUserId);
+        boolean isFirstReg = lastHealthInfo.isEmpty();
         model.addAttribute("isFirstReg", isFirstReg);
 
-        if (!isFirstReg) {
-            // 初回登録でない場合
-            SelectOption selectOption = new SelectOptionBuilder()
-                    .orderBy("SEQ_HEALTH_INFO_ID", DESC).limit(1).build();
-            HealthInfo lastHealthInfo = healthInfoSearchService
-                    .findBySeqUserId(seqUserId, selectOption).getFirst();
-            healthInfoService.addModel(model, dto, lastHealthInfo);
-        }
+        lastHealthInfo.ifPresent(
+                healthInfo -> healthInfoService.addModel(model, dto, healthInfo));
 
         // 健康情報登録処理を行う
         HealthInfoRegistApiResponse apiResponse = healthInfoService.regist(dto,

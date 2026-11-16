@@ -32,18 +32,6 @@ public interface HealthInfoService {
     void addModel(Model model, HealthInfoDto dto, HealthInfo lastHealthInfo);
 
     /**
-     * 指定されたユーザIDが初回登録かどうか判定する<br>
-     * 初回登録の場合true, それ以外の場合falseを返す<br>
-     *
-     * @param seqUserId
-     *     ユーザID
-     * @return 判定結果
-     * @throws BaseException
-     *     基底例外
-     */
-    boolean isFirstReg(Long seqUserId) throws BaseException;
-
-    /**
      * CSVモデルリストに変換する
      *
      * @param healthInfoList

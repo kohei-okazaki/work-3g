@@ -37,6 +37,7 @@
     WHERE
       HI.SEQ_USER_ID = #{seqUserId,jdbcType=BIGINT}
       AND HI.SEQ_HEALTH_INFO_ID = #{seqHealthInfoId,jdbcType=BIGINT}
+      AND HI.DELETE_FLAG = false
   </select>
 
   <select id="selectAll" parameterType="jp.co.ha.db.entity.HealthInfoExample" resultMap="BaseResultMap">
@@ -58,6 +59,8 @@
       HEALTH_INFO HI
       LEFT OUTER JOIN BMI_RANGE_MT BRM
         ON HI.SEQ_BMI_RANGE_MT_ID = BRM.SEQ_BMI_RANGE_MT_ID
+    WHERE
+      HI.DELETE_FLAG = false
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
