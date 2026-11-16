@@ -13,7 +13,7 @@ import jp.co.ha.db.entity.HealthInfo;
 
 /**
  * 健康情報連携処理-Proccesor
- * 
+ *
  * @version 1.0.0
  */
 @Component

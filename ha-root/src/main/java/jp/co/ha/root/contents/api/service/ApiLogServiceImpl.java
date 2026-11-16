@@ -3,6 +3,7 @@ package jp.co.ha.root.contents.api.service;
 import static jp.co.ha.common.db.SelectOption.SortType.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,9 @@ public class ApiLogServiceImpl implements ApiLogService {
                 .map(e -> {
                     ApiLogListApiResponse.ApiLog response = new ApiLogListApiResponse.ApiLog();
                     BeanUtil.copy(e, response);
-                    response.setHttpStatus(HttpStatus.valueOf(e.getHttpStatus()));
+                    if (Objects.nonNull(e.getHttpStatus())) {
+                        response.setHttpStatus(HttpStatus.valueOf(e.getHttpStatus()));
+                    }
                     return response;
                 }).collect(Collectors.toList());
     }

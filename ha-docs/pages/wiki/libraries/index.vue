@@ -28,7 +28,7 @@
                   <th>dashboard</th>
                   <th>api</th>
                   <th>batch</th>
-                  <th>calc_api</th>
+                  <th>calc API</th>
                   <th>root api</th>
                   <th>root front</th>
                   <th>track api</th>
@@ -264,7 +264,7 @@ export default {
         {
           name: "Python標準ライブラリ",
           version: "Python 3.14",
-          description: "計算Lambdaで使用するjson・math（外部依存なし）",
+          description: "ha-calc-apiの計算Lambdaで使用するjson・math（外部依存なし）",
           projects: ["calc_api"],
         },
         {

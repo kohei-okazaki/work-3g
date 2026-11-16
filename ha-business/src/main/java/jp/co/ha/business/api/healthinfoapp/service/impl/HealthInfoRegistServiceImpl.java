@@ -14,14 +14,11 @@ import jp.co.ha.business.api.healthinfoapp.service.HealthInfoRegistService;
 import jp.co.ha.business.api.node.request.BasicHealthInfoCalcApiRequest;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse.BasicHealthInfo;
-import jp.co.ha.business.api.node.response.TokenApiResponse;
 import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
-import jp.co.ha.business.component.TokenApiComponent;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
@@ -46,15 +43,9 @@ public class HealthInfoRegistServiceImpl extends CommonService
     /** API通信ログComponent */
     @Autowired
     private ApiLogComponent apiLogComponent;
-    /** トークン発行API */
-    @Autowired
-    private TokenApiComponent tokenApiComponent;
     /** 基礎健康情報計算APIコンポーネント */
     @Autowired
     private BasicHealthInfoCalcApiComponent basicHealthInfoCalcApiComponent;
-    /** 健康情報設定ファイル */
-    @Autowired
-    private HealthInfoProperties prop;
 
     @Override
     public void checkRequest(HealthInfoRegistApiRequest request) throws BaseException {
@@ -64,7 +55,6 @@ public class HealthInfoRegistServiceImpl extends CommonService
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void execute(HealthInfoRegistApiRequest request,
             HealthInfoRegistApiResponse response) throws BaseException {
 
@@ -76,25 +66,10 @@ public class HealthInfoRegistServiceImpl extends CommonService
         BasicHealthInfoCalcApiRequest basicHealthInfoCalcRequest = new BasicHealthInfoCalcApiRequest();
         BeanUtil.copy(request, basicHealthInfoCalcRequest);
 
-        BasicHealthInfoCalcApiResponse basicHealthInfoCalcResponse;
-        if (prop.healthinfoNodeApiMigrateFlg()) {
-
-            // 基礎健康情報計算API実施
-            basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
-                    .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
-                            request.getTransactionId());
-
-        } else {
-
-            // トークン発行API実施
-            TokenApiResponse tokenResponse = tokenApiComponent.callTokenApi(
-                    request.getSeqUserId(), request.getTransactionId());
-
-            // 基礎健康情報計算API実施
-            basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
-                    .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
-                            tokenResponse.getToken(), request.getTransactionId());
-        }
+        // 基礎健康情報計算API実施
+        BasicHealthInfoCalcApiResponse basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
+                .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
+                        request.getTransactionId());
 
         // リクエストをEntityに変換
         HealthInfo entity = toEntity(request,

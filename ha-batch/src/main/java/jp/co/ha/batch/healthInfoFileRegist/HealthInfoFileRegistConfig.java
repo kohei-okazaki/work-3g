@@ -20,7 +20,7 @@ import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
 
 /**
  * 健康情報一括登録バッチConfig
- * 
+ *
  * @version 1.0.0
  */
 @Configuration
@@ -49,7 +49,7 @@ public class HealthInfoFileRegistConfig extends BatchConfig {
 
     /**
      * 健康情報一括登録バッチSTEP
-     * 
+     *
      * @param reader
      *     Reader
      * @param processor

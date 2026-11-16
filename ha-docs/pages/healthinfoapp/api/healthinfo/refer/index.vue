@@ -71,7 +71,7 @@ export default {
         },
         {
           id: "3",
-          text: "入力正常：USER検索<br/>USER.SEQ_USER_ID = パス.ユーザID",
+          text: "入力正常：USER検索<br/>USER.SEQ_USER_ID = パス.ユーザID<br/>AND USER.DELETE_FLAG = false<br/>AND USER.PASSWORD_EXPIRE >= システム日付（日本時間・当日有効）",
           edgeType: "round",
           next: ["100","4"],
           style: "fill:#c6ffc6",
@@ -84,7 +84,7 @@ export default {
         },
         {
           id: "40",
-          text: "ユーザなし／APIキー不一致",
+          text: "対象ユーザなし（不存在・削除済み・期限切れ）／APIキー不一致",
           edgeType: "round",
           next: ["100"],
         },

@@ -61,6 +61,7 @@
 
 <script>
 import axios from "axios";
+import { formatDateInput } from "~/utils/dateInput.mjs";
 let url = process.env.api_base_url + "news";
 
 export default {
@@ -74,7 +75,7 @@ export default {
       loading: false,
       entryInfo: {
         title: "",
-        date: new Date().toISOString().substr(0, 10),
+        date: formatDateInput(new Date()),
         detail: "",
         tag: {
           color: "",

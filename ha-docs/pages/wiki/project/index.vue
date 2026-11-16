@@ -158,18 +158,13 @@ export default {
           description: "アプリが提供するAPI機能を管理するmavenプロジェクト",
         },
         {
-          name: "ha-asset",
-          description:
-            "DDLなどアプリで必要なファイルを管理するドキュメントプロジェクト",
-        },
-        {
           name: "ha-batch",
           description: "アプリが提供するバッチ機能を管理するmavenプロジェクト",
         },
         {
           name: "ha-build",
           description:
-            "ローカル環境のビルド機能を管理するドキュメントプロジェクト",
+            "ローカル環境のビルド、AWS CodeBuildのCI/CD、Terraformのインフラ定義を管理するプロジェクト",
         },
         {
           name: "ha-business",
@@ -189,12 +184,12 @@ export default {
         },
         {
           name: "ha-docs",
-          description: "健康管理アプリの静的ドキュメントプロジェクト",
+          description: "設計書・DB定義・AWSローカル検証資料とドキュメントサイトを管理するプロジェクト",
         },
         {
-          name: "ha-calc_api",
+          name: "ha-calc-api",
           description:
-            "lambdaで動作する健康情報計算APIを管理するJavaScriptプロジェクト",
+            "Python 3.14の計算LambdaとAPI Gateway・CloudFormationを管理するプロジェクト",
         },
         {
           name: "ha-pom",
@@ -205,12 +200,12 @@ export default {
           description: "健康管理アプリの管理サイト(管理者向けシステム)",
         },
         {
-          name: "ha-track",
-          description: "健康情報を蓄積するPythonプロジェクト",
+          name: "ha_track",
+          description: "健康情報を蓄積するPythonプロジェクト（サービス名はha-track）",
         },
         {
           name: "ha-tools",
-          description: "健康情報アプリのDDLなどを自動生成するツールプロジェクト",
+          description: "DB定義からのSQL生成・API自動テスト・開発補助ツールを管理するプロジェクト",
         },
       ],
       languages: [
@@ -220,11 +215,11 @@ export default {
         },
         {
           name: "Node.js",
-          version: "20.19.5",
+          version: "24.15.0以降（24系）",
         },
         {
           name: "Python",
-          version: "3.13.8",
+          version: "3.14（Lambda・ha_track）／3.15（ツール）",
         },
       ],
     };

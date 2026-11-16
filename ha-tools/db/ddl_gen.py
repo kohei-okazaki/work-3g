@@ -120,7 +120,6 @@ def generate(tables: dict[str, list[dict]]):
     output_file_path.mkdir(exist_ok=True)
 
     for table_name, columns in tables.items():
-
         # テーブル名（論理）
         logical_table_name = table_name.split(".")[const.LOGICAL_TABLE_NAME_POS]
         # テーブル名（物理）

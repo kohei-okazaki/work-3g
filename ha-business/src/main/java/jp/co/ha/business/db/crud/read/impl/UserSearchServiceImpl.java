@@ -14,6 +14,7 @@ import jp.co.ha.common.crypt.Crypter;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.common.util.CollectionUtil;
+import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.User;
 import jp.co.ha.db.entity.UserExample;
 import jp.co.ha.db.entity.UserKey;
@@ -52,6 +53,22 @@ public class UserSearchServiceImpl implements UserSearchService {
         UserKey key = new UserKey();
         key.setSeqUserId(seqUserId);
         return Optional.ofNullable(mapper.selectByPrimaryKey(key));
+    }
+
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<User> findApiUsableById(Long seqUserId) {
+
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andSeqUserIdEqualTo(seqUserId);
+        criteria.andDeleteFlagEqualTo(false);
+        criteria.andPasswordExpireGreaterThanOrEqualTo(
+                DateTimeUtil.getSysDate().toLocalDate());
+
+        List<User> list = mapper.selectByExample(example);
+        return Optional.ofNullable(CollectionUtil.isEmpty(list) ? null : list.getFirst());
     }
 
     @Select

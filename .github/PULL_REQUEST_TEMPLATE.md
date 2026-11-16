@@ -11,3 +11,4 @@
  - [ ] ha-root
  - [ ] ha-docs
  - [ ] ha-track
+ - [ ] ha-calc-api

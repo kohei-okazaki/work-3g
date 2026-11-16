@@ -1,0 +1,96 @@
+openapi: 3.1.0
+info:
+  title: calc APIの入出力仕様
+  version: 1.0.0
+  description: |
+    ha-businessのHTTPクライアントとDTOに基づく、外部API呼び出し側の契約。
+    接続先はhealthinfo.node.api.urlで指定する。外部サーバの全仕様を定義するものではない。
+    Node APIサーバからLambda + API Gatewayへ移植済みで、GET /basicを直接呼び出す。
+    ヘルスチェックAPIとトークン発行APIは廃止済み。トークンヘッダーや移行フラグによる分岐はない。
+    通信例外と4xx/5xxは共通クライアントが失敗DTOへ変換し、上位コンポーネントが
+    BE0032（基礎健康情報計算API）として扱う。
+    外部APIとの実通信は確認していない。
+tags:
+  - name: BasicHealthInfo
+paths:
+  /basic:
+    get:
+      tags: [BasicHealthInfo]
+      operationId: calculateBasicHealthInfo
+      summary: BMI・標準体重を計算する
+      description: |
+        GETクエリとしてheightとweightを送る。seq_user_idは送信しない。
+        Acceptはapplication/json、Accept-CharsetはUTF-8。
+        GETにリクエストボディとContent-Typeは設定しない。
+        トークンヘッダーは付与しない。
+      parameters:
+        - name: height
+          in: query
+          required: true
+          description: 登録リクエストの身長。BigDecimal.toString()でクエリへ設定する。
+          schema:
+            type: number
+        - name: weight
+          in: query
+          required: true
+          description: 登録リクエストの体重。BigDecimal.toString()でクエリへ設定する。
+          schema:
+            type: number
+      responses:
+        '2XX':
+          description: HTTP成功時、レスポンスをBasicHealthInfoCalcApiResponseへ変換する。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicCalculationResponse'
+              examples:
+                lambdaSuccess:
+                  summary: リポジトリ内の計算Lambdaが返す数値resultの例
+                  value:
+                    result: 0
+                    basic_health_info:
+                      height: 170.5
+                      weight: 65.2
+                      bmi: 22.428
+                      standard_weight: 63.954
+        '4XX':
+          description: |
+            RestTemplateがHTTP例外として扱い、共通クライアントで失敗DTOに変換する。
+            外部エラー本文の形式は呼び出し側では規定せず、detailを通信エラー文言へ置き換える。
+        '5XX':
+          description: HTTP例外を失敗DTOに変換し、上位コンポーネントでBE0032を送出する。
+components:
+  schemas:
+    NodeResult:
+      type: [integer, string, 'null']
+      description: |
+        呼び出し側DTOはBaseNodeApiResponse.Result（SUCCESS/FAILURE）へ読み込む。
+        論理値は成功0・失敗1。外部サーバ共通のJSON数値型／文字列型は、このDTOだけでは確定しない。
+        リポジトリ内のha-calc-api/lambda/basic.pyは数値0/1を返す。
+        nullやSUCCESS以外の結果は上位コンポーネントで失敗として扱う。
+        JSON変換自体が失敗した場合も、共通クライアントは通信エラーの失敗DTOへ変換する。
+    BasicCalculationResponse:
+      type: object
+      additionalProperties: true
+      description: |
+        Javaクライアントが読み取る項目。未知のレスポンス項目は無視する。
+        resultをSUCCESSと判定できた場合、basic_health_infoのBMI・標準体重を登録処理へ渡す。
+        外部レスポンスDTOにはBean検証を実行していない。
+      properties:
+        result:
+          $ref: '#/components/schemas/NodeResult'
+        detail:
+          type: [string, 'null']
+          description: 失敗時に上位コンポーネントへ渡す詳細。
+        basic_health_info:
+          type: [object, 'null']
+          additionalProperties: true
+          properties:
+            height:
+              type: [number, 'null']
+            weight:
+              type: [number, 'null']
+            bmi:
+              type: [number, 'null']
+            standard_weight:
+              type: [number, 'null']

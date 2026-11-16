@@ -265,11 +265,6 @@ export default {
                     message: "肺活量計算APIの通信に失敗しました",
                 },
                 {
-                    innerErrorCode: "TOKEN_API_CONNECT_ERROR",
-                    outerErrorCode: "BE0038",
-                    message: "Token発行APIの通信に失敗しました",
-                },
-                {
                     innerErrorCode: "HEALTH_INFO_REGIST_API_CONNECT_ERROR",
                     outerErrorCode: "BE0039",
                     message: "健康情報登録APIの通信に失敗しました",

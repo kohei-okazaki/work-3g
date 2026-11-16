@@ -53,45 +53,55 @@ export default {
       flow: [
         {
           id: "1",
-          text: "トークン検証",
+          text: "クエリパラメータ取得・型変換",
           edgeType: "round",
-          next: ["2"],
+          next: [
+            "2"
+          ]
         },
         {
           id: "2",
-          text: "リクエストログ出力",
-          edgeType: "round",
-          next: ["3"],
+          text: "必須・型変換結果・値域チェック",
+          edgeType: "diamond",
+          next: [
+            "3",
+            "100"
+          ]
         },
         {
           id: "3",
-          text: "BMI計算",
+          text: "身長をmへ変換してBMI計算<br/>小数第3位までfloor",
           edgeType: "round",
-          next: ["4"],
+          next: [
+            "4"
+          ]
         },
         {
           id: "4",
-          text: "標準体重計算",
+          text: "標準体重計算<br/>小数第3位までfloor",
           edgeType: "round",
-          next: ["5"],
+          next: [
+            "5"
+          ]
         },
         {
           id: "5",
-          text: "レスポンスJSON生成",
+          text: "正常レスポンスJSON生成<br/>result=0（数値）",
           edgeType: "round",
-          next: ["6"],
+          next: [
+            "6"
+          ]
         },
         {
           id: "6",
-          text: "レスポンスログ出力",
-          edgeType: "round",
-          next: ["7"],
+          text: "HTTP 200で返却",
+          edgeType: "round"
         },
         {
-          id: "7",
-          text: "レスポンスJSON返却",
-          edgeType: "round",
-        },
+          id: "100",
+          text: "入力エラー時のJSON返却<br/>HTTP 400・result=1（数値）・detail",
+          edgeType: "round"
+        }
       ],
     };
   },

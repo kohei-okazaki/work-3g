@@ -11,8 +11,7 @@
 README.md
 
 # 不要なプロジェクトを除外
-ha-asset/
 ha-build/
+ha-calc-api/
 ha-docs/
-ha-node/
 ha-tools/

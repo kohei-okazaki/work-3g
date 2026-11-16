@@ -1,0 +1,1888 @@
+openapi: 3.1.0
+info:
+  title: 管理者用Root API 入出力仕様
+  version: 1.0.0
+  description: Excel設計書に収録された26操作の現実装に基づく入出力仕様。内部処理は同じフォルダのAPI操作ごとのMarkdown設計書を参照する。resultは文字列0/1。ログイン成功は例外としてAuthorizationヘッダーのみでJSONボディを返さない。認証フィルターの拒否・JWT解析エラーはControllerのerrors形式へ一律に変換しない。
+servers:
+  - url: /
+    description: ha-root APIの配置先を基準にする。ホスト・ポートは実行環境に従う。
+security:
+  - RootBearer: []
+paths:
+  /api/root/healthcheck:
+    get:
+      operationId: rootHealthCheck
+      summary: Root APIの応答を確認する
+      tags:
+        - HealthCheck
+      security: []
+      description: 個別入力・DB検査を行わず正常応答を返す。
+      responses:
+        '200':
+          description: サーバが応答した。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootSuccess'
+              example:
+                result: '0'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルターや実行環境の共通処理による応答。
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.0.%E3%83%98%E3%83%AB%E3%82%B9%E3%83%81%E3%82%A7%E3%83%83%E3%82%AFAPI.md
+  /api/root/login:
+    post:
+      operationId: rootLogin
+      summary: 管理者サイトへログインする
+      tags:
+        - Authentication
+      security: []
+      description: 認証フィルターがJSONを読み、管理者ログイン情報・削除状態・有効期限・パスワードを照合する。Bean Validationは使用しない。成功時は8時間有効なJWTをヘッダーに返す。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RootLoginRequest'
+            example:
+              seq_login_id: 1
+              password: sample-password
+      responses:
+        '200':
+          description: 認証成功。JSONボディなし。
+          headers:
+            Authorization:
+              description: Bearer接頭辞付きのJWT。発行時点から8時間有効。
+              required: true
+              schema:
+                type: string
+              example: Bearer <JWT>
+        '401':
+          description: Spring Securityの既定認証失敗ハンドラーによる拒否。Root APIのresult/errors形式は返さない。
+        default:
+          description: JSON読込み・認証・署名鍵取得などの予期しない例外はFilterまたは実行環境の応答に従う。
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.1.%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3API.md
+  /api/root/account:
+    get:
+      tags:
+        - AppUser
+      operationId: rootListAppUsers
+      summary: アカウント情報一覧取得API
+      description: 削除されていない健康管理アプリのユーザと、健康情報ファイル設定をページ単位で取得する。管理者サイト用のログインユーザを扱うAPIとは別である。 内部処理は「設計書_5.3.1.アカウント情報一覧取得API.md」を参照する。 一覧はU.DELETE_FLAG=falseで絞り込むが、paging用の件数はUSER全件を数えるため検索条件が一致しない。
+      responses:
+        '200':
+          description: 一覧取得に成功した。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootAppUserListResponse'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: JWT認証フィルタや共通HTTP処理の応答。コントローラのresult/errors形式および固定の認証エラーステータスは保証しない。
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: 0始まりのページ番号。省略時0。@Decimalの上下限は両端を含む。1ページ件数はfront.account.pageの設定に従う。
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 999999999
+            default: 0
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.3.1.%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E6%83%85%E5%A0%B1%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97API.md
+  /api/root/account/{seq_user_id}:
+    put:
+      tags:
+        - AppUser
+      operationId: rootEditAppUser
+      summary: アカウント情報編集API
+      description: 指定したユーザのメールアドレスとパスワード有効期限を更新する。 内部処理は「設計書_5.3.2.アカウント情報編集API.md」を参照する。 対象ユーザが存在しなければ400、message=user is not found。メールはDB共通処理でAES暗号化し、パスワード自体は変更しない。
+      responses:
+        '200':
+          description: 処理に成功した。作成・更新内容やIDは返さない。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootSuccess'
+              example:
+                result: '0'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: JWT認証フィルタや共通HTTP処理の応答。コントローラのresult/errors形式および固定の認証エラーステータスは保証しない。
+      parameters:
+        - name: seq_user_id
+          in: path
+          required: true
+          description: 64ビット符号付き整数。正数限定の検証はない。
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RootAppUserEditRequest'
+            example:
+              mail_address: user@example.com
+              password_expire: 2030/12/31
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.3.2.%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E6%83%85%E5%A0%B1%E7%B7%A8%E9%9B%86API.md
+  /api/root/apidata:
+    get:
+      tags:
+        - ApiLog
+      operationId: rootListApiLogs
+      summary: API通信情報一覧取得API
+      description: API通信ログを新しいログID順にページ単位で取得する。 内部処理は「設計書_5.4.API通信情報一覧取得API.md」を参照する。 応答はapi_log_listであり、ユーザIDは応答項目に含めない。DBのHTTPステータスがHttpStatusへ変換できない場合は例外となる。
+      responses:
+        '200':
+          description: 一覧取得に成功した。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootApiLogListResponse'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: JWT認証フィルタや共通HTTP処理の応答。コントローラのresult/errors形式および固定の認証エラーステータスは保証しない。
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: 0始まりのページ番号。省略時0。@Decimalの上下限は両端を含む。1ページ件数はfront.api.pageの設定に従う。
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 999999999
+            default: 0
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.4.API%E9%80%9A%E4%BF%A1%E6%83%85%E5%A0%B1%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97API.md
+  /api/root/healthinfo:
+    get:
+      tags:
+        - HealthInfo
+      operationId: rootListHealthInfos
+      summary: 健康情報一覧取得API
+      description: 全ユーザの健康情報とBMI範囲マスタの肥満度ステータスをページ単位で取得する。 内部処理は「設計書_5.5.1.健康情報一覧取得API.md」を参照する。 ユーザ・削除フラグによる絞り込みは行わない。
+      responses:
+        '200':
+          description: 一覧取得に成功した。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootHealthInfoListResponse'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: JWT認証フィルタや共通HTTP処理の応答。コントローラのresult/errors形式および固定の認証エラーステータスは保証しない。
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: 0始まりのページ番号。省略時0。@Decimalの上下限は両端を含む。1ページ件数はfront.healthinfo.pageの設定に従う。
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 999999999
+            default: 0
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.5.1.%E5%81%A5%E5%BA%B7%E6%83%85%E5%A0%B1%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97API.md
+  /api/root/healthinfo/{seq_health_info_id}:
+    put:
+      tags:
+        - HealthInfo
+      operationId: rootEditHealthInfo
+      summary: 健康情報編集API
+      description: 指定した健康情報の身長・体重を基に基礎健康情報計算APIを呼び出し、計算結果とBMI範囲マスタIDを更新する。 内部処理は「設計書_5.5.2.健康情報編集API.md」を参照する。 健康情報IDとseq_user_idの組み合わせがなければ400、message=health_info is not found。トークンを発行せず基礎健康情報計算APIを呼び、BMI範囲マスタIDを決めて更新する。計算API失敗やBMI範囲なしのBaseExceptionは500・application error.となり、内部エラーコードをJSONへ出さない。
+      responses:
+        '200':
+          description: 処理に成功した。作成・更新内容やIDは返さない。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootSuccess'
+              example:
+                result: '0'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: JWT認証フィルタや共通HTTP処理の応答。コントローラのresult/errors形式および固定の認証エラーステータスは保証しない。
+      parameters:
+        - name: seq_health_info_id
+          in: path
+          required: true
+          description: 64ビット符号付き整数。正数限定の検証はない。
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RootHealthInfoEditRequest'
+            example:
+              seq_user_id: 1
+              height: 170.5
+              weight: 65.2
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.5.2.%E5%81%A5%E5%BA%B7%E6%83%85%E5%A0%B1%E7%B7%A8%E9%9B%86API.md
+  /api/root/news:
+    get:
+      tags:
+        - News
+      operationId: rootListNews
+      summary: お知らせ情報一覧取得API
+      description: 未削除のお知らせ情報をページ単位で検索し、各お知らせの本文JSONをS3から読み込んで返す。 内部処理は「設計書_5.6.1.お知らせ情報一覧取得API.md」を参照する。
+      responses:
+        '200':
+          description: 一覧取得に成功した。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootNewsListResponse'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: JWT認証フィルタや共通HTTP処理の応答。コントローラのresult/errors形式および固定の認証エラーステータスは保証しない。
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: 0始まりのページ番号。省略時0。@Decimalの上下限は両端を含む。1ページ件数はfront.news.pageの設定に従う。
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 999999999
+            default: 0
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.6.1.%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%E6%83%85%E5%A0%B1%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97API.md
+    post:
+      tags:
+        - News
+      operationId: rootCreateNews
+      summary: お知らせ情報登録API
+      description: お知らせのメタデータをDBへ登録し、本文をS3 JSONとして保存してSlackへ通知する。 内部処理は「設計書_5.6.2.お知らせ情報登録API.md」を参照する。 DB登録後にS3へアップロードしてSlack通知する。全体をまとめたトランザクションはなく、外部処理失敗時にDB行だけ残る場合がある。
+      responses:
+        '200':
+          description: 処理に成功した。作成・更新内容やIDは返さない。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootSuccess'
+              example:
+                result: '0'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: JWT認証フィルタや共通HTTP処理の応答。コントローラのresult/errors形式および固定の認証エラーステータスは保証しない。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RootNewsCreateRequest'
+            example:
+              title: お知らせ
+              date: 2026/11/11
+              detail: 健康管理アプリのお知らせです。
+              tag:
+                color: blue
+                name: お知らせ
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.6.2.%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%E6%83%85%E5%A0%B1%E7%99%BB%E9%8C%B2API.md
+  /api/root/news/{seq_news_info_id}:
+    put:
+      tags:
+        - News
+      operationId: rootEditNews
+      summary: お知らせ情報編集API
+      description: 既存お知らせのS3 JSONを読み込み、タイトル・日付文字列・本文を変更して同じキーへ保存する。 内部処理は「設計書_5.6.3.お知らせ情報編集API.md」を参照する。 tag自体は必須だが、BeanUtilは要求TagとNewsDto.Tagの型が異なるためコピーせず、既存タグを保持する。DBのUPDATE_DATEは更新しない。対象DB行なしは400・news_info is not found。
+      responses:
+        '200':
+          description: 処理に成功した。作成・更新内容やIDは返さない。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootSuccess'
+              example:
+                result: '0'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: JWT認証フィルタや共通HTTP処理の応答。コントローラのresult/errors形式および固定の認証エラーステータスは保証しない。
+      parameters:
+        - name: seq_news_info_id
+          in: path
+          required: true
+          description: 64ビット符号付き整数。正数限定の検証はない。
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RootNewsEditRequest'
+            example:
+              title: 更新したお知らせ
+              date: 2026/11/11
+              detail: 本文を更新します。
+              tag:
+                color: green
+                name: 更新
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.6.3.%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%E6%83%85%E5%A0%B1%E7%B7%A8%E9%9B%86API.md
+    delete:
+      tags:
+        - News
+      operationId: rootDeleteNews
+      summary: お知らせ情報削除API
+      description: お知らせ情報をDBで論理削除した後、対応するS3 JSONを削除してSlackへ通知する。 内部処理は「設計書_5.6.4.お知らせ情報削除API.md」を参照する。 DBは物理削除せずDELETE_FLAG=trueに更新し、S3 JSONを削除してSlackへ通知する。既に削除済みのDB行も主キー検索の対象となる。対象DB行なしは400・news_info is not found。
+      responses:
+        '200':
+          description: 処理に成功した。作成・更新内容やIDは返さない。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootSuccess'
+              example:
+                result: '0'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: JWT認証フィルタや共通HTTP処理の応答。コントローラのresult/errors形式および固定の認証エラーステータスは保証しない。
+      parameters:
+        - name: seq_news_info_id
+          in: path
+          required: true
+          description: 64ビット符号付き整数。正数限定の検証はない。
+          schema:
+            type: integer
+            format: int64
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.6.4.%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%E6%83%85%E5%A0%B1%E5%89%8A%E9%99%A4API.md
+  /api/root/user:
+    post:
+      operationId: rootRegisterAdminUser
+      summary: 管理者サイトユーザを登録する
+      tags:
+        - RootAdminUser
+      security: []
+      description: 認証不要。passwordとconf_passwordの一致を確認し、照会権限01を付けたユーザをトランザクションで作成する。有効期限はシステム日付の6か月後。登録失敗は400 data regist error。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RootAdminUserRegisterRequest'
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootAdminUserRegisterResponse'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルター、未対応メソッド、実行環境等の共通応答。コントローラのresult/errors形式とは限らない。
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.2.1.%E7%AE%A1%E7%90%86%E8%80%85%E3%82%B5%E3%82%A4%E3%83%88%E3%83%A6%E3%83%BC%E3%82%B6%E7%99%BB%E9%8C%B2API.md
+  /api/root/user/{seq_login_id}:
+    put:
+      operationId: rootEditAdminUser
+      summary: 管理者サイトユーザを編集する
+      tags:
+        - RootAdminUser
+      parameters:
+        - name: seq_login_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            description: 編集するログインID。正数制約はない。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RootAdminUserEditRequest'
+      description: 結合検索結果がなければ400 data illegal error。権限詳細置き換えとログイン情報更新を同一トランザクションで行い、失敗は400 data update error。
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootSuccess'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルター、未対応メソッド、実行環境等の共通応答。コントローラのresult/errors形式とは限らない。
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.2.2.%E7%AE%A1%E7%90%86%E8%80%85%E3%82%B5%E3%82%A4%E3%83%88%E3%83%A6%E3%83%BC%E3%82%B6%E7%B7%A8%E9%9B%86API.md
+    get:
+      operationId: rootGetAdminUser
+      summary: 管理者サイトユーザを取得する
+      tags:
+        - RootAdminUser
+      parameters:
+        - name: seq_login_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            description: 取得するログインID。正数制約はない。
+      description: ユーザと権限の内部結合結果を取得する。削除フラグでは除外しない。結合結果が0件の場合は400 user data is not found。
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootAdminUserGetResponse'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルター、未対応メソッド、実行環境等の共通応答。コントローラのresult/errors形式とは限らない。
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.2.3.%E7%AE%A1%E7%90%86%E8%80%85%E3%82%B5%E3%82%A4%E3%83%88%E3%83%A6%E3%83%BC%E3%82%B6%E5%8F%96%E5%BE%97API.md
+  /api/root/note:
+    get:
+      operationId: rootListNotes
+      summary: メモ情報を一覧取得する
+      tags:
+        - RootNote
+      parameters:
+        - name: seq_login_id
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+            description: 必須。対象ログインID。正数制約や存在確認はない。
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            default: 0
+            description: 0始まり。省略/空文字は0。
+      description: 指定ユーザの非削除メモをID降順でページ取得し、S3から本文を読み込む。ページ件数はfront.note.page（現在local/devとも10）。pagingの件数は全ユーザ・削除済みを含む全メモ件数。本文の改行は除去される。
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootNoteListResponse'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルター、未対応メソッド、実行環境等の共通応答。コントローラのresult/errors形式とは限らない。
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.7.1.%E3%83%A1%E3%83%A2%E6%83%85%E5%A0%B1%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97API.md
+    post:
+      operationId: rootRegisterNote
+      summary: メモ情報を登録する
+      tags:
+        - RootNote
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RootNoteRegisterRequest'
+      description: note/{seq_login_id}/{yyyyMMddHHmmss}.txtへ本文を保存後、DB登録とSlack通知を行う。秒単位の同一キーは上書きとなる。S3/DB/Slackを一括したトランザクションはなく、後続失敗による補償処理はない。採番IDは応答に含めない。
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootSuccess'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルター、未対応メソッド、実行環境等の共通応答。コントローラのresult/errors形式とは限らない。
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.7.2.%E3%83%A1%E3%83%A2%E6%83%85%E5%A0%B1%E7%99%BB%E9%8C%B2API.md
+  /api/root/note/{seq_root_user_note_info_id}:
+    put:
+      operationId: rootEditNote
+      summary: メモ情報を編集する
+      tags:
+        - RootNote
+      parameters:
+        - name: seq_root_user_note_info_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            description: 編集するメモID。正数制約はない。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RootNoteEditRequest'
+      description: 主キー検索で対象なしは400 note_info is not found。削除状態/所有ユーザで絞らない。DB件名更新を確定後、S3本文を上書きしてSlack通知する。後続失敗でDB更新は戻さない。
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootSuccess'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルター、未対応メソッド、実行環境等の共通応答。コントローラのresult/errors形式とは限らない。
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.7.3.%E3%83%A1%E3%83%A2%E6%83%85%E5%A0%B1%E7%B7%A8%E9%9B%86API.md
+    delete:
+      operationId: rootDeleteNote
+      summary: メモ情報を論理削除する
+      tags:
+        - RootNote
+      parameters:
+        - name: seq_root_user_note_info_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            description: 削除するメモID。正数制約はない。
+      description: 主キー検索で対象なしは400 note_info is not found。削除フラグtrueに更新してSlack通知する。物理削除/S3ファイル削除は行わない。削除済みメモへの再実行も正常終了する。
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootSuccess'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルター、未対応メソッド、実行環境等の共通応答。コントローラのresult/errors形式とは限らない。
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.7.4.%E3%83%A1%E3%83%A2%E6%83%85%E5%A0%B1%E5%89%8A%E9%99%A4API.md
+  /api/root/roles:
+    get:
+      operationId: rootGetRoles
+      summary: 権限マスタ一覧取得
+      tags:
+        - RootTools
+      description: ROOT_ROLE_MTの全件を1時間のオンメモリキャッシュ経由で取得する。削除条件・明示ソートなし。
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootToolRolesResponse'
+              example:
+                result: '0'
+                roles:
+                  - label: 管理者権限
+                    value: '00'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルターなどの共通処理による応答。RootError形式を保証しない。
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.8.1.%E6%A8%A9%E9%99%90%E3%83%9E%E3%82%B9%E3%82%BF%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97API.md
+  /api/root/inquiry/status:
+    get:
+      operationId: rootGetInquiryStatuses
+      summary: 問い合わせステータスマスタ一覧取得
+      tags:
+        - RootTools
+      description: INQUIRY_STATUS_MTをINQUIRY_STATUS昇順で全件取得。削除条件・キャッシュなし。
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootToolInquiryStatusesResponse'
+              example:
+                result: '0'
+                statuses:
+                  - label: 未対応
+                    value: '00'
+                  - label: 対応中
+                    value: '01'
+                  - label: 完了
+                    value: '02'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルターなどの共通処理による応答。RootError形式を保証しない。
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.8.2.%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%83%9E%E3%82%B9%E3%82%BF%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97API.md
+  /api/root/top:
+    get:
+      operationId: rootGetTop
+      summary: Top情報取得API
+      tags:
+        - RootTop
+      description: 対象月の登録日別件数。月初00:00:00～月末23:59:59を両端含みで検索し、日付昇順。削除条件・0件日の補完なし。対象外のグラフ項目は省略する。date変換失敗は400でerrors[].message=date format error. date is yyyymm。
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootTopResponse'
+              example:
+                result: '0'
+                account_reg_graph_list:
+                  - count: 1
+                    date: 2026/11/01
+                health_info_reg_graph_list:
+                  - count: 2
+                    date: 2026/11/01
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルターなどの共通処理による応答。RootError形式を保証しない。
+      parameters:
+        - name: date
+          in: query
+          required: false
+          description: 対象年月yyyyMM。未指定・空文字・空白のみはシステム日付の月。非空値は末尾に01を付け、uuuuMMddの厳密日付として解釈する。
+          schema:
+            type: string
+            examples:
+              - '202611'
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.9.1.Top%E6%83%85%E5%A0%B1%E5%8F%96%E5%BE%97API.md
+  /api/root/top/healthinfo:
+    get:
+      operationId: rootGetTopHealthInfo
+      summary: Top情報健康情報取得API
+      tags:
+        - RootTop
+      description: 対象月の登録日別件数。月初00:00:00～月末23:59:59を両端含みで検索し、日付昇順。削除条件・0件日の補完なし。対象外のグラフ項目は省略する。date変換失敗は400でerrors[].message=date format error. date is yyyymm。
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootTopHealthInfoResponse'
+              example:
+                result: '0'
+                health_info_reg_graph_list:
+                  - count: 2
+                    date: 2026/11/01
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルターなどの共通処理による応答。RootError形式を保証しない。
+      parameters:
+        - name: date
+          in: query
+          required: false
+          description: 対象年月yyyyMM。未指定・空文字・空白のみはシステム日付の月。非空値は末尾に01を付け、uuuuMMddの厳密日付として解釈する。
+          schema:
+            type: string
+            examples:
+              - '202611'
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.9.2.Top%E6%83%85%E5%A0%B1%E5%81%A5%E5%BA%B7%E6%83%85%E5%A0%B1%E5%8F%96%E5%BE%97API.md
+  /api/root/top/account:
+    get:
+      operationId: rootGetTopAccount
+      summary: Top情報アカウント情報取得API
+      tags:
+        - RootTop
+      description: 対象月の登録日別件数。月初00:00:00～月末23:59:59を両端含みで検索し、日付昇順。削除条件・0件日の補完なし。対象外のグラフ項目は省略する。date変換失敗は400でerrors[].message=date format error. date is yyyymm。
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootTopAccountResponse'
+              example:
+                result: '0'
+                account_reg_graph_list:
+                  - count: 1
+                    date: 2026/11/01
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルターなどの共通処理による応答。RootError形式を保証しない。
+      parameters:
+        - name: date
+          in: query
+          required: false
+          description: 対象年月yyyyMM。未指定・空文字・空白のみはシステム日付の月。非空値は末尾に01を付け、uuuuMMddの厳密日付として解釈する。
+          schema:
+            type: string
+            examples:
+              - '202611'
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.9.3.Top%E6%83%85%E5%A0%B1%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E6%83%85%E5%A0%B1%E5%8F%96%E5%BE%97API.md
+  /api/root/inquiry:
+    get:
+      operationId: rootGetInquiries
+      summary: 問い合わせ情報一覧取得
+      tags:
+        - RootInquiry
+      description: 問い合わせ一覧とS3本文、pagingを返す。一覧はIM.DELETE_FLAG条件なし、paging総件数はDELETE_FLAG=false。S3取得失敗時は処理を中止する。
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootInquiryListResponse'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルターなどの共通処理による応答。RootError形式を保証しない。
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: 0始まりのページ。未指定・空文字は0。ページ件数はfront.inquiry.page。
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 999999999
+            default: 0
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.10.1.%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B%E6%83%85%E5%A0%B1%E4%B8%80%E8%A6%A7%E5%8F%96%E5%BE%97API.md
+  /api/root/inquiry/{seq_inquriy_mng_id}:
+    put:
+      operationId: rootEditInquiry
+      summary: 問い合わせ情報編集
+      tags:
+        - RootInquiry
+      description: 未削除の問い合わせを存在確認後、ステータス・対応者・更新日時を更新する。状態遷移制限、対応者の存在確認、JWT主体との一致確認なし。パスのinquriyは実装上の綴り。
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootSuccess'
+              example:
+                result: '0'
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルターなどの共通処理による応答。RootError形式を保証しない。
+      parameters:
+        - name: seq_inquriy_mng_id
+          in: path
+          required: true
+          description: 問い合わせ管理ID。正数限定の追加検証なし。
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RootInquiryEditRequest'
+            example:
+              status: '01'
+              seq_login_id: 1
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.10.2.%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B%E6%83%85%E5%A0%B1%E7%B7%A8%E9%9B%86API.md
+  /api/root/inquiry/notice:
+    get:
+      operationId: rootGetInquiryNotice
+      summary: 問い合わせ情報通知（件数取得）
+      tags:
+        - RootInquiry
+      description: 未削除で指定ステータスの問い合わせ件数を返す。メール・Slackへの業務通知はしない。未知statusは00へフォールバック。エラー応答でもDTO初期値count:0が出力される。
+      responses:
+        '200':
+          description: 正常終了。resultは文字列の0。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootInquiryNoticeResponse'
+              example:
+                result: '0'
+                count: 0
+        '400':
+          $ref: '#/components/responses/RootBadRequest'
+        '500':
+          $ref: '#/components/responses/RootInternalServerError'
+        default:
+          description: 認証フィルターなどの共通処理による応答。RootError形式を保証しない。
+      parameters:
+        - name: status
+          in: query
+          required: false
+          description: 00:未対応、01:対応中、02:完了。未指定・空文字・未知値は00。
+          schema:
+            type: string
+            default: '00'
+      externalDocs:
+        description: 内部処理のMarkdown設計書
+        url: ./%E8%A8%AD%E8%A8%88%E6%9B%B8_5.10.3.%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B%E6%83%85%E5%A0%B1%E9%80%9A%E7%9F%A5API.md
+components:
+  securitySchemes:
+    RootBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: POST /api/root/loginのAuthorization応答ヘッダーから取得したJWTをBearer接頭辞付きで送信する。
+  schemas:
+    RootSuccess:
+      type: object
+      required:
+        - result
+      properties:
+        result:
+          type: string
+          const: '0'
+        paging:
+          $ref: '#/components/schemas/RootPaging'
+      additionalProperties: true
+    RootError:
+      type: object
+      required:
+        - result
+      properties:
+        result:
+          type: string
+          const: '1'
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type:
+                  - string
+                  - 'null'
+        paging:
+          $ref: '#/components/schemas/RootPaging'
+      additionalProperties: true
+    RootPaging:
+      type: object
+      properties:
+        total_record_num:
+          type: integer
+          format: int64
+        from_record_num:
+          type: integer
+          format: int64
+        to_record_num:
+          type: integer
+          format: int64
+        total_page:
+          type: integer
+          format: int64
+        current_page_num:
+          type: integer
+          format: int32
+        record_per_page:
+          type: integer
+          format: int32
+        can_go_next:
+          type: boolean
+        can_go_previous:
+          type: boolean
+        can_go_last:
+          type: boolean
+        can_go_first:
+          type: boolean
+        next_href:
+          type:
+            - string
+            - 'null'
+        previous_href:
+          type:
+            - string
+            - 'null'
+        last_href:
+          type:
+            - string
+            - 'null'
+        first_href:
+          type:
+            - string
+            - 'null'
+      description: PagingViewのJSON項目。リンクと件数は各APIが指定したページ・URL・検索件数から算出する。
+    RootLoginRequest:
+      type: object
+      required:
+        - seq_login_id
+        - password
+      properties:
+        seq_login_id:
+          type: integer
+          format: int64
+          description: 認証成功に必要なログインID。読み取り後は半角数字形式を検査しROOT_LOGIN_INFOを検索する。
+        password:
+          type: string
+          description: 認証成功に必要。空saltのSHA-256で保存値と照合する。DTOに桁数・文字種の検証注釈はない。
+      additionalProperties: true
+      description: 標準のログイン要求。欠落等はBean Validationの400ではなく認証処理・フィルターのエラーとして扱う。基底リクエストの指定により未定義のJSON項目は無視する。
+    RootAppUser:
+      type: object
+      properties:
+        seq_user_id:
+          type: integer
+          format: int64
+          description: ユーザID。
+        mail_address:
+          type:
+            - string
+            - 'null'
+          description: 復号したメールアドレス。
+        delete_flag:
+          type: string
+          enum:
+            - '0'
+            - '1'
+          description: 削除フラグ。falseは文字列0、trueは文字列1。
+        password_expire:
+          type:
+            - string
+            - 'null'
+          description: パスワード有効期限。yyyy/MM/dd。
+          examples:
+            - 2030/12/31
+        remarks:
+          type:
+            - string
+            - 'null'
+          description: 備考。
+        api_key:
+          type:
+            - string
+            - 'null'
+          description: APIキー。
+        reg_date:
+          type:
+            - string
+            - 'null'
+          description: 登録日時。yyyy/MM/dd HH:mm:ss。
+          examples:
+            - 2026/11/11 12:34:56
+        update_date:
+          type:
+            - string
+            - 'null'
+          description: 更新日時。yyyy/MM/dd HH:mm:ss。
+          examples:
+            - 2026/11/11 12:34:56
+        header_flag:
+          type: string
+          enum:
+            - '0'
+            - '1'
+          description: ヘッダ出力フラグ。
+        footer_flag:
+          type: string
+          enum:
+            - '0'
+            - '1'
+          description: フッタ出力フラグ。
+        mask_flag:
+          type: string
+          enum:
+            - '0'
+            - '1'
+          description: マスク出力フラグ。
+        enclosure_char_flag:
+          type: string
+          enum:
+            - '0'
+            - '1'
+          description: 囲い文字利用フラグ。
+      required:
+        - seq_user_id
+        - mail_address
+        - delete_flag
+        - password_expire
+        - remarks
+        - api_key
+        - reg_date
+        - update_date
+        - header_flag
+        - footer_flag
+        - mask_flag
+        - enclosure_char_flag
+      additionalProperties: true
+    RootAppUserEditRequest:
+      type: object
+      properties:
+        mail_address:
+          type: string
+          description: 必須。null・空文字・空白のみ不可。MailAddressValidator（RegexType.MAIL_ADDRESS）で形式を検証する。
+          minLength: 1
+        password_expire:
+          type: string
+          description: 必須。null不可。yyyy/MM/ddでLocalDateへ変換し、サーバのLocalDate.now()より後の日付を指定する。当日は不可。
+          examples:
+            - 2030/12/31
+      required:
+        - mail_address
+        - password_expire
+      additionalProperties: true
+      description: 未定義のJSON項目は無視する。更新するのはメールアドレスとパスワード有効期限のみ。
+    RootApiLog:
+      type: object
+      properties:
+        seq_api_log_id:
+          type: integer
+          format: int64
+          description: API通信ログID。
+        transaction_id:
+          type:
+            - string
+            - 'null'
+          description: トランザクションID。
+        api_name:
+          type:
+            - string
+            - 'null'
+          description: API名。
+        http_method:
+          type:
+            - string
+            - 'null'
+          description: HTTPメソッド。
+        url:
+          type:
+            - string
+            - 'null'
+          description: 通信先URL。
+        body:
+          type:
+            - string
+            - 'null'
+          description: 保存された要求本文。JSONオブジェクトではなく文字列。
+        http_status:
+          type:
+            - integer
+            - 'null'
+          description: HTTPステータスコード。HttpStatusSerializerにより数値として出力する。
+        detail:
+          type:
+            - string
+            - 'null'
+          description: 詳細。
+        request_date:
+          type:
+            - string
+            - 'null'
+          description: 要求送信日時。yyyy/MM/dd HH:mm:ss。
+          examples:
+            - 2026/11/11 12:34:56
+        response_date:
+          type:
+            - string
+            - 'null'
+          description: 応答受信日時。yyyy/MM/dd HH:mm:ss。
+          examples:
+            - 2026/11/11 12:34:56
+      required:
+        - seq_api_log_id
+        - transaction_id
+        - api_name
+        - http_method
+        - url
+        - body
+        - http_status
+        - detail
+        - request_date
+        - response_date
+      additionalProperties: true
+    RootHealthInfoBmiStatus:
+      type: object
+      properties:
+        status:
+          type:
+            - string
+            - 'null'
+          description: BMI_RANGE_MT.OVER_WEIGHT_STATUS。マスタ未結合ならnull。
+        message:
+          type:
+            - string
+            - 'null'
+          description: 10:低体重、11:普通体重、12:肥満(1)、13:肥満(2)、14:肥満(3)、15:肥満(4)。その他の値ではnull。
+      required:
+        - status
+        - message
+      additionalProperties: true
+    RootHealthInfo:
+      type: object
+      properties:
+        seq_health_info_id:
+          type: integer
+          format: int64
+          description: 健康情報ID。
+        seq_user_id:
+          type: integer
+          format: int64
+          description: ユーザID。
+        height:
+          type:
+            - number
+            - 'null'
+          description: 身長。
+        weight:
+          type:
+            - number
+            - 'null'
+          description: 体重。
+        bmi:
+          type:
+            - number
+            - 'null'
+          description: BMI。
+        standard_weight:
+          type:
+            - number
+            - 'null'
+          description: 標準体重。
+        bmi_status:
+          $ref: '#/components/schemas/RootHealthInfoBmiStatus'
+        health_info_reg_date:
+          type:
+            - string
+            - 'null'
+          description: 健康情報登録日時。yyyy/MM/dd HH:mm:ss。
+          examples:
+            - 2026/11/11 12:34:56
+      required:
+        - seq_health_info_id
+        - seq_user_id
+        - height
+        - weight
+        - bmi
+        - standard_weight
+        - bmi_status
+        - health_info_reg_date
+      additionalProperties: true
+    RootHealthInfoEditRequest:
+      type: object
+      properties:
+        seq_user_id:
+          type: integer
+          format: int64
+          description: 必須。null不可。対象の健康情報IDとの組み合わせを照合する。正数限定の検証はない。
+        height:
+          type: number
+          minimum: 0
+          maximum: 999999999
+          description: 必須。null不可。BigDecimalへ変換する。@Decimalの上下限は両端を含む。
+        weight:
+          type: number
+          minimum: 0
+          maximum: 999999999
+          description: 必須。null不可。BigDecimalへ変換する。@Decimalの上下限は両端を含む。
+      required:
+        - seq_user_id
+        - height
+        - weight
+      additionalProperties: true
+      description: 未定義のJSON項目は無視する。
+    RootNewsTag:
+      type: object
+      properties:
+        color:
+          type:
+            - string
+            - 'null'
+          description: タグ色。色の列挙は定義しない。
+        name:
+          type:
+            - string
+            - 'null'
+          description: タグ名。
+      required:
+        - color
+        - name
+      additionalProperties: true
+    RootNews:
+      type: object
+      properties:
+        seq_news_info_id:
+          type: integer
+          format: int64
+          description: DBのお知らせ情報ID。S3 JSON内IDではない。
+        title:
+          type:
+            - string
+            - 'null'
+          description: S3 JSONのタイトル。
+        date:
+          type:
+            - string
+            - 'null'
+          description: S3 JSONの日付文字列。LocalDateへ変換しない。
+        detail:
+          type:
+            - string
+            - 'null'
+          description: S3 JSONの本文。
+        tag:
+          $ref: '#/components/schemas/RootNewsTag'
+        reg_date:
+          type:
+            - string
+            - 'null'
+          description: DB登録日時。yyyy/MM/dd HH:mm:ss。
+          examples:
+            - 2026/11/11 12:34:56
+        update_date:
+          type:
+            - string
+            - 'null'
+          description: DB更新日時。yyyy/MM/dd HH:mm:ss。
+          examples:
+            - 2026/11/11 12:34:56
+      required:
+        - seq_news_info_id
+        - title
+        - date
+        - detail
+        - tag
+        - reg_date
+        - update_date
+      additionalProperties: true
+    RootNewsCreateTag:
+      type: object
+      properties:
+        color:
+          type: string
+          description: 必須。null・空文字・空白のみ不可。英字限定や色名の列挙検証はない。
+          minLength: 1
+        name:
+          type: string
+          description: 必須。null・空文字・空白のみ不可。
+          minLength: 1
+      required:
+        - color
+        - name
+      additionalProperties: true
+      description: 未定義のJSON項目は無視する。
+    RootNewsEditTag:
+      type: object
+      properties:
+        color:
+          type:
+            - string
+            - 'null'
+          description: 省略・null可。編集DTOに必須制約はなく、指定しても保存値には反映されない。
+        name:
+          type:
+            - string
+            - 'null'
+          description: 省略・null可。編集DTOに必須制約はなく、指定しても保存値には反映されない。
+      required: []
+      additionalProperties: true
+      description: tag自体は必須。空オブジェクトを許容する。現実装ではNewsDto.Tagと要求Tagの型が異なり、既存タグを保持する。未定義のJSON項目は無視する。
+    RootNewsCreateRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: 必須。null・空文字・空白のみ不可。
+          minLength: 1
+        date:
+          type: string
+          description: 必須。null・空文字・空白のみ不可。Stringとして扱い、日付の形式や実在性は検証しない。
+          minLength: 1
+        detail:
+          type: string
+          description: 必須。null・空文字・空白のみ不可。
+          minLength: 1
+        tag:
+          $ref: '#/components/schemas/RootNewsCreateTag'
+      required:
+        - title
+        - date
+        - detail
+        - tag
+      additionalProperties: true
+      description: 未定義のJSON項目は無視する。tag.color/nameも必須。
+    RootNewsEditRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: 必須。null・空文字・空白のみ不可。
+          minLength: 1
+        date:
+          type: string
+          description: 必須。null・空文字・空白のみ不可。Stringとして扱い、日付の形式や実在性は検証しない。
+          minLength: 1
+        detail:
+          type: string
+          description: 必須。null・空文字・空白のみ不可。
+          minLength: 1
+        tag:
+          $ref: '#/components/schemas/RootNewsEditTag'
+      required:
+        - title
+        - date
+        - detail
+        - tag
+      additionalProperties: true
+      description: 未定義のJSON項目は無視する。tagは必須だが、現実装で更新される本文項目はtitle/date/detailのみ。
+    RootAppUserListResponse:
+      allOf:
+        - $ref: '#/components/schemas/RootSuccess'
+        - type: object
+          properties:
+            account_list:
+              type: array
+              items:
+                $ref: '#/components/schemas/RootAppUser'
+              description: 取得結果。0件なら空配列。
+            paging:
+              $ref: '#/components/schemas/RootPaging'
+          required:
+            - account_list
+            - paging
+          additionalProperties: true
+    RootApiLogListResponse:
+      allOf:
+        - $ref: '#/components/schemas/RootSuccess'
+        - type: object
+          properties:
+            api_log_list:
+              type: array
+              items:
+                $ref: '#/components/schemas/RootApiLog'
+              description: 取得結果。0件なら空配列。
+            paging:
+              $ref: '#/components/schemas/RootPaging'
+          required:
+            - api_log_list
+            - paging
+          additionalProperties: true
+    RootHealthInfoListResponse:
+      allOf:
+        - $ref: '#/components/schemas/RootSuccess'
+        - type: object
+          properties:
+            health_info_list:
+              type: array
+              items:
+                $ref: '#/components/schemas/RootHealthInfo'
+              description: 取得結果。0件なら空配列。
+            paging:
+              $ref: '#/components/schemas/RootPaging'
+          required:
+            - health_info_list
+            - paging
+          additionalProperties: true
+    RootNewsListResponse:
+      allOf:
+        - $ref: '#/components/schemas/RootSuccess'
+        - type: object
+          properties:
+            news_list:
+              type: array
+              items:
+                $ref: '#/components/schemas/RootNews'
+              description: 取得結果。0件なら空配列。
+            paging:
+              $ref: '#/components/schemas/RootPaging'
+          required:
+            - news_list
+            - paging
+          additionalProperties: true
+    RootAdminUserRegisterRequest:
+      type: object
+      required:
+        - password
+        - conf_password
+      additionalProperties: true
+      description: 管理者サイトユーザ登録要求。Bearer認証は不要。未定義項目を無視する。
+      properties:
+        password:
+          type: string
+          description: 必須。null・空文字・空白のみ不可。文字種や最大長の独自制限はない。
+          minLength: 1
+        conf_password:
+          type: string
+          description: 必須。passwordと完全一致すること。
+          minLength: 1
+    RootAdminUserRegisterResponse:
+      description: 権限管理・照会権限詳細・ログイン情報の登録後にIDを返す。
+      allOf:
+        - $ref: '#/components/schemas/RootSuccess'
+        - type: object
+          required:
+            - seq_login_id
+          properties:
+            seq_login_id:
+              type: integer
+              format: int64
+              description: 採番した管理者サイトログインID。
+    RootAdminUserEditRequest:
+      type: object
+      required:
+        - roles
+        - password_expire
+      additionalProperties: true
+      description: ユーザ編集要求。未定義のJSON項目は無視する。passwordとdelete_flagは省略可能。
+      properties:
+        roles:
+          type: array
+          minItems: 1
+          items:
+            type:
+              - string
+              - 'null'
+            description: 通常値は00（管理者）、01（照会）、02（作成）。未知コードはnullへ変換され、null要素と同様に後続処理で失敗して400 data update errorとなる。
+          description: 必須の非空配列。入力検証は要素ごとの既知コード判定を行わない。既知コードに対応する権限マスタで既存詳細を置き換える。
+        delete_flag:
+          type: boolean
+          default: false
+          description: 削除状態。プリミティブbooleanであり、省略時false。@Requiredがあっても省略は検出しない。falseも既存データへ反映する。
+        password:
+          type:
+            - string
+            - 'null'
+          description: 任意。省略・null・trim後に空の場合は既存パスワードを保持。値がある場合は空ソルトのSHA-256で更新する。
+        password_expire:
+          type: string
+          pattern: ^\d{4}/\d{2}/\d{2}$
+          description: 必須。yyyy/MM/dd形式、サーバの現在日付より後の日付。当日は不可。
+          examples:
+            - 2099/12/31
+        remarks:
+          type:
+            - string
+            - 'null'
+          description: 任意。256 UTF-16コード単位以下。省略/nullは更新せず、空文字は空文字で更新する。
+          maxLength: 256
+    RootAdminUserRole:
+      type: object
+      description: 権限マスタから取得した権限情報。nullの項目は出力しない。
+      properties:
+        label:
+          type: string
+          description: 権限名。
+        value:
+          type: string
+          description: 権限コード。通常00、01、02。
+      additionalProperties: false
+    RootAdminUserGetResponse:
+      description: 管理者サイトユーザ取得応答。パスワードは返さない。
+      allOf:
+        - $ref: '#/components/schemas/RootSuccess'
+        - type: object
+          required:
+            - seq_login_id
+            - roles
+            - delete_flag
+          properties:
+            seq_login_id:
+              type: integer
+              format: int64
+              description: 要求のログインID。
+            roles:
+              type: array
+              minItems: 1
+              items:
+                $ref: '#/components/schemas/RootAdminUserRole'
+              description: 権限マスタIDの昇順。
+            delete_flag:
+              type: string
+              enum:
+                - '0'
+                - '1'
+              description: 0=非削除、1=削除済み。JSON真偽値ではない。
+            password_expire:
+              type: string
+              pattern: ^\d{4}/\d{2}/\d{2}$
+              description: パスワード有効期限。nullなら省略。
+            remarks:
+              type: string
+              description: 備考。nullなら省略。
+    RootNoteRegisterRequest:
+      type: object
+      required:
+        - seq_login_id
+        - title
+        - detail
+      additionalProperties: true
+      description: メモ登録要求。未定義項目は無視する。
+      properties:
+        seq_login_id:
+          type: integer
+          format: int64
+          description: 保存先の管理者サイトログインID。0以上。ユーザ存在/JWT主体との一致検証はない。
+          minimum: 0
+        title:
+          type: string
+          description: 必須。空白のみ不可。30 UTF-16コード単位以下。
+          minLength: 1
+          maxLength: 30
+        detail:
+          type: string
+          description: 必須。空白のみ不可。本文はS3へUTF-8で保存する。独自の最大長制限はない。
+          minLength: 1
+    RootNoteEditRequest:
+      type: object
+      required:
+        - title
+        - detail
+      additionalProperties: true
+      description: メモ編集要求。未定義項目は無視する。
+      properties:
+        title:
+          type: string
+          description: 必須。空白のみ不可。30 UTF-16コード単位以下。
+          minLength: 1
+          maxLength: 30
+        detail:
+          type: string
+          description: 必須。空白のみ不可。対象行の既存S3キーへ上書きする。
+          minLength: 1
+    RootNoteItem:
+      type: object
+      required:
+        - seq_root_user_note_info_id
+        - title
+        - detail
+        - reg_date
+        - update_date
+      additionalProperties: false
+      properties:
+        seq_root_user_note_info_id:
+          type:
+            - integer
+            - 'null'
+          format: int64
+          description: メモID。
+        title:
+          type:
+            - string
+            - 'null'
+          description: DBの件名。
+        detail:
+          type: string
+          description: S3本文を行単位で読み、改行を挿入せず連結した文字列。
+        reg_date:
+          type:
+            - string
+            - 'null'
+          pattern: ^\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}$
+          description: DBの登録日時。yyyy/MM/dd HH:mm:ss形式。
+        update_date:
+          type:
+            - string
+            - 'null'
+          pattern: ^\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}$
+          description: DBの更新日時。yyyy/MM/dd HH:mm:ss形式。
+    RootNoteListResponse:
+      description: メモ一覧応答。
+      allOf:
+        - $ref: '#/components/schemas/RootSuccess'
+        - type: object
+          required:
+            - note_list
+            - paging
+          properties:
+            note_list:
+              type: array
+              items:
+                $ref: '#/components/schemas/RootNoteItem'
+              description: 指定ユーザの非削除メモ。メモID降順。対象なしは空配列。
+            paging:
+              $ref: '#/components/schemas/RootPaging'
+              description: 全ユーザ・削除済みを含む全メモ件数で作成され、一覧の絞り込み範囲と一致しない。リンク基底はapidata?page。
+    RootToolOption:
+      type: object
+      properties:
+        label:
+          type: string
+          description: マスタの表示名。nullの場合は省略。
+        value:
+          type: string
+          description: マスタのコード。nullの場合は省略。
+    RootToolRolesResponse:
+      allOf:
+        - $ref: '#/components/schemas/RootSuccess'
+        - type: object
+          properties:
+            roles:
+              type: array
+              items:
+                $ref: '#/components/schemas/RootToolOption'
+          required:
+            - roles
+    RootToolInquiryStatusesResponse:
+      allOf:
+        - $ref: '#/components/schemas/RootSuccess'
+        - type: object
+          properties:
+            statuses:
+              type: array
+              items:
+                $ref: '#/components/schemas/RootToolOption'
+          required:
+            - statuses
+    RootTopRegGraph:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+          description: 日別登録件数。
+        date:
+          type: string
+          pattern: ^\d{4}/\d{2}/\d{2}$
+          description: 日付。yyyy/MM/dd。
+      required:
+        - count
+        - date
+    RootTopResponse:
+      allOf:
+        - $ref: '#/components/schemas/RootSuccess'
+        - type: object
+          properties:
+            account_reg_graph_list:
+              type: array
+              items:
+                $ref: '#/components/schemas/RootTopRegGraph'
+            health_info_reg_graph_list:
+              type: array
+              items:
+                $ref: '#/components/schemas/RootTopRegGraph'
+          required:
+            - account_reg_graph_list
+            - health_info_reg_graph_list
+    RootTopHealthInfoResponse:
+      allOf:
+        - $ref: '#/components/schemas/RootSuccess'
+        - type: object
+          properties:
+            health_info_reg_graph_list:
+              type: array
+              items:
+                $ref: '#/components/schemas/RootTopRegGraph'
+          required:
+            - health_info_reg_graph_list
+    RootTopAccountResponse:
+      allOf:
+        - $ref: '#/components/schemas/RootSuccess'
+        - type: object
+          properties:
+            account_reg_graph_list:
+              type: array
+              items:
+                $ref: '#/components/schemas/RootTopRegGraph'
+          required:
+            - account_reg_graph_list
+    RootInquiryOption:
+      type: object
+      properties:
+        label:
+          type: string
+          description: 対応するマスタが取得できずnullの場合は省略。
+        value:
+          type: string
+          description: コード。nullの場合は省略。
+    RootInquiryItem:
+      type: object
+      properties:
+        seq_inquiry_mng_id:
+          type: integer
+          format: int64
+        seq_user_id:
+          type: integer
+          format: int64
+        responder_login_id:
+          type:
+            - integer
+            - 'null'
+          format: int64
+        status:
+          $ref: '#/components/schemas/RootInquiryOption'
+        type:
+          $ref: '#/components/schemas/RootInquiryOption'
+        title:
+          type:
+            - string
+            - 'null'
+        body:
+          type: string
+          description: S3本文を行単位で読み、改行を挿入せず連結した内容。JSON解析はしない。
+        reg_date:
+          type:
+            - string
+            - 'null'
+          description: yyyy/MM/dd HH:mm:ss。
+        update_date:
+          type:
+            - string
+            - 'null'
+          description: yyyy/MM/dd HH:mm:ss。
+      required:
+        - seq_inquiry_mng_id
+        - seq_user_id
+        - responder_login_id
+        - status
+        - type
+        - title
+        - body
+        - reg_date
+        - update_date
+    RootInquiryListResponse:
+      allOf:
+        - $ref: '#/components/schemas/RootSuccess'
+        - type: object
+          properties:
+            inquiry_list:
+              type: array
+              items:
+                $ref: '#/components/schemas/RootInquiryItem'
+            paging:
+              $ref: '#/components/schemas/RootPaging'
+          required:
+            - inquiry_list
+            - paging
+    RootInquiryEditRequest:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - '00'
+            - '01'
+            - '02'
+          description: 00:未対応、01:対応中、02:完了。未知値はデシリアライズでnullとなり必須チェックで拒否。
+        seq_login_id:
+          type: integer
+          format: int64
+          minimum: 0
+          description: 対応者ログインID。実在確認やJWT主体との一致確認はしない。
+      required:
+        - status
+        - seq_login_id
+      additionalProperties: true
+    RootInquiryNoticeResponse:
+      allOf:
+        - $ref: '#/components/schemas/RootSuccess'
+        - type: object
+          properties:
+            count:
+              type: integer
+              format: int64
+              description: 未削除で指定ステータスの件数。
+          required:
+            - count
+  responses:
+    RootBadRequest:
+      description: Controllerの入力検証・型変換・個別の業務チェックによる400。resultは文字列1、errors[].messageは各処理のメッセージ。固有レスポンスDTOの初期値やnullable項目が付く場合がある。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RootError'
+    RootInternalServerError:
+      description: ControllerのBaseExceptionはapplication error.、その他の一般例外はunexpected error.。共通処理からRoot用Slackへ通知する。FilterのエラーにはこのJSON形式を保証しない。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RootError'

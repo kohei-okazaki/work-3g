@@ -17,7 +17,7 @@ public class PagingView extends JsonEntity {
     private long totalRecordNum;
     /** レコード数(from) */
     @JsonProperty("from_record_num")
-    private int fromRecordNum;
+    private long fromRecordNum;
     /** レコード数(to) */
     @JsonProperty("to_record_num")
     private long toRecordNum;
@@ -82,7 +82,7 @@ public class PagingView extends JsonEntity {
      *
      * @return fromRecordNum
      */
-    public int getFromRecordNum() {
+    public long getFromRecordNum() {
         return fromRecordNum;
     }
 
@@ -92,7 +92,7 @@ public class PagingView extends JsonEntity {
      * @param fromRecordNum
      *     レコード数(from)
      */
-    public void setFromRecordNum(int fromRecordNum) {
+    public void setFromRecordNum(long fromRecordNum) {
         this.fromRecordNum = fromRecordNum;
     }
 

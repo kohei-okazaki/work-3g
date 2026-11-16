@@ -29,9 +29,10 @@
       HEALTH_INFO
     WHERE
       HEALTH_INFO_REG_DATE BETWEEN #{from} AND #{to}
-    ORDER BY 
+      AND DELETE_FLAG = false
+    ORDER BY
       SEQ_HEALTH_INFO_ID ASC
-    LIMIT 
+    LIMIT
       #{_skiprows},
       #{_pagesize}
   </select>

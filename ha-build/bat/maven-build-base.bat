@@ -7,43 +7,44 @@ rem ------------------------------------------------------------------------
 
 cls
 
-rem read build.ini
-call initialize.bat
-
-rem jar.version
-set ver=1.0.0
-echo jar.version=%ver%
-
 rem profile
-set profile=%1
+set "profile=%~1"
 echo profile=%profile%
-if "%profile%" equ "" (
-  echo profile is invalid
-  exit /B 0
+if not defined profile (
+  >&2 echo profile is required. Usage: %~nx0 profile
+  exit /b 1
 )
 
-rem build common
-cd %BASE_DIR%\ha-common
-echo mvn clean package -Dmaven.test.skip=true -P%profile%
-call mvn clean package -Dmaven.test.skip=true -P%profile%
+rem initialize.bat reads build.ini from the current directory.
+pushd "%~dp0"
+if errorlevel 1 exit /b %errorlevel%
 
-echo mvn install:install-file -Dfile=target\common-%ver%.jar -DgroupId=jp.co.ha -DartifactId=common -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
-call mvn install:install-file -Dfile=target\common-%ver%.jar -DgroupId=jp.co.ha -DartifactId=common -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
+if not exist "build.ini" (
+  >&2 echo build.ini was not found.
+  goto :build_failed
+)
 
-rem build db
-cd %BASE_DIR%\ha-db
-echo mvn clean package -Dmaven.test.skip=true -P%profile%
-call mvn clean package -Dmaven.test.skip=true -P%profile%
+rem Keep BASE_DIR available to the calling build scripts.
+set "BASE_DIR="
+call "%~dp0initialize.bat"
+if errorlevel 1 goto :build_failed
+if not defined BASE_DIR (
+  >&2 echo BASE_DIR is not configured in build.ini.
+  goto :build_failed
+)
+if not exist "%BASE_DIR%\ha-pom\pom.xml" (
+  >&2 echo The parent POM was not found: "%BASE_DIR%\ha-pom\pom.xml"
+  goto :build_failed
+)
 
-echo mvn install:install-file -Dfile=target\db-%ver%.jar -DgroupId=jp.co.ha -DartifactId=db -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
-call mvn install:install-file -Dfile=target\db-%ver%.jar -DgroupId=jp.co.ha -DartifactId=db -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
+rem Build and install the parent POM, ha-common, ha-db and ha-business.
+rem Maven uses the artifact names, versions and dependencies from their POMs.
+echo mvn -f "%BASE_DIR%\ha-pom\pom.xml" -pl :ha-business -am clean install -Dmaven.test.skip=true "-P%profile%"
+call mvn -f "%BASE_DIR%\ha-pom\pom.xml" -pl :ha-business -am clean install -Dmaven.test.skip=true "-P%profile%"
+set "build_base_exit_code=%errorlevel%"
+popd
+exit /b %build_base_exit_code%
 
-rem build business
-cd %BASE_DIR%\ha-business
-echo mvn clean package -Dmaven.test.skip=true -P%profile%
-call mvn clean package -Dmaven.test.skip=true -P%profile%
-
-echo mvn install:install-file -Dfile=target\business-%ver%.jar -DgroupId=jp.co.ha -DartifactId=business -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
-call mvn install:install-file -Dfile=target\business-%ver%.jar -DgroupId=jp.co.ha -DartifactId=business -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
-
-cd %~dp0
+:build_failed
+popd
+exit /b 1

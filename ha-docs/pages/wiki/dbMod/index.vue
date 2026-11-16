@@ -32,7 +32,7 @@
                       <kbd>tool.target.tables=追加したいテーブル名(物理名)</kbd>
                     </li>
                     <li>
-                      <p>ha-asset/02_db/DB.xlsx にテーブル定義を追加</p>
+                      <p>ha-docs/db/DB.xlsx にテーブル定義を追加</p>
                     </li>
                     <li>
                       <p>
@@ -42,7 +42,7 @@
                     </li>
                     <li>
                       <p>
-                        ha-asset/02_db/ddl配下にsqlが作成されていることを確認
+                        ha-docs/db/ddl配下にsqlが作成されていることを確認
                       </p>
                     </li>
                     <li>
@@ -117,7 +117,7 @@
                       >
                     </li>
                     <li>
-                      <p>ha-asset/02_db/DB.xlsx にテーブル定義を追加</p>
+                      <p>ha-docs/db/DB.xlsx にテーブル定義を追加</p>
                     </li>
                     <li>
                       <p>
@@ -127,7 +127,7 @@
                     </li>
                     <li>
                       <p>
-                        ha-asset/02_db/ddl配下にsqlが作成されていることを確認
+                        ha-docs/db/ddl配下にsqlが作成されていることを確認
                       </p>
                     </li>
                     <li>
@@ -196,7 +196,7 @@
                   <summary>DB側対応</summary>
                   <ol>
                     <li>
-                      <p>ha-asset/02_db/DB.xlsx に以下を対応</p>
+                      <p>ha-docs/db/DB.xlsx に以下を対応</p>
                       <ol>
                         <li>
                           新規追加の場合、既存シートをコピーしテーブル名をDMLの物理名を指定しレコードを記載
@@ -219,7 +219,7 @@
                     <li>
                       <p>以下のコマンドをwsl上で実行</p>
                       <ol>
-                        <li><kbd>/ha-build/docker/docker.sh build</kbd></li>
+                        <li><kbd>bash ha-build/docker/docker.sh build</kbd>（リポジトリルートから実行）</li>
                       </ol>
                     </li>
                   </ol>

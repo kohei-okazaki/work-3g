@@ -1,0 +1,277 @@
+openapi: 3.1.0
+info:
+  title: 健康情報蓄積API 入出力仕様
+  version: 1.0.0
+  description: |
+    健康情報連携APIの標準JSON要求と応答を定義する。
+    内部処理は同じフォルダの「設計書_6.0.健康情報連携API.md」を参照する。
+    接続先のホスト・ポートは実行環境に従う。
+    resultは数値の0または1。文字列の"0"、"1"ではない。
+    アプリ固有の200/400応答と、Django REST frameworkなどの共通エラー応答を区別する。
+servers:
+  - url: /
+    description: ha-trackの配置先を基準とする相対URL
+tags:
+  - name: HealthInfo
+    description: 健康情報の連携・蓄積
+paths:
+  /api/healthinfo/:
+    post:
+      tags: [HealthInfo]
+      operationId: syncHealthInfo
+      summary: 健康情報を連携する
+      description: |
+        ユーザIDと健康情報の配列を受け取り、DynamoDBに保存する。
+        全体の入力検証に失敗した場合は書き込みを開始しない。
+        入力検証後は配列順に処理し、各要素の例外を記録して後続要素の処理を続ける。
+        1件でも処理に失敗すると400を返すが、保存済みの要素は取り消さない。
+        空配列は許容し、書き込みをせず200を返す。
+        IDの正数制約、健康情報の値域、実在ユーザとの照合、BMIなどの再計算は行わない。
+        独自のAPIキー・トークン項目は定義していない。
+        DRFの認証・認可設定をこのビューでは上書きしておらず、未設定時の権限はAllowAnyとなる。
+        解析・認証・Content negotiationなどでビューの処理前に発生するエラーは、
+        resultとerror_messageによるアプリ固有の応答形式を保証しない。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HealthInfoSyncRequest'
+            examples:
+              sync:
+                summary: 1件の健康情報を連携する
+                value:
+                  seq_user_id: 100
+                  health_infos:
+                    - seq_health_info_id: 200
+                      height: 170.5
+                      weight: 70.2
+                      bmi: 24.2
+                      standard_weight: 63.6
+                      created_at: '2024/12/01 12:34:56'
+              empty:
+                summary: 空配列も正常終了する
+                value:
+                  seq_user_id: 100
+                  health_infos: []
+      responses:
+        '200':
+          description: |
+            全要素の処理が成功した。health_infosが空配列の場合も同じ形式を返す。
+            id、保存件数、各要素の保存結果は返さない。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthInfoSyncSuccessResponse'
+              example:
+                result: 0
+                synced_at: '2025/01/02 12:04:05'
+        '400':
+          description: |
+            入力検証の失敗、または各要素の変換・保存処理の失敗。
+            入力検証に失敗するとerror_messageは項目名に対応するエラーオブジェクトとなる。
+            各要素の処理に失敗するとerror_messageは失敗要素の配列となる。
+            エラー時はsynced_atを返さない。
+            不正JSONなどDRF共通処理の400は別形式となり、detailなどを返す場合がある。
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/HealthInfoValidationErrorResponse'
+                  - $ref: '#/components/schemas/HealthInfoItemErrorResponse'
+                  - $ref: '#/components/schemas/FrameworkErrorResponse'
+              examples:
+                missingUserId:
+                  summary: 必須のユーザIDが欠落した
+                  value:
+                    result: 1
+                    error_message:
+                      seq_user_id:
+                        - This field is required.
+                invalidCreatedAt:
+                  summary: 配列要素の作成日時が不正な形式だった
+                  value:
+                    result: 1
+                    error_message:
+                      health_infos:
+                        - created_at:
+                            - created_at must be specified in 'YYYY/MM/DD HH:MM:SS' format
+                invalidHealthInfoList:
+                  summary: health_infosに配列以外を指定した
+                  value:
+                    result: 1
+                    error_message:
+                      health_infos:
+                        non_field_errors:
+                          - 'Expected a list of items but got type "str".'
+                writeFailure:
+                  summary: 0番目の要素の保存に失敗した
+                  value:
+                    result: 1
+                    error_message:
+                      - index: 0
+                        error: unexpected
+                        detail: DynamoDB is unavailable
+        default:
+          description: |
+            Django/DRFや実行環境で発生する、上記以外の共通エラー応答。
+            未対応メソッド、認証、Content negotiation、未対応Content-Typeなどの失敗は、
+            アプリ固有のresult/error_message形式とは別に扱う。
+            内容やメディアタイプは各共通処理と設定に従う。
+components:
+  schemas:
+    HealthInfoSyncRequest:
+      type: object
+      required: [seq_user_id, health_infos]
+      additionalProperties: true
+      description: |
+        両項目とも必須で、nullは許容しない。
+        未定義のJSON項目は無視する。
+        既存Javaクライアントが送信するmigrate_flgも未定義項目であり、保存先の切り替えに使わない。
+        ここでは標準の送信型を示す。DRFのIntegerField/FloatFieldが変換できる
+        数値文字列なども受理するが、変換できない値は400となる。
+      properties:
+        seq_user_id:
+          type: integer
+          description: |
+            ユーザID。DRFのIntegerFieldで整数に変換する。
+            正数限定や64ビット整数への範囲制限をアプリでは設けない。
+            0・負数も入力検証を通過する。ユーザの実在確認は行わない。
+        health_infos:
+          type: array
+          minItems: 0
+          description: |
+            健康情報の配列。必須で、nullは許容しない。
+            空配列を許容し、要素数の上限をアプリでは設けない。
+            各要素はnullでないオブジェクトであること。
+          items:
+            $ref: '#/components/schemas/HealthInfoSyncItem'
+    HealthInfoSyncItem:
+      type: object
+      required: [seq_health_info_id, height, weight, bmi, standard_weight, created_at]
+      additionalProperties: true
+      description: |
+        全6項目が必須で、nullは許容しない。未定義項目は無視する。
+        各数値はDRFのIntegerField/FloatFieldによる型変換を行う。
+        身長・体重・BMI・標準体重の正数制約、最小値・最大値、相互の整合性は検証しない。
+        小数値はFloatFieldでPythonのfloatに変換した後、Decimal(str(値))として保存するため、
+        入力の小数桁を任意精度で保持することは保証しない。
+      properties:
+        seq_health_info_id:
+          type: integer
+          description: |
+            健康情報ID。DRFのIntegerFieldで整数に変換する。
+            正数限定や64ビット整数への範囲制限をアプリでは設けない。
+        height:
+          type: number
+          description: 身長。DRFのFloatFieldで数値に変換する。
+        weight:
+          type: number
+          description: 体重。DRFのFloatFieldで数値に変換する。
+        bmi:
+          type: number
+          description: BMI。DRFのFloatFieldで数値に変換する。再計算は行わない。
+        standard_weight:
+          type: number
+          description: 標準体重。DRFのFloatFieldで数値に変換する。再計算は行わない。
+        created_at:
+          type: string
+          minLength: 1
+          description: |
+            作成日時。基準形式はYYYY/MM/DD HH:MM:SS（例は日本時間）。
+            CharFieldが前後の空白を除去した後、Pythonのdatetime.strptimeの
+            %Y/%m/%d %H:%M:%Sで解析する。ゼロ埋めなどの許容範囲はstrptimeに従う。
+            RFC 3339/ISO 8601形式の日時文字列やタイムゾーンオフセットは指定しない。
+            省略・null・空文字・空白のみは400となり、現在日時への補完は行われない。
+            解析した日時は現在のタイムゾーン（既定設定はAsia/Tokyo）として解釈し、UTCに変換する。
+          examples:
+            - '2024/12/01 12:34:56'
+    HealthInfoSyncSuccessResponse:
+      type: object
+      required: [result, synced_at]
+      additionalProperties: false
+      properties:
+        result:
+          type: integer
+          const: 0
+          description: 成功を示す数値の0。
+        synced_at:
+          type: string
+          pattern: '^\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}$'
+          description: |
+            応答生成時の連携日時。書き込んだ各健康情報の作成日時ではない。
+            localtime(timezone.now())をYYYY/MM/DD HH:MM:SSに整形した文字列。
+            現在のタイムゾーンに従い、既定設定ではAsia/Tokyo（UTC+09:00）となる。
+            オフセットやタイムゾーン名は文字列に含めない。
+          examples:
+            - '2025/01/02 12:04:05'
+    HealthInfoValidationErrorResponse:
+      type: object
+      required: [result, error_message]
+      additionalProperties: false
+      description: |
+        入力全体の検証に失敗した応答。この場合、DynamoDBへの書き込みは行わない。
+        標準メッセージの文言はDRFの版と言語設定に従う。例はLANGUAGE_CODE=en-usの場合。
+      properties:
+        result:
+          type: integer
+          const: 1
+        error_message:
+          type: object
+          description: |
+            serializer.errorsをそのまま返す。項目名をキーとし、エラーメッセージ配列や
+            ネストしたオブジェクト・配列を保持する。項目に属さないエラーはnon_field_errorsに入る。
+            health_infosの各要素のエラーは入力順の配列となり、正常な要素の位置は空オブジェクトとなる。
+          additionalProperties:
+            $ref: '#/components/schemas/ValidationErrorValue'
+    ValidationErrorValue:
+      description: DRFのネストしたエラー値。メッセージ文字列、配列、またはオブジェクト。
+      oneOf:
+        - type: string
+        - type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorValue'
+        - type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ValidationErrorValue'
+    HealthInfoItemErrorResponse:
+      type: object
+      required: [result, error_message]
+      additionalProperties: false
+      description: |
+        入力検証通過後、各要素の日時変換・値変換・DynamoDB書き込みなどで例外が発生した応答。
+        失敗した要素だけを列挙する。失敗後も後続要素を処理し、成功済みの書き込みを取り消さない。
+      properties:
+        result:
+          type: integer
+          const: 1
+        error_message:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            required: [index, error, detail]
+            additionalProperties: false
+            properties:
+              index:
+                type: integer
+                minimum: 0
+                description: 入力health_infos内の0始まりの位置。
+              error:
+                type: string
+                const: unexpected
+                description: 捕捉した例外の固定識別子。
+              detail:
+                type: string
+                description: 捕捉した例外をstr(e)で文字列化した内容。
+    FrameworkErrorResponse:
+      type: object
+      required: [detail]
+      additionalProperties: true
+      description: |
+        不正JSONなどに対するDRF共通処理のJSON応答。
+        アプリ固有のresult/error_messageは付与しない。
+      properties:
+        detail:
+          type: string
+          description: 共通処理が設定するエラー詳細。

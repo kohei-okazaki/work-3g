@@ -26,7 +26,7 @@ import jp.co.ha.db.entity.HealthInfo;
  * <ul>
  * <li>引数1=処理対象年月日(YYYYMMDD)</li>
  * </ul>
- * 
+ *
  * @version 1.0.0
  */
 @Configuration
@@ -37,7 +37,7 @@ public class HealthInfoMigrateConfig extends BatchConfig {
 
     /**
      * 健康情報連携バッチJOB
-     * 
+     *
      * @param jobRepository
      *     JobRepository
      * @param healthInfoMigrateBatchStep
@@ -60,7 +60,7 @@ public class HealthInfoMigrateConfig extends BatchConfig {
 
     /**
      * 健康情報連携バッチSTEP
-     * 
+     *
      * @param reader
      *     Reader
      * @param processor

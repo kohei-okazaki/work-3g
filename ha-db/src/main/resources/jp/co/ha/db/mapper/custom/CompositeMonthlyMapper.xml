@@ -18,11 +18,14 @@
           DATE_FORMAT(HEALTH_INFO_REG_DATE, '%Y%m%d') AS REG_DATE
         FROM
           HEALTH_INFO
+        WHERE
+          DELETE_FLAG = false
         GROUP BY
           DATE_FORMAT(HEALTH_INFO_REG_DATE, '%Y%m%d')
       ) AS CNT
     WHERE
       HI.HEALTH_INFO_REG_DATE BETWEEN #{from,jdbcType=TIMESTAMP} AND #{to,jdbcType=TIMESTAMP}
+      AND HI.DELETE_FLAG = false
       AND DATE_FORMAT(CNT.REG_DATE, '%Y%m%d') = DATE_FORMAT(HI.HEALTH_INFO_REG_DATE, '%Y%m%d')
     ORDER BY
       DATE_FORMAT(HI.HEALTH_INFO_REG_DATE, '%Y-%m-%d');

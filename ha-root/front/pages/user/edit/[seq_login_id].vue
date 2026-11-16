@@ -101,6 +101,13 @@ import axios from "axios";
 let url = process.env.api_base_url + "user/";
 let rolesUrl = process.env.api_base_url + "roles";
 
+function getErrorMessage(data, fallback) {
+  const messages = Array.isArray(data?.errors)
+    ? data.errors.map((error) => error?.message).filter(Boolean).join("\n")
+    : "";
+  return messages || data?.error?.message || fallback;
+}
+
 export default {
   data: function () {
     return {
@@ -167,67 +174,79 @@ export default {
     /**
      * ユーザ更新処理
      */
-    updateUser: function () {
+    updateUser: async function () {
       this.loading = true;
-      let headers = {
-        Authorization: this.$store.state.auth.token,
-      };
-      // ユーザ情報編集API
-      let reqUrl = url + this.editUserForm.seqLoginId;
-      let reqBody = {
-        roles: this.userRoles,
-        delete_flag: this.editUserForm.deleteFlag,
-        remarks: this.editUserForm.remarks,
-        password: this.editUserForm.password,
-        password_expire: this.editUserForm.passwordExpire.replaceAll("-", "/"),
-      };
-      axios.put(reqUrl, reqBody, { headers }).then(
-        (result) => {
-          if (result.data.result == "0") {
-            this.apiResult.isSuccess = true;
-            this.apiResult.message = "更新完了";
-            this.saveUpdateData();
-          } else {
-            this.error.hasError = true;
-            this.error.message = result.data.error.message;
-          }
-          this.loading = false;
-        },
-        (error) => {
-          this.loading = false;
+      this.error.hasError = false;
+      this.error.message = null;
+      this.apiResult.isSuccess = false;
+      this.apiResult.message = "";
+      try {
+        let headers = {
+          Authorization: this.$store.state.auth.token,
+        };
+        // ユーザ情報編集API
+        let reqUrl = url + this.editUserForm.seqLoginId;
+        let reqBody = {
+          roles: this.userRoles,
+          delete_flag: this.editUserForm.deleteFlag,
+          remarks: this.editUserForm.remarks,
+          password: this.editUserForm.password,
+          password_expire: this.editUserForm.passwordExpire.replaceAll("-", "/"),
+        };
+        const result = await axios.put(reqUrl, reqBody, { headers });
+        if (result?.data?.result == "0") {
+          this.apiResult.isSuccess = true;
+          this.apiResult.message = "更新完了";
+          this.saveUpdateData();
+        } else {
           this.error.hasError = true;
-          this.error.message = error;
-          console.log("user update [error]=" + error);
-          return error;
-        },
-      );
+          this.error.message = getErrorMessage(
+            result?.data,
+            "ユーザ情報の更新に失敗しました。",
+          );
+        }
+      } catch (error) {
+        this.error.hasError = true;
+        this.error.message = getErrorMessage(
+          error?.response?.data,
+          error?.message || "ユーザ情報の更新に失敗しました。",
+        );
+        console.log("user update [error]=" + error);
+      } finally {
+        this.loading = false;
+      }
     },
     /**
      * 権限リスト取得
      */
-    getRoles: function () {
+    getRoles: async function () {
       this.loading = true;
-      let headers = {
-        Authorization: this.$store.state.auth.token,
-      };
-      axios.get(rolesUrl, { headers }).then(
-        (result) => {
-          if (result.data.result === "0") {
-            this.roles = result.data.roles;
-          } else {
-            this.error.hasError = true;
-            this.error.message = result.data.error.message;
-          }
-          this.loading = false;
-        },
-        (error) => {
+      this.error.hasError = false;
+      this.error.message = null;
+      try {
+        let headers = {
+          Authorization: this.$store.state.auth.token,
+        };
+        const result = await axios.get(rolesUrl, { headers });
+        if (result?.data?.result === "0") {
+          this.roles = result.data.roles;
+        } else {
           this.error.hasError = true;
-          this.error.message = error;
-          this.loading = false;
-          console.log("roles [error]=" + error);
-          return error;
-        },
-      );
+          this.error.message = getErrorMessage(
+            result?.data,
+            "権限一覧の取得に失敗しました。",
+          );
+        }
+      } catch (error) {
+        this.error.hasError = true;
+        this.error.message = getErrorMessage(
+          error?.response?.data,
+          error?.message || "権限一覧の取得に失敗しました。",
+        );
+        console.log("roles [error]=" + error);
+      } finally {
+        this.loading = false;
+      }
     },
     /**
      * ユーザ更新後、storeのユーザ情報を更新

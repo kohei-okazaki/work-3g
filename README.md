@@ -1,17 +1,25 @@
 # work-3g
 健康管理アプリ  
 
-## 01_環境構築手順  
-[環境構築手順](http://healthinfo-app-docs.s3-website-ap-northeast-1.amazonaws.com/wiki/dockerEnv)を参考にローカル環境構築を行う  
+## 01_構成図
 
 ### 健康情報登録フロー
-![healthinfo_flow](ha-asset/99_tool/png/healthinfo_flow.png)
+![healthinfo_flow](ha-tools/other_tools/png/healthinfo_flow.png)
 
-## 02_Project構成  
+## 02_環境構築手順
+[環境構築手順](http://healthinfo-app-docs.s3-website-ap-northeast-1.amazonaws.com/wiki/dockerEnv)を参考にローカル環境構築を行う
+
+## 03_Project構成
 ### ha-api  
 健康管理のAPI。  
   - Java25
   - SpringBoot
+
+### ha-calc-api
+健康情報計算APIの実装・CloudFormation定義・ビルド・デプロイ処理を管理。
+  - Python3.14
+  - AWS Lambda
+  - Amazon API Gateway
 
 ### ha-dashboard  
 健康管理のダッシュボード。   
@@ -62,7 +70,7 @@
 | ha-root |
 
 ### ha-tools  
-指定のフォーマットのExcelからDDL/DMLを自動生成するツールプロジェクト  
+DB定義からのDDL/DML生成、API自動テスト、ローカル開発用の補助ツールを管理。
 
 ### ha-pom  
 以下のプロジェクトで共通的に使う外部ライブラリを定義したpomプロジェクト。
@@ -76,17 +84,14 @@
 | ha-db |
 | ha-root |
 
-### ha-track  
-健康情報蓄積用プロジェクト。  
-  - Python3.13.8
+### ha_track
+健康情報蓄積用プロジェクト（サービス名：ha-track）。
+  - Python3.14.8
   - Django rest framework
 
 ### ha-build  
 Docker環境でのBuild用のスクリプトを定義。   
-また、AWS CodeBuildによるCI/CD、CDKによるIaC化時のファイルを定義。  
+また、AWS CodeBuildによるCI/CD、TerraformによるIaCのファイルを定義。
 
 ### ha-docs  
-健康管理アプリのドキュメントプロジェクト。  
-
-### ha-asset  
-詳細設計書、DDL等を定義したドキュメントプロジェクト。  
+API設計書・DB定義・AWSローカル検証資料とドキュメントサイトを管理。

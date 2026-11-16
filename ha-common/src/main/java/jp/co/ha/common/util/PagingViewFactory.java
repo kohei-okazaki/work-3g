@@ -61,61 +61,58 @@ public class PagingViewFactory {
      * @param count
      *     レコード件数
      * @return PagingView
+     * @throws IllegalArgumentException
+     *     ページングなし、またはレコード件数が負の場合
      */
     public static PagingView getPageView(Pageable pageable, String path, long count) {
+
+        if (pageable.isUnpaged()) {
+            throw new IllegalArgumentException("pageable must be paged");
+        }
+        if (count < 0) {
+            throw new IllegalArgumentException("count must not be negative");
+        }
+
+        int currentPage = pageable.getPageNumber();
+        int pageSize = pageable.getPageSize();
+        long offset = pageable.getOffset();
 
         LOG.debug(
                 // 要求しているページ番号, 表示件数, 2つの積
                 "page_number=%s, page_size=%s, offset=%s".formatted(
-                        pageable.getPageNumber(),
-                        pageable.getPageSize(),
-                        pageable.getOffset()));
+                        currentPage, pageSize, offset));
+
+        // 総ページ数と、0始まりの最終ページ番号を区別する。
+        long totalPages = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+        long lastPage = Math.max(totalPages - 1, 0);
+        boolean hasPrevious = count > 0 && currentPage > 0;
+        boolean hasNext = currentPage < lastPage;
 
         PagingView pv = new PagingView();
-
-        pv.setCanGoFirst(pageable.getPageNumber() != 0);
-        pv.setCanGoPrevious(pageable.getPageNumber() != 0);
-
-        // (1ページあたりに表示できる件数 * n) と総レコード数が等しいかどうか
-        boolean isFullePage = count % pageable.getPageSize() == 0;
-        if (isFullePage) {
-            pv.setCanGoLast(false);
-            pv.setCanGoNext(false);
-            pv.setTotalPage(count / pageable.getPageSize());
-        } else {
-            pv.setCanGoLast(
-                    pageable.getPageNumber() < (count / pageable.getPageSize()));
-            pv.setCanGoNext(
-                    pageable.getPageNumber() < (count / pageable.getPageSize()));
-            pv.setTotalPage(count / pageable.getPageSize() + 1);
-        }
-
-        pv.setCurrentPageNum(pageable.getPageNumber());
+        pv.setCanGoFirst(hasPrevious);
+        pv.setCanGoPrevious(hasPrevious);
+        pv.setCanGoNext(hasNext);
+        pv.setCanGoLast(hasNext);
+        pv.setTotalPage(totalPages);
+        pv.setCurrentPageNum(currentPage);
+        pv.setRecordPerPage(pageSize);
         pv.setFirstHref(path + "=" + 0);
+        pv.setLastHref(path + "=" + lastPage);
 
-        int fromRecordNum;
-        if (count == 0) {
-            fromRecordNum = 0;
-        } else if (count < pageable.getOffset()) {
-            fromRecordNum = (int) (count / pageable.getPageSize()
-                    * pageable.getPageSize());
-        } else {
-            fromRecordNum = pageable.getPageSize() * pageable.getPageNumber() + 1;
-        }
-        pv.setFromRecordNum(fromRecordNum);
+        // 範囲外から戻る場合も、実在するページをリンク先とする。
+        long previousPage = hasPrevious ? Math.min((long) currentPage - 1, lastPage) : 0;
+        long nextPage = hasNext ? (long) currentPage + 1 : lastPage;
+        pv.setPreviousHref(path + "=" + previousPage);
+        pv.setNextHref(path + "=" + nextPage);
 
-        pv.setLastHref(
-                path + "=" + (count / pageable.getPageSize()));
-        pv.setNextHref(
-                path + "=" + (pageable.getPageNumber() + 1));
-        pv.setPreviousHref(
-                path + "=" + (pageable.getPageNumber() - 1));
-        pv.setRecordPerPage(5);
+        // 取得済みデータとのずれを避け、要求ページ自体は補正しない。
+        // 0件・範囲外ページでは表示するレコードがないため0～0件とする。
+        boolean hasPageRecords = offset < count;
+        pv.setFromRecordNum(hasPageRecords ? offset + 1 : 0);
+        pv.setToRecordNum(hasPageRecords
+                ? offset + Math.min((long) pageSize, count - offset)
+                : 0);
 
-        long toRecordNum = pageable.getPageSize() * pageable.getPageNumber()
-                + pageable.getPageSize();
-        toRecordNum = count < toRecordNum ? count : toRecordNum;
-        pv.setToRecordNum(toRecordNum);
         pv.setTotalRecordNum(count);
 
         return pv;
