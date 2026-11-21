@@ -44,6 +44,8 @@ public class UserRecoveryTokenSearchServiceImpl
         creteria.andTokenEqualTo(token);
         // トークン作成日時
         creteria.andTokenCreateDateGreaterThan(getTargetTokenDate());
+        // 有効なトークンのみ
+        creteria.andDeleteFlagEqualTo(false);
 
         List<UserRecoveryToken> list = mapper.selectByExample(example);
 

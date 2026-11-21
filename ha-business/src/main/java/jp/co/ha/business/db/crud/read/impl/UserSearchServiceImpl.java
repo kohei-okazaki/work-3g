@@ -50,9 +50,14 @@ public class UserSearchServiceImpl implements UserSearchService {
     @Override
     @Transactional(readOnly = true)
     public Optional<User> findById(Long seqUserId) {
-        UserKey key = new UserKey();
-        key.setSeqUserId(seqUserId);
-        return Optional.ofNullable(mapper.selectByPrimaryKey(key));
+        if (seqUserId == null) {
+            return Optional.empty();
+        }
+        UserExample example = new UserExample();
+        example.createCriteria()
+                .andSeqUserIdEqualTo(seqUserId)
+                .andDeleteFlagEqualTo(false);
+        return mapper.selectByExample(example).stream().findFirst();
     }
 
     @Select
@@ -147,6 +152,7 @@ public class UserSearchServiceImpl implements UserSearchService {
             // ユーザID
             criteria.andSeqUserIdEqualTo(seqUserId);
         }
+        criteria.andDeleteFlagEqualTo(false);
         return mapper.countByExample(example);
     }
 

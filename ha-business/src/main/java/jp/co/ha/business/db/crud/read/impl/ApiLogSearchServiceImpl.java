@@ -31,6 +31,7 @@ public class ApiLogSearchServiceImpl implements ApiLogSearchService {
     public List<ApiLog> findAll(SelectOption selectOption) {
 
         ApiLogExample example = new ApiLogExample();
+        example.createCriteria().andDeleteFlagEqualTo(false);
         example.setOrderByClause(selectOption.getOrderBy());
         example.setPageable(selectOption.getPageable());
 
@@ -48,6 +49,7 @@ public class ApiLogSearchServiceImpl implements ApiLogSearchService {
             // API通信ログID
             criteria.andSeqApiLogIdEqualTo(seqApiLogId);
         }
+        criteria.andDeleteFlagEqualTo(false);
         return mapper.countByExample(example);
     }
 

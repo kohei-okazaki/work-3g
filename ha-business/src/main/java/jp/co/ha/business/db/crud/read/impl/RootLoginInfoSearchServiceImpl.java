@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.RootLoginInfo;
-import jp.co.ha.db.entity.RootLoginInfoKey;
+import jp.co.ha.db.entity.RootLoginInfoExample;
 import jp.co.ha.db.entity.custom.CompositeRootUserInfo;
 import jp.co.ha.db.mapper.RootLoginInfoMapper;
 import jp.co.ha.db.mapper.custom.CompositeRootUserInfoMapper;
@@ -35,10 +35,14 @@ public class RootLoginInfoSearchServiceImpl implements RootLoginInfoSearchServic
     @Transactional(readOnly = true)
     public Optional<RootLoginInfo> findById(Long seqLoginId) {
 
-        RootLoginInfoKey key = new RootLoginInfoKey();
-        key.setSeqRootLoginInfoId(seqLoginId);
-
-        return Optional.ofNullable(mapper.selectByPrimaryKey(key));
+        if (seqLoginId == null) {
+            return Optional.empty();
+        }
+        RootLoginInfoExample example = new RootLoginInfoExample();
+        example.createCriteria()
+                .andSeqRootLoginInfoIdEqualTo(seqLoginId)
+                .andDeleteFlagEqualTo(false);
+        return mapper.selectByExample(example).stream().findFirst();
     }
 
     @Select
