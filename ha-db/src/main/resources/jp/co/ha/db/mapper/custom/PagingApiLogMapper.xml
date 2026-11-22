@@ -28,6 +28,7 @@
       API_LOG
     WHERE
       REG_DATE BETWEEN #{from} AND #{to}
+      AND DELETE_FLAG = false
     ORDER BY
       REG_DATE ASC
     LIMIT 

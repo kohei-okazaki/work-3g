@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # ----------------------------------------------------------------------------------------
 # 月次健康情報集計バッチ
@@ -9,7 +9,7 @@
 # 
 # input: MySQL.HEALTH_INFO
 # 
-# output: S3.monthly/healthinfo/year=YYYY/YYYYMMDD.csv.gz
+# output: S3.monthly/healthinfo/year=YYYY/YYYYMM.csv.gz
 # ----------------------------------------------------------------------------------------
 set -eu
 
@@ -18,7 +18,8 @@ echo "START $0"
 echo "------------------------------------------------------------------------"
 
 # call common.sh
-. ./common.sh
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+. "${SCRIPT_DIR}/common.sh"
 
 # ロック処理
 SCRIPT_NAME=$(basename "$0")

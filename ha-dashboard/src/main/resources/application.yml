@@ -8,7 +8,8 @@ spring:
     encoding: UTF-8
     cache: false
   messages:
-    basename: messages
+    basename: messages,apiErrorCode,dashboardErrorCode,businessErrorCode,commonErrorCode,validateErrorCode
+    encoding: UTF-8
     fallback-to-system-locale: false
     locale: ja
     cache-duration: 1s

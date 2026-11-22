@@ -2,6 +2,7 @@ package jp.co.ha.business.db.crud.read.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         }
         // 健康情報登録日時
         criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate, toHealthInfoRegDate);
+        // 有効な健康情報のみ
+        criteria.andDeleteFlagEqualTo(false);
         // ソート処理
         example.setOrderByClause(selectOption.getOrderBy());
 
@@ -77,6 +80,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         criteria.andSeqUserIdEqualTo(seqUserId);
         // 健康情報登録日時
         criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate, toHealthInfoRegDate);
+        // 有効な健康情報のみ
+        criteria.andDeleteFlagEqualTo(false);
 
         return mapper.countByExample(example);
     }
@@ -93,6 +98,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         criteria.andSeqHealthInfoIdEqualTo(seqHealthInfoId);
         // ユーザID
         criteria.andSeqUserIdEqualTo(seqUserId);
+        // 有効な健康情報のみ
+        criteria.andDeleteFlagEqualTo(false);
 
         return mapper.selectByExample(example);
     }
@@ -114,6 +121,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
             // ユーザID
             criteria.andSeqUserIdEqualTo(seqUserId);
         }
+        // 有効な健康情報のみ
+        criteria.andDeleteFlagEqualTo(false);
 
         return mapper.countByExample(example);
     }
@@ -128,12 +137,29 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         HealthInfoExample.Criteria criteria = example.createCriteria();
         // ユーザID
         criteria.andSeqUserIdEqualTo(seqUserId);
+        // 有効な健康情報のみ
+        criteria.andDeleteFlagEqualTo(false);
         // ソート処理
         example.setOrderByClause(selectOption.getOrderBy());
         // 検索上限数
         example.setLimit(selectOption.getLimit());
 
         return mapper.selectByExample(example);
+    }
+
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<HealthInfo> findLatestBySeqUserId(Long seqUserId) {
+
+        HealthInfoExample example = new HealthInfoExample();
+        example.createCriteria()
+                .andSeqUserIdEqualTo(seqUserId)
+                .andDeleteFlagEqualTo(false);
+        example.setOrderByClause("SEQ_HEALTH_INFO_ID DESC");
+        example.setLimit(1);
+
+        return mapper.selectByExample(example).stream().findFirst();
     }
 
     @Select
@@ -182,6 +208,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         criteria.andSeqHealthInfoIdLessThan(seqHealthInfoId);
         // ユーザID
         criteria.andSeqUserIdEqualTo(seqUserId);
+        // 有効な健康情報のみ
+        criteria.andDeleteFlagEqualTo(false);
         // ソート処理
         example.setOrderByClause(selectOption.getOrderBy());
         // 検索上限数

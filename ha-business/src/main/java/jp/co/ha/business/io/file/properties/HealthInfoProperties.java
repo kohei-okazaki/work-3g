@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component;
  *     照会ファイル格納パス
  * @param healthinfoNodeApiUrl
  *     NodeAPIの基底URL
- * @param healthinfoNodeApiMigrateFlg
- *     NodeAPI 移行フラグ
  * @param healthInfoDashboardUrl
  *     健康情報ダッシュボードの基底URL
  * @param healthInfoApiUrl
@@ -28,7 +26,6 @@ import org.springframework.stereotype.Component;
 public record HealthInfoProperties(
         String referenceFilePath,
         String healthinfoNodeApiUrl,
-        boolean healthinfoNodeApiMigrateFlg,
         String healthInfoDashboardUrl,
         String healthInfoApiUrl,
         String rootApiUrl,

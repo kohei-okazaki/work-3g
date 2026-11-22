@@ -17,18 +17,7 @@
 </template>
 
 <script>
-import AppFooter from "~/components/AppFooter.vue";
-import AppTop from "~/components/AppTop.vue";
-import AppTheme from "~/components/AppTheme.vue";
-import AppScroll from "~/components/AppScroll.vue";
-
 export default {
-  components: {
-    AppFooter,
-    AppTop,
-    AppTheme,
-    AppScroll,
-  },
   data: function () {
     return {
       clipped: false,

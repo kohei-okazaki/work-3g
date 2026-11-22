@@ -18,8 +18,6 @@ public enum ApiNameType implements BaseEnum {
 
     /** 計算API:ヘルスチェックAPI */
     NODE_API_HEALTH_CHECK("Node API:ヘルスチェックAPI"),
-    /** 計算API:トークン発行API */
-    NODE_API_TOKEN("Node API:トークン発行API"),
     /** 計算API:基礎健康情報計算API */
     NODE_API_BASIC("Node API:基礎健康情報計算API"),
     /** 計算API:カロリー計算API */

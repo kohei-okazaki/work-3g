@@ -37,7 +37,7 @@
           :headers="headers"
           :items="apiLogList"
           class="pushable"
-          hide-default-footer="true"
+          hide-default-footer
           @click:row="openTimelineModal"
         >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
@@ -62,19 +62,10 @@
 </template>
 
 <script>
-import AppTitle from "~/components/AppTitle.vue";
-import AppMessageError from "~/components/AppMessageError.vue";
-import AppLoading from "~/components/AppLoading.vue";
-
 import axios from "axios";
 let url = process.env.api_base_url + "apidata";
 
 export default {
-  components: {
-    AppTitle,
-    AppMessageError,
-    AppLoading,
-  },
   data: function () {
     return {
       error: {

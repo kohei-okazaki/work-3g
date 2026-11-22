@@ -71,44 +71,4 @@ public class BasicHealthInfoCalcApiComponent {
 
     }
 
-    /**
-     * 基礎健康情報計算APIを呼び出す
-     *
-     * @param apiRequest
-     *     基礎健康情報計算APIリクエスト
-     * @param token
-     *     トークン
-     * @param transactionId
-     *     トランザクションID
-     * @return 基礎健康情報計算APIレスポンス
-     * @throws BaseException
-     *     API通信に失敗した場合
-     */
-    @Deprecated
-    public BasicHealthInfoCalcApiResponse callBasicHealthInfoCalcApi(
-            BasicHealthInfoCalcApiRequest apiRequest, String token, String transactionId)
-            throws BaseException {
-
-        ApiConnectInfo connectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.healthinfoNodeApiUrl()
-                        + NodeApiType.BASIC.getValue())
-                .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
-
-        BasicHealthInfoCalcApiResponse apiResponse = api
-                .callApi(apiRequest, connectInfo);
-
-        ApiLogQueuePayload payload = apiLogComponent
-                .getPayload4NodeApi(api, connectInfo, apiRequest,
-                        apiResponse, transactionId);
-        apiLogComponent.registQueue(payload);
-
-        if (Result.SUCCESS != apiResponse.getResult()) {
-            // 基礎健康情報計算APIの処理が成功以外の場合
-            throw new ApiException(BASIC_API_CONNECT_ERROR, apiResponse.getDetail());
-        }
-
-        return apiResponse;
-
-    }
-
 }

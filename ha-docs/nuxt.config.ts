@@ -3,6 +3,8 @@ import type { VuetifyModuleOptions } from "vuetify-nuxt-module";
 
 const vuetifyOptions: VuetifyModuleOptions = {
   moduleOptions: {
+    // Nuxt 4.6 also exports useLayout; keep Vuetify composables distinct.
+    prefixComposables: true,
     styles: {
       configFile: "assets/variables.scss",
     },

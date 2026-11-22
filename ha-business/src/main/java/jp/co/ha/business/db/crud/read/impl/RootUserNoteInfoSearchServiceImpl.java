@@ -12,7 +12,6 @@ import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.RootUserNoteInfo;
 import jp.co.ha.db.entity.RootUserNoteInfoExample;
-import jp.co.ha.db.entity.RootUserNoteInfoKey;
 import jp.co.ha.db.mapper.RootUserNoteInfoMapper;
 
 /**
@@ -51,9 +50,14 @@ public class RootUserNoteInfoSearchServiceImpl implements RootUserNoteInfoSearch
     @Transactional(readOnly = true)
     public Optional<RootUserNoteInfo> findById(Long seqRootUserNoteInfoId) {
 
-        RootUserNoteInfoKey key = new RootUserNoteInfoKey();
-        key.setSeqRootUserNoteInfoId(seqRootUserNoteInfoId);
-        return Optional.ofNullable(mapper.selectByPrimaryKey(key));
+        if (seqRootUserNoteInfoId == null) {
+            return Optional.empty();
+        }
+        RootUserNoteInfoExample example = new RootUserNoteInfoExample();
+        example.createCriteria()
+                .andSeqRootUserNoteInfoIdEqualTo(seqRootUserNoteInfoId)
+                .andDeleteFlagEqualTo(false);
+        return mapper.selectByExample(example).stream().findFirst();
     }
 
     @Select
@@ -67,6 +71,7 @@ public class RootUserNoteInfoSearchServiceImpl implements RootUserNoteInfoSearch
             // 管理者サイトログインID
             criteria.andSeqRootLoginInfoIdEqualTo(seqLoginId);
         }
+        criteria.andDeleteFlagEqualTo(false);
         return mapper.countByExample(example);
     }
 

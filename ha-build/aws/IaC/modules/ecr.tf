@@ -11,9 +11,6 @@ resource "aws_ecr_repository" "dashboard" {
     encryption_type = "AES256"
   }
 
-  tags = {
-    Name = "${local.resource_prefix}-ha-dashboard"
-  }
 }
 
 resource "aws_ecr_repository" "api" {
@@ -29,9 +26,6 @@ resource "aws_ecr_repository" "api" {
     encryption_type = "AES256"
   }
 
-  tags = {
-    Name = "${local.resource_prefix}-ha-api"
-  }
 }
 
 resource "aws_ecr_repository" "root_api" {
@@ -47,9 +41,6 @@ resource "aws_ecr_repository" "root_api" {
     encryption_type = "AES256"
   }
 
-  tags = {
-    Name = "${local.resource_prefix}-ha-root-api"
-  }
 }
 
 resource "aws_ecr_repository" "track" {
@@ -65,9 +56,6 @@ resource "aws_ecr_repository" "track" {
     encryption_type = "AES256"
   }
 
-  tags = {
-    Name = "${local.resource_prefix}-ha-track"
-  }
 }
 
 resource "aws_ecr_repository" "batch" {
@@ -83,9 +71,6 @@ resource "aws_ecr_repository" "batch" {
     encryption_type = "AES256"
   }
 
-  tags = {
-    Name = "${local.resource_prefix}-ha-batch"
-  }
 }
 
 resource "aws_ecr_lifecycle_policy" "expire_untagged_images" {

@@ -44,7 +44,8 @@ export default {
   },
   methods: {
     updateValue: function (e) {
-      this.$emit("update:modelValue", e.color);
+      // フォームのリセットで null が通知された場合は、初期のタグ色へ戻す。
+      this.$emit("update:modelValue", e?.color ?? this.getTag(this.color).color);
     },
     getTag: function (color) {
       for (var i = 0; i < this.tagColorSelectList.length; i++) {

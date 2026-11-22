@@ -39,22 +39,7 @@
 </template>
 
 <script>
-import AppFooter from "~/components/AppFooter.vue";
-import AppLogout from "~/components/AppLogout.vue";
-import AppTop from "~/components/AppTop.vue";
-import AppTheme from "~/components/AppTheme.vue";
-import AppScroll from "~/components/AppScroll.vue";
-import AppLoginUserMenu from "~/components/AppLoginUserMenu.vue";
-
 export default {
-  components: {
-    AppFooter,
-    AppLogout,
-    AppTop,
-    AppTheme,
-    AppScroll,
-    AppLoginUserMenu,
-  },
   data: function () {
     return {
       drawer: true,

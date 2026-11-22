@@ -1,6 +1,9 @@
 spring:
   application:
     name: ha-batch
+  messages:
+    basename: messages,apiErrorCode,businessErrorCode,commonErrorCode,validateErrorCode
+    encoding: UTF-8
   batch:
     jdbc:
       initialize-schema: never

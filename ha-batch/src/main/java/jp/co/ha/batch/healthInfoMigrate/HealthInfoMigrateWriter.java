@@ -20,7 +20,7 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 /**
  * 健康情報連携処理-Writer<br>
  * 健康情報連携APIを呼び出す
- * 
+ *
  * @version 1.0.0
  */
 @Component
@@ -45,7 +45,7 @@ public class HealthInfoMigrateWriter implements ItemWriter<HealthInfoMigrateApiR
 
     /**
      * 健康情報連携APIを呼び出す
-     * 
+     *
      * @param list
      *     健康情報リスト
      * @throws BaseException

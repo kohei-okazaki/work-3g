@@ -15,9 +15,7 @@
         <div class="text-left">
           <v-expansion-panels multiple>
             <v-expansion-panel>
-              <v-expansion-panel-header class="text-subtitle-1"
-                >テーブル追加</v-expansion-panel-header
-              >
+              <v-expansion-panel-header class="text-subtitle-1">テーブル追加</v-expansion-panel-header>
               <v-expansion-panel-content class="text-body-2">
                 <details>
                   <summary>DB側対応</summary>
@@ -32,7 +30,7 @@
                       <kbd>tool.target.tables=追加したいテーブル名(物理名)</kbd>
                     </li>
                     <li>
-                      <p>ha-asset/02_db/DB.xlsx にテーブル定義を追加</p>
+                      <p>ha-docs/db/DB.xlsx にテーブル定義を追加</p>
                     </li>
                     <li>
                       <p>
@@ -42,7 +40,7 @@
                     </li>
                     <li>
                       <p>
-                        ha-asset/02_db/ddl配下にsqlが作成されていることを確認
+                        ha-docs/db/ddl配下にsqlが作成されていることを確認
                       </p>
                     </li>
                     <li>
@@ -67,11 +65,9 @@
                       <p>
                         ha-db/src/main/resources/generatorConfig.xmlを開き、以下を追加
                       </p>
-                      <kbd
-                        >&lt;table schema="work3g"
+                      <kbd>&lt;table schema="work3g"
                         tableName="追加するテーブル名" modelType="hierarchical"
-                        /&gt;</kbd
-                      >
+                        /&gt;</kbd>
                     </li>
                     <li>
                       <p>
@@ -98,9 +94,7 @@
             </v-expansion-panel>
 
             <v-expansion-panel>
-              <v-expansion-panel-header class="text-subtitle-1"
-                >カラム追加</v-expansion-panel-header
-              >
+              <v-expansion-panel-header class="text-subtitle-1">カラム追加</v-expansion-panel-header>
               <v-expansion-panel-content class="text-body-2">
                 <details>
                   <summary>DB側対応</summary>
@@ -112,12 +106,10 @@
                       <p>
                         ha-tool/src/main/resources/tool.properties に以下を追加
                       </p>
-                      <kbd
-                        >tool.target.tables=カラム追加したいテーブル名(物理名)</kbd
-                      >
+                      <kbd>tool.target.tables=カラム追加したいテーブル名(物理名)</kbd>
                     </li>
                     <li>
-                      <p>ha-asset/02_db/DB.xlsx にテーブル定義を追加</p>
+                      <p>ha-docs/db/DB.xlsx にテーブル定義を追加</p>
                     </li>
                     <li>
                       <p>
@@ -127,7 +119,7 @@
                     </li>
                     <li>
                       <p>
-                        ha-asset/02_db/ddl配下にsqlが作成されていることを確認
+                        ha-docs/db/ddl配下にsqlが作成されていることを確認
                       </p>
                     </li>
                     <li>
@@ -157,11 +149,9 @@
                       <p>
                         ha-db/src/main/resources/generatorConfig.xmlを開き、以下を追加
                       </p>
-                      <kbd
-                        >&lt;table schema="work3g"
+                      <kbd>&lt;table schema="work3g"
                         tableName="カラム追加するテーブル名"
-                        modelType="hierarchical" /&gt;</kbd
-                      >
+                        modelType="hierarchical" /&gt;</kbd>
                     </li>
                     <li>
                       <p>
@@ -188,15 +178,13 @@
             </v-expansion-panel>
 
             <v-expansion-panel>
-              <v-expansion-panel-header class="text-subtitle-1"
-                >DML作成</v-expansion-panel-header
-              >
+              <v-expansion-panel-header class="text-subtitle-1">DML作成</v-expansion-panel-header>
               <v-expansion-panel-content class="text-body-2">
                 <details>
                   <summary>DB側対応</summary>
                   <ol>
                     <li>
-                      <p>ha-asset/02_db/DB.xlsx に以下を対応</p>
+                      <p>ha-docs/db/DB.xlsx に以下を対応</p>
                       <ol>
                         <li>
                           新規追加の場合、既存シートをコピーしテーブル名をDMLの物理名を指定しレコードを記載
@@ -219,7 +207,7 @@
                     <li>
                       <p>以下のコマンドをwsl上で実行</p>
                       <ol>
-                        <li><kbd>/ha-build/docker/docker.sh build</kbd></li>
+                        <li><kbd>bash ha-build/docker/docker.sh build</kbd>（リポジトリルートから実行）</li>
                       </ol>
                     </li>
                   </ol>
@@ -266,5 +254,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

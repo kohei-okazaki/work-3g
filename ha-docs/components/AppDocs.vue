@@ -1,6 +1,34 @@
 <template>
-  <div>
-    <v-card>
+  <div class="flow-docs" :class="{ 'flow-docs--batch': hasBatchSections }">
+    <template v-if="hasBatchSections">
+      <v-card
+        v-for="section in flowSections"
+        :key="section.id"
+        class="flow-card"
+        :class="{ 'flow-card--shell': section.kind === 'shell' }"
+        variant="outlined"
+      >
+        <v-card-title class="flow-card__title">
+          {{ section.title }}
+        </v-card-title>
+        <v-card-text class="flow-card__body">
+          <div
+            class="flow-card__viewport"
+            tabindex="0"
+            role="region"
+            :aria-label="`${section.title}の処理フロー`"
+          >
+            <Mermaid
+              class="flow-card__diagram"
+              :nodes="section.nodes"
+              type="graph TB"
+              natural-size
+            />
+          </div>
+        </v-card-text>
+      </v-card>
+    </template>
+    <v-card v-else>
       <v-card-text class="text-subtitle-1">処理フロー</v-card-text>
       <v-card-text>
         <div
@@ -40,7 +68,20 @@ export default {
 
       const buildSection = (sectionNodes) => {
         const ids = new Set(sectionNodes.map((node) => getId(node)));
+        const kind = sectionNodes.every((node) => getId(node).startsWith("sh_"))
+          ? "shell"
+          : sectionNodes.every((node) => getId(node).startsWith("java_"))
+            ? "java"
+            : "flow";
+        const title = {
+          shell: "シェル処理",
+          java: "Java処理",
+          flow: "処理フロー",
+        }[kind];
         return {
+          id: getId(sectionNodes[0]),
+          kind,
+          title,
           nodes: sectionNodes.map((node) => ({
             ...node,
             next: Array.isArray(node.next)
@@ -114,11 +155,76 @@ export default {
 
       return sections;
     },
+    hasBatchSections() {
+      return this.flowSections.some(
+        (section) => section.kind === "shell" || section.kind === "java"
+      );
+    },
   },
 };
 </script>
 
 <style scoped>
+.flow-docs {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.flow-docs--batch {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+.flow-card {
+  min-width: 0;
+  border-color: #d5e1e5;
+  background: rgb(var(--v-theme-surface));
+}
+
+.flow-card__title {
+  padding: 16px 20px;
+  border-bottom: 1px solid #d5e1e5;
+  background: #f4f9fa;
+  color: #006d77;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.flow-card__body {
+  padding: 0;
+}
+
+.flow-card__viewport {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  max-height: min(75vh, 900px);
+  overflow: auto;
+  padding: 24px;
+  scrollbar-gutter: stable;
+}
+
+.flow-card__viewport:focus-visible {
+  outline: 2px solid #0097a7;
+  outline-offset: -2px;
+}
+
+.flow-card--shell .flow-card__viewport {
+  max-height: min(50vh, 650px);
+}
+
+.flow-card__diagram {
+  width: max-content;
+  min-width: 100%;
+}
+
+.flow-card__diagram :deep(svg) {
+  display: block;
+  margin-inline: auto;
+}
+
 .flow-sections {
   display: flex;
   align-items: flex-start;

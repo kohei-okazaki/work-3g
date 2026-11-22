@@ -174,6 +174,18 @@ public class UserComponent {
     }
 
     /**
+     * 指定したユーザIDからAPIを利用可能なユーザ情報を検索する<br>
+     * 未削除かつパスワード有効期限がシステム日付以降のユーザを対象とする
+     *
+     * @param seqUserId
+     *     ユーザID
+     * @return APIを利用可能なユーザ情報
+     */
+    public Optional<User> findApiUsableById(Long seqUserId) {
+        return userSearchService.findApiUsableById(seqUserId);
+    }
+
+    /**
      * ユーザ関連情報の登録処理を行う
      *
      * @param dto

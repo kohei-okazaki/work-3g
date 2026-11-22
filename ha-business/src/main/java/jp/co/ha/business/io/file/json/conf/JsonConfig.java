@@ -5,8 +5,6 @@ import org.springframework.context.annotation.Configuration;
 
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultTypeSerializer;
-import jp.co.ha.business.api.healthinfoapp.type.TestMode;
-import jp.co.ha.business.api.healthinfoapp.type.TestMode.TestModeDeserializer;
 import tools.jackson.databind.JacksonModule;
 import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.module.SimpleModule;
@@ -27,20 +25,8 @@ public class JsonConfig {
     @Bean
     JsonMapper jsonObjectMapper() {
         return JsonMapper.builder()
-                .addModule(getDeserializeModule())
                 .addModule(getSerializeModule())
                 .build();
-    }
-
-    /**
-     * JSONデシリアライズするModuleを返す
-     *
-     * @return JacksonModule
-     */
-    private JacksonModule getDeserializeModule() {
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(TestMode.class, new TestModeDeserializer());
-        return module;
     }
 
     /**

@@ -15,10 +15,8 @@ import jp.co.ha.business.api.healthinfoapp.HealthInfoRegistApi;
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
-import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.component.UserComponent;
-import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.dto.ApiLogQueuePayload;
 import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
@@ -47,9 +45,6 @@ import jp.co.ha.db.entity.User;
 @Service
 public class HealthInfoServiceImpl implements HealthInfoService {
 
-    /** 健康情報情報検索サービス */
-    @Autowired
-    private HealthInfoSearchService healthInfoSearchService;
     /** 健康情報メールサービス */
     @Autowired
     private HealthInfoMailService healthInfoMailService;
@@ -74,12 +69,6 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         model.addAttribute("beforeWeight", lastHealthInfo.getWeight());
         model.addAttribute("diffWeight", getDiffWeight(dto, lastHealthInfo));
         model.addAttribute("resultMessage", getDiffStatus(dto, lastHealthInfo));
-    }
-
-    @Override
-    public boolean isFirstReg(Long seqUserId) throws BaseException {
-        return healthInfoSearchService.countByHealthInfoIdAndSeqUserId(null,
-                seqUserId) == 0L;
     }
 
     @Override
@@ -109,7 +98,6 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         HealthInfoRegistApiRequest request = new HealthInfoRegistApiRequest();
         request.setHeight(dto.height());
         request.setWeight(dto.weight());
-        request.setTestMode(TestMode.DB_REGIST);
         request.setTransactionId(transactionId);
 
         HealthInfoRegistApiResponse response = registApi.callApi(request,

@@ -33,18 +33,18 @@
 
                 <div class="custom-file">
                   <input type="file"
-                         class="custom-file-input validate[required]"
-                         id="multipartFile"
-                         th:field="*{multipartFile}"
-                         required />
+                    class="custom-file-input validate[required]"
+                    id="multipartFile"
+                    th:field="*{multipartFile}"
+                    required />
                   <label class="custom-file-label" for="multipartFile">ファイルを選択</label>
                 </div>
 
                 <!-- エラーメッセージ -->
                 <div class="alert alert-danger mt-2"
-                     role="alert"
-                     th:if="${#fields.hasErrors('multipartFile')}"
-                     th:errors="*{multipartFile}"></div>
+                  role="alert"
+                  th:if="${#fields.hasErrors('multipartFile')}"
+                  th:errors="*{multipartFile}"></div>
               </div>
 
               <!-- ボタンエリア -->

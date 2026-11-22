@@ -18,7 +18,7 @@ export default {
   },
   data: function () {
     return {
-      breadcrumbs:[
+      breadcrumbs: [
         {
           text: "Top",
           disabled: false,
@@ -35,5 +35,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

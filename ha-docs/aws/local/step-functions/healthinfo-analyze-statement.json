@@ -1,0 +1,49 @@
+{
+  "Comment": "Athena -> SNS -> Slack (simple, no intrinsic functions)",
+  "StartAt": "RunAthenaQuery",
+  "States": {
+    "RunAthenaQuery": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::athena:startQueryExecution.sync",
+      "Parameters": {
+        "QueryString": "SELECT * FROM health_info",
+        "WorkGroup": "primary",
+        "QueryExecutionContext": {
+          "Database": "local"
+        },
+        "ResultConfiguration": {
+          "OutputLocation": "s3://healthinfo-app-local/monthly/athena_results/"
+        }
+      },
+      "ResultPath": "$.athena",
+      "Catch": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "ResultPath": "$.error",
+          "Next": "NotifyFailure"
+        }
+      ],
+      "Next": "NotifySuccess"
+    },
+    "NotifySuccess": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Parameters": {
+        "TopicArn": "arn:aws:sns:ap-northeast-1:263597691431:healthinfo-athena-notify",
+        "Message": "{\"version\":\"1.0\",\"source\":\"custom\",\"content\":{\"textType\":\"client-markdown\",\"title\":\"✅ Athena query SUCCEEDED\",\"description\":\"Athena query finished successfully. check S3 'healthinfo-app-local/monthly/athena_results/' \"},\"metadata\":{\"threadId\":\"athena-monthly\",\"summary\":\"Athena succeeded\"}}"
+      },
+      "End": true
+    },
+    "NotifyFailure": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Parameters": {
+        "TopicArn": "arn:aws:sns:ap-northeast-1:263597691431:healthinfo-athena-notify",
+        "Message": "{\"version\":\"1.0\",\"source\":\"custom\",\"content\":{\"textType\":\"client-markdown\",\"title\":\"❌ Athena query FAILED\",\"description\":\"Athena query failed. Open Step Functions execution details.\"},\"metadata\":{\"threadId\":\"athena-monthly\",\"summary\":\"Athena failed\"}}"
+      },
+      "End": true
+    }
+  }
+}

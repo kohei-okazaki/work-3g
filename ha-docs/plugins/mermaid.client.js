@@ -6,6 +6,10 @@ export default defineNuxtPlugin(async () => {
     mermaid.initialize({
       startOnLoad: false,
       securityLevel: "antiscript",
+      // Preserve the diagram layout and appearance used before Mermaid 12.
+      layout: "dagre",
+      theme: "default",
+      look: "classic",
     });
 
     return {

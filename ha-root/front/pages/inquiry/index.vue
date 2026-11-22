@@ -7,7 +7,7 @@
         <v-data-table
           :headers="headers"
           :items="inquiryList"
-          hide-default-footer="true"
+          hide-default-footer
         >
           <!-- 詳細ボタン -->
           <template v-slot:[`item.detail_action`]="{ item }">
@@ -73,19 +73,10 @@
 </template>
 
 <script>
-import AppTitle from "~/components/AppTitle.vue";
-import AppMessageError from "~/components/AppMessageError.vue";
-import AppLoading from "~/components/AppLoading.vue";
-
 import axios from "axios";
 let url = process.env.api_base_url + "inquiry";
 
 export default {
-  components: {
-    AppTitle,
-    AppMessageError,
-    AppLoading,
-  },
   data: function () {
     return {
       error: {

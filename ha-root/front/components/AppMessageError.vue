@@ -4,7 +4,7 @@
       <v-alert
         class="pushable"
         elevation="2"
-        border="left"
+        border="start"
         color="red"
         type="error"
         :outlined="isOutlined"

@@ -28,7 +28,7 @@
                   <th>dashboard</th>
                   <th>api</th>
                   <th>batch</th>
-                  <th>calc_api</th>
+                  <th>calc API</th>
                   <th>root api</th>
                   <th>root front</th>
                   <th>track api</th>
@@ -50,61 +50,35 @@
                     <div>{{ lib.description }}</div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('dashboard')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('dashboard')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon v-if="lib.projects.includes('api')" color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('api')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon v-if="lib.projects.includes('batch')" color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('batch')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('calc_api')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('calc_api')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('root api')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('root api')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('root front')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('root front')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('track api')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('track api')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon v-if="lib.projects.includes('docs')" color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('docs')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                 </tr>
@@ -264,7 +238,7 @@ export default {
         {
           name: "Python標準ライブラリ",
           version: "Python 3.14",
-          description: "計算Lambdaで使用するjson・math（外部依存なし）",
+          description: "ha-calc-apiの計算Lambdaで使用するjson・math（外部依存なし）",
           projects: ["calc_api"],
         },
         {
@@ -299,19 +273,19 @@ export default {
         },
         {
           name: "Vue",
-          version: "3.5.38",
+          version: "3.5.44",
           description: "フロントエンドUIフレームワーク",
           projects: ["root front", "docs"],
         },
         {
           name: "Nuxt",
-          version: "4.4.8",
+          version: "4.6.2",
           description: "Vueベースのアプリケーションフレームワーク",
           projects: ["root front", "docs"],
         },
         {
           name: "Vuetify",
-          version: "4.1.2",
+          version: "4.3.0",
           description: "Vue向けUIコンポーネントライブラリ",
           projects: ["root front", "docs"],
         },
@@ -337,7 +311,13 @@ export default {
           name: "Sass",
           version: "1.101.0",
           description: "CSSプリプロセッサ",
-          projects: ["root front", "docs"],
+          projects: ["root front"],
+        },
+        {
+          name: "Sass",
+          version: "1.106.1",
+          description: "CSSプリプロセッサ",
+          projects: ["docs"],
         },
         {
           name: "TypeScript",
@@ -359,13 +339,13 @@ export default {
         },
         {
           name: "Mermaid",
-          version: "11.15.0",
+          version: "12.2.0",
           description: "ドキュメント内の図を生成するライブラリ",
           projects: ["docs"],
         },
         {
           name: "PostCSS",
-          version: "8.5.15",
+          version: "8.5.31",
           description: "CSS変換ツール",
           projects: ["docs"],
         },
@@ -375,5 +355,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

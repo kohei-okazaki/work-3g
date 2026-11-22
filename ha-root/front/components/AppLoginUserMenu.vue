@@ -34,12 +34,7 @@
 </template>
 
 <script>
-import AppLoginUserEdit from "~/components/AppLoginUserEdit.vue";
-
 export default {
-  components: {
-    AppLoginUserEdit,
-  },
   methods: {
     getSeqLoginId: function () {
       return this.$store.state.auth.seq_login_id;

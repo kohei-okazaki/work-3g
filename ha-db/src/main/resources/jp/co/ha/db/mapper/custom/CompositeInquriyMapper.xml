@@ -34,6 +34,8 @@
         ON (IM.INQUIRY_STATUS = SM.INQUIRY_STATUS AND SM.DELETE_FLAG = FALSE)
       LEFT OUTER JOIN INQUIRY_TYPE_MT TM
         ON (IM.INQUIRY_TYPE = TM.INQUIRY_TYPE AND TM.DELETE_FLAG = FALSE)
+    WHERE
+      IM.DELETE_FLAG = false
     <if test="orderByClause != null">
       ORDER BY ${orderByClause}
     </if>

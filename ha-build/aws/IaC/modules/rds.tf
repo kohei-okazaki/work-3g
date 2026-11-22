@@ -8,9 +8,6 @@ resource "aws_db_subnet_group" "database" {
   description = "Subnet group for private RDS MySQL"
   subnet_ids  = aws_subnet.private_db[*].id
 
-  tags = {
-    Name = "${local.resource_prefix}-db-subnet-group"
-  }
 }
 
 resource "aws_db_instance" "database" {
@@ -19,6 +16,8 @@ resource "aws_db_instance" "database" {
   engine         = "mysql"
   engine_version = var.db_engine_version
   instance_class = var.db_instance_class
+
+  allow_major_version_upgrade = var.db_allow_major_version_upgrade
 
   allocated_storage = 20
   storage_type      = "gp3"
@@ -38,7 +37,4 @@ resource "aws_db_instance" "database" {
   auto_minor_version_upgrade = true
   apply_immediately          = true
 
-  tags = {
-    Name = "${local.resource_prefix}-database"
-  }
 }

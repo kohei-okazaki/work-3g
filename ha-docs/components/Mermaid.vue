@@ -4,6 +4,9 @@
 <script>
 export default {
     name: 'Mermaid',
+    data() {
+        return { renderVersion: 0 };
+    },
     props: {
         // 新規は code 推奨。旧API互換で nodes/type も受ける
         code: String,
@@ -15,6 +18,10 @@ export default {
         type: {
             type: String,
             default: 'graph TB'
+        },
+        naturalSize: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -66,11 +73,17 @@ export default {
     mounted() { 
         this.render() 
     },
+    beforeUnmount() {
+        this.renderVersion++;
+    },
     watch: {
         code() {
             this.render()
         },
         type() {
+            this.render()
+        },
+        naturalSize() {
             this.render()
         },
         nodes: {
@@ -82,21 +95,36 @@ export default {
     },
     methods: {
         async render() {
+            const version = ++this.renderVersion;
+            const el = this.$refs.el;
+            if (!el) return;
             const code = this.resolvedCode;
-            console.log('[Mermaid] rendering code=', code)
             if (!code) {
-                // デバッグしやすく
-                console.warn('[Mermaid] empty code')
-                this.$refs.el.innerHTML = ''
+                el.innerHTML = ''
                 return
             }
             const id = 'mmd-' + Math.random().toString(36).slice(2);
             try {
                 const { svg } = await this.$mermaid.render(id, code);
-                this.$refs.el.innerHTML = svg;
+                if (version !== this.renderVersion || this.$refs.el !== el) return;
+                el.innerHTML = svg;
+                if (this.naturalSize) {
+                    const diagram = el.querySelector?.('svg');
+                    const viewBox = diagram?.getAttribute('viewBox')?.trim();
+                    const dimensions = viewBox ? viewBox.split(/[\s,]+/).map(Number) : [];
+                    if (dimensions.length !== 4 || !dimensions.every(Number.isFinite)
+                        || dimensions[2] <= 0 || dimensions[3] <= 0) return;
+                    const [, , width, height] = dimensions;
+                    diagram.setAttribute('width', String(width));
+                    diagram.setAttribute('height', String(height));
+                    diagram.style.width = `${width}px`;
+                    diagram.style.height = `${height}px`;
+                    diagram.style.maxWidth = 'none';
+                }
             } catch (e) {
+                if (version !== this.renderVersion || this.$refs.el !== el) return;
                 console.error('[Mermaid] render failed', e, { code });
-                this.$refs.el.innerHTML = '<pre style="color:#c00">Mermaid parse error</pre>';
+                el.innerHTML = '<pre style="color:#c00">Mermaid parse error</pre>';
             }
         }
     }

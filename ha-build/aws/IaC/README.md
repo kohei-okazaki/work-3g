@@ -22,9 +22,16 @@
   - `ha-dashboard` / `ha-api` / `ha-root` API / `ha-track` / `ha-batch` 用ECR repository
   - 各ECR repositoryの未タグイメージをpushから1日後に削除するLifecycle Policy
 - データストア・キュー
-  - RDS MySQL（`db_engine_version` の既定値は `8.4.8`）とDB subnet group
+  - RDS MySQL（`db_engine_version` の既定値は `9.7.4` LTS）とDB subnet group
   - `health_info_<環境名>` DynamoDB table（On-demand / server-side encryption有効）
+  - `healthinfo-app-<環境名>` アプリデータ用S3 bucket（ACL無効 / public access block / server-side encryption有効）
   - API通信ログ用SQS FIFO queue（SQS managed server-side encryption有効）
+- 月次健康情報分析・通知
+  - S3 Object Created eventを受け取るEventBridge ruleと配信失敗用SQS DLQ
+  - `<プロジェクト名>-<環境名>-healthinfo-analysis` Step Functions Standard workflow
+  - Glue Data CatalogのCSV tableとAthena workgroup
+  - Athena query結果用S3 prefixと7日保持のLifecycle rule
+  - SNSとAmazon Q Developer in chat applicationsを経由するSlack通知
 - 運用・権限
   - RDS初期設定・接続用のEC2踏み台とIAM instance profile
   - 各ECSタスクのexecution role / task roleと必要なIAM policy
@@ -32,36 +39,47 @@
 `ha-dashboard` / `ha-api` / `ha-root` API / `ha-batch` は、同じRDS databaseを同じアプリ用DBユーザで参照する。
 `ha-track` はRDSを使用せず、環境ごとのDynamoDB tableを使用する。
 
-RDSのパスワードなどを保持するSSM Parameter、`ha-root/front` のS3 static website、およびアプリデータ用S3 bucketは既存リソースを参照し、このTerraformでは作成しない。
+RDSのパスワードなどを保持するSSM Parameterと `ha-root/front` のS3 static websiteは既存リソースを参照し、このTerraformでは作成しない。
+アプリデータ用S3 bucketは `healthinfo-app-<app_env>` という名前でこのTerraformが作成する。
 
 ## 注意
 
 - このTerraform構成でECRリポジトリを作成し、Docker imageは手順に沿って `docker build` / `docker push`
 - `ha-root/front` のS3 static websiteは既存管理のままとし、このTerraformでは作成・変更対象外
+- S3 bucket名はグローバルで一意。同一AWSアカウントの既存bucketを管理対象へ移す場合は、適用前にTerraform stateへimportする
 - TerraformでRDS master passwordをSSM SecureStringから読むため、値はTerraform stateにsensitive値として保持
 - `terraform.tfstate` と `*.tfvars` はGit管理対象外。環境ごとの `environments/<環境名>` 配下に配置
+- `environments/dev` の同じstateでアプリ基盤と月次健康情報分析基盤を管理するため、`plan` / `apply` / `destroy` は両方を対象にする
+- S3 bucket notificationとLifecycleはbucket単位の設定。手動または別stateで設定を追加する場合はTerraform定義へ統合する
 
 ## ディレクトリ構成
 
 ```text
 ha-build/aws/IaC/
 ├─ modules/              # AWSリソースの共通定義
+│  ├─ locals.tf
+│  ├─ variables.tf
+│  ├─ outputs.tf
 │  ├─ network.tf
 │  ├─ security_groups.tf
+│  ├─ cloudwatch_logs.tf
+│  ├─ cloud_map.tf
 │  ├─ iam.tf
 │  ├─ rds.tf
-│  ├─ ec2.tf
 │  ├─ dynamodb.tf
+│  ├─ ec2.tf
+│  ├─ s3.tf
 │  ├─ sqs.tf
 │  ├─ ecs.tf
 │  ├─ ecr.tf
-│  ├─ cloudwatch_logs.tf
-│  ├─ cloud_map.tf
-│  ├─ locals.tf
-│  ├─ variables.tf
-│  └─ outputs.tf
+│  ├─ glue.tf
+│  ├─ athena.tf
+│  ├─ eventbridge.tf
+│  ├─ step_functions.tf
+│  ├─ sns.tf
+│  └─ chatbot.tf
 ├─ environments/
-│  └─ dev/               # dev環境のTerraform実行ルート
+│  └─ dev/               # アプリ基盤と分析基盤を管理するdev環境Terraform実行ルート
 │     ├─ main.tf
 │     ├─ versions.tf
 │     ├─ providers.tf
@@ -72,7 +90,9 @@ ha-build/aws/IaC/
 └─ README.md
 ```
 
-`modules` は単独で実行せず、`environments/dev` からmoduleとして呼び出す。
+`modules` は単独で実行せず、`environments` 配下の対応する実行ルートからmoduleとして呼び出す。
+
+`environments/dev` は単一の `module.healthinfo` でWebアプリ基盤と月次健康情報分析基盤をまとめて作成し、同じbackend・stateで管理する。
 
 ## 前提
 
@@ -82,7 +102,6 @@ ha-build/aws/IaC/
 - `Dockerfile.ha-dashboard`、`Dockerfile.ha-api`、`Dockerfile.ha-root-api`、`Dockerfile.ha-track` がリポジトリ直下にあること
 - RDS master passwordとapp user passwordのSSM SecureStringを事前に作っておくこと
 - `ha-root/front` の既存S3サイトURLを `root_front_url` として渡せること
-- `ha-root` API が利用する既存アプリデータ用S3 bucket名を `app_data_bucket_name` として渡せること
 
 ## Terraformのインストール
 
@@ -173,6 +192,39 @@ terraform fmt -recursive ../..
 terraform validate
 ```
 
+## 月次健康情報CSVのAthena分析・Slack通知
+
+```mermaid
+flowchart LR
+    Batch["monthly_health_info_summary.sh"] -->|"monthly/healthinfo/year=YYYY/YYYYMM.csv.gz"| S3[("healthinfo-app-dev")]
+    S3 --> EventBridge["EventBridge<br/>Object Created"]
+    EventBridge --> SF["Step Functions Standard<br/>healthinfo-app-dev-healthinfo-analysis"]
+    EventBridge -.->|"配信失敗"| DLQ["SQS DLQ"]
+    SF -->|"StartQueryExecution.sync<br/>GetQueryResults"| Athena["Athena"]
+    Glue["Glue Data Catalog"] -.-> Athena
+    Athena --> Results[("S3<br/>monthly/athena-results/")]
+    SF --> SNS["SNS"] --> Q["Amazon Q Developer"] --> Slack["Slack"]
+```
+
+Athena queryはEventBridgeが受け取った1ファイルだけを対象に `COUNT(*)` を実行する。空CSVは0件として処理し、Slackには健康情報の明細を送らず、件数・入力S3 key・Athena QueryExecutionId・結果prefixだけを通知する。
+
+個人dev向けの既定値:
+
+- Athena scan上限: 1 query当たり100 MiB
+- Athena結果保持: 7日
+- Step Functions log: `ERROR` のみ、実行データを含めず1日保持
+- Amazon Q診断log: 無効
+- customer managed KMS key、Glue Crawler、Lambda、Athena Provisioned Capacity: 作成しない
+
+Slack通知を有効にする場合は、AWSコンソールでAmazon QとSlack workspaceを認可し、channelへAmazon Qを招待してから `environments/dev/terraform.tfvars` に次を追加する。両方が空の場合はAmazon QのSlack channel configurationを作成せず、SNSまでを構築する。
+
+```hcl
+slack_team_id    = "T0123456789"
+slack_channel_id = "C0123456789"
+```
+
+現在の `MonthlyHealthInfoSummaryWriter` はS3 upload後に `slack.sendFile(...)` でもCSV.gzを送信するため、新経路を有効にすると通知が二重になる。新経路へ完全移行する場合は、動作確認後に既存のファイル送信を無効化する。
+
 ## リソース確認(terraform plan)
 
 最初は `dashboard_desired_count=0` / `api_desired_count=0` / `root_api_desired_count=0` /
@@ -210,6 +262,8 @@ aws ecr get-login-password --region ap-northeast-1 \
 
 ```bash
 cd ../../../../..
+
+# DockerDesktopを起動
 
 docker build -f Dockerfile.ha-dashboard -t "${DASHBOARD_REPO}:dev" .
 docker push "${DASHBOARD_REPO}:dev"
@@ -255,6 +309,18 @@ terraform output -raw batch_run_command
 - `dailyApiLogJob`
 - `dailyBatchLogJob`
 
+## RDS MySQL 9.7.4への移行
+
+ローカルDockerとRDSはMySQL `9.7.4` LTSに揃える。Git管理対象外の `environments/dev/terraform.tfvars` などで `db_engine_version` を上書きしている場合も `"9.7.4"` に変更する。
+
+既存RDSの8.4系から9.7系への更新はメジャーアップグレードとなる。新規作成と異なり、バージョンを書き換えるだけでは実行できない。事前にスナップショットまたはBlue/Green環境で復元・移行を検証し、アプリとFlywayの実行を確認してから `db_allow_major_version_upgrade = true` を明示して適用する。既定値は `false`。この構成は `apply_immediately = true` のため、既存DBへの適用時には更新と接続断が発生し得る。
+
+RDSの更新経路は8.4→9.7。8.0以前は順番に更新する。RDSの事前チェックでは、`mysql_native_password` のアカウント、削除された関数や予約語、証明書の期限切れなどが更新を妨げる場合がある。既存アカウントの認証方式は `caching_sha2_password` を使用し、実DBの `PrePatchCompatibility.log` と更新先バージョン・インスタンスクラスの提供状況を確認する。カスタムDB parameter groupを使用する場合は `mysql9.7` familyが必要。この構成ではカスタムgroupを指定していない。
+
+RDS 9.7ではTLS接続が既定で必須となるため、ECSへ渡す `DB_URL` は `sslMode=REQUIRED` を使用する。外部のDBクライアントやFlyway MavenコマンドからRDSへ接続するときも、TLS対応のURLを指定する。`REQUIRED` は暗号化を必須にするが、CAとホスト名の検証は行わない。サーバ証明書を検証する構成ではRDS CAをJava trust storeへ登録し、`sslMode=VERIFY_IDENTITY` と実際のRDSエンドポイントを使用する。
+
+公式資料: [RDS MySQLのメジャーアップグレード](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.MySQL.Major.html)、[RDSのTLS接続要件](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-ssl-connections.require-ssl.html)、[Connector/JのSSL設定](https://dev.mysql.com/doc/connector-j/en/connector-j-connp-props-security.html)。
+
 ## RDS接続・初期設定
 
 RDSはprivate DB subnetにあるため、ローカルPCから直接接続不可。
@@ -287,7 +353,7 @@ aws ssm start-session \
 
 ポートフォワード中に、元のGit Bashターミナルから実行。
 ローカルPCへのMySQL clientのインストールは不要。DockerのMySQL clientを利用。
-初回実行時は `mysql:8.0` imageをダウンロード。
+初回実行時はRDSの設定と同じ `mysql:9.7.4` imageをダウンロード。接続にはTLSを必須とする。
 
 ```bash
 # SSMから値を設定
@@ -296,8 +362,8 @@ echo
 
 docker run --rm -i \
   -e MYSQL_PWD="${DB_MASTER_PASSWORD}" \
-  mysql:8.0 \
-  mysql -h host.docker.internal -P 13306 -u ${DbMasterUsername} < ../../../../../ha-asset/02_db/others/CREATE_DATABASE.sql
+  mysql:9.7.4 \
+  mysql --ssl-mode=REQUIRED -h host.docker.internal -P 13306 -u ${DbMasterUsername} < ../../../../../ha-docs/db/others/CREATE_DATABASE.sql
 
 unset DB_MASTER_PASSWORD
 ```
@@ -307,8 +373,8 @@ unset DB_MASTER_PASSWORD
 RDS master userでMySQLへ接続。
 
 ```bash
-winpty docker run --rm -it mysql:8.0 \
-  mysql -h host.docker.internal -P 13306 -u ${DbMasterUsername} -p
+winpty docker run --rm -it mysql:9.7.4 \
+  mysql --ssl-mode=REQUIRED -h host.docker.internal -P 13306 -u ${DbMasterUsername} -p
 ```
 
 MySQL接続後、アプリ用DBユーザを作成。
@@ -316,7 +382,7 @@ MySQL接続後、アプリ用DBユーザを作成。
 FlywayのDDLに外部キー作成が含まれるため、`REFERENCES`権限も付与。
 
 ```sql
-CREATE USER 'app_user'@'%' IDENTIFIED BY '<APP_DB_PASSWORD>';
+CREATE USER 'app_user'@'%' IDENTIFIED WITH caching_sha2_password BY '<APP_DB_PASSWORD>';
 GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP, INDEX, REFERENCES ON work3g.* TO 'app_user'@'%';
 FLUSH PRIVILEGES;
 ```
@@ -326,8 +392,8 @@ FLUSH PRIVILEGES;
 ユーザ作成後に実行。
 
 ```bash
-winpty docker run --rm -it mysql:8.0 \
-  mysql -h host.docker.internal -P 13306 -u app_user -p work3g
+winpty docker run --rm -it mysql:9.7.4 \
+  mysql --ssl-mode=REQUIRED -h host.docker.internal -P 13306 -u app_user -p work3g
 ```
 
 ## ha-api / ha-dashboard / ha-root API / ha-track起動

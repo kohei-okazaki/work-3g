@@ -10,9 +10,6 @@ resource "aws_security_group" "shared_db_client" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = "${local.resource_prefix}-shared-db-client-sg"
-  }
 }
 
 resource "aws_security_group" "internal_app_client" {
@@ -27,9 +24,6 @@ resource "aws_security_group" "internal_app_client" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = "${local.resource_prefix}-internal-app-client-sg"
-  }
 }
 
 resource "aws_security_group" "db" {
@@ -44,9 +38,6 @@ resource "aws_security_group" "db" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = "${local.resource_prefix}-db-sg"
-  }
 }
 
 resource "aws_security_group_rule" "db_from_app" {
@@ -69,10 +60,6 @@ resource "aws_security_group" "bastion" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "${local.resource_prefix}-bastion-sg"
   }
 }
 
@@ -107,10 +94,6 @@ resource "aws_security_group" "dashboard_ingress" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  tags = {
-    Name = "${local.resource_prefix}-dashboard-web-sg"
-  }
 }
 
 resource "aws_security_group_rule" "dashboard_public_ingress" {
@@ -133,10 +116,6 @@ resource "aws_security_group" "api_task" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "${local.resource_prefix}-api-task-sg"
   }
 }
 
@@ -173,10 +152,6 @@ resource "aws_security_group" "track_task" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  tags = {
-    Name = "${local.resource_prefix}-track-task-sg"
-  }
 }
 
 resource "aws_security_group_rule" "track_from_internal_app" {
@@ -211,10 +186,6 @@ resource "aws_security_group" "root_api_task" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "${local.resource_prefix}-root-api-task-sg"
   }
 }
 

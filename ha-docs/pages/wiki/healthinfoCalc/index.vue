@@ -17,10 +17,10 @@
             <v-expansion-panel v-for="(item, i) in list" :key="i">
               <v-expansion-panel-header class="text-subtitle-1">{{
                 item.name
-              }}</v-expansion-panel-header>
+                }}</v-expansion-panel-header>
               <v-expansion-panel-content class="text-body-2">
-                <div v-html="item.exp" align="left"></div
-              ></v-expansion-panel-content>
+                <div v-html="item.exp" align="left"></div>
+              </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
         </div>
@@ -82,5 +82,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

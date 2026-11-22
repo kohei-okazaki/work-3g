@@ -12,7 +12,6 @@ import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.NewsInfo;
 import jp.co.ha.db.entity.NewsInfoExample;
-import jp.co.ha.db.entity.NewsInfoKey;
 import jp.co.ha.db.mapper.NewsInfoMapper;
 
 /**
@@ -61,9 +60,14 @@ public class NewsInfoSearchServiceImpl implements NewsInfoSearchService {
     @Override
     @Transactional(readOnly = true)
     public Optional<NewsInfo> findById(Long seqNewsInfoId) {
-        NewsInfoKey key = new NewsInfoKey();
-        key.setSeqNewsInfoId(seqNewsInfoId);
-        return Optional.ofNullable(mapper.selectByPrimaryKey(key));
+        if (seqNewsInfoId == null) {
+            return Optional.empty();
+        }
+        NewsInfoExample example = new NewsInfoExample();
+        example.createCriteria()
+                .andSeqNewsInfoIdEqualTo(seqNewsInfoId)
+                .andDeleteFlagEqualTo(false);
+        return mapper.selectByExample(example).stream().findFirst();
     }
 
 }

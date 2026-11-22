@@ -116,7 +116,7 @@ public class CalorieCalcController implements BaseWebController {
                 GenderType.of(user.get().getGenderType().intValue()), form.getHeight(),
                 form.getWeight(), form.getLifeWorkMetabolism());
 
-        CalorieCalcResult calcResult = calorieCalcComponent.calc(param, seqUserId);
+        CalorieCalcResult calcResult = calorieCalcComponent.calc(param);
 
         model.addAttribute("calcResult", calcResult);
 

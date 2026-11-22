@@ -20,7 +20,7 @@
 
           <div class="card-body bg-white">
             <form id="healthInfoReferenceForm" th:action="@{/healthinforeference/refer}" method="get" th:object="${healthInfoReferenceForm}">
-              
+
               <!-- アラート類 -->
               <div th:if="${isRefered != null && isRefered && hasResult != null && !hasResult}" class="alert alert-danger">
                 健康情報の登録がありません

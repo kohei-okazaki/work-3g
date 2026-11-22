@@ -31,7 +31,7 @@ import jp.co.ha.db.entity.User;
 
 /**
  * 健康情報一括登録処理-Writer
- * 
+ *
  * @version 1.0.0
  */
 @Component
@@ -54,7 +54,7 @@ public class HealthInfoFileRegistWriter
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param api
      *     健康情報登録API
      * @param userComponent

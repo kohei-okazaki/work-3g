@@ -55,18 +55,9 @@ definePageMeta({
 </script>
 
 <script>
-import AppMessageError from "~/components/AppMessageError.vue";
-import AppLoading from "~/components/AppLoading.vue";
-import UserDataSave from "~/components/user/UserDataSave.vue";
-
 export default {
   // ログイン前のレイアウトを適用
   layout: "non-auth-layout",
-  components: {
-    AppMessageError,
-    AppLoading,
-    UserDataSave,
-  },
   data: function () {
     return {
       title: "ログイン",

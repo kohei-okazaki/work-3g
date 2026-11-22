@@ -7,7 +7,7 @@
         <v-data-table
           :headers="headers"
           :items="jobLogList"
-          hide-default-footer="true"
+          hide-default-footer
         >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
           <template v-slot:[`item.status`]="{ item }">
@@ -34,19 +34,10 @@
 </template>
 
 <script>
-import AppTitle from "~/components/AppTitle.vue";
-import AppMessageError from "~/components/AppMessageError.vue";
-import AppLoading from "~/components/AppLoading.vue";
-
 import axios from "axios";
 let url = process.env.api_base_url + "job";
 
 export default {
-  components: {
-    AppTitle,
-    AppMessageError,
-    AppLoading,
-  },
   data: function () {
     return {
       error: {
