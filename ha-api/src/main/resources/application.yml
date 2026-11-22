@@ -4,7 +4,8 @@ spring:
   security:
     enabled: false
   messages:
-    basename: messages
+    basename: messages,apiErrorCode,businessErrorCode,commonErrorCode,validateErrorCode
+    encoding: UTF-8
     fallback-to-system-locale: false
     locale: ja
     cache-duration: 1s

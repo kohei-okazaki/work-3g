@@ -15,6 +15,8 @@ public class BatchConfigConst {
     public static final String HEALTH_CHECK_ROOT_API_STEP_NAME = "rootApihealthCheckStep";
     /** STEP名 - ヘルスチェック通知用Step */
     public static final String HEALTH_CHECK_NOTIFY_STEP_NAME = "healthCheckNotifyStep";
+    /** STEP名 - ヘルスチェック結果判定Step */
+    public static final String HEALTH_CHECK_RESULT_STEP_NAME = "healthCheckResultStep";
     /** FLOW名 - 健康管理APIヘルスチェックFlow */
     public static final String HEALTH_CHECK_APP_API_FLOW_NAME = "appApiHealthCheckFlow";
     /** FLOW名 - 管理者用APIヘルスチェックFlow */

@@ -21,6 +21,10 @@ public abstract class BaseHealthCheckApiTasklet implements Tasklet {
     public static final String KEY_TRANSACTION_ID = "transactionId";
     /** キー名:レスポンスタイプ */
     public static final String KEY_RESPONSE_TYPE = "response_type";
+    /** キー名:健康管理APIのヘルスチェック失敗有無 */
+    public static final String KEY_APP_API_FAILED = "appApiFailed";
+    /** キー名:管理者用APIのヘルスチェック失敗有無 */
+    public static final String KEY_ROOT_API_FAILED = "rootApiFailed";
     /** キー名:API名 */
     public static final String KEY_API_NAME = "apiName";
     /** キー名:メール件名 */

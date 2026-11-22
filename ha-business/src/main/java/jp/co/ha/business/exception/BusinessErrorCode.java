@@ -27,7 +27,9 @@ public enum BusinessErrorCode implements BaseErrorCode, BaseEnum {
     HEALTH_INFO_REGIST_API_CONNECT_ERROR("HEALTH_INFO_REGIST_API_CONNECT_ERROR", "BE0039",
             ERROR),
     /** ユーザ更新エラー */
-    USER_UPDATE_ERROR("USER_UPDATE_ERROR", "BE0045", ERROR);
+    USER_UPDATE_ERROR("USER_UPDATE_ERROR", "BE0045", ERROR),
+    /** ヘルスチェックエラー */
+    HEALTH_CHECK_ERROR("HEALTH_CHECK_ERROR", "BE0048", ERROR);
 
     /**
      * コンストラクタ
