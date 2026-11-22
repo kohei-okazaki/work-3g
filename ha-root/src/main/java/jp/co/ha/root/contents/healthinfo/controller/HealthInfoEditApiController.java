@@ -16,15 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.api.node.request.BasicHealthInfoCalcApiRequest;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse;
-import jp.co.ha.business.api.node.response.TokenApiResponse;
 import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
-import jp.co.ha.business.component.TokenApiComponent;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.crud.update.HealthInfoUpdateService;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.db.entity.BmiRangeMt;
@@ -45,9 +42,6 @@ public class HealthInfoEditApiController extends
     /** API通信ログComponent */
     @Autowired
     private ApiLogComponent apiLogComponent;
-    /** トークン発行APIComponent */
-    @Autowired
-    private TokenApiComponent tokenApiComponent;
     /** 基礎健康情報計算APIComponent */
     @Autowired
     private BasicHealthInfoCalcApiComponent basicHealthInfoCalcApiComponent;
@@ -60,9 +54,6 @@ public class HealthInfoEditApiController extends
     /** 健康情報更新サービス */
     @Autowired
     private HealthInfoUpdateService healthInfoUpdateService;
-    /** 健康情報設定ファイル */
-    @Autowired
-    private HealthInfoProperties prop;
 
     /**
      * 健康情報編集
@@ -75,7 +66,6 @@ public class HealthInfoEditApiController extends
      * @throws BaseException
      *     API呼び出しに失敗した場合
      */
-    @SuppressWarnings("deprecation")
     @PutMapping(value = "healthinfo/{seq_health_info_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HealthInfoEditApiResponse> edit(
             @PathVariable(name = "seq_health_info_id", required = true) Long seqHealthInfoId,
@@ -95,25 +85,9 @@ public class HealthInfoEditApiController extends
         BasicHealthInfoCalcApiRequest basicHealthInfoCalcRequest = new BasicHealthInfoCalcApiRequest();
         BeanUtil.copy(request, basicHealthInfoCalcRequest);
 
-        BasicHealthInfoCalcApiResponse basicHealthInfoCalcResponse;
-        if (prop.healthinfoNodeApiMigrateFlg()) {
-
-            // 基礎健康情報計算API実施
-            basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
-                    .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
-                            transactionId);
-
-        } else {
-
-            // トークン発行API実施
-            TokenApiResponse tokenResponse = tokenApiComponent.callTokenApi(
-                    request.getSeqUserId(), transactionId);
-
-            // 基礎健康情報計算API実施
-            basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
-                    .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
-                            tokenResponse.getToken(), transactionId);
-        }
+        BasicHealthInfoCalcApiResponse basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
+                .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
+                        transactionId);
 
         BigDecimal bmi = basicHealthInfoCalcResponse.getBasicHealthInfo().getBmi();
         BmiRangeMt bmiRangeMt = bmiRangeMtSearchService.findAll().stream()

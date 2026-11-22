@@ -22,7 +22,7 @@
   - `ha-dashboard` / `ha-api` / `ha-root` API / `ha-track` / `ha-batch` 用ECR repository
   - 各ECR repositoryの未タグイメージをpushから1日後に削除するLifecycle Policy
 - データストア・キュー
-  - RDS MySQL（`db_engine_version` の既定値は `8.4.8`）とDB subnet group
+  - RDS MySQL（`db_engine_version` の既定値は `9.7.4` LTS）とDB subnet group
   - `health_info_<環境名>` DynamoDB table（On-demand / server-side encryption有効）
   - `healthinfo-app-<環境名>` アプリデータ用S3 bucket（ACL無効 / public access block / server-side encryption有効）
   - API通信ログ用SQS FIFO queue（SQS managed server-side encryption有効）
@@ -57,25 +57,27 @@ RDSのパスワードなどを保持するSSM Parameterと `ha-root/front` のS3
 ```text
 ha-build/aws/IaC/
 ├─ modules/              # AWSリソースの共通定義
+│  ├─ locals.tf
+│  ├─ variables.tf
+│  ├─ outputs.tf
 │  ├─ network.tf
 │  ├─ security_groups.tf
+│  ├─ cloudwatch_logs.tf
+│  ├─ cloud_map.tf
 │  ├─ iam.tf
 │  ├─ rds.tf
-│  ├─ ec2.tf
 │  ├─ dynamodb.tf
+│  ├─ ec2.tf
 │  ├─ s3.tf
 │  ├─ sqs.tf
 │  ├─ ecs.tf
 │  ├─ ecr.tf
+│  ├─ glue.tf
 │  ├─ athena.tf
 │  ├─ eventbridge.tf
 │  ├─ step_functions.tf
-│  ├─ notifications.tf
-│  ├─ cloudwatch_logs.tf
-│  ├─ cloud_map.tf
-│  ├─ locals.tf
-│  ├─ variables.tf
-│  └─ outputs.tf
+│  ├─ sns.tf
+│  └─ chatbot.tf
 ├─ environments/
 │  └─ dev/               # アプリ基盤と分析基盤を管理するdev環境Terraform実行ルート
 │     ├─ main.tf
@@ -307,6 +309,18 @@ terraform output -raw batch_run_command
 - `dailyApiLogJob`
 - `dailyBatchLogJob`
 
+## RDS MySQL 9.7.4への移行
+
+ローカルDockerとRDSはMySQL `9.7.4` LTSに揃える。Git管理対象外の `environments/dev/terraform.tfvars` などで `db_engine_version` を上書きしている場合も `"9.7.4"` に変更する。
+
+既存RDSの8.4系から9.7系への更新はメジャーアップグレードとなる。新規作成と異なり、バージョンを書き換えるだけでは実行できない。事前にスナップショットまたはBlue/Green環境で復元・移行を検証し、アプリとFlywayの実行を確認してから `db_allow_major_version_upgrade = true` を明示して適用する。既定値は `false`。この構成は `apply_immediately = true` のため、既存DBへの適用時には更新と接続断が発生し得る。
+
+RDSの更新経路は8.4→9.7。8.0以前は順番に更新する。RDSの事前チェックでは、`mysql_native_password` のアカウント、削除された関数や予約語、証明書の期限切れなどが更新を妨げる場合がある。既存アカウントの認証方式は `caching_sha2_password` を使用し、実DBの `PrePatchCompatibility.log` と更新先バージョン・インスタンスクラスの提供状況を確認する。カスタムDB parameter groupを使用する場合は `mysql9.7` familyが必要。この構成ではカスタムgroupを指定していない。
+
+RDS 9.7ではTLS接続が既定で必須となるため、ECSへ渡す `DB_URL` は `sslMode=REQUIRED` を使用する。外部のDBクライアントやFlyway MavenコマンドからRDSへ接続するときも、TLS対応のURLを指定する。`REQUIRED` は暗号化を必須にするが、CAとホスト名の検証は行わない。サーバ証明書を検証する構成ではRDS CAをJava trust storeへ登録し、`sslMode=VERIFY_IDENTITY` と実際のRDSエンドポイントを使用する。
+
+公式資料: [RDS MySQLのメジャーアップグレード](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.MySQL.Major.html)、[RDSのTLS接続要件](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-ssl-connections.require-ssl.html)、[Connector/JのSSL設定](https://dev.mysql.com/doc/connector-j/en/connector-j-connp-props-security.html)。
+
 ## RDS接続・初期設定
 
 RDSはprivate DB subnetにあるため、ローカルPCから直接接続不可。
@@ -339,7 +353,7 @@ aws ssm start-session \
 
 ポートフォワード中に、元のGit Bashターミナルから実行。
 ローカルPCへのMySQL clientのインストールは不要。DockerのMySQL clientを利用。
-初回実行時は `mysql:8.0` imageをダウンロード。
+初回実行時はRDSの設定と同じ `mysql:9.7.4` imageをダウンロード。接続にはTLSを必須とする。
 
 ```bash
 # SSMから値を設定
@@ -348,8 +362,8 @@ echo
 
 docker run --rm -i \
   -e MYSQL_PWD="${DB_MASTER_PASSWORD}" \
-  mysql:8.0 \
-  mysql -h host.docker.internal -P 13306 -u ${DbMasterUsername} < ../../../../../ha-asset/02_db/others/CREATE_DATABASE.sql
+  mysql:9.7.4 \
+  mysql --ssl-mode=REQUIRED -h host.docker.internal -P 13306 -u ${DbMasterUsername} < ../../../../../ha-docs/db/others/CREATE_DATABASE.sql
 
 unset DB_MASTER_PASSWORD
 ```
@@ -359,8 +373,8 @@ unset DB_MASTER_PASSWORD
 RDS master userでMySQLへ接続。
 
 ```bash
-winpty docker run --rm -it mysql:8.0 \
-  mysql -h host.docker.internal -P 13306 -u ${DbMasterUsername} -p
+winpty docker run --rm -it mysql:9.7.4 \
+  mysql --ssl-mode=REQUIRED -h host.docker.internal -P 13306 -u ${DbMasterUsername} -p
 ```
 
 MySQL接続後、アプリ用DBユーザを作成。
@@ -368,7 +382,7 @@ MySQL接続後、アプリ用DBユーザを作成。
 FlywayのDDLに外部キー作成が含まれるため、`REFERENCES`権限も付与。
 
 ```sql
-CREATE USER 'app_user'@'%' IDENTIFIED BY '<APP_DB_PASSWORD>';
+CREATE USER 'app_user'@'%' IDENTIFIED WITH caching_sha2_password BY '<APP_DB_PASSWORD>';
 GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP, INDEX, REFERENCES ON work3g.* TO 'app_user'@'%';
 FLUSH PRIVILEGES;
 ```
@@ -378,8 +392,8 @@ FLUSH PRIVILEGES;
 ユーザ作成後に実行。
 
 ```bash
-winpty docker run --rm -it mysql:8.0 \
-  mysql -h host.docker.internal -P 13306 -u app_user -p work3g
+winpty docker run --rm -it mysql:9.7.4 \
+  mysql --ssl-mode=REQUIRED -h host.docker.internal -P 13306 -u app_user -p work3g
 ```
 
 ## ha-api / ha-dashboard / ha-root API / ha-track起動

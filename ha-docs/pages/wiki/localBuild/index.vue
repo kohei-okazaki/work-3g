@@ -14,8 +14,8 @@
     <v-row align="center">
       <v-col sm="12">
         <v-alert text type="error" elevation="2" border="left">
-            健康管理アプリはDocker環境に移行したため、本手順は不要。<br>
-            備忘のために手順は残すが、基本的に参照しないこと。
+          健康管理アプリはDocker環境に移行したため、本手順は不要。<br>
+          備忘のために手順は残すが、基本的に参照しないこと。
         </v-alert>
       </v-col>
     </v-row>
@@ -33,10 +33,7 @@
       <v-col sm="12">
         <v-expansion-panels multiple>
           <v-expansion-panel>
-            <v-expansion-panel-header
-              class="justify-self-start text-subtitle-1"
-              disable-icon-rotate
-            >
+            <v-expansion-panel-header class="justify-self-start text-subtitle-1" disable-icon-rotate>
               <div>バッチ ビルド手順</div>
             </v-expansion-panel-header>
             <v-expansion-panel-content class="text-body-2">
@@ -49,10 +46,7 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
           <v-expansion-panel>
-            <v-expansion-panel-header
-              class="justify-self-start text-subtitle-1"
-              disable-icon-rotate
-            >
+            <v-expansion-panel-header class="justify-self-start text-subtitle-1" disable-icon-rotate>
               <div>健康管理ドキュメント ビルド手順</div>
             </v-expansion-panel-header>
             <v-expansion-panel-content class="text-body-2">
@@ -104,5 +98,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

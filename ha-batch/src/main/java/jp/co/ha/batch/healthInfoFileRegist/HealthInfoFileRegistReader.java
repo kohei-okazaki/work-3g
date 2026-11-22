@@ -24,7 +24,7 @@ import jp.co.ha.common.util.FileUtil;
 
 /**
  * 健康情報一括登録処理-Reader
- * 
+ *
  * @version 1.0.0
  */
 @Component
@@ -51,7 +51,7 @@ public class HealthInfoFileRegistReader
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param prop
      *     健康情報設定ファイル
      * @param component
@@ -119,7 +119,7 @@ public class HealthInfoFileRegistReader
 
     /**
      * 健康情報登録APIのリクエスト形式に変換する
-     * 
+     *
      * @param dto
      *     健康情報一括登録情報JSON Dto
      * @param healthInfoJson

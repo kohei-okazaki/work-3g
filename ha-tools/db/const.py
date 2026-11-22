@@ -2,35 +2,37 @@
 DB定義関連の定数定義モジュール
 """
 
+from pathlib import Path
+
 # 基底パス
-BASE_PATH = r"C:\app\git\work-3g\ha-asset\02_db"
+BASE_PATH = Path(__file__).resolve().parents[2] / "ha-docs" / "db"
 
 # DB定義書パス
-EXCEL_PATH = BASE_PATH + r"\DB.xlsx"
+EXCEL_PATH = str(BASE_PATH / "DB.xlsx")
 
 # DDL出力パス
-DDL_OUTPUT_PATH = BASE_PATH + r"\ddl"
+DDL_OUTPUT_PATH = str(BASE_PATH / "ddl")
 # DDLテンプレートファイル名
 DDL_TEMPLATE_FILE = "ddl_template.sql.j2"
 # DDLシート名
 DDL_SHEET_NAME = "TABLE_LIST"
 
 # Define SQL出力パス
-DEF_OUTPUT_PATH = BASE_PATH + r"\others"
+DEF_OUTPUT_PATH = str(BASE_PATH / "others")
 # Define SQLファイル名
 DEF_FILE_NAME = "TABLE_DEFINE.sql"
 # Define SQLテンプレートファイル名
 DEF_TEMPLATE_FILE = "define_template.sql.j2"
 
 # Drop SQL出力パス
-DROP_OUTPUT_PATH = BASE_PATH + r"\others"
+DROP_OUTPUT_PATH = str(BASE_PATH / "others")
 # Drop SQLファイル名
 DROP_FILE_NAME = "DROP.sql"
 # Drop SQLテンプレートファイル名
 DROP_TEMPLATE_FILE = "drop_template.sql.j2"
 
 # DML出力パス
-DML_OUTPUT_PATH = BASE_PATH + r"\dml"
+DML_OUTPUT_PATH = str(BASE_PATH / "dml")
 # DMLテンプレートファイル名
 DML_TEMPLATE_FILE = "dml_template.sql.j2"
 

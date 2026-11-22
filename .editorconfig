@@ -39,3 +39,7 @@ indent_size = 2
 # Markdownは行末スペースが意味を持つ場合があるため除去しない
 [*.md]
 trim_trailing_whitespace = false
+
+# Java
+[*.java]
+indent_size = 4

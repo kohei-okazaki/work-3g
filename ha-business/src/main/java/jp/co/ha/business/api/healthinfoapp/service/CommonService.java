@@ -25,7 +25,8 @@ public abstract class CommonService {
 
     /**
      * 指定したAPI実行ユーザがAPIを実行できるか判定する<br>
-     * 指定したユーザIDが存在しない場合、またはAPIキーが一致しない場合エラーとする
+     * 指定したユーザIDが存在しない場合、削除済みまたはパスワード有効期限切れの場合、
+     * APIキーが一致しない場合エラーとする
      *
      * @param request
      *     リクエスト
@@ -34,8 +35,8 @@ public abstract class CommonService {
      */
     protected void checkApiUse(BaseAppApiRequest request) throws BaseException {
 
-        // ユーザ情報取得
-        User user = userComponent.findById(request.getSeqUserId())
+        // 未削除かつパスワード有効期限内のユーザ情報取得
+        User user = userComponent.findApiUsableById(request.getSeqUserId())
                 .orElseThrow(() -> new BusinessException(ACCOUNT_ILLEGAL,
                         "ユーザ情報が存在しません seqUserId:%s".formatted(request.getSeqUserId())));
 

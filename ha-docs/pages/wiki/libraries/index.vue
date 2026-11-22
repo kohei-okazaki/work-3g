@@ -28,7 +28,7 @@
                   <th>dashboard</th>
                   <th>api</th>
                   <th>batch</th>
-                  <th>calc_api</th>
+                  <th>calc API</th>
                   <th>root api</th>
                   <th>root front</th>
                   <th>track api</th>
@@ -50,61 +50,35 @@
                     <div>{{ lib.description }}</div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('dashboard')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('dashboard')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon v-if="lib.projects.includes('api')" color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('api')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon v-if="lib.projects.includes('batch')" color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('batch')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('calc_api')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('calc_api')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('root api')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('root api')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('root front')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('root front')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('track api')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('track api')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon v-if="lib.projects.includes('docs')" color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('docs')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                 </tr>
@@ -264,7 +238,7 @@ export default {
         {
           name: "Python標準ライブラリ",
           version: "Python 3.14",
-          description: "計算Lambdaで使用するjson・math（外部依存なし）",
+          description: "ha-calc-apiの計算Lambdaで使用するjson・math（外部依存なし）",
           projects: ["calc_api"],
         },
         {
@@ -381,5 +355,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

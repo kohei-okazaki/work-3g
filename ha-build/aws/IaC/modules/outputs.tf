@@ -251,11 +251,11 @@ output "batch_run_command" {
 }
 
 output "db_create_database_command" {
-  value = "mysql -h ${aws_db_instance.database.address} -P ${aws_db_instance.database.port} -u ${var.db_master_username} -p < CREATE_DATABASE.sql"
+  value = "mysql --ssl-mode=REQUIRED -h ${aws_db_instance.database.address} -P ${aws_db_instance.database.port} -u ${var.db_master_username} -p < CREATE_DATABASE.sql"
 }
 
 output "db_connect_command" {
-  value = "mysql -h ${aws_db_instance.database.address} -P ${aws_db_instance.database.port} -u ${var.db_master_username} -p"
+  value = "mysql --ssl-mode=REQUIRED -h ${aws_db_instance.database.address} -P ${aws_db_instance.database.port} -u ${var.db_master_username} -p"
 }
 
 output "healthinfo_analysis_state_machine_name" {

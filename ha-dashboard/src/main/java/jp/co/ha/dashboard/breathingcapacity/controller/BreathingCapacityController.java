@@ -114,7 +114,7 @@ public class BreathingCapacityController implements BaseWebController {
         BreathingCapacityParam param = new BreathingCapacityParam(form.getAge(),
                 GenderType.of(user.get().getGenderType().intValue()), form.getHeight());
 
-        BreathingCapacityResult calcResult = component.calc(param, seqUserId);
+        BreathingCapacityResult calcResult = component.calc(param);
 
         model.addAttribute("calcResult", calcResult);
 

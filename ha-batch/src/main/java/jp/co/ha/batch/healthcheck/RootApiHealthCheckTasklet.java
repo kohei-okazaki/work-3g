@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.root.HealthCheckApi;
 import jp.co.ha.business.api.root.request.HealthCheckApiRequest;
+import jp.co.ha.business.api.root.response.BaseRootApiResponse.Result;
 import jp.co.ha.business.api.root.response.HealthCheckApiResponse;
 import jp.co.ha.business.dto.ApiLogQueuePayload;
 import jp.co.ha.common.web.api.ApiConnectInfo;
@@ -47,13 +48,16 @@ public class RootApiHealthCheckTasklet extends BaseHealthCheckApiTasklet {
 
         HealthCheckApiResponse response = healthCheckApi.callApi(request, connectInfo);
 
+        boolean failed = response == null || Result.SUCCESS != response.getResult();
+        executionContext.put(KEY_ROOT_API_FAILED, failed);
+        executionContext.putString(KEY_RESPONSE_TYPE,
+                failed ? Result.FAILURE.name() : Result.SUCCESS.name());
+        executionContext.putString(KEY_API_NAME, "root api");
+        executionContext.putString(KEY_TITLE_TEXT, "管理者用API.ヘルスチェックAPI結果");
+
         ApiLogQueuePayload payload = apiLogComponent.getPayload4RootApi(healthCheckApi,
                 connectInfo, request, response, transactionId);
         apiLogComponent.registQueue(payload);
-
-        executionContext.put(KEY_RESPONSE_TYPE, response.getResult().toString());
-        executionContext.put(KEY_API_NAME, "root api");
-        executionContext.put(KEY_TITLE_TEXT, "管理者用API.ヘルスチェックAPI結果");
 
         return RepeatStatus.FINISHED;
     }

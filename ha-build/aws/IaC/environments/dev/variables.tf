@@ -54,7 +54,13 @@ variable "db_name" {
 variable "db_engine_version" {
   description = "RDS MySQLエンジンバージョン"
   type        = string
-  default     = "8.4.8"
+  default     = "9.7.4"
+}
+
+variable "db_allow_major_version_upgrade" {
+  description = "既存RDSのメジャーバージョン更新を許可するか。移行検証後に明示的に有効化します。"
+  type        = bool
+  default     = false
 }
 
 variable "db_instance_class" {

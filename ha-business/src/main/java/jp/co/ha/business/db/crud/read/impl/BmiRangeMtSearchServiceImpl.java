@@ -43,7 +43,11 @@ public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
     @Override
     @Transactional(readOnly = true)
     public List<BmiRangeMt> findAll() {
-        return cacheComponent.get(() -> mapper.selectByExample(new BmiRangeMtExample()));
+        return cacheComponent.get(() -> {
+            BmiRangeMtExample example = new BmiRangeMtExample();
+            example.createCriteria().andDeleteFlagEqualTo(false);
+            return mapper.selectByExample(example);
+        });
     }
 
 }

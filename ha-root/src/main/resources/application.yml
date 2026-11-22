@@ -4,7 +4,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   messages:
-    basename: messages
+    basename: messages,apiErrorCode,businessErrorCode,commonErrorCode,validateErrorCode
     cache-duration: -1
     encoding: UTF-8
   output:

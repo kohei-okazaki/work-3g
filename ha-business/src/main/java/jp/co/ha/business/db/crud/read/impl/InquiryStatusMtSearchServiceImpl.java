@@ -31,6 +31,7 @@ public class InquiryStatusMtSearchServiceImpl implements InquiryStatusMtSearchSe
     public List<InquiryStatusMt> findAll(SelectOption selectOption) {
 
         InquiryStatusMtExample example = new InquiryStatusMtExample();
+        example.createCriteria().andDeleteFlagEqualTo(false);
         example.setOrderByClause(selectOption.getOrderBy());
 
         return inquiryStatusMtMapper.selectByExample(example);

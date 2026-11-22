@@ -35,6 +35,9 @@ public class HealthCheckConfig extends BatchConfig {
     /** 共通通知tasklet */
     @Autowired
     private HealthCheckNotifyTasklet notifyTasklet;
+    /** ヘルスチェック結果判定tasklet */
+    @Autowired
+    private HealthCheckResultTasklet resultTasklet;
 
     /**
      * ヘルスチェックバッチJOB
@@ -47,6 +50,8 @@ public class HealthCheckConfig extends BatchConfig {
      *     管理者用APIヘルスチェックStep
      * @param healthCheckNotifyStep
      *     通知用Step
+     * @param healthCheckResultStep
+     *     ヘルスチェック結果判定Step
      * @param listener
      *     BatchJobListener
      * @return ヘルスチェックバッチJOB
@@ -56,6 +61,7 @@ public class HealthCheckConfig extends BatchConfig {
             @Qualifier(HEALTH_CHECK_APP_API_STEP_NAME) Step appApihealthCheckStep,
             @Qualifier(HEALTH_CHECK_ROOT_API_STEP_NAME) Step rootApihealthCheckStep,
             @Qualifier(HEALTH_CHECK_NOTIFY_STEP_NAME) Step healthCheckNotifyStep,
+            @Qualifier(HEALTH_CHECK_RESULT_STEP_NAME) Step healthCheckResultStep,
             BatchJobListener listener) {
 
         Flow appApiHealthCheckFlow = new FlowBuilder<Flow>(HEALTH_CHECK_APP_API_FLOW_NAME)
@@ -75,6 +81,7 @@ public class HealthCheckConfig extends BatchConfig {
                 .listener(listener)
                 .start(appApiHealthCheckFlow)
                 .next(rootApiHealthCheckFlow)
+                .next(healthCheckResultStep)
                 .end()
                 .build();
     }
@@ -93,6 +100,7 @@ public class HealthCheckConfig extends BatchConfig {
             PlatformTransactionManager transactionManager) {
         return new StepBuilder(HEALTH_CHECK_APP_API_STEP_NAME, jobRepository)
                 .tasklet(appApiHealthCheckTasklet, transactionManager)
+                .allowStartIfComplete(true)
                 .build();
     }
 
@@ -110,6 +118,7 @@ public class HealthCheckConfig extends BatchConfig {
             PlatformTransactionManager transactionManager) {
         return new StepBuilder(HEALTH_CHECK_ROOT_API_STEP_NAME, jobRepository)
                 .tasklet(rootApiHealthCheckTasklet, transactionManager)
+                .allowStartIfComplete(true)
                 .build();
     }
 
@@ -127,6 +136,24 @@ public class HealthCheckConfig extends BatchConfig {
             PlatformTransactionManager transactionManager) {
         return new StepBuilder(HEALTH_CHECK_NOTIFY_STEP_NAME, jobRepository)
                 .tasklet(notifyTasklet, transactionManager)
+                .allowStartIfComplete(true)
+                .build();
+    }
+
+    /**
+     * ヘルスチェック結果判定Step
+     *
+     * @param jobRepository
+     *     JobRepository
+     * @param transactionManager
+     *     PlatformTransactionManager
+     * @return ヘルスチェック結果判定Step
+     */
+    @Bean
+    Step healthCheckResultStep(JobRepository jobRepository,
+            PlatformTransactionManager transactionManager) {
+        return new StepBuilder(HEALTH_CHECK_RESULT_STEP_NAME, jobRepository)
+                .tasklet(resultTasklet, transactionManager)
                 .build();
     }
 }

@@ -33,7 +33,7 @@ locals {
   app_ssm_parameter_prefix_arn          = "arn:${data.aws_partition.current.partition}:ssm:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:parameter/${local.app_ssm_parameter_prefix_resource}/*"
   track_django_secret_key_parameter_arn = "arn:${data.aws_partition.current.partition}:ssm:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:parameter/${local.track_django_secret_key_parameter_resource}"
 
-  db_url = "jdbc:mysql://${aws_db_instance.database.address}:${aws_db_instance.database.port}/${var.db_name}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo"
+  db_url = "jdbc:mysql://${aws_db_instance.database.address}:${aws_db_instance.database.port}/${var.db_name}?sslMode=REQUIRED&serverTimezone=Asia/Tokyo"
 
   dashboard_image_uri = "${aws_ecr_repository.dashboard.repository_url}:${var.image_tag}"
   api_image_uri       = "${aws_ecr_repository.api.repository_url}:${var.image_tag}"

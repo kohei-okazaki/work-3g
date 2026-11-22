@@ -83,8 +83,6 @@ public class BusinessConfig implements WebMvcConfigurer {
      *     照会ファイル格納パス
      * @param healthinfoNodeApiUrl
      *     NodeAPIの基底URL
-     * @param healthinfoNodeApiMigrateFlg
-     *     NodeAPI 移行フラグ
      * @param healthInfoDashboardUrl
      *     健康情報ダッシュボードの基底URL
      * @param healthInfoApiUrl
@@ -101,7 +99,6 @@ public class BusinessConfig implements WebMvcConfigurer {
     HealthInfoProperties healthInfoProperties(
             @Value("${reference.file.path}") String referenceFilePath,
             @Value("${healthinfo.node.api.url}") String healthinfoNodeApiUrl,
-            @Value("${healthinfo.node.api.migrate.flg}") boolean healthinfoNodeApiMigrateFlg,
             @Value("${healthinfo.dashboard.url}") String healthInfoDashboardUrl,
             @Value("${healthinfo.api.url}") String healthInfoApiUrl,
             @Value("${root.api.url}") String rootApiUrl,
@@ -110,7 +107,6 @@ public class BusinessConfig implements WebMvcConfigurer {
         return new HealthInfoProperties(
                 referenceFilePath,
                 healthinfoNodeApiUrl,
-                healthinfoNodeApiMigrateFlg,
                 healthInfoDashboardUrl,
                 healthInfoApiUrl,
                 rootApiUrl,

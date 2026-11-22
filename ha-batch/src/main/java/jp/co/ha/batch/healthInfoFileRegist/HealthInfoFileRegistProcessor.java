@@ -14,7 +14,7 @@ import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
 
 /**
  * 健康情報一括登録処理-Reader
- * 
+ *
  * @version 1.0.0
  */
 @Component
@@ -27,7 +27,7 @@ public class HealthInfoFileRegistProcessor
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param validator
      *     妥当性チェック
      */

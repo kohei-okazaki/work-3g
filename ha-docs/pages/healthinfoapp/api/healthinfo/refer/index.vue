@@ -61,7 +61,7 @@ export default {
           id: "2",
           text: "必須・形式チェック",
           edgeType: "diamond",
-          next: ["20","3"],
+          next: ["20", "3"],
         },
         {
           id: "20",
@@ -71,20 +71,20 @@ export default {
         },
         {
           id: "3",
-          text: "入力正常：USER検索<br/>USER.SEQ_USER_ID = パス.ユーザID",
+          text: "入力正常：USER検索<br/>USER.SEQ_USER_ID = パス.ユーザID<br/>AND USER.DELETE_FLAG = false<br/>AND USER.PASSWORD_EXPIRE >= システム日付（日本時間・当日有効）",
           edgeType: "round",
-          next: ["100","4"],
+          next: ["100", "4"],
           style: "fill:#c6ffc6",
         },
         {
           id: "4",
           text: "USERの存在と<br/>USER.API_KEY = ヘッダー.Api-Keyを確認",
           edgeType: "diamond",
-          next: ["40","5"],
+          next: ["40", "5"],
         },
         {
           id: "40",
-          text: "ユーザなし／APIキー不一致",
+          text: "対象ユーザなし（不存在・削除済み・期限切れ）／APIキー不一致",
           edgeType: "round",
           next: ["100"],
         },
@@ -92,14 +92,14 @@ export default {
           id: "5",
           text: "認証成功：HEALTH_INFO検索<br/>HEALTH_INFO.SEQ_HEALTH_INFO_ID = パス.健康情報ID<br/>AND HEALTH_INFO.SEQ_USER_ID = パス.ユーザID",
           edgeType: "round",
-          next: ["100","6"],
+          next: ["100", "6"],
           style: "fill:#c6ffc6",
         },
         {
           id: "6",
           text: "健康情報の検索結果件数",
           edgeType: "diamond",
-          next: ["60","61","7"],
+          next: ["60", "61", "7"],
         },
         {
           id: "60",
@@ -147,5 +147,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

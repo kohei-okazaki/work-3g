@@ -13,57 +13,30 @@
     <v-form ref="sqlForm">
       <v-row>
         <v-col class="text-left" sm="12" md="5">
-          <v-select
-            :items="tables"
-            return-object
-            clearable
-            label="テーブル名"
-            item-title="logicalName"
-            item-value="physicalName"
-            v-model="table"
-          ></v-select>
+          <v-select :items="tables" return-object clearable label="テーブル名" item-title="logicalName"
+            item-value="physicalName" v-model="table"></v-select>
         </v-col>
       </v-row>
       <v-row>
         <v-col class="text-left" sm="12" md="3">
-          <v-text-field
-            clearable
-            label="変更前カラム名"
-            v-model="oldColumn"
-          ></v-text-field>
+          <v-text-field clearable label="変更前カラム名" v-model="oldColumn"></v-text-field>
         </v-col>
         <v-col class="text-left" sm="12" md="3">
-          <v-text-field
-            clearable
-            label="変更後カラム名"
-            v-model="newColumn"
-          ></v-text-field>
+          <v-text-field clearable label="変更後カラム名" v-model="newColumn"></v-text-field>
         </v-col>
         <v-col class="text-left" sm="12" md="3">
-          <v-select
-            :items="columnTypes"
-            return-object
-            clearable
-            label="カラム型"
-            v-model="columnType"
-          ></v-select>
+          <v-select :items="columnTypes" return-object clearable label="カラム型" v-model="columnType"></v-select>
         </v-col>
         <v-col class="text-left" sm="12" md="3">
-          <v-text-field
-            clearable
-            label="サイズ"
-            v-model="columnSize"
-          ></v-text-field>
+          <v-text-field clearable label="サイズ" v-model="columnSize"></v-text-field>
         </v-col>
       </v-row>
-      <v-row
-        v-if="
-          table != null &&
-          oldColumn != null &&
-          newColumn != null &&
-          columnType != null
-        "
-      >
+      <v-row v-if="
+        table != null &&
+        oldColumn != null &&
+        newColumn != null &&
+        columnType != null
+      ">
         <v-col class="text-left" sm="12">
           <v-btn color="info" @click="createSql">SQL生成</v-btn>
         </v-col>
@@ -137,5 +110,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

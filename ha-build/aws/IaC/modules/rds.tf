@@ -17,6 +17,8 @@ resource "aws_db_instance" "database" {
   engine_version = var.db_engine_version
   instance_class = var.db_instance_class
 
+  allow_major_version_upgrade = var.db_allow_major_version_upgrade
+
   allocated_storage = 20
   storage_type      = "gp3"
   multi_az          = false

@@ -61,13 +61,13 @@ export default {
           id: "read",
           text: "本文からログインID・パスワードを取得",
           edgeType: "round",
-          next: ["validate","read_error"],
+          next: ["validate", "read_error"],
         },
         {
           id: "validate",
           text: "読込成功：ログインIDの<br/>必須・半角数字チェック",
           edgeType: "diamond",
-          next: ["search","auth_error"],
+          next: ["search", "auth_error"],
         },
         {
           id: "search",
@@ -79,13 +79,13 @@ export default {
           id: "account",
           text: "取得後にユーザの存在と有効状態を確認<br/>ROOT_LOGIN_INFO.DELETE_FLAG = false<br/>ROOT_LOGIN_INFO.PASSWORD_EXPIRE ≧ 当日",
           edgeType: "diamond",
-          next: ["password","auth_error"],
+          next: ["password", "auth_error"],
         },
         {
           id: "password",
           text: "ユーザ有効：本文.パスワードをハッシュ化<br/>ROOT_LOGIN_INFO.PASSWORDと照合",
           edgeType: "diamond",
-          next: ["token","auth_error"],
+          next: ["token", "auth_error"],
         },
         {
           id: "token",
@@ -114,5 +114,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

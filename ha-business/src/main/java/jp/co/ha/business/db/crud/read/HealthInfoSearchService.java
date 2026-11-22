@@ -2,6 +2,7 @@ package jp.co.ha.business.db.crud.read;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.HealthInfo;
@@ -85,6 +86,15 @@ public interface HealthInfoSearchService {
      * @return 健康情報リスト
      */
     List<HealthInfo> findBySeqUserId(Long seqUserId, SelectOption selectOption);
+
+    /**
+     * 指定されたユーザの削除されていない健康情報を健康情報ID降順で1件検索する
+     *
+     * @param seqUserId
+     *     ユーザID
+     * @return 前回の健康情報。該当しない場合は空
+     */
+    Optional<HealthInfo> findLatestBySeqUserId(Long seqUserId);
 
     /**
      * 指定された健康情報IDとユーザIDより健康情報とBMI範囲マスタの複合Entityを検索する

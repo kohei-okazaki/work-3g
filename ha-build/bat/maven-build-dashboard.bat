@@ -6,11 +6,12 @@ rem arg1:profile (ex. local or dev)
 rem ------------------------------------------------------------------------
 
 rem common -> db-> business‚Ì‡‚Ébuild
-call maven-build-base.bat %1
+call "%~dp0maven-build-base.bat" "%~1"
+if errorlevel 1 exit /b %errorlevel%
 
 rem build dashboard
-cd %BASE_DIR%\ha-dashboard
+cd /d "%BASE_DIR%\ha-dashboard"
 echo mvn clean package -Dmaven.test.skip=true -P%1
 call mvn clean package -Dmaven.test.skip=true -P%1
 
-cd %~dp0
+cd /d "%~dp0"

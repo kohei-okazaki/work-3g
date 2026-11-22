@@ -90,7 +90,7 @@ public class NoteListApiController
         }
 
         PagingView paging = PagingViewFactory.getPageView(pageable, "apidata?page",
-                searchService.countBySeqLoginId(null));
+                searchService.countBySeqLoginId(seqLoginId));
 
         NoteListApiResponse response = getSuccessResponse();
         response.setNoteList(noteList);

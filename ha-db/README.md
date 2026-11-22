@@ -4,7 +4,7 @@
 健康管理アプリのDBアクセスやEntityを管理するプロジェクト
 
 ## テーブル一覧
-詳細はha-asset内のDB.xlsxを参照
+詳細は [ha-docs/db/DB.xlsx](../ha-docs/db/DB.xlsx) を参照
 
 - API_LOG
 - BMI_RANGE_MT
@@ -39,6 +39,9 @@
 - ha-root
 
 ## マイグレーション
+
+適用元は [src/main/resources/db/migration](./src/main/resources/db/migration/) とし、Flywayは`classpath:/db/migration`からSQLを読み込む。
+
 - 概要
     - 開発で変更になったDB定義について手でSQLを叩き、DDLを反映させずDocker上で　docker compose コマンドで反映。
 

@@ -42,7 +42,11 @@ public class RootRoleMtSearchServiceImpl implements RootRoleMtSearchService {
     @Override
     @Transactional(readOnly = true)
     public List<RootRoleMt> findAll() {
-        return cacheComponent.get(() -> mapper.selectByExample(new RootRoleMtExample()));
+        return cacheComponent.get(() -> {
+            RootRoleMtExample example = new RootRoleMtExample();
+            example.createCriteria().andDeleteFlagEqualTo(false);
+            return mapper.selectByExample(example);
+        });
     }
 
 }

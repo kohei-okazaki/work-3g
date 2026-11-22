@@ -213,6 +213,6 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel>
 
         String fileName = new String(
                 "sample.xlsx".getBytes(conf.getCharsetType().getValue()), "ISO-8859-1");
-        response.setHeader("Content-Desposition", "attachment; filename=" + fileName);
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
     }
 }

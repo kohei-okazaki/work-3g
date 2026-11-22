@@ -31,6 +31,7 @@ public class InquiryTypeMtSearchServiceImpl implements InquiryTypeMtSearchServic
     public List<InquiryTypeMt> findAll(SelectOption selectOption) {
 
         InquiryTypeMtExample example = new InquiryTypeMtExample();
+        example.createCriteria().andDeleteFlagEqualTo(false);
         example.setOrderByClause(selectOption.getOrderBy());
 
         return inquiryTypeMtMapper.selectByExample(example);
