@@ -26,7 +26,8 @@ import jp.co.ha.common.log.LoggerFactory;
 public class HealthCheckResultTasklet implements Tasklet {
 
     /** LOG */
-    private static final Logger LOG = LoggerFactory.getLogger(HealthCheckResultTasklet.class);
+    private static final Logger LOG = LoggerFactory
+            .getLogger(HealthCheckResultTasklet.class);
 
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
@@ -38,10 +39,10 @@ public class HealthCheckResultTasklet implements Tasklet {
         StringJoiner failures = new StringJoiner(", ");
 
         // 結果が未保存の場合も、成功を確認できていないため異常とする。
-        if (!Boolean.FALSE.equals(executionContext.get(KEY_APP_API_FAILED))) {
+        if ((boolean) executionContext.get(KEY_APP_API_FAILED)) {
             failures.add("healthinfo api");
         }
-        if (!Boolean.FALSE.equals(executionContext.get(KEY_ROOT_API_FAILED))) {
+        if ((boolean) executionContext.get(KEY_ROOT_API_FAILED)) {
             failures.add("root api");
         }
 
