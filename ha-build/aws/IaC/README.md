@@ -36,6 +36,23 @@
   - RDS初期設定・接続用のEC2踏み台とIAM instance profile
   - 各ECSタスクのexecution role / task roleと必要なIAM policy
 
+IAM権限はアプリケーションのAWS API呼び出しに合わせて定義する。
+ECS execution roleは各タスクのECRリポジトリとCloudWatch Logsのログストリームだけを対象とし、
+リソース指定に対応しない `ecr:GetAuthorizationToken` のみ `Resource = "*"` とする。
+Parameter Storeはexecution roleが `ssm:GetParameters`、アプリのtask roleが `ssm:GetParameter` を使用し、
+SQSのURL取得・送信はAPI通信ログ用キューに限定する。
+`ha-batch` のS3権限は `analysis/` と `monthly/healthinfo/` へのアップロードだけとし、
+`ha-batch` / `ha-root` APIのSES権限は実際に呼び出す `ses:SendEmail` だけを許可する。
+S3の `s3:PutObjectAcl` は、現在の `AwsS3Component` がアップロード時に
+`bucket-owner-full-control` ACLを指定するため保持する。
+既存SecureStringがカスタマー管理KMSキーを使用する可能性があるため、SSM経由に限定した復号権限も保持する。
+RDS用Security GroupはMySQLの接続元だけを許可し、送信ルールは持たない（応答はステートフル追跡で許可される）。
+
+分析対象S3データはIAMで直接アクセスし、Lake Formationで管理しない前提とする。
+`lakeformation:GetDataAccess` は付与しないため、手動設定や別のIaCでも対象S3データをLake Formationに登録しない。
+Step Functionsの `.sync` 連携で使うAthenaの監視・停止権限、Glueカタログ参照、
+S3のmultipart操作権限、CloudWatch Logsのログ配信権限は、サービス内部の処理に必要なため保持する。
+
 `ha-dashboard` / `ha-api` / `ha-root` API / `ha-batch` は、同じRDS databaseを同じアプリ用DBユーザで参照する。
 `ha-track` はRDSを使用せず、環境ごとのDynamoDB tableを使用する。
 
@@ -190,6 +207,13 @@ cd ha-build/aws/IaC/environments/dev
 terraform init -backend-config=backend.hcl
 terraform fmt -recursive ../..
 terraform validate
+```
+
+IAM権限とRDSの通信ルールは、Terraform 1.7以降のモックテストで検証できる。
+上記と同じ `environments/dev` から実行する。AWSへのAPI呼び出しやリソース作成は行わず、既存のデプロイ用stateも使用しない。
+
+```bash
+terraform test
 ```
 
 ## 月次健康情報CSVのAthena分析・Slack通知

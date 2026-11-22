@@ -55,7 +55,7 @@ resource "aws_ecs_task_definition" "dashboard" {
   ])
 
   depends_on = [
-    aws_iam_role_policy_attachment.dashboard_task_execution_managed,
+    aws_iam_role_policy.ecs_task_execution_policy["dashboard"],
     aws_iam_role_policy.dashboard_execution_ssm_policy,
     aws_iam_role_policy.dashboard_task_app_policy,
   ]
@@ -129,7 +129,7 @@ resource "aws_ecs_task_definition" "api" {
   ])
 
   depends_on = [
-    aws_iam_role_policy_attachment.api_task_execution_managed,
+    aws_iam_role_policy.ecs_task_execution_policy["api"],
     aws_iam_role_policy.api_execution_ssm_policy,
     aws_iam_role_policy.api_task_app_policy,
   ]
@@ -207,7 +207,7 @@ resource "aws_ecs_task_definition" "track" {
   ])
 
   depends_on = [
-    aws_iam_role_policy_attachment.track_task_execution_managed,
+    aws_iam_role_policy.ecs_task_execution_policy["track"],
     aws_iam_role_policy.track_execution_ssm_policy,
     aws_iam_role_policy.track_task_dynamodb_policy,
   ]
@@ -283,7 +283,7 @@ resource "aws_ecs_task_definition" "root_api" {
   ])
 
   depends_on = [
-    aws_iam_role_policy_attachment.root_api_task_execution_managed,
+    aws_iam_role_policy.ecs_task_execution_policy["root_api"],
     aws_iam_role_policy.root_api_execution_ssm_policy,
     aws_iam_role_policy.root_api_task_app_policy,
     aws_iam_role_policy.root_api_task_aws_access_policy,
@@ -355,7 +355,7 @@ resource "aws_ecs_task_definition" "batch" {
   ])
 
   depends_on = [
-    aws_iam_role_policy_attachment.batch_task_execution_managed,
+    aws_iam_role_policy.ecs_task_execution_policy["batch"],
     aws_iam_role_policy.batch_execution_ssm_policy,
     aws_iam_role_policy.batch_task_app_policy,
     aws_iam_role_policy.batch_task_aws_access_policy,
