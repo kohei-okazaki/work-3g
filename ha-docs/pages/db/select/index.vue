@@ -12,58 +12,37 @@
     </v-row>
     <v-row justify="center">
       <v-col class="text-left" sm="12">
-        <v-alert border="left" type="info" text elevation="2" dismissible
-          >簡易的にDBを検索するSQLを作成するツール。<br />以下に当たる部分を指定し作成ボタンでSQLを作成
+        <v-alert border="left" type="info" text elevation="2"
+          dismissible>簡易的にDBを検索するSQLを作成するツール。<br />以下に当たる部分を指定し作成ボタンでSQLを作成
           <ul>
             <li>テーブル名</li>
             <li>WHERE句</li>
-          </ul></v-alert
-        >
+          </ul>
+        </v-alert>
       </v-col>
     </v-row>
 
     <v-form ref="sqlForm">
       <v-row>
         <v-col class="text-left" sm="12" md="6">
-          <v-select
-            :items="tables"
-            return-object
-            clearable
-            label="検索対象テーブル名"
-            item-title="logicalName"
-            item-value="physicalName"
-            v-model="selectedTable"
-            @update:model-value="setColumns"
-          ></v-select>
+          <v-select :items="tables" return-object clearable label="検索対象テーブル名" item-title="logicalName"
+            item-value="physicalName" v-model="selectedTable" @update:model-value="setColumns"></v-select>
         </v-col>
       </v-row>
       <v-row v-if="selectedTable != null">
         <v-col class="text-left" sm="12" md="6">
-          <v-select
-            :items="columns"
-            return-object
-            clearable
-            label="検索対象カラム名"
-            item-title="logicalName"
-            item-value="physicalName"
-            v-model="selectedColumn"
-          ></v-select>
+          <v-select :items="columns" return-object clearable label="検索対象カラム名" item-title="logicalName"
+            item-value="physicalName" v-model="selectedColumn"></v-select>
         </v-col>
         <v-col class="text-left" sm="12" md="6">
-          <v-text-field
-            label="検索対象カラムの値"
-            clearable
-            v-model="selectedColumnValue"
-          ></v-text-field>
+          <v-text-field label="検索対象カラムの値" clearable v-model="selectedColumnValue"></v-text-field>
         </v-col>
       </v-row>
-      <v-row
-        v-if="
-          selectedTable != null &&
-          selectedColumn != null &&
-          selectedColumnValue != null
-        "
-      >
+      <v-row v-if="
+        selectedTable != null &&
+        selectedColumn != null &&
+        selectedColumnValue != null
+      ">
         <v-col class="text-left" sm="12">
           <v-btn color="info" @click="createSql">SQL生成</v-btn>
         </v-col>
@@ -142,5 +121,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

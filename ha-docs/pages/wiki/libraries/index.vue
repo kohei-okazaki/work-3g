@@ -50,61 +50,35 @@
                     <div>{{ lib.description }}</div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('dashboard')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('dashboard')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon v-if="lib.projects.includes('api')" color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('api')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon v-if="lib.projects.includes('batch')" color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('batch')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('calc_api')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('calc_api')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('root api')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('root api')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('root front')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('root front')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon
-                      v-if="lib.projects.includes('track api')"
-                      color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('track api')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                   <td>
-                    <v-icon v-if="lib.projects.includes('docs')" color="green"
-                      >mdi-check</v-icon
-                    >
+                    <v-icon v-if="lib.projects.includes('docs')" color="green">mdi-check</v-icon>
                     <div v-else></div>
                   </td>
                 </tr>
@@ -381,5 +355,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -304,7 +304,8 @@
               <v-alert text type="error" elevation="2" border="left">
                 <div class="text-body-2">
                   Node.jsとnpmはha-docs・ha-root/frontの開発とビルドに使用する。<br />
-                  健康情報計算APIはha-calc-apiのPython 3.14 LambdaをAPI Gateway経由で呼び出す。配置・デプロイ手順は<kbd>ha-calc-api/README.md</kbd>を参照。
+                  健康情報計算APIはha-calc-apiのPython 3.14 LambdaをAPI
+                  Gateway経由で呼び出す。配置・デプロイ手順は<kbd>ha-calc-api/README.md</kbd>を参照。
                 </div>
               </v-alert>
               <details>

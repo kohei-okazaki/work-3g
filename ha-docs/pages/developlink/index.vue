@@ -10,12 +10,7 @@
         <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
       </v-col>
     </v-row>
-    <v-row
-      align="center"
-      class="develop-link-row"
-      v-for="(link, i) in linkList"
-      :key="i"
-    >
+    <v-row align="center" class="develop-link-row" v-for="(link, i) in linkList" :key="i">
       <v-col sm="12">
         <v-card>
           <v-card-title>{{ link.name }}</v-card-title>
@@ -28,14 +23,8 @@
                     <div class="text-left">{{ env.envName }}</div>
                   </th>
                   <td class="develop-link-url-cell">
-                    <a
-                      v-if="isUrl(env.url)"
-                      :href="env.url"
-                      class="develop-link-url"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >{{ env.url }}</a
-                    >
+                    <a v-if="isUrl(env.url)" :href="env.url" class="develop-link-url" target="_blank"
+                      rel="noopener noreferrer">{{ env.url }}</a>
                     <span v-else class="develop-link-url develop-link-url-text">
                       {{ env.url }}
                     </span>
@@ -43,9 +32,7 @@
                 </tr>
               </template>
             </v-simple-table>
-          </v-card-text></v-card
-        ></v-col
-      >
+          </v-card-text></v-card></v-col>
     </v-row>
 
     <v-row align="center" class="develop-link-row">
@@ -61,14 +48,8 @@
                     <div class="text-left">{{ other.name }}</div>
                   </th>
                   <td class="develop-link-url-cell">
-                    <a
-                      v-if="isUrl(other.url)"
-                      :href="other.url"
-                      class="develop-link-url"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >{{ other.url }}</a
-                    >
+                    <a v-if="isUrl(other.url)" :href="other.url" class="develop-link-url" target="_blank"
+                      rel="noopener noreferrer">{{ other.url }}</a>
                     <span v-else class="develop-link-url develop-link-url-text">
                       {{ other.url }}
                     </span>
@@ -76,8 +57,7 @@
                 </tr>
               </template>
             </v-simple-table>
-          </v-card-text></v-card
-        >
+          </v-card-text></v-card>
       </v-col>
     </v-row>
   </div>

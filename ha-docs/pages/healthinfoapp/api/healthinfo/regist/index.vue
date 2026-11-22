@@ -61,13 +61,13 @@ export default {
           id: "2",
           text: "必須・形式チェック",
           edgeType: "diamond",
-          next: ["101","3"],
+          next: ["101", "3"],
         },
         {
           id: "3",
           text: "USER検索<br/>USER.SEQ_USER_ID = パス.ユーザID<br/>AND USER.DELETE_FLAG = false<br/>AND USER.PASSWORD_EXPIRE >= システム日付（日本時間・当日有効）<br/>取得後にUSER.API_KEY = ヘッダー.Api-Keyを照合",
           edgeType: "diamond",
-          next: ["101","4"],
+          next: ["101", "4"],
           style: "fill:#c6ffc6",
         },
         {
@@ -88,27 +88,27 @@ export default {
           id: "9",
           text: "calc APIの通信ログをSQS送信<br/>計算結果の成功判定より先に送信",
           edgeType: "round",
-          next: ["101","91"],
+          next: ["101", "91"],
           style: "fill:#ffce9e",
         },
         {
           id: "91",
           text: "calc APIの計算結果が成功か",
           edgeType: "diamond",
-          next: ["101","10"],
+          next: ["101", "10"],
         },
         {
           id: "10",
           text: "BMI_RANGE_MT全件取得・有効キャッシュがあれば再利用<br/>取得後に先頭の該当範囲を選択<br/>BMI_RANGE_MT.RANGE_MINの整数値 ≦ 計算結果.BMIの整数値<br/>計算結果.BMIの整数値 #lt; BMI_RANGE_MT.RANGE_MAXの整数値",
           edgeType: "round",
-          next: ["101","11"],
+          next: ["101", "11"],
           style: "fill:#c6ffc6",
         },
         {
           id: "11",
           text: "HEALTH_INFO登録<br/>HEALTH_INFO.SEQ_USER_ID = パス.ユーザID<br/>HEALTH_INFO.SEQ_BMI_RANGE_MT_ID =<br/>取得したBMI_RANGE_MT.SEQ_BMI_RANGE_MT_ID<br/>身長・体重・計算結果・登録日時を保存",
           edgeType: "round",
-          next: ["101","100"],
+          next: ["101", "100"],
           style: "fill:#c6ffc6",
         },
         {
@@ -145,5 +145,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

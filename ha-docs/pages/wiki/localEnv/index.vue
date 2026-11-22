@@ -14,9 +14,9 @@
     <v-row align="center">
       <v-col sm="12">
         <v-alert text type="error" elevation="2" border="left">
-            現在のMySQLサーバーはRDSの設定と同じ8.4.8を使用します。
-            新規構築は<nuxt-link to="/wiki/dockerEnv">Docker環境構築手順</nuxt-link>を参照してください。
-            このページのMySQLインストール・初期設定の画面と8.0のインストーラ名は、旧環境の参考資料です。
+          現在のMySQLサーバーはRDSの設定と同じ8.4.8を使用します。
+          新規構築は<nuxt-link to="/wiki/dockerEnv">Docker環境構築手順</nuxt-link>を参照してください。
+          このページのMySQLインストール・初期設定の画面と8.0のインストーラ名は、旧環境の参考資料です。
         </v-alert>
       </v-col>
     </v-row>
@@ -673,7 +673,8 @@
               <v-alert text type="error" elevation="2" border="left">
                 <div class="text-body-2">
                   Node.jsとnpmはha-docs・ha-root/frontの開発とビルドに使用する。<br />
-                  健康情報計算APIはha-calc-apiのPython 3.14 LambdaをAPI Gateway経由で呼び出す。配置・デプロイ手順は<kbd>ha-calc-api/README.md</kbd>を参照。
+                  健康情報計算APIはha-calc-apiのPython 3.14 LambdaをAPI
+                  Gateway経由で呼び出す。配置・デプロイ手順は<kbd>ha-calc-api/README.md</kbd>を参照。
                 </div>
               </v-alert>
               <details>

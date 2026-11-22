@@ -13,30 +13,14 @@
     <v-form ref="sqlForm">
       <v-row>
         <v-col class="text-left" sm="12" md="5">
-          <v-select
-            :items="tables"
-            return-object
-            clearable
-            label="テーブル名"
-            item-title="logicalName"
-            item-value="physicalName"
-            v-model="table"
-            @update:model-value="setColumns"
-          ></v-select>
+          <v-select :items="tables" return-object clearable label="テーブル名" item-title="logicalName"
+            item-value="physicalName" v-model="table" @update:model-value="setColumns"></v-select>
         </v-col>
       </v-row>
       <v-row>
         <v-col class="text-left" sm="12" md="5">
-          <v-select
-            :items="columns"
-            return-object
-            clearable
-            label="カラム名"
-            item-title="logicalName"
-            item-value="physicalName"
-            v-model="column"
-            @update:model-value="setColumnData"
-          ></v-select>
+          <v-select :items="columns" return-object clearable label="カラム名" item-title="logicalName"
+            item-value="physicalName" v-model="column" @update:model-value="setColumnData"></v-select>
         </v-col>
         <!-- <v-col class="text-left" sm="12" md="5">
           <v-select

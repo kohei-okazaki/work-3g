@@ -61,19 +61,19 @@ export default {
           id: "auth",
           text: "JWTの署名・有効期限を確認",
           edgeType: "diamond",
-          next: ["authenticated","auth_error"],
+          next: ["authenticated", "auth_error"],
         },
         {
           id: "authenticated",
           text: "認証成功：クエリ.dateの対象年月から月初・月末を設定<br/>未指定・空文字は当月",
           edgeType: "round",
-          next: ["aggregate","date_error"],
+          next: ["aggregate", "date_error"],
         },
         {
           id: "aggregate",
           text: "USER検索／USER.REG_DATEの日別件数を集計<br/>集計元はUSER全体<br/>GROUP BY USER.REG_DATEの日付部分<br/>USER.REG_DATE BETWEEN 対象年月の月初00:00:00<br/>AND 月末23:59:59<br/>同日のUSER.REG_DATE集計結果と結合<br/>ORDER BY USER.REG_DATEの日付部分 ASC<br/>USER.DELETE_FLAG条件なし<br/>続いてHEALTH_INFO検索／日別件数を集計<br/>集計元はHEALTH_INFO全体<br/>GROUP BY HEALTH_INFO.HEALTH_INFO_REG_DATEの日付部分<br/>HEALTH_INFO.HEALTH_INFO_REG_DATE BETWEEN<br/>対象年月の月初00:00:00 AND 月末23:59:59<br/>同日のHEALTH_INFO.HEALTH_INFO_REG_DATE集計結果と結合<br/>ORDER BY HEALTH_INFO.HEALTH_INFO_REG_DATEの日付部分 ASC<br/>HEALTH_INFO.DELETE_FLAG条件なし",
           edgeType: "round",
-          next: ["response","server_error"],
+          next: ["response", "server_error"],
         },
         {
           id: "response",
@@ -107,5 +107,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
