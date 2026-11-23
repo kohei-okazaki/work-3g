@@ -1,4 +1,5 @@
 .terraform/
+.legacy-local-backup/
 terraform.tfstate
 terraform.tfstate.*
 *.tfvars

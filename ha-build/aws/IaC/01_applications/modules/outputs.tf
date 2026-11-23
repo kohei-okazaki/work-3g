@@ -258,42 +258,14 @@ output "db_connect_command" {
   value = "mysql --ssl-mode=REQUIRED -h ${aws_db_instance.database.address} -P ${aws_db_instance.database.port} -u ${var.db_master_username} -p"
 }
 
-output "healthinfo_analysis_state_machine_name" {
-  value = aws_sfn_state_machine.healthinfo_analysis.name
-}
-
-output "healthinfo_analysis_state_machine_arn" {
-  value = aws_sfn_state_machine.healthinfo_analysis.arn
-}
-
-output "healthinfo_analysis_athena_workgroup_name" {
-  value = aws_athena_workgroup.healthinfo.name
-}
-
-output "healthinfo_analysis_glue_database_name" {
-  value = aws_glue_catalog_database.healthinfo.name
-}
-
-output "healthinfo_analysis_glue_table_name" {
-  value = aws_glue_catalog_table.health_info.name
-}
-
-output "healthinfo_analysis_sns_topic_arn" {
-  value = aws_sns_topic.healthinfo_analysis.arn
-}
-
-output "healthinfo_analysis_eventbridge_rule_name" {
-  value = aws_cloudwatch_event_rule.healthinfo_object_created.name
-}
-
-output "healthinfo_analysis_eventbridge_dlq_url" {
-  value = aws_sqs_queue.eventbridge_dlq.url
-}
-
-output "healthinfo_analysis_athena_result_s3_uri" {
-  value = local.athena_result_s3_uri
-}
-
-output "healthinfo_analysis_amazon_q_slack_configuration_arn" {
-  value = aws_chatbot_slack_channel_configuration.healthinfo_analysis.chat_configuration_arn
+output "analytics_inputs" {
+  description = "分析基盤のtfvarsへ渡す非機密の接続情報"
+  value = {
+    project_name         = var.project_name
+    aws_region           = data.aws_region.current.region
+    app_env              = var.app_env
+    source_bucket_name   = aws_s3_bucket.app_data.id
+    source_data_prefix   = local.input_prefix
+    athena_result_prefix = local.athena_result_prefix
+  }
 }

@@ -9,7 +9,7 @@ resource "aws_cloudwatch_event_rule" "healthinfo_object_created" {
     "detail-type" = ["Object Created"]
     detail = {
       bucket = {
-        name = [aws_s3_bucket.app_data.id]
+        name = [var.source_bucket_name]
       }
       object = {
         key = [

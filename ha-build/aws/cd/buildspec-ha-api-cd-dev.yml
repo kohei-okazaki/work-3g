@@ -1,0 +1,39 @@
+version: 0.2
+
+env:
+  shell: bash
+
+phases:
+  pre_build:
+    commands:
+      - |
+        set -euo pipefail
+        : "${ECR_REPOSITORY_URI:?Set ECR_REPOSITORY_URI in the CodeBuild project}"
+        test -f Dockerfile.ha-api
+        REGISTRY="${ECR_REPOSITORY_URI%%/*}"
+        docker info
+        aws ecr get-login-password --region "$AWS_DEFAULT_REGION" |
+          docker login --username AWS --password-stdin "$REGISTRY"
+
+  build:
+    commands:
+      - |
+        set -euo pipefail
+        docker build --platform linux/amd64 -f Dockerfile.ha-api \
+          -t "${ECR_REPOSITORY_URI}:dev" .
+
+  post_build:
+    commands:
+      - |
+        set -euo pipefail
+        if [ "${CODEBUILD_BUILD_SUCCEEDING:-0}" != "1" ]; then
+          echo "Build failed; the image will not be published." >&2
+          exit 1
+        fi
+        docker push "${ECR_REPOSITORY_URI}:dev"
+        printf '%s\n' "${ECR_REPOSITORY_URI}:dev" > image-uri.txt
+
+artifacts:
+  files:
+    - image-uri.txt
+    - ha-build/aws/cd/deploy-ha-api-dev.sh

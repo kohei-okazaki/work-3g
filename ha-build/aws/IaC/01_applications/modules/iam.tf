@@ -12,7 +12,6 @@ data "aws_iam_policy_document" "ecs_tasks_assume_role" {
 data "aws_iam_policy_document" "ecs_execution_ssm" {
   statement {
     actions = [
-      "ssm:GetParameter",
       "ssm:GetParameters",
     ]
     resources = [local.db_app_password_parameter_arn]
@@ -32,13 +31,12 @@ data "aws_iam_policy_document" "app_task_policy" {
   statement {
     actions = [
       "ssm:GetParameter",
-      "ssm:GetParameters",
     ]
     resources = [local.app_ssm_parameter_prefix_arn]
   }
   statement {
     actions   = ["sqs:GetQueueUrl"]
-    resources = ["*"]
+    resources = [aws_sqs_queue.api_log.arn]
   }
   statement {
     actions   = ["sqs:SendMessage"]
@@ -96,29 +94,67 @@ resource "aws_iam_role" "batch_task_role" {
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_role.json
 }
 
-resource "aws_iam_role_policy_attachment" "dashboard_task_execution_managed" {
-  role       = aws_iam_role.dashboard_task_execution_role.name
-  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-}
+resource "aws_iam_role_policy" "ecs_task_execution_policy" {
+  for_each = {
+    dashboard = {
+      role           = aws_iam_role.dashboard_task_execution_role.id
+      repository_arn = aws_ecr_repository.dashboard.arn
+      log_group_arn  = aws_cloudwatch_log_group.dashboard.arn
+    }
+    api = {
+      role           = aws_iam_role.api_task_execution_role.id
+      repository_arn = aws_ecr_repository.api.arn
+      log_group_arn  = aws_cloudwatch_log_group.api.arn
+    }
+    root_api = {
+      role           = aws_iam_role.root_api_task_execution_role.id
+      repository_arn = aws_ecr_repository.root_api.arn
+      log_group_arn  = aws_cloudwatch_log_group.root_api.arn
+    }
+    track = {
+      role           = aws_iam_role.track_task_execution_role.id
+      repository_arn = aws_ecr_repository.track.arn
+      log_group_arn  = aws_cloudwatch_log_group.track.arn
+    }
+    batch = {
+      role           = aws_iam_role.batch_task_execution_role.id
+      repository_arn = aws_ecr_repository.batch.arn
+      log_group_arn  = aws_cloudwatch_log_group.batch.arn
+    }
+  }
 
-resource "aws_iam_role_policy_attachment" "api_task_execution_managed" {
-  role       = aws_iam_role.api_task_execution_role.name
-  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-}
-
-resource "aws_iam_role_policy_attachment" "root_api_task_execution_managed" {
-  role       = aws_iam_role.root_api_task_execution_role.name
-  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-}
-
-resource "aws_iam_role_policy_attachment" "track_task_execution_managed" {
-  role       = aws_iam_role.track_task_execution_role.name
-  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-}
-
-resource "aws_iam_role_policy_attachment" "batch_task_execution_managed" {
-  role       = aws_iam_role.batch_task_execution_role.name
-  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+  name = "${local.resource_prefix}-${each.key}-exec"
+  role = each.value.role
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid      = "AuthenticateToEcr"
+        Effect   = "Allow"
+        Action   = "ecr:GetAuthorizationToken"
+        Resource = "*"
+      },
+      {
+        Sid    = "PullTaskImage"
+        Effect = "Allow"
+        Action = [
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:BatchGetImage",
+        ]
+        Resource = each.value.repository_arn
+      },
+      {
+        Sid    = "WriteTaskLogs"
+        Effect = "Allow"
+        Action = [
+          "logs:CreateLogStream",
+          "logs:PutLogEvents",
+        ]
+        Resource = "${each.value.log_group_arn}:log-stream:*"
+      },
+    ]
+  })
 }
 
 resource "aws_iam_role_policy" "track_execution_ssm_policy" {
@@ -131,7 +167,6 @@ resource "aws_iam_role_policy" "track_execution_ssm_policy" {
       {
         Effect = "Allow"
         Action = [
-          "ssm:GetParameter",
           "ssm:GetParameters",
         ]
         Resource = [
@@ -212,7 +247,6 @@ resource "aws_iam_role_policy" "batch_task_aws_access_policy" {
         Effect = "Allow"
         Action = [
           "sqs:DeleteMessage",
-          "sqs:GetQueueAttributes",
           "sqs:ReceiveMessage",
         ]
         Resource = [aws_sqs_queue.api_log.arn]
@@ -220,26 +254,18 @@ resource "aws_iam_role_policy" "batch_task_aws_access_policy" {
       {
         Effect = "Allow"
         Action = [
-          "s3:ListBucket",
-        ]
-        Resource = [aws_s3_bucket.app_data.arn]
-      },
-      {
-        Effect = "Allow"
-        Action = [
-          "s3:DeleteObject",
-          "s3:GetObject",
           "s3:PutObject",
           "s3:PutObjectAcl",
         ]
-        Resource = ["${aws_s3_bucket.app_data.arn}/*"]
+        Resource = [
+          "${aws_s3_bucket.app_data.arn}/analysis/*",
+          "${aws_s3_bucket.app_data.arn}/${local.input_prefix}*",
+        ]
       },
       {
         Effect = "Allow"
         Action = [
           "ses:SendEmail",
-          "ses:SendRawEmail",
-          "ses:VerifyEmailIdentity",
         ]
         Resource = "*"
       }
@@ -257,13 +283,6 @@ resource "aws_iam_role_policy" "root_api_task_aws_access_policy" {
       {
         Effect = "Allow"
         Action = [
-          "s3:ListBucket",
-        ]
-        Resource = [aws_s3_bucket.app_data.arn]
-      },
-      {
-        Effect = "Allow"
-        Action = [
           "s3:GetObject",
           "s3:PutObject",
           "s3:PutObjectAcl",
@@ -275,8 +294,6 @@ resource "aws_iam_role_policy" "root_api_task_aws_access_policy" {
         Effect = "Allow"
         Action = [
           "ses:SendEmail",
-          "ses:SendRawEmail",
-          "ses:VerifyEmailIdentity",
         ]
         Resource = "*"
       }
@@ -326,202 +343,4 @@ resource "aws_iam_role_policy_attachment" "bastion_ssm" {
 resource "aws_iam_instance_profile" "bastion" {
   name = "${local.resource_prefix}-bastion-profile"
   role = aws_iam_role.bastion_role.name
-}
-
-# IAM roles and policies for the monthly health information analysis workflow.
-resource "aws_iam_role" "step_functions_role" {
-  name = "${local.resource_prefix}-sfn-role"
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Action = "sts:AssumeRole"
-        Principal = {
-          Service = "states.amazonaws.com"
-        }
-        Condition = {
-          StringEquals = {
-            "aws:SourceAccount" = data.aws_caller_identity.current.account_id
-          }
-          ArnLike = {
-            "aws:SourceArn" = "arn:${data.aws_partition.current.partition}:states:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:stateMachine:${local.state_machine_name}"
-          }
-        }
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role_policy" "step_functions_policy" {
-  name = "${local.resource_prefix}-sfn-policy"
-  role = aws_iam_role.step_functions_role.id
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid    = "RunAthenaQuery"
-        Effect = "Allow"
-        Action = [
-          "athena:BatchGetQueryExecution",
-          "athena:GetDataCatalog",
-          "athena:GetQueryExecution",
-          "athena:GetQueryResults",
-          "athena:GetWorkGroup",
-          "athena:ListQueryExecutions",
-          "athena:StartQueryExecution",
-          "athena:StopQueryExecution",
-        ]
-        Resource = [
-          aws_athena_workgroup.healthinfo.arn,
-          "arn:${data.aws_partition.current.partition}:athena:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:datacatalog/AwsDataCatalog",
-        ]
-      },
-      {
-        Sid    = "ReadGlueCatalog"
-        Effect = "Allow"
-        Action = [
-          "glue:BatchGetPartition",
-          "glue:GetDatabase",
-          "glue:GetDatabases",
-          "glue:GetPartition",
-          "glue:GetPartitions",
-          "glue:GetTable",
-          "glue:GetTables",
-        ]
-        Resource = [
-          "arn:${data.aws_partition.current.partition}:glue:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:catalog",
-          aws_glue_catalog_database.healthinfo.arn,
-          aws_glue_catalog_table.health_info.arn,
-        ]
-      },
-      {
-        Sid      = "ReadLakeFormationData"
-        Effect   = "Allow"
-        Action   = "lakeformation:GetDataAccess"
-        Resource = "*"
-      },
-      {
-        Sid    = "ReadBucketMetadata"
-        Effect = "Allow"
-        Action = [
-          "s3:GetBucketLocation",
-          "s3:ListBucketMultipartUploads",
-        ]
-        Resource = aws_s3_bucket.app_data.arn
-      },
-      {
-        Sid      = "ListInputAndResultPrefixes"
-        Effect   = "Allow"
-        Action   = "s3:ListBucket"
-        Resource = aws_s3_bucket.app_data.arn
-        Condition = {
-          StringLike = {
-            "s3:prefix" = [
-              "${local.input_prefix}*",
-              "${local.athena_result_prefix}*",
-            ]
-          }
-        }
-      },
-      {
-        Sid    = "ReadMonthlyHealthInfo"
-        Effect = "Allow"
-        Action = "s3:GetObject"
-        Resource = [
-          "${aws_s3_bucket.app_data.arn}/${local.input_prefix}*",
-          "${aws_s3_bucket.app_data.arn}/${local.athena_result_prefix}*",
-        ]
-      },
-      {
-        Sid    = "WriteAthenaResults"
-        Effect = "Allow"
-        Action = [
-          "s3:AbortMultipartUpload",
-          "s3:ListMultipartUploadParts",
-          "s3:PutObject",
-        ]
-        Resource = "${aws_s3_bucket.app_data.arn}/${local.athena_result_prefix}*"
-      },
-      {
-        Sid      = "PublishNotification"
-        Effect   = "Allow"
-        Action   = "sns:Publish"
-        Resource = aws_sns_topic.healthinfo_analysis.arn
-      },
-      {
-        Sid    = "DeliverStepFunctionsLogs"
-        Effect = "Allow"
-        Action = [
-          "logs:CreateLogDelivery",
-          "logs:DeleteLogDelivery",
-          "logs:DescribeLogGroups",
-          "logs:DescribeResourcePolicies",
-          "logs:GetLogDelivery",
-          "logs:ListLogDeliveries",
-          "logs:PutResourcePolicy",
-          "logs:UpdateLogDelivery",
-        ]
-        Resource = "*"
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role" "eventbridge_role" {
-  name = "${local.resource_prefix}-events-role"
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Action = "sts:AssumeRole"
-        Principal = {
-          Service = "events.amazonaws.com"
-        }
-        Condition = {
-          StringEquals = {
-            "aws:SourceAccount" = data.aws_caller_identity.current.account_id
-          }
-          ArnEquals = {
-            "aws:SourceArn" = aws_cloudwatch_event_rule.healthinfo_object_created.arn
-          }
-        }
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role_policy" "eventbridge_policy" {
-  name = "${local.resource_prefix}-events-policy"
-  role = aws_iam_role.eventbridge_role.id
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid      = "StartHealthInfoAnalysis"
-        Effect   = "Allow"
-        Action   = "states:StartExecution"
-        Resource = aws_sfn_state_machine.healthinfo_analysis.arn
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role" "amazon_q_role" {
-  name = "${local.resource_prefix}-amazon-q-role"
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Action = "sts:AssumeRole"
-
-        Principal = {
-          Service = "chatbot.amazonaws.com"
-        }
-      }
-    ]
-  })
-
 }

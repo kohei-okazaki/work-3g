@@ -1,0 +1,36 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ListStateBucket",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::healthinfo-tfstate"
+    },
+    {
+      "Sid": "ReadWriteDevStates",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::healthinfo-tfstate/dev/application/terraform.tfstate",
+        "arn:aws:s3:::healthinfo-tfstate/dev/analytics/terraform.tfstate"
+      ]
+    },
+    {
+      "Sid": "ManageDevStateLocks",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::healthinfo-tfstate/dev/application/terraform.tfstate.tflock",
+        "arn:aws:s3:::healthinfo-tfstate/dev/analytics/terraform.tfstate.tflock"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+project_name = "healthinfo-app"
+aws_region   = "ap-northeast-1"
+app_env      = "dev"
+
+# Supply the values exported by 01_applications, or generate application.auto.tfvars.json.
+source_bucket_name   = "healthinfo-app-dev"
+source_data_prefix   = "monthly/healthinfo/"
+athena_result_prefix = "monthly/athena-results/"
+
+athena_bytes_scanned_cutoff_per_query = 104857600
+step_functions_log_retention_days     = 1
+slack_team_id                         = "T0123456789"
+slack_channel_id                      = "C0123456789"

@@ -18,7 +18,7 @@ resource "aws_glue_catalog_table" "health_info" {
     "projection.year.range"     = "2000,2100"
     "projection.year.interval"  = "1"
     "projection.year.digits"    = "4"
-    "storage.location.template" = "s3://${aws_s3_bucket.app_data.id}/${local.input_prefix}year=$${year}/"
+    "storage.location.template" = "s3://${var.source_bucket_name}/${local.input_prefix}year=$${year}/"
   }
 
   partition_keys {
@@ -27,7 +27,7 @@ resource "aws_glue_catalog_table" "health_info" {
   }
 
   storage_descriptor {
-    location      = "s3://${aws_s3_bucket.app_data.id}/${local.input_prefix}"
+    location      = "s3://${var.source_bucket_name}/${local.input_prefix}"
     compressed    = true
     input_format  = "org.apache.hadoop.mapred.TextInputFormat"
     output_format = "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat"

@@ -106,14 +106,8 @@ locals {
   ]
 }
 
-# 分析基盤用変数
+# Shared data paths published to the analytics platform.
 locals {
-  state_machine_name   = "${local.resource_prefix}-healthinfo-analysis"
   input_prefix         = "monthly/healthinfo/"
   athena_result_prefix = "monthly/athena-results/"
-
-  glue_database_name = "healthinfo_${var.app_env}"
-  glue_table_name    = "health_info"
-
-  athena_result_s3_uri = "s3://${aws_s3_bucket.app_data.id}/${local.athena_result_prefix}"
 }
