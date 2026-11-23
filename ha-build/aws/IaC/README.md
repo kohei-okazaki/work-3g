@@ -1,565 +1,278 @@
-# Terraform for healthinfo application services
+# 健康管理アプリのAWS反映手順（CloudShell）
 
-## 作成する主なリソース
+東京リージョン（`ap-northeast-1`）のCloudShellで実行する。初回は下記の順に進める。
 
-- ネットワーク
-  - VPC / Internet Gateway
-  - public app subnet / private DB subnet（それぞれ `az_count` 個、既定は2）
-  - public app subnet / private DB subnet用のルートテーブルと関連付け
-  - ECSタスク、RDS、踏み台EC2用のSecurity Groupと通信ルール
-- コンテナ実行環境
-  - ECS Cluster
-  - `ha-dashboard` ECS Fargate service / task definition
-  - `ha-api` ECS Fargate service / task definition
-  - `ha-root` API ECS Fargate service / task definition
-  - `ha-track` ECS Fargate service / task definition
-  - `ha-batch` 単発実行用ECS Fargate task definition
-  - 各ECSタスク用CloudWatch Logs log group
-- サービスディスカバリ
-  - Cloud Map private DNS namespace
-  - `ha-api` / `ha-root` API / `ha-track` 用Cloud Map service
-- コンテナイメージ
-  - `ha-dashboard` / `ha-api` / `ha-root` API / `ha-track` / `ha-batch` 用ECR repository
-  - 各ECR repositoryの未タグイメージをpushから1日後に削除するLifecycle Policy
-- データストア・キュー
-  - RDS MySQL（`db_engine_version` の既定値は `9.7.4` LTS）とDB subnet group
-  - `health_info_<環境名>` DynamoDB table（On-demand / server-side encryption有効）
-  - `healthinfo-app-<環境名>` アプリデータ用S3 bucket（ACL無効 / public access block / server-side encryption有効）
-  - API通信ログ用SQS FIFO queue（SQS managed server-side encryption有効）
-- 月次健康情報分析・通知
-  - S3 Object Created eventを受け取るEventBridge ruleと配信失敗用SQS DLQ
-  - `<プロジェクト名>-<環境名>-healthinfo-analysis` Step Functions Standard workflow
-  - Glue Data CatalogのCSV tableとAthena workgroup
-  - Athena query結果用S3 prefixと7日保持のLifecycle rule
-  - SNSとAmazon Q Developer in chat applicationsを経由するSlack通知
-- 運用・権限
-  - RDS初期設定・接続用のEC2踏み台とIAM instance profile
-  - 各ECSタスクのexecution role / task roleと必要なIAM policy
+| 基盤 | Terraformの配置 | 管理対象 |
+| --- | --- | --- |
+| アプリ基盤 | `01_applications/environments/dev` | VPC、ECS、ECR、EC2、RDS、DynamoDB、共用S3、アプリ用IAM・ログ・SQS |
+| データ分析基盤 | `02_analytics/environments/dev` | EventBridge、Step Functions、Glue、Athena、SNS、Amazon Q、分析用IAM・ログ・DLQ |
 
-IAM権限はアプリケーションのAWS API呼び出しに合わせて定義する。
-ECS execution roleは各タスクのECRリポジトリとCloudWatch Logsのログストリームだけを対象とし、
-リソース指定に対応しない `ecr:GetAuthorizationToken` のみ `Resource = "*"` とする。
-Parameter Storeはexecution roleが `ssm:GetParameters`、アプリのtask roleが `ssm:GetParameter` を使用し、
-SQSのURL取得・送信はAPI通信ログ用キューに限定する。
-`ha-batch` のS3権限は `analysis/` と `monthly/healthinfo/` へのアップロードだけとし、
-`ha-batch` / `ha-root` APIのSES権限は実際に呼び出す `ses:SendEmail` だけを許可する。
-S3の `s3:PutObjectAcl` は、現在の `AwsS3Component` がアップロード時に
-`bucket-owner-full-control` ACLを指定するため保持する。
-既存SecureStringがカスタマー管理KMSキーを使用する可能性があるため、SSM経由に限定した復号権限も保持する。
-RDS用Security GroupはMySQLの接続元だけを許可し、送信ルールは持たない（応答はステートフル追跡で許可される）。
+IAMはそれぞれの `modules/iam.tf` に定義する。共用リソースはアプリ基盤で管理し、バケット名などを分析側へ渡す。
+リソースや分析処理、RDSアップグレードの詳細は [構成・設定の補足](REFERENCE.md) を参照。
 
-分析対象S3データはIAMで直接アクセスし、Lake Formationで管理しない前提とする。
-`lakeformation:GetDataAccess` は付与しないため、手動設定や別のIaCでも対象S3データをLake Formationに登録しない。
-Step Functionsの `.sync` 連携で使うAthenaの監視・停止権限、Glueカタログ参照、
-S3のmultipart操作権限、CloudWatch Logsのログ配信権限は、サービス内部の処理に必要なため保持する。
+## 事前準備（初回のみ）
 
-`ha-dashboard` / `ha-api` / `ha-root` API / `ha-batch` は、同じRDS databaseを同じアプリ用DBユーザで参照する。
-`ha-track` はRDSを使用せず、環境ごとのDynamoDB tableを使用する。
+- state用S3バケット `healthinfo-tfstate` を東京リージョンに用意する。バージョニング有効、SSE-S3暗号化、パブリックアクセスはすべてブロックする。バージョニングを初めて有効にした場合は15分待つ。
+- CloudShell利用者に、Terraformでのリソース操作、ECRへのpush、SSM接続の権限を付与する。stateアクセス権限の例は [こちら](state-backend-policy.example.json)。
+- 両基盤の `environments/dev/terraform.tfvars` を用意する。未作成なら各 `terraform.tfvars.example` をコピーする。
+- アプリ側は `root_front_url` を既存フロントのURLに変更し、4つの `*_desired_count` は初回は `0` にする。分析側は実際の `slack_team_id` / `slack_channel_id` を指定し、Amazon QとSlack workspaceの認可・チャンネルへの招待を済ませる。
+- Systems ManagerのParameter Storeに以下を登録する。名前は既定の `project_name=healthinfo-app`、`app_env=dev` の例。既にある場合は再作成不要。
 
-RDSのパスワードなどを保持するSSM Parameterと `ha-root/front` のS3 static websiteは既存リソースを参照し、このTerraformでは作成しない。
-アプリデータ用S3 bucketは `healthinfo-app-<app_env>` という名前でこのTerraformが作成する。
+| パラメータ名 | 種類・用途 |
+| --- | --- |
+| `/healthinfo-app-dev/db/master/password` | SecureString：RDSマスターパスワード。tfvarsの `db_master_password_parameter_version` と登録バージョンを合わせる |
+| `/healthinfo-app-dev/db/app/password` | SecureString：アプリ用DBユーザのパスワード |
+| `/healthinfo-app-dev/ha-track/django-secret-key` | SecureString：Djangoの秘密鍵 |
+| `/dev/root_jwt_secret` | SecureString：JWT署名用の値 |
+| `/dev/crypt_key`、`/dev/crypt_mode`、`/dev/crypt_shift`、`/dev/slack_token`、`/dev/system_mailaddress` | String：各アプリ設定値 |
 
-## 注意
+stateは同じバケット内で分け、S3のロックファイルを使用する。設定済みの `backend.hcl` をそのまま使用する。
 
-- このTerraform構成でECRリポジトリを作成し、Docker imageは手順に沿って `docker build` / `docker push`
-- `ha-root/front` のS3 static websiteは既存管理のままとし、このTerraformでは作成・変更対象外
-- S3 bucket名はグローバルで一意。同一AWSアカウントの既存bucketを管理対象へ移す場合は、適用前にTerraform stateへimportする
-- TerraformでRDS master passwordをSSM SecureStringから読むため、値はTerraform stateにsensitive値として保持
-- `terraform.tfstate` と `*.tfvars` はGit管理対象外。環境ごとの `environments/<環境名>` 配下に配置
-- `environments/dev` の同じstateでアプリ基盤と月次健康情報分析基盤を管理するため、`plan` / `apply` / `destroy` は両方を対象にする
-- S3 bucket notificationとLifecycleはbucket単位の設定。手動または別stateで設定を追加する場合はTerraform定義へ統合する
+| 基盤 | stateの保存先 |
+| --- | --- |
+| アプリ基盤 | `s3://healthinfo-tfstate/dev/application/terraform.tfstate` |
+| データ分析基盤 | `s3://healthinfo-tfstate/dev/analytics/terraform.tfstate` |
 
-## ディレクトリ構成
+## 1. ZIPをアップロードして展開する
 
-```text
-ha-build/aws/IaC/
-├─ modules/              # AWSリソースの共通定義
-│  ├─ locals.tf
-│  ├─ variables.tf
-│  ├─ outputs.tf
-│  ├─ network.tf
-│  ├─ security_groups.tf
-│  ├─ cloudwatch_logs.tf
-│  ├─ cloud_map.tf
-│  ├─ iam.tf
-│  ├─ rds.tf
-│  ├─ dynamodb.tf
-│  ├─ ec2.tf
-│  ├─ s3.tf
-│  ├─ sqs.tf
-│  ├─ ecs.tf
-│  ├─ ecr.tf
-│  ├─ glue.tf
-│  ├─ athena.tf
-│  ├─ eventbridge.tf
-│  ├─ step_functions.tf
-│  ├─ sns.tf
-│  └─ chatbot.tf
-├─ environments/
-│  └─ dev/               # アプリ基盤と分析基盤を管理するdev環境Terraform実行ルート
-│     ├─ main.tf
-│     ├─ versions.tf
-│     ├─ providers.tf
-│     ├─ variables.tf
-│     ├─ outputs.tf
-│     ├─ backend.hcl
-│     └─ terraform.tfvars
-└─ README.md
-```
-
-`modules` は単独で実行せず、`environments` 配下の対応する実行ルートからmoduleとして呼び出す。
-
-`environments/dev` は単一の `module.healthinfo` でWebアプリ基盤と月次健康情報分析基盤をまとめて作成し、同じbackend・stateで管理する。
-
-## 前提
-
-- Windows PCにAWS CLI / Dockerが入っていること
-- Git BashからAWS CLIの認証が通っていること
-- RDSへの接続のため、SSM Session Manager pluginが入っていること
-- `Dockerfile.ha-dashboard`、`Dockerfile.ha-api`、`Dockerfile.ha-root-api`、`Dockerfile.ha-track` がリポジトリ直下にあること
-- RDS master passwordとapp user passwordのSSM SecureStringを事前に作っておくこと
-- `ha-root/front` の既存S3サイトURLを `root_front_url` として渡せること
-
-## Terraformのインストール
+手元で `01_applications`、`02_analytics` を**フォルダ名ごと**ZIPにし、CloudShellの「Actions」→「Upload file」で `/home/cloudshell-user` へ1つずつアップロードする。
+設定済みの `terraform.tfvars`、`backend.hcl`、存在する場合は `.terraform.lock.hcl` も含める。`.terraform/`、state・バックアップ、planファイル、生成済みの `application.auto.tfvars.json` は除外する。
 
 ```bash
-# インストール
-winget install --id Hashicorp.Terraform --exact --source winget
+cd /home/cloudshell-user
+unzip 01_applications.zip
+unzip 02_analytics.zip
+```
 
-# ターミナル再起動
+展開後、`/home/cloudshell-user/01_applications/environments/dev/main.tf` と分析側の同じ配置に `main.tf` があることを確認する。既に展開済みのフォルダがある場合は、必要な設定を保管して退避してから展開する。
+
+## 2. CloudShellを準備する
+
+新しいセッションでは、この節を再実行する。大きなファイルは `/tmp/work` に置く。stateはS3に残る。
+
+```bash
+export AWS_REGION=ap-northeast-1
+export AWS_DEFAULT_REGION="$AWS_REGION"
+export TF_WORKSPACE=default
+export TF_PLUGIN_CACHE_DIR=/tmp/work/plugin-cache
+APP_TF_DIR=/home/cloudshell-user/01_applications/environments/dev
+ANALYTICS_TF_DIR=/home/cloudshell-user/02_analytics/environments/dev
+mkdir -p "$TF_PLUGIN_CACHE_DIR"
+
+sudo dnf install -y dnf-plugins-core shadow-utils
+sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+sudo dnf install -y terraform-1.16.2
 terraform version
-
-# TerraformはAWS CLIと同じ認証情報を利用。反映先が意図したAWSアカウントであることを確認。
 aws sts get-caller-identity
-
-# 複数のAWS CLIプロファイルがある場合は、使用するプロファイルを設定してから確認。
-export AWS_PROFILE="プロファイル名"
-aws sts get-caller-identity
+docker info
 ```
 
-## 変数例
+Terraformは[HashiCorp公式のAmazon Linux向けリポジトリ](https://developer.hashicorp.com/terraform/install)から `1.16.2` をインストールする。
+アプリと分析で `TF_DATA_DIR` を分ける。以下の各手順の `export` を省略しない。
+長時間のbuild・apply中もCloudShellを操作し、無操作によるセッション終了を防ぐ。
+
+## 3. アプリ基盤を反映する
 
 ```bash
-export MSYS_NO_PATHCONV=1
-
-AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-PROJECT_NAME=ha-project
-APP_ENV=dev
-RESOURCE_PREFIX="${PROJECT_NAME}-${APP_ENV}"
-```
-
-DynamoDBの設定:
-
-- dev: `health_info_dev`、PITRなし
-- stg: `health_info_stg`、PITRなし
-- prd: `health_info_prd`、PITRあり
-- パーティションキー: `seq_user_id`（Number）
-- ソートキー: `created_at_epoch`（Number）
-- キャパシティーモード: On-demand
-- 削除保護: 無効
-
-dev/stg/prdのDynamoDBテーブルは、他のTerraform管理リソースと同様に
-`terraform destroy` でテーブルと登録データが削除される。
-
-## SSM SecureString作成（最初のみでOK）
-
-```bash
-# ${MASTER_PASSWORD}は正しい値に置換。
-aws ssm put-parameter \
-  --name "/${RESOURCE_PREFIX}/db/master/password" \
-  --type "SecureString" \
-  --tier "Standard" \
-  --value "${MASTER_PASSWORD}" \
-  --overwrite
-
-# ${APP_DB_PASSWORD}は正しい値に置換。
-aws ssm put-parameter \
-  --name "/${RESOURCE_PREFIX}/db/app/password" \
-  --type "SecureString" \
-  --tier "Standard" \
-  --value "${APP_DB_PASSWORD}" \
-  --overwrite
-
-# ${DJANGO_SECRET_KEY}には十分に長いランダム値を指定。
-aws ssm put-parameter \
-  --name "/${RESOURCE_PREFIX}/ha-track/django-secret-key" \
-  --type "SecureString" \
-  --tier "Standard" \
-  --value "${DJANGO_SECRET_KEY}" \
-  --overwrite
-```
-
-## アプリ起動に必要なSSM Parameter作成（最初のみでOK）
-
-```bash
-aws ssm put-parameter --name "/${APP_ENV}/crypt_key" --type "String" --value "${VALUE}" --overwrite
-aws ssm put-parameter --name "/${APP_ENV}/crypt_mode" --type "String" --value "${VALUE}" --overwrite
-aws ssm put-parameter --name "/${APP_ENV}/crypt_shift" --type "String" --value "${VALUE}" --overwrite
-aws ssm put-parameter --name "/${APP_ENV}/root_jwt_secret" --type "SecureString" --value "${VALUE}" --overwrite
-aws ssm put-parameter --name "/${APP_ENV}/slack_token" --type "String" --value "${VALUE}" --overwrite
-aws ssm put-parameter --name "/${APP_ENV}/system_mailaddress" --type "String" --value "${VALUE}" --overwrite
-```
-
-## Terraformの初期化・整形・検証
-
-```bash
-cd ha-build/aws/IaC/environments/dev
+export TF_DATA_DIR=/tmp/work/application
+cd "$APP_TF_DIR"
 terraform init -backend-config=backend.hcl
-terraform fmt -recursive ../..
 terraform validate
-```
-
-IAM権限とRDSの通信ルールは、Terraform 1.7以降のモックテストで検証できる。
-上記と同じ `environments/dev` から実行する。AWSへのAPI呼び出しやリソース作成は行わず、既存のデプロイ用stateも使用しない。
-
-```bash
-terraform test
-```
-
-## 月次健康情報CSVのAthena分析・Slack通知
-
-```mermaid
-flowchart LR
-    Batch["monthly_health_info_summary.sh"] -->|"monthly/healthinfo/year=YYYY/YYYYMM.csv.gz"| S3[("healthinfo-app-dev")]
-    S3 --> EventBridge["EventBridge<br/>Object Created"]
-    EventBridge --> SF["Step Functions Standard<br/>healthinfo-app-dev-healthinfo-analysis"]
-    EventBridge -.->|"配信失敗"| DLQ["SQS DLQ"]
-    SF -->|"StartQueryExecution.sync<br/>GetQueryResults"| Athena["Athena"]
-    Glue["Glue Data Catalog"] -.-> Athena
-    Athena --> Results[("S3<br/>monthly/athena-results/")]
-    SF --> SNS["SNS"] --> Q["Amazon Q Developer"] --> Slack["Slack"]
-```
-
-Athena queryはEventBridgeが受け取った1ファイルだけを対象に `COUNT(*)` を実行する。空CSVは0件として処理し、Slackには健康情報の明細を送らず、件数・入力S3 key・Athena QueryExecutionId・結果prefixだけを通知する。
-
-個人dev向けの既定値:
-
-- Athena scan上限: 1 query当たり100 MiB
-- Athena結果保持: 7日
-- Step Functions log: `ERROR` のみ、実行データを含めず1日保持
-- Amazon Q診断log: 無効
-- customer managed KMS key、Glue Crawler、Lambda、Athena Provisioned Capacity: 作成しない
-
-Slack通知を有効にする場合は、AWSコンソールでAmazon QとSlack workspaceを認可し、channelへAmazon Qを招待してから `environments/dev/terraform.tfvars` に次を追加する。両方が空の場合はAmazon QのSlack channel configurationを作成せず、SNSまでを構築する。
-
-```hcl
-slack_team_id    = "T0123456789"
-slack_channel_id = "C0123456789"
-```
-
-現在の `MonthlyHealthInfoSummaryWriter` はS3 upload後に `slack.sendFile(...)` でもCSV.gzを送信するため、新経路を有効にすると通知が二重になる。新経路へ完全移行する場合は、動作確認後に既存のファイル送信を無効化する。
-
-## リソース確認(terraform plan)
-
-最初は `dashboard_desired_count=0` / `api_desired_count=0` / `root_api_desired_count=0` /
-`track_desired_count=0` のまま作成。
-目的はDBとアプリ用ユーザの初期設定、Docker image pushの完了前にECS taskが起動して失敗することの防止。
-
-```bash
 terraform plan
-```
-
-## リソース反映(terraform apply)
-
-```bash
 terraform apply
 ```
 
-## Docker imageをECRへpush
+各コマンドが成功したことを確認してから次へ進む。`plan` の内容を確認して `apply` の確認に `yes` と入力する。
 
-Terraform apply後にECR repository URLを取得。
-同じタグへ新しいimageをpushしてタグが外れた古いimageは、pushから1日を超えるとECR Lifecycle Policyの削除対象。
-現在タグが付いている最新imageは削除対象外。削除条件を満たした後、実際の削除まで最大24時間程度。
+## 4. 共有情報を渡して、データ分析基盤を反映する
+
+アプリ側の出力を分析側の変数ファイルへ書き出す。アプリ基盤を再構築した場合も、この受け渡しを再実行する。
 
 ```bash
-DASHBOARD_REPO=$(terraform output -raw dashboard_ecr_repository_url)
-API_REPO=$(terraform output -raw api_ecr_repository_url)
-ROOT_API_REPO=$(terraform output -raw root_api_ecr_repository_url)
-TRACK_REPO=$(terraform output -raw track_ecr_repository_url)
-BATCH_REPO=$(terraform output -raw batch_ecr_repository_url)
-
-aws ecr get-login-password --region ap-northeast-1 \
-  | docker login --username AWS --password-stdin "${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com"
+export TF_DATA_DIR=/tmp/work/application
+terraform -chdir="$APP_TF_DIR" output -json analytics_inputs > /tmp/work/application-inputs.json &&
+  mv /tmp/work/application-inputs.json "$ANALYTICS_TF_DIR/application.auto.tfvars.json"
 ```
 
-リポジトリ直下をbuild contextにしてpush。
+書き出し成功後、分析側を反映する。生成したJSONの値は `terraform.tfvars` の同じ項目より優先される。
 
 ```bash
-cd ../../../../..
-
-# DockerDesktopを起動
-
-docker build -f Dockerfile.ha-dashboard -t "${DASHBOARD_REPO}:dev" .
-docker push "${DASHBOARD_REPO}:dev"
-
-docker build -f Dockerfile.ha-api -t "${API_REPO}:dev" .
-docker push "${API_REPO}:dev"
-
-docker build -f Dockerfile.ha-root-api -t "${ROOT_API_REPO}:dev" .
-docker push "${ROOT_API_REPO}:dev"
-
-docker build -f Dockerfile.ha-track -t "${TRACK_REPO}:dev" .
-docker push "${TRACK_REPO}:dev"
-
-docker build -f Dockerfile.ha-batch -t "${BATCH_REPO}:dev" .
-docker push "${BATCH_REPO}:dev"
-
-cd ha-build/aws/IaC/environments/dev
+export TF_DATA_DIR=/tmp/work/analytics
+cd "$ANALYTICS_TF_DIR"
+terraform init -backend-config=backend.hcl
+terraform validate
+terraform plan
+terraform apply
 ```
 
-## ha-batch起動
+月次CSVの出力は、分析基盤の反映が完了してから開始する。
 
-`ha-batch` は常駐サービスではなく、ECS Fargateの単発タスクとして起動する。
-基本コマンドは次で確認できる。
+## 5. ソースをビルドしてECRへ登録する
+
+今回は **CloudShellでgit cloneし、既存Dockerfileでbuildする方法**を使う。
+JavaアプリはDockerfile内のMaven 3.9・JDK 25でJARを作るため、手元でのMavenビルドやCloudShell本体へのMaven・JDKインストールは不要。
+`ha-track` は同じ操作でPythonのイメージを作る。ECRへ登録するのは、これらのコンテナイメージである。
+
+反映対象のソースは事前にGitへpushする。以下の `master` は反映対象のブランチまたはタグ、`IMAGE_TAG` はアプリ側tfvarsの `image_tag`（未指定時は `dev`）に合わせる。
 
 ```bash
-terraform output -raw batch_run_command
+(
+  set -euo pipefail
+  export TF_DATA_DIR=/tmp/work/application
+  SOURCE_REF=master
+  IMAGE_TAG=dev
+
+  if [ -d /tmp/work/work-3g/.git ]; then
+    git -C /tmp/work/work-3g fetch --depth 1 origin "$SOURCE_REF"
+    git -C /tmp/work/work-3g checkout --detach FETCH_HEAD
+  else
+    git clone --depth 1 --branch "$SOURCE_REF" \
+      https://github.com/kohei-okazaki/work-3g.git /tmp/work/work-3g
+  fi
+  cd /tmp/work/work-3g
+  git rev-parse --short HEAD
+
+  AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+  REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+  aws ecr get-login-password --region "$AWS_REGION" |
+    docker login --username AWS --password-stdin "$REGISTRY"
+
+  for app in dashboard api root-api track batch; do
+    output_name="${app//-/_}_ecr_repository_url"
+    repo=$(terraform -chdir="$APP_TF_DIR" output -raw "$output_name")
+    docker build --platform linux/amd64 -f "Dockerfile.ha-$app" -t "$repo:$IMAGE_TAG" .
+    docker push "$repo:$IMAGE_TAG"
+  done
+)
 ```
 
-出力コマンドの `JOB_NAME` を実行対象のSpring Batch Job名へ変更する。
-日付が必要なJobは、container overrideの `command` 配列へ `d=YYYYMMDD` または
-`m=YYYYMM` を追加する。
+[CloudShellは1 vCPU・2 GiB RAM](https://docs.aws.amazon.com/cloudshell/latest/userguide/vm-specs.html)のため、上記のとおり順番にbuildする。メモリ不足になる場合はCodeBuildなどのビルド環境へ切り替える。
+既存Dockerfileはテストをスキップするため、テスト済みのソースを使用する。
 
-主なJob名:
+## 6. アプリを起動・更新する
 
-- `healthCheckBatchJob`
-- `healthInfoFileRegistBatchJob`
-- `monthlyHealthInfoSummaryBatchJob`
-- `healthInfoMigrateBatchJob`
-- `awsSqsImportBatchJob`
-- `dataPurgeBatchJob`
-- `dailyHealthInfoJob`
-- `dailyUserJob`
-- `dailyApiLogJob`
-- `dailyBatchLogJob`
+手順5まで完了し、AWS基盤とECRのイメージが用意できた状態で実行する。
+初回は「6-1」「6-2」の順に進める。DBとアプリ用ユーザを作成済みの場合は「6-1」を省略する。同じタグでの更新には「6-3」を使用する。
 
-## RDS MySQL 9.7.4への移行
-
-ローカルDockerとRDSはMySQL `9.7.4` LTSに揃える。Git管理対象外の `environments/dev/terraform.tfvars` などで `db_engine_version` を上書きしている場合も `"9.7.4"` に変更する。
-
-既存RDSの8.4系から9.7系への更新はメジャーアップグレードとなる。新規作成と異なり、バージョンを書き換えるだけでは実行できない。事前にスナップショットまたはBlue/Green環境で復元・移行を検証し、アプリとFlywayの実行を確認してから `db_allow_major_version_upgrade = true` を明示して適用する。既定値は `false`。この構成は `apply_immediately = true` のため、既存DBへの適用時には更新と接続断が発生し得る。
-
-RDSの更新経路は8.4→9.7。8.0以前は順番に更新する。RDSの事前チェックでは、`mysql_native_password` のアカウント、削除された関数や予約語、証明書の期限切れなどが更新を妨げる場合がある。既存アカウントの認証方式は `caching_sha2_password` を使用し、実DBの `PrePatchCompatibility.log` と更新先バージョン・インスタンスクラスの提供状況を確認する。カスタムDB parameter groupを使用する場合は `mysql9.7` familyが必要。この構成ではカスタムgroupを指定していない。
-
-RDS 9.7ではTLS接続が既定で必須となるため、ECSへ渡す `DB_URL` は `sslMode=REQUIRED` を使用する。外部のDBクライアントやFlyway MavenコマンドからRDSへ接続するときも、TLS対応のURLを指定する。`REQUIRED` は暗号化を必須にするが、CAとホスト名の検証は行わない。サーバ証明書を検証する構成ではRDS CAをJava trust storeへ登録し、`sslMode=VERIFY_IDENTITY` と実際のRDSエンドポイントを使用する。
-
-公式資料: [RDS MySQLのメジャーアップグレード](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.MySQL.Major.html)、[RDSのTLS接続要件](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-ssl-connections.require-ssl.html)、[Connector/JのSSL設定](https://dev.mysql.com/doc/connector-j/en/connector-j-connp-props-security.html)。
-
-## RDS接続・初期設定
-
-RDSはprivate DB subnetにあるため、ローカルPCから直接接続不可。
-Git BashからSSM Session Managerのポートフォワードを起動し、踏み台EC2経由で接続。
-
-### 1. Terraform Outputの取得
+まず、CloudShellのターミナル1でアプリ基盤の作業環境を設定する。
 
 ```bash
-DbEndpointAddress=$(terraform output -raw db_endpoint_address)
-DbPort=$(terraform output -raw db_port)
-DbMasterUsername=$(terraform output -raw db_master_username)
-BastionInstanceId=$(terraform output -raw bastion_instance_id)
+export AWS_REGION=ap-northeast-1
+export AWS_DEFAULT_REGION="$AWS_REGION"
+export TF_WORKSPACE=default
+export TF_DATA_DIR=/tmp/work/application
+export TF_PLUGIN_CACHE_DIR=/tmp/work/plugin-cache
+APP_TF_DIR=/home/cloudshell-user/01_applications/environments/dev
+mkdir -p "$TF_PLUGIN_CACHE_DIR"
+cd "$APP_TF_DIR"
+terraform init -backend-config=backend.hcl
 ```
 
-### 2. ポートフォワードの起動
+### 6-1. DBへ接続し、DBとアプリ用ユーザを作成する（初回のみ）
 
-別のGit Bashターミナルで実行。
-このコマンドの実行中のみ、ローカルPCの `127.0.0.1:13306` からRDSへ接続可能。
+RDSは非公開のため、**CloudShell → SSM → 踏み台EC2 → RDS** の順で接続する。
+同じCloudShell環境でターミナルを2つ開く。
+
+#### ターミナル1：接続用トンネルを開く
+
+踏み台がSystems Managerの管理対象としてオンラインで、SSM Agentが `3.1.1374.0` 以上であることが前提。
 
 ```bash
-export MSYS_NO_PATHCONV=1
+if ! command -v session-manager-plugin >/dev/null; then
+  case "$(uname -m)" in
+    x86_64) PLUGIN_ARCH=linux_64bit ;;
+    aarch64) PLUGIN_ARCH=linux_arm64 ;;
+  esac
+  sudo dnf install -y "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/$PLUGIN_ARCH/session-manager-plugin.rpm"
+fi
+DB_HOST=$(terraform output -raw db_endpoint_address)
+DB_PORT=$(terraform output -raw db_port)
+BASTION_ID=$(terraform output -raw bastion_instance_id)
 
-aws ssm start-session \
-  --target ${BastionInstanceId} \
+aws ssm start-session --target "$BASTION_ID" \
   --document-name AWS-StartPortForwardingSessionToRemoteHost \
-  --parameters "{\"host\":[\"${DbEndpointAddress}\"],\"portNumber\":[\"${DbPort}\"],\"localPortNumber\":[\"13306\"]}"
+  --parameters "{\"host\":[\"$DB_HOST\"],\"portNumber\":[\"$DB_PORT\"],\"localPortNumber\":[\"13306\"]}"
 ```
 
-### 3. データベースの作成
+このターミナルは接続したままにする。
 
-ポートフォワード中に、元のGit Bashターミナルから実行。
-ローカルPCへのMySQL clientのインストールは不要。DockerのMySQL clientを利用。
-初回実行時はRDSの設定と同じ `mysql:9.7.4` imageをダウンロード。接続にはTLSを必須とする。
+#### ターミナル2：MySQLに接続して初期設定する
+
+以下は既定のマスターユーザ名 `healthapp_master` の例。変更している場合はtfvarsの値に合わせる。
+パスワードには事前にParameter Storeへ登録したRDSマスターパスワードを入力する。
 
 ```bash
-# SSMから値を設定
-read -s -p "RDS master password: " DB_MASTER_PASSWORD
-echo
-
-docker run --rm -i \
-  -e MYSQL_PWD="${DB_MASTER_PASSWORD}" \
-  mysql:9.7.4 \
-  mysql --ssl-mode=REQUIRED -h host.docker.internal -P 13306 -u ${DbMasterUsername} < ../../../../../ha-docs/db/others/CREATE_DATABASE.sql
-
-unset DB_MASTER_PASSWORD
+docker run --rm -it --network host mysql:9.7.4 \
+  mysql --ssl-mode=REQUIRED -h 127.0.0.1 -P 13306 -u healthapp_master -p
 ```
 
-### 4. アプリ用DBユーザの作成
-
-RDS master userでMySQLへ接続。
-
-```bash
-winpty docker run --rm -it mysql:9.7.4 \
-  mysql --ssl-mode=REQUIRED -h host.docker.internal -P 13306 -u ${DbMasterUsername} -p
-```
-
-MySQL接続後、アプリ用DBユーザを作成。
-`<APP_DB_PASSWORD>`には `/${RESOURCE_PREFIX}/db/app/password` のSSM SecureStringと同じ値を指定。
-FlywayのDDLに外部キー作成が含まれるため、`REFERENCES`権限も付与。
+MySQL内で以下を実行する。DB名・ユーザ名を変更している場合はtfvarsに合わせ、`<APP_DB_PASSWORD>` はParameter Storeのアプリ用パスワードへ置き換える。
 
 ```sql
+CREATE DATABASE IF NOT EXISTS work3g;
 CREATE USER 'app_user'@'%' IDENTIFIED WITH caching_sha2_password BY '<APP_DB_PASSWORD>';
 GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP, INDEX, REFERENCES ON work3g.* TO 'app_user'@'%';
-FLUSH PRIVILEGES;
 ```
 
-### 5. アプリ用DBユーザの接続確認
-
-ユーザ作成後に実行。
+マスター接続を `exit` で終了し、アプリ用ユーザでも接続できることを確認する。
 
 ```bash
-winpty docker run --rm -it mysql:9.7.4 \
-  mysql --ssl-mode=REQUIRED -h host.docker.internal -P 13306 -u app_user -p work3g
+docker run --rm -it --network host mysql:9.7.4 \
+  mysql --ssl-mode=REQUIRED -h 127.0.0.1 -P 13306 -u app_user -p work3g
 ```
 
-## ha-api / ha-dashboard / ha-root API / ha-track起動
+確認後はMySQLで `exit`、ターミナル1で `Ctrl+C` を入力してトンネルを閉じる。
+以降はターミナル1で作業する。
 
-DB初期設定とECR pushの完了後、desired countを1へ変更。
+### 6-2. ECSサービスを起動する
 
-```bash
-aws ecs update-service \
-  --cluster ${RESOURCE_PREFIX}-cluster \
-  --service ${RESOURCE_PREFIX}-ha-root-api-service \
-  --desired-count 1
-
-aws ecs update-service \
-  --cluster ${RESOURCE_PREFIX}-cluster \
-  --service ${RESOURCE_PREFIX}-ha-api-service \
-  --desired-count 1
-
-aws ecs update-service \
-  --cluster ${RESOURCE_PREFIX}-cluster \
-  --service ${RESOURCE_PREFIX}-ha-dashboard-service \
-  --desired-count 1
-
-aws ecs update-service \
-  --cluster ${RESOURCE_PREFIX}-cluster \
-  --service ${RESOURCE_PREFIX}-ha-track-service \
-  --desired-count 1
-```
-
-`ha-dashboard` 起動時にFlywayでDDL / DMLを実行。
-`ha-track` はTask Roleを使い、対象環境の `health_info_dev` または `health_info_prd`
-に対する `dynamodb:PutItem` のみ許可。
-
-## アクセス方法
-
-AWS上の`ha-dashboard`は80番ポートで起動するため、URLのポート指定は不要。
-
-```bash
-CLUSTER_NAME=${RESOURCE_PREFIX}-cluster
-SERVICE_NAME=${RESOURCE_PREFIX}-ha-dashboard-service
-
-TASK_ARN=$(aws ecs list-tasks \
-  --cluster "$CLUSTER_NAME" \
-  --service-name "$SERVICE_NAME" \
-  --query 'taskArns[0]' \
-  --output text)
-
-ENI_ID=$(aws ecs describe-tasks \
-  --cluster "$CLUSTER_NAME" \
-  --tasks "$TASK_ARN" \
-  --query 'tasks[0].attachments[0].details[?name==`networkInterfaceId`].value' \
-  --output text)
-
-DASHBOARD_PUBLIC_IP=$(aws ec2 describe-network-interfaces \
-  --network-interface-ids "$ENI_ID" \
-  --query 'NetworkInterfaces[0].Association.PublicIp' \
-  --output text)
-
-echo "http://${DASHBOARD_PUBLIC_IP}/login"
-```
-
-AWS上の`ha-api`も80番ポートで起動し、URLのポート指定なしで直接アクセス可能。
-`ha-dashboard`からはCloud Map private DNSの `http://ha-api.<namespace>/api/` を使用。
-
-```bash
-CLUSTER_NAME=${RESOURCE_PREFIX}-cluster
-SERVICE_NAME=${RESOURCE_PREFIX}-ha-api-service
-
-TASK_ARN=$(aws ecs list-tasks \
-  --cluster "$CLUSTER_NAME" \
-  --service-name "$SERVICE_NAME" \
-  --query 'taskArns[0]' \
-  --output text)
-
-ENI_ID=$(aws ecs describe-tasks \
-  --cluster "$CLUSTER_NAME" \
-  --tasks "$TASK_ARN" \
-  --query 'tasks[0].attachments[0].details[?name==`networkInterfaceId`].value' \
-  --output text)
-
-API_PUBLIC_IP=$(aws ec2 describe-network-interfaces \
-  --network-interface-ids "$ENI_ID" \
-  --query 'NetworkInterfaces[0].Association.PublicIp' \
-  --output text)
-
-echo "http://${API_PUBLIC_IP}/api/"
-curl -i "http://${API_PUBLIC_IP}/api/healthcheck"
-```
-
-AWS上の`ha-root` APIも80番ポートで起動し、URLのポート指定なしで直接アクセス可能。
-`ha-dashboard` / `ha-api`からはCloud Map private DNSの `http://ha-root.<namespace>/api/root/` を使用。
-
-```bash
-CLUSTER_NAME=${RESOURCE_PREFIX}-cluster
-SERVICE_NAME=${RESOURCE_PREFIX}-ha-root-api-service
-
-TASK_ARN=$(aws ecs list-tasks \
-  --cluster "$CLUSTER_NAME" \
-  --service-name "$SERVICE_NAME" \
-  --query 'taskArns[0]' \
-  --output text)
-
-ENI_ID=$(aws ecs describe-tasks \
-  --cluster "$CLUSTER_NAME" \
-  --tasks "$TASK_ARN" \
-  --query 'tasks[0].attachments[0].details[?name==`networkInterfaceId`].value' \
-  --output text)
-
-ROOT_API_PUBLIC_IP=$(aws ec2 describe-network-interfaces \
-  --network-interface-ids "$ENI_ID" \
-  --query 'NetworkInterfaces[0].Association.PublicIp' \
-  --output text)
-
-echo "http://${ROOT_API_PUBLIC_IP}/api/root/"
-curl -i "http://${ROOT_API_PUBLIC_IP}/api/root/healthcheck"
-```
-
-`ha-track` はCloud Map private DNSの
-`http://ha-track.<namespace>/api/` を内部通信に使用。
-外部から直接アクセスする場合は、`environments/dev/terraform.tfvars` で以下を設定する。
+`/home/cloudshell-user/01_applications/environments/dev/terraform.tfvars` の以下の値を変更する。
 
 ```hcl
-track_public_allowed_cidr = "接続元IP/32"
-track_django_allowed_hosts = "*"
+dashboard_desired_count = 1
+api_desired_count       = 1
+root_api_desired_count  = 1
+track_desired_count     = 1
 ```
 
-外部公開を有効にした場合のPublic IP取得コマンドは以下。
+変更を反映する。
 
 ```bash
-terraform output -raw track_public_url_command
+cd "$APP_TF_DIR"
+terraform validate
+terraform plan
+terraform apply
 ```
 
-## ログ確認
+各コマンドの成功を確認してから次へ進む。`plan` の内容を確認し、`apply` の確認に `yes` と入力する。
+`ha-dashboard` の起動時にFlywayがテーブルを作成・更新する。バッチは常駐させず、必要時に単発タスクとして実行する。
+
+### 6-3. 同じイメージタグで更新する場合
+
+稼働中のアプリに**同じタグ**でイメージを上書きした場合は、ECRへのpush後に以下で再デプロイする。
 
 ```bash
-aws logs tail /ecs/${RESOURCE_PREFIX}/ha-dashboard --follow
-aws logs tail /ecs/${RESOURCE_PREFIX}/ha-api --follow
-aws logs tail /ecs/${RESOURCE_PREFIX}/ha-root-api --follow
-aws logs tail /ecs/${RESOURCE_PREFIX}/ha-track --follow
+export TF_DATA_DIR=/tmp/work/application
+cd "$APP_TF_DIR"
+CLUSTER=$(terraform output -raw cluster_name)
+for app in dashboard api root_api track; do
+  SERVICE=$(terraform output -raw "${app}_service_name") || break
+  aws ecs update-service --cluster "$CLUSTER" --service "$SERVICE" \
+    --force-new-deployment --query 'service.serviceName' --output text || break
+done
 ```
 
-## 削除
+## 削除する場合
+
+分析基盤、アプリ基盤の順に削除する。データも削除対象になるため、必要なものを保管してから実行する。state専用バケットは削除されない。
+新しいセッションの場合は手順2と、各基盤の `init` を先に実行する。
 
 ```bash
-terraform destroy
+export TF_DATA_DIR=/tmp/work/analytics
+terraform -chdir="$ANALYTICS_TF_DIR" destroy
+
+export TF_DATA_DIR=/tmp/work/application
+terraform -chdir="$APP_TF_DIR" destroy
 ```
+
+参考：[CloudShellのZIP転送](https://docs.aws.amazon.com/cloudshell/latest/userguide/multiple-files-upload-download.html)、[CloudShellからECRへの登録](https://docs.aws.amazon.com/cloudshell/latest/userguide/tutorial-docker-cli.html)、[SSMのリモートホスト接続](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html#sessions-remote-port-forwarding)。

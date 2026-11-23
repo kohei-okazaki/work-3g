@@ -1,0 +1,16 @@
+project_name = "healthinfo-app"
+aws_region   = "ap-northeast-1"
+app_env      = "dev"
+
+db_name                              = "work3g"
+db_engine_version                    = "9.7.4"
+db_master_password_parameter_version = 1
+app_ssm_parameter_prefix             = "/dev"
+api_log_queue_name                   = "dev_api_log.fifo"
+
+dashboard_desired_count = 0
+api_desired_count       = 0
+root_api_desired_count  = 0
+track_desired_count     = 0
+
+athena_result_expiration_days = 7
