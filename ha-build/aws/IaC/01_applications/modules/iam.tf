@@ -6,6 +6,18 @@ data "aws_iam_policy_document" "ecs_tasks_assume_role" {
       type        = "Service"
       identifiers = ["ecs-tasks.amazonaws.com"]
     }
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:SourceAccount"
+      values   = [data.aws_caller_identity.current.account_id]
+    }
+
+    condition {
+      test     = "ArnLike"
+      variable = "aws:SourceArn"
+      values   = ["arn:${data.aws_partition.current.partition}:ecs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:*"]
+    }
   }
 }
 
@@ -261,6 +273,11 @@ resource "aws_iam_role_policy" "batch_task_aws_access_policy" {
           "${aws_s3_bucket.app_data.arn}/analysis/*",
           "${aws_s3_bucket.app_data.arn}/${local.input_prefix}*",
         ]
+        Condition = {
+          StringEquals = {
+            "aws:ResourceAccount" = data.aws_caller_identity.current.account_id
+          }
+        }
       },
       {
         Effect = "Allow"
@@ -289,6 +306,11 @@ resource "aws_iam_role_policy" "root_api_task_aws_access_policy" {
           "s3:DeleteObject",
         ]
         Resource = ["${aws_s3_bucket.app_data.arn}/*"]
+        Condition = {
+          StringEquals = {
+            "aws:ResourceAccount" = data.aws_caller_identity.current.account_id
+          }
+        }
       },
       {
         Effect = "Allow"
