@@ -73,6 +73,11 @@ resource "aws_iam_role_policy" "step_functions_policy" {
           "s3:ListBucketMultipartUploads",
         ]
         Resource = local.source_bucket_arn
+        Condition = {
+          StringEquals = {
+            "aws:ResourceAccount" = data.aws_caller_identity.current.account_id
+          }
+        }
       },
       {
         Sid      = "ListInputAndResultPrefixes"
@@ -80,6 +85,9 @@ resource "aws_iam_role_policy" "step_functions_policy" {
         Action   = "s3:ListBucket"
         Resource = local.source_bucket_arn
         Condition = {
+          StringEquals = {
+            "aws:ResourceAccount" = data.aws_caller_identity.current.account_id
+          }
           StringLike = {
             "s3:prefix" = [
               "${local.input_prefix}*",
@@ -96,6 +104,11 @@ resource "aws_iam_role_policy" "step_functions_policy" {
           "${local.source_bucket_arn}/${local.input_prefix}*",
           "${local.source_bucket_arn}/${local.athena_result_prefix}*",
         ]
+        Condition = {
+          StringEquals = {
+            "aws:ResourceAccount" = data.aws_caller_identity.current.account_id
+          }
+        }
       },
       {
         Sid    = "WriteAthenaResults"
@@ -106,6 +119,11 @@ resource "aws_iam_role_policy" "step_functions_policy" {
           "s3:PutObject",
         ]
         Resource = "${local.source_bucket_arn}/${local.athena_result_prefix}*"
+        Condition = {
+          StringEquals = {
+            "aws:ResourceAccount" = data.aws_caller_identity.current.account_id
+          }
+        }
       },
       {
         Sid      = "PublishNotification"
